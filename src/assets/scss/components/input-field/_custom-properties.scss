@@ -1,0 +1,101 @@
+@use "tools";
+
+//@include inputs() {
+.#{tools.$inp} /*, .inp-container*/ {
+    --f-input-font-family: inherit;
+    --f-input-font-size: var(--f-font-size-5, 16px);
+    --f-input-font-weight: normal;
+
+    --f-input-padding: var(--f-spacer-2, 6px) var(--f-spacer-3, 12px);
+
+    --f-input-height: calc(var(--f-doc-line-height, 24px) * 1.5);
+    --f-input-line-height: 1;
+
+    --f-input-transition: color var(--f-transition-length, 220ms) var(--f-transition-func, ease),
+    background-color var(--f-transition-length, 220ms) var(--f-transition-func, ease),
+    border-color var(--f-transition-length, 220ms) var(--f-transition-func, ease),
+    box-shadow var(--f-transition-length, 220ms) var(--f-transition-func, ease);
+
+    --f-input-color: inherit;
+    --f-input-background: var(--f-inputs-background);
+    --f-input-border: var(--f-inputs-border) var(--f-inputs-border-color);
+    //--f-input-background: #fdfdfd;
+    //--f-input-border: var(--f-inputs-border) #d7dce1;
+    --f-input-border-radius: var(--f-border-radius-2, 4px);
+    --f-input-box-shadow: none;
+
+    --f-input-hover-color: inherit;
+    --f-input-hover-background: var(--f-input-background);
+    --f-input-hover-border: var(--f-inputs-border) var(--f-color-grey-4, #bababa);
+    //--f-input-hover-border: var(--f-inputs-border) #c3c7cc;
+    --f-input-hover-box-shadow: none;
+
+    --f-input-focus-color: inherit;
+    --f-input-focus-background: #fff;
+    --f-input-focus-border: var(--f-inputs-border) var(--f-color-primary-5, #1a6aff);
+    --f-input-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-color-primary-h, 219), var(--f-color-primary-s, 100%), var(--f-color-primary-l, 55%), 0.35);
+
+    --f-input-disabled-color: var(--f-inputs-disabled-text-color);
+    --f-input-disabled-background: var(--f-inputs-disabled-background-color);
+    //--f-input-disabled-color: #999;
+    //--f-input-disabled-background: #eee;
+    --f-input-disabled-border: var(--f-inputs-border) var(--f-input-disabled-background);
+    --f-input-disabled-box-shadow: none;
+    --f-input-disabled-opacity: initial;
+
+    --f-input-readonly-color: inherit;
+    --f-input-readonly-background: #fff8f1;
+    --f-input-readonly-border: var(--f-inputs-border) var(--f-inputs-border-color, 4px);
+    --f-input-readonly-box-shadow: none;
+
+    --f-input-readonly-hover-color: inherit;
+    --f-input-readonly-hover-background: var(--f-input-readonly-background);
+    --f-input-readonly-hover-border: var(--f-inputs-border) var(--f-inputs-border-color, 4px);
+    --f-input-readonly-hover-box-shadow: none;
+
+    --f-input-readonly-focus-color: inherit;
+    --f-input-readonly-focus-background: var(--f-input-readonly-background);
+    --f-input-readonly-focus-border: var(--f-input-focus-border);
+    --f-input-readonly-focus-box-shadow: var(--f-input-focus-box-shadow);
+
+    --f-input-invalid-color: var(--f-color-red-5, #ca1616);
+    --f-input-invalid-background: var(--f-input-background);
+    --f-input-invalid-border: var(--f-inputs-border) var(--f-color-red-5, #ca1616);
+    --f-input-invalid-box-shadow: none;
+
+    --f-input-invalid-hover-color: var(--f-input-invalid-color);
+    --f-input-invalid-hover-background: var(--f-input-invalid-background);
+    --f-input-invalid-hover-border: var(--f-input-invalid-border);
+    --f-input-invalid-hover-box-shadow: none;
+
+    --f-input-invalid-focus-color: var(--f-input-invalid-color);
+    --f-input-invalid-focus-background: var(--f-input-invalid-background);
+    --f-input-invalid-focus-border: var(--f-input-invalid-border);
+    --f-input-invalid-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-color-red-h, 0), var(--f-color-red-s, 80%), var(--f-color-red-l, 44%), 0.35);
+
+    --f-input-xs-font-size: var(--f-font-size-2, 10px);
+    --f-input-xs-font-weight: normal;
+    --f-input-xs-height: calc(var(--f-doc-line-height, 24px) * 0.75);
+    --f-input-xs-padding: var(--f-spacer-2, 6px) var(--f-spacer-2, 6px);
+    --f-input-xs-border-radius: var(--f-input-border-radius);
+
+    --f-input-sm-font-size: var(--f-font-size-3, 12px);
+    --f-input-sm-font-weight: normal;
+    --f-input-sm-height: var(--f-doc-line-height, 24px);
+    --f-input-sm-padding: var(--f-spacer-2, 6px) var(--f-spacer-2, 6px);
+    --f-input-sm-border-radius: var(--f-input-border-radius);
+
+    --f-input-lg-font-size: var(--f-font-size-5, 16px);
+    --f-input-lg-font-weight: normal;
+    --f-input-lg-height: calc(var(--f-doc-line-height, 24px) * 2);
+    --f-input-lg-padding: var(--f-spacer-3, 12px) var(--f-spacer-5, 24px);
+    --f-input-lg-border-radius: var(--f-input-border-radius);
+
+    &-cont {
+        /* gap between edges and prefix/suffix and prefix/suffix and input */
+        --f-inp-cont-gap-h: var(--f-spacer-2, 6px);
+        --f-inp-cont-xs-gap-h: var(--f-spacer-1, 3px);
+        --f-inp-cont-sm-gap-h: var(--f-spacer-2, 6px);
+        --f-inp-cont-lg-gap-h: var(--f-spacer-3, 12px);
+    }
+}

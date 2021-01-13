@@ -1,0 +1,18 @@
+/**
+ CSS custom properties for spacers.
+ */
+
+:root {
+    --f-spacer-base: var(--f-doc-line-height, 24px);
+
+    --f-spacer-0: 0;
+    --f-spacer-1: calc(var(--f-spacer-base) * 0.125);
+    --f-spacer-2: calc(var(--f-spacer-base) * 0.25);
+    --f-spacer-3: calc(var(--f-spacer-base) * 0.5);
+    --f-spacer-4: calc(var(--f-spacer-base) * 0.75);
+    --f-spacer-5: calc(var(--f-spacer-base) * 1);
+    --f-spacer-6: calc(var(--f-spacer-base) * 1.25);
+    --f-spacer-7: calc(var(--f-spacer-base) * 1.5);
+    --f-spacer-8: calc(var(--f-spacer-base) * 2);
+    --f-spacer-9: calc(var(--f-spacer-base) * 3.27);
+}

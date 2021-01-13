@@ -1,0 +1,65 @@
+@use "tools";
+
+.#{tools.$cr} {
+    //@include color-hsl(--f-cr-color, 210, 44%, 52%);
+    --f-cr-color: var(--f-color-primary-5, #1a6aff);
+    --f-cr-color-hsl: var(--f-color-primary-h, 219), var(--f-color-primary-s, 100%), var(--f-color-primary-l, 55%);
+
+    --f-cr-invalid-color: var(--f-color-red-5, #ca1616);
+    --f-cr-invalid-color-hsl: 0 80% 44%;
+
+    --f-cr-background: var(--f-inputs-background);
+    --f-cr-border: var(--f-inputs-border) var(--f-inputs-border-color);
+    --f-cr-border-radius: var(--f-border-radius-1, 2px);
+    --f-cr-box-shadow: none;
+
+    --f-cr-hover-background: var(--f-cr-background);
+    --f-cr-hover-border: var(--f-inputs-border) var(--f-color-grey-4, #bababa);
+    --f-cr-hover-box-shadow: none;
+
+    --f-cr-checked-background: var(--f-cr-color);
+    --f-cr-checked-border: var(--f-inputs-border) var(--f-cr-color);
+    --f-cr-checked-box-shadow: none;
+
+    //--f-cr-focus-background: none;
+    --f-cr-focus-border: var(--f-inputs-border) var(--f-cr-color);
+    --f-cr-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-cr-color-hsl), 0.35);
+
+    --f-cr-disabled-background: var(--f-inputs-disabled-background-color);
+    --f-cr-disabled-checked-background: var(--f-inputs-disabled-background-color);
+    --f-cr-disabled-border: var(--f-inputs-border) var(--f-cr-disabled-background);
+    --f-cr-disabled-box-shadow: none;
+    --f-cr-disabled-opacity: 1;
+    /*
+    --f-cr-disabled-background: var(--f-inputs-disabled-background-color);
+    --f-cr-disabled-checked-background: var(--f-cr-disabled-background);
+    --f-cr-disabled-border: var(--f-inputs-border) var(--f-cr-disabled-background);
+    --f-cr-disabled-box-shadow: none;
+    --f-cr-disabled-opacity: initial;
+    */
+
+    --f-cr-invalid-border: var(--f-inputs-border) var(--f-cr-invalid-color);
+    --f-cr-invalid-box-shadow: none;
+    --f-cr-invalid-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-cr-invalid-color-hsl), 0.35);
+
+    //--f-cr-check-size: 0.61;
+    --f-cr-checkbox-check-size: 0.75;
+    --f-cr-radio-check-size: 0.65;
+    --f-cr-check-size: var(--f-cr-checkbox-check-size);
+    --f-cr-checkbox-check-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>');
+    --f-cr-radio-check-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"/></svg>');
+    --f-cr-radio-check-color: var(--f-cr-color);
+    --f-cr-checkbox-check-color: #fff;
+    --f-cr-checkbox-check-disabled-color: var(--f-color-grey-5, #666);
+    --f-cr-radio-check-disabled-color: var(--f-color-grey-5, #666);
+    //--f-cr-checkbox-check-disabled-color: var(--f-color-grey-4);
+    //--f-cr-radio-check-disabled-color: var(--f-color-grey-4);
+
+    --f-cr-label-color: inherit;
+    --f-cr-label-disabled-color: var(--f-inputs-disabled-text-color);
+
+    --f-cr-size: calc(var(--f-doc-line-height, 24px) * 1);
+    --f-cr-lg-size: calc(var(--f-doc-line-height, 24px) * 1.25);
+    --f-cr-sm-size: calc(var(--f-doc-line-height, 24px) * 0.75);
+    --f-cr-xs-size: calc(var(--f-doc-line-height, 24px) * 0.5);
+}

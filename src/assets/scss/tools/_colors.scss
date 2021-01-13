@@ -1,0 +1,56 @@
+@use "sass:map";
+@use "../settings/colors" as colorsSettings;
+@use "sizes" as sizesTools;
+
+@mixin create-custom-properties() {
+    $colors: colorsSettings.$colors;
+
+    @each $name, $color in $colors {
+        $hsl: map.get($color, "hsl");
+        $lightness: map.get($color, "lightness");
+        $cpName: --f-color-#{$name};
+
+        #{$cpName}-h: #{nth($hsl, 1)};
+        #{$cpName}-s: #{nth($hsl, 2)};
+        #{$cpName}-l: #{nth($hsl, 3)};
+
+        @include sizesTools.sizes() using($size) {
+            $suffix: map.get($size, "suffix");
+            $index: map.get($size, "index");
+            $l: 0%;
+
+            @if $index < 5 {
+                $l: nth($lightness, $index);
+            } @else if ($index == 5) {
+                $l: nth($hsl, 3);
+            } @else {
+                $l: nth($lightness, $index - 1);
+            }
+
+            #{$cpName}#{$suffix}: hsl(var(#{$cpName}-h), var(#{$cpName}-s), $l);
+            //@debug #{$cpName}#{$suffix} hsl(var(#{$cpName}-h), var(#{$cpName}-s), $l);
+        }
+    }
+}
+
+@mixin color-utils($_type: 'foreground') {
+    $colors: colorsSettings.$colors;
+
+    @each $name, $color in $colors {
+        $cpName: --f-color-#{$name};
+
+        @include sizesTools.sizes() using($size) {
+            $suffix: map.get($size, "suffix");
+
+            @if $_type == 'foreground' {
+                .co-#{$name}#{$suffix} {
+                    color: var(#{$cpName}#{$suffix});
+                }
+            } @else if $_type == 'background' {
+                .bac-#{$name}#{$suffix} {
+                    background-color: var(#{$cpName}#{$suffix});
+                }
+            }
+        }
+    }
+}

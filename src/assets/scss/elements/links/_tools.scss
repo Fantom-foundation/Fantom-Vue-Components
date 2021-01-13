@@ -1,0 +1,18 @@
+@use "sass:list";
+@use "sass:string";
+@use "../../settings/components" as componentsSettings;
+
+$_linkPseudoClasses: ':link', ':visited', ':hover', ':active';
+
+// produce selectors like: a:not(.button):link, a:not(.button):visited, a:not(.button):hover, a:not(.button):active
+@mixin links($_pseudoClasses: $_linkPseudoClasses, $_prefix: '', $_suffix: '') {
+    $selectors: ();
+
+    @each $selector in $_pseudoClasses {
+        $selectors: list.append($selectors, string.unquote("#{$_prefix}a:not(.#{componentsSettings.$button})#{$selector}#{$_suffix}"), comma);
+    }
+
+    #{$selectors} {
+        @content
+    }
+}

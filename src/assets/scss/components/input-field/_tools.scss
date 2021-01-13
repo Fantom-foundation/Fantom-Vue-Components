@@ -1,0 +1,27 @@
+@use "../../settings/components" as componentsSettings;
+
+$inp: componentsSettings.$input;
+
+@mixin inp($_type: '') {
+    .#{$inp} {
+        @if $_type == 'disabled' {
+            &[disabled], &-disabled {
+                @content;
+            }
+        } @else if $_type == 'readonly' {
+            &[readonly], &-readonly {
+                @content;
+            }
+        } @else if $_type == 'invalid' {
+            &[aria-invalid="true"], &-invalid {
+                @content;
+            }
+        } @else if $_type != '' {  // pseudoclasses
+            &:not([disabled]):not(.inp-disabled):not(.inp-nohover):not([readonly]):not(.inp-readonly):not([aria-invalid="true"]):not(.inp-invalid):#{$_type} {
+                @content;
+            }
+        } @else {
+            @content;
+        }
+    }
+}

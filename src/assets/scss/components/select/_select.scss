@@ -1,0 +1,70 @@
+@use "../../settings/components" as componentsSettings;
+@use "custom-properties";
+@use "tools";
+
+/* Requires input-field. */
+@include tools.select {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: var(--f-input-font-size);
+    //padding-right: 24px;
+
+    /* chevron icon */
+    &::after {
+        position: absolute;
+        content: " ";
+        display: block;
+        //right: var(--f-spacer-3);
+        right: var(--f-sel-icon-right-margin);
+        top: 50%;
+        width: var(--f-sel-icon-size);
+        height: var(--f-sel-icon-size);
+        transform: translateY(-50%);
+        background-color: var(--f-sel-icon-color);
+        background-repeat: no-repeat;
+        //background-position: 50% 50%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: 100% 50%;
+        mask-position: 100% 50%;
+        -webkit-mask-image: var(--f-sel-icon-image);
+        mask-image: var(--f-sel-icon-image);
+        pointer-events: none;
+    }
+
+    &-disabled {
+        --f-sel-icon-color: var(--f-sel-disabled-icon-color);
+    }
+
+    &-invalid {
+        --f-sel-icon-color: var(--f-sel-invalid-icon-color);
+    }
+
+    .#{componentsSettings.$input} {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-right: var(--f-sel-padding-right);
+
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+
+    &-lg {
+        --f-sel-icon-size: var(--f-sel-icon-lg-size);
+        /*
+        &::after {
+            --f-sel-icon-size: var(--f-sel-icon-lg-size);
+        }
+        */
+    }
+
+    &-sm {
+        --f-sel-icon-size: var(--f-sel-icon-sm-size);
+    }
+
+    &-xs {
+        --f-sel-icon-size: var(--f-sel-icon-xs-size);
+    }
+}

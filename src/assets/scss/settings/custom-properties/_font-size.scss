@@ -1,0 +1,17 @@
+/**
+ CSS custom properties for various font sizes.
+ */
+
+:root {
+    --f-font-size-base: var(--f-doc-font-size);
+
+    --f-font-size-1: calc(var(--f-font-size-base) * 0.5);
+    --f-font-size-2: calc(var(--f-font-size-base) * 0.625);
+    --f-font-size-3: calc(var(--f-font-size-base) * 0.75);
+    --f-font-size-4: calc(var(--f-font-size-base) * 0.875);
+    --f-font-size-5: calc(var(--f-font-size-base) * 1);
+    --f-font-size-6: calc(var(--f-font-size-base) * 1.5);
+    --f-font-size-7: calc(var(--f-font-size-base) * 1.75);
+    --f-font-size-8: calc(var(--f-font-size-base) * 2.25);
+    --f-font-size-9: calc(var(--f-font-size-base) * 3.375);
+}

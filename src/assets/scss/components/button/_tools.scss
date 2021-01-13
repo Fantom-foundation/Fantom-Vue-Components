@@ -1,0 +1,22 @@
+@use "../../settings/components" as componentsSettings;
+
+$button: componentsSettings.$button;
+
+@mixin button($_type: '') {
+    .#{$button} {
+        @if $_type == 'disabled' {
+            &[disabled], &-disabled {
+                @content;
+            }
+        }
+        @else if $_type != '' {  // pseudoclasses
+            &:not([disabled]):not(.#{$button}-disabled):not(.#{$button}-nohover) {
+                &:#{$_type} {
+                    @content;
+                }
+            }
+        } @else {
+            @content;
+        }
+    }
+}

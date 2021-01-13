@@ -1,0 +1,20 @@
+.ftabs {
+    --ftabs-main-color: var(--f-primary-color);
+
+    --ftabs-color: inherit;
+    --ftabs-font-family: inherit;
+    --ftabs-font-size: inherit;
+    --ftabs-font-weight: inherit;
+
+    --ftabs-border-width: 1px;
+    --ftabs-border-color: #eee;
+
+    --ftabs-active-color: var(--ftabs-main-color);
+    --ftabs-active-color-border-color: var(--ftabs-main-color);
+
+    --ftabs-hover-color: var(--ftabs-color);
+    --ftabs-hover-border-color: #666;
+
+    --ftabs-disabled-color: #ddd;
+    --ftabs-disabled-border-color: transparent;
+}

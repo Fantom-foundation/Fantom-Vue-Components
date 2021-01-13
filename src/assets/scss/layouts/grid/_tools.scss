@@ -1,0 +1,25 @@
+@use "../../settings/layouts" as layoutsSettings;
+
+$grid: layoutsSettings.$grid;
+
+@mixin grid() {
+    .#{$grid} {
+        @content
+    }
+}
+
+@mixin grid-layout-columns($_numCols: 12, $_prefix: '') {
+    @for $i from 1 to $_numCols + 1 {
+        & > .#{$_prefix}col-#{$i} {
+            grid-column: span $i;
+        }
+    }
+}
+
+@mixin grid-template-columns($_numCols: 12, $_prefix: '') {
+    @for $i from 1 to $_numCols + 1 {
+        .#{$_prefix}#{$grid}-cols-#{$i} {
+            grid-template-columns: repeat($i, 1fr);
+        }
+    }
+}

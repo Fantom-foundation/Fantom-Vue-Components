@@ -1,0 +1,82 @@
+@use "tools";
+
+@include tools.togglebtn {
+    --f-togglebtn-background: #fdfdfd;
+    --f-togglebtn-box-shadow: none;
+    --f-togglebtn-border: 1px solid var(--f-inputs-border-color);
+    --f-togglebtn-border-radius: var(--f-togglebtn-height);
+
+    /* colors */
+    --f-togglebtn-theme-color: var(--f-color-primary-5);
+    --f-togglebtn-theme-color-h: var(--f-color-primary-h);
+    --f-togglebtn-theme-color-s: var(--f-color-primary-s);
+    --f-togglebtn-theme-color-l: var(--f-color-primary-l);
+
+    --f-togglebtn-disabled-theme-color: var(--f-inputs-disabled-background-color);
+
+    /* size */
+    --f-togglebtn-width: calc(var(--f-togglebtn-height) * 1.8);
+    --f-togglebtn-lg-width: calc(var(--f-togglebtn-lg-height) * 1.8);
+    --f-togglebtn-sm-width: calc(var(--f-togglebtn-sm-height) * 1.8);
+    --f-togglebtn-xs-width: calc(var(--f-togglebtn-xs-height) * 1.8);
+    //--f-togglebtn-width: 100px;
+    //--f-togglebtn-width: calc(var(--f-togglebtn-switch-size) * 2.2);
+    --f-togglebtn-height: calc(var(--f-doc-line-height) * 1);
+    --f-togglebtn-lg-height: calc(var(--f-doc-line-height) * 1.25);
+    --f-togglebtn-sm-height: calc(var(--f-doc-line-height) * 0.75);
+    --f-togglebtn-xs-height: calc(var(--f-doc-line-height) * 0.5);
+
+    /* checked */
+    --f-togglebtn-checked-background: var(--f-togglebtn-theme-color);
+    --f-togglebtn-checked-box-shadow: var(--f-togglebtn-box-shadow);
+    --f-togglebtn-checked-border: 1px solid var(--f-togglebtn-theme-color);
+    --f-togglebtn-checked-switch-translate-x: calc(var(--f-togglebtn-width) - var(--f-togglebtn-switch-size) - 4px);
+
+    /* disabled */
+    --f-togglebtn-disabled-background: var(--f-togglebtn-disabled-theme-color);
+    --f-togglebtn-disabled-box-shadow: var(--f-togglebtn-box-shadow);
+    --f-togglebtn-disabled-border: 1px solid var(--f-togglebtn-disabled-theme-color);
+    --f-togglebtn-disabled-opacity: 1;
+
+    /* disabled + checked */
+    --f-togglebtn-disabled-checked-background: var(--f-togglebtn-disabled-theme-color);
+    --f-togglebtn-disabled-checked-border: var(--f-togglebtn-disabled-border);
+
+    /* focus */
+    --f-togglebtn-focus-background: var(--f-togglebtn-background);
+    --f-togglebtn-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-togglebtn-theme-color-h), var(--f-togglebtn-theme-color-s), var(--f-togglebtn-theme-color-l), 0.35);
+    --f-togglebtn-focus-border: 1px solid var(--f-togglebtn-theme-color);
+
+    /* focus + checked*/
+    --f-togglebtn-focus-checked-border: var(--f-togglebtn-focus-border); //1px solid #f00;//var(--f-togglebtn-focus-border);
+
+    /* hover (not disabled + checked) */
+    --f-togglebtn-hover-border: 1px solid #c3c7cc;
+
+    /* switch */
+    --f-togglebtn-switch-size: calc(var(--f-togglebtn-height) - 4px);
+    --f-togglebtn-switch-background: #fff;
+    --f-togglebtn-switch-box-shadow: none;
+    --f-togglebtn-switch-border: var(--f-togglebtn-border);
+    --f-togglebtn-switch-border-radius: 50%;
+    /* switch - checked */
+    --f-togglebtn-checked-switch-background: var(--f-togglebtn-switch-background);
+    --f-togglebtn-checked-switch-box-shadow: none;
+    --f-togglebtn-checked-switch-border: 1px solid var(--f-togglebtn-switch-background);
+    /* switch - disabled */
+    --f-togglebtn-disabled-switch-background: var(--f-togglebtn-switch-background);
+    --f-togglebtn-disabled-switch-box-shadow: none;
+    --f-togglebtn-disabled-switch-border: 1px solid var(--f-togglebtn-switch-background);
+    /* switch - disabled + checked */
+    --f-togglebtn-disabled-checked-switch-background:var(--f-color-grey-4);
+    --f-togglebtn-disabled-checked-switch-border: none;
+    /* switch - focus */
+    //--f-togglebtn-focus-switch-background: inherit;
+    //--f-togglebtn-focus-switch-box-shadow: none;
+    --f-togglebtn-focus-switch-border: var(--f-togglebtn-focus-border);
+    /* switch - hover (not disabled and checked) */
+    --f-togglebtn-hover-switch-border: var(--f-togglebtn-hover-border);
+
+    --f-togglebtn-label-color: inherit;
+    --f-togglebtn-label-disabled-color: var(--f-inputs-disabled-text-color);
+}

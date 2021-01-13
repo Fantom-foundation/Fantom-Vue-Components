@@ -1,0 +1,127 @@
+@use "custom-properties";
+@use "tools";
+
+@include tools.button() {
+    font-family: var(--f-btn-font-family);
+    font-size: var(--f-btn-font-size);
+    font-weight: var(--f-btn-font-weight);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    vertical-align: middle;
+
+    padding: var(--f-btn-padding);
+    line-height: var(--f-btn-line-height);
+    min-height: var(--f-btn-min-height);
+
+    text-decoration: none;
+    text-align: var(--f-btn-text-align);
+    text-transform: var(--f-btn-text-transform);
+    text-shadow: var(--f-btn-text-shadow);
+    white-space: var(--f-btn-white-space);
+
+    color: var(--f-btn-color);
+    background: var(--f-btn-background);
+    border: var(--f-btn-border);
+    border-radius: var(--f-btn-border-radius);
+    transition: var(--f-btn-transition);
+
+    cursor: pointer;
+
+    &-xs {
+        font-size: var(--f-btn-xs-font-size);
+        min-height: var(--f-btn-xs-min-height);
+        padding: var(--f-btn-xs-padding);
+        border-radius: var(--f-btn-xs-border-radius);
+    }
+
+    &-sm {
+        font-size: var(--f-btn-sm-font-size);
+        min-height: var(--f-btn-sm-min-height);
+        padding: var(--f-btn-sm-padding);
+        border-radius: var(--f-btn-sm-border-radius);
+    }
+
+    &-lg {
+        font-size: var(--f-btn-lg-font-size);
+        min-height: var(--f-btn-lg-min-height);
+        line-height: var(--f-btn-lg-line-height);
+        padding: var(--f-btn-lg-padding);
+        border-radius: var(--f-btn-lg-border-radius);
+    }
+
+    &-secondary {
+        color: var(--f-btn-secondary-color);
+        border-color: var(--f-btn-secondary-border-color);
+        background: var(--f-btn-secondary-background);
+    }
+
+    &-tertiary {
+        color: var(--f-btn-tertiary-color);
+        border-color: var(--f-btn-tertiary-border-color);
+        background: var(--f-btn-tertiary-background);
+    }
+
+    &-samesize {
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: var(--f-btn-min-height);
+
+        &.#{tools.$button}-xs {
+            min-width: var(--f-btn-xs-min-height);
+        }
+
+        &.#{tools.$button}-sm {
+            min-width: var(--f-btn-sm-min-height);
+        }
+
+        &.#{tools.$button}-lg {
+            min-width: var(--f-btn-lg-min-height);
+        }
+    }
+
+    &-round {
+        border-radius: 50%;
+    }
+
+    &-nostyle {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+}
+
+@include tools.button('hover') {
+    color: var(--f-btn-hover-color);
+    background: var(--f-btn-hover-background);
+    border-color: var(--f-btn-hover-border-color);
+}
+
+@include tools.button('focus') {
+    color: var(--f-btn-focus-color);
+    background: var(--f-btn-focus-background);
+    border-color: var(--f-btn-focus-border-color);
+}
+
+@include tools.button('active') {
+    color: var(--f-btn-active-color);
+    background: var(--f-btn-active-background);
+    border-color: var(--f-btn-active-border-color);
+}
+
+@include tools.button('disabled') {
+    cursor: default;
+    color: var(--f-btn-disabled-color);
+    background: var(--f-btn-disabled-background);
+    border-color: var(--f-btn-disabled-border-color);
+    opacity: var(--f-btn-disabled-opacity);
+}

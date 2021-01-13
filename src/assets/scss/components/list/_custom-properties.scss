@@ -1,0 +1,7 @@
+@use "tools";
+
+.#{tools.$list} {
+    --f-list-marker-color: inherit;
+    --f-list-padding-left: var(--f-spacer-5);
+    --f-list-marker-width: 0.9em;
+}

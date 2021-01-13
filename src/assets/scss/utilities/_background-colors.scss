@@ -1,0 +1,8 @@
+/**
+ Generates utility classes for background colors.
+ For example: .bac-primary-5, .bac-primary-9, ...
+ */
+
+@use "../tools/colors";
+
+@include colors.color-utils('background');

@@ -1,0 +1,50 @@
+@use "custom-properties";@use "../../settings/components" as componentsSettings;
+@use "tools";
+
+$list: tools.$list;
+
+@include tools.list {
+    padding-left: var(--f-list-padding-left);
+
+    &-custommarkers {
+        list-style-type: none;
+
+        .#{$list} {
+            list-style-type: none;
+        }
+
+        li::before {
+            content: "\25cf";
+            color: var(--f-list-marker-color);
+            //font-weight: bold;
+            //font-size: 1.1em;
+            display: inline-block;
+            width: var(--f-list-marker-width);
+            margin-left: -0.8em;
+        }
+
+        &.#{$list} {
+            &-discmarker li::before {
+                content: "\25cf";
+            }
+
+            &-circlemarker li::before {
+                content: "\25cb";
+            }
+
+            &-squaremarker li::before {
+                font-size: 0.8em;
+                width: calc(var(--f-list-marker-width) * 1.5);
+                content: "\25a0";
+            }
+        }
+    }
+
+    &-nomarkers {
+        list-style-type: none;
+
+        .#{$list} {
+            list-style-type: none;
+        }
+    }
+}

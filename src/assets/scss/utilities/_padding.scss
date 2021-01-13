@@ -1,0 +1,75 @@
+@use "sass:map";
+@use "../tools/breakpoints" as breakpointsTools;
+@use "../tools/sizes" as sizesTools;
+
+@mixin _padding($_type: 'bare', $_size: '', $_bp: '') {
+    $spacer: var(--f-spacer#{$_size});
+
+    @if $_size == '-0' {
+        $spacer: 0;
+    }
+
+    @if $_type == 'bare' {
+        .#{$_bp}pa#{$_size} {
+            padding: $spacer;
+        }
+    } @else if $_type == 'trbl' {
+        // top, right, bottom, left
+        .#{$_bp}pat#{$_size} {
+            padding-top: $spacer;
+        }
+
+        .#{$_bp}par#{$_size} {
+            padding-right: $spacer;
+        }
+
+        .#{$_bp}pab#{$_size} {
+            padding-bottom: $spacer;
+        }
+
+        .#{$_bp}pal#{$_size} {
+            padding-left: $spacer;
+        }
+    } @else {
+        // vertical, horizontal
+        .#{$_bp}hpa#{$_size} {
+            padding-left: $spacer;
+            padding-right: $spacer;
+        }
+
+        .#{$_bp}vpa#{$_size} {
+            padding-top: $spacer;
+            padding-bottom: $spacer;
+        }
+    }
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _padding('bare', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _padding('vh', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _padding('trbl', map.get($size, "suffix"));
+}
+
+/*
+@include breakpointsTools.breakpoints-min() using($shortcut) {
+    $bp: $shortcut + '\\:';
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _padding('bare', map.get($size, "suffix"), $bp);
+    }
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _padding('trbl', map.get($size, "suffix"), $bp);
+    }
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _padding('vh', map.get($size, "suffix"), $bp);
+    }
+}
+*/

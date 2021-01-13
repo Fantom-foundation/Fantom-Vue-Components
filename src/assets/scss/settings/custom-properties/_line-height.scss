@@ -1,0 +1,16 @@
+/**
+ CSS custom properties for line heights.
+ These values correspond to the respective font sizes.
+ */
+
+:root {
+    --f-line-height-1: 1.3;
+    --f-line-height-2: 1.3;
+    --f-line-height-3: 1.4;
+    --f-line-height-4: 1.45;
+    --f-line-height-5: var(--f-doc-line-height, 16px);
+    --f-line-height-6: 1.3;
+    --f-line-height-7: 1.13;
+    --f-line-height-8: 1.13;
+    --f-line-height-9: 1.13;
+}

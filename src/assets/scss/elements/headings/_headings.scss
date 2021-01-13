@@ -1,0 +1,42 @@
+@use "custom-properties";
+@use "tools";
+
+@include tools.headings() {
+    color: var(--f-headings-color);
+}
+
+h1, .h1 {
+    font-family: var(--f-h1-font-family);
+    font-size: var(--f-h1-font-size);
+    font-weight: var(--f-h1-font-weight);
+    line-height: var(--f-h1-line-height);
+    margin-top: var(--f-h1-margin-top);
+    margin-bottom: var(--f-h1-margin-bottom);
+}
+
+h2, .h2 {
+    font-family: var(--f-h2-font-family);
+    font-size: var(--f-h2-font-size);
+    font-weight: var(--f-h2-font-weight);
+    line-height: var(--f-h2-line-height);
+    margin-top: var(--f-h2-margin-top);
+    margin-bottom: var(--f-h2-margin-bottom);
+}
+
+h3, .h3 {
+    font-family: var(--f-h3-font-family);
+    font-size: var(--f-h3-font-size);
+    font-weight: var(--f-h3-font-weight);
+    line-height: var(--f-h3-line-height);
+    margin-top: var(--f-h3-margin-top);
+    margin-bottom: var(--f-h3-margin-bottom);
+}
+
+h4, .h4 {
+    font-family: var(--f-h4-font-family);
+    font-size: var(--f-h4-font-size);
+    font-weight: var(--f-h4-font-weight);
+    line-height: var(--f-h4-line-height);
+    margin-top: var(--f-h4-margin-top);
+    margin-bottom: var(--f-h4-margin-bottom);
+}

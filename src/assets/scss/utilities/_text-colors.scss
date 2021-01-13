@@ -1,0 +1,8 @@
+/**
+ Generates utility classes for text colors.
+ For example: .co-primary-5, .co-primary-9, ...
+ */
+
+@use "../tools/colors";
+
+@include colors.color-utils('foreground');

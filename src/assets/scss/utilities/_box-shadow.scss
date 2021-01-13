@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "../tools/sizes" as sizesTools;
+
+@include sizesTools.sizes(0) using ($size) {
+    $size: map.get($size, 'suffix');
+    $bos: var(--f-box-shadow#{$size});
+
+    @if $size == '-0' {
+        $bos: none;
+    }
+
+    // box shadow
+    .bos#{$size} {
+        box-shadow: $bos;
+    }
+}

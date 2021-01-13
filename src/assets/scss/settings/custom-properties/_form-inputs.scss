@@ -1,0 +1,12 @@
+/**
+ Common CSS custom properties for form inputs - fields, checkboxes, ...
+ */
+
+:root {
+    --f-inputs-background: #fff;
+    --f-inputs-border: 1px solid;
+    --f-inputs-border-color: var(--f-color-grey-3, #dedede);
+    --f-inputs-focus-box-shadow: 0 0 0 2px;
+    --f-inputs-disabled-background-color: var(--f-color-grey-2, #f5f5f5);
+    --f-inputs-disabled-text-color: var(--f-color-grey-6, #666);
+}

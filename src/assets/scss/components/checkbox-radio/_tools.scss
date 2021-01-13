@@ -1,0 +1,9 @@
+@use "../../settings/components" as componentsSettings;
+
+$cr: componentsSettings.$checkboxradio;
+
+@mixin cr() {
+    .#{$cr} {
+        @content;
+    }
+}

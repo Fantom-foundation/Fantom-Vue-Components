@@ -1,0 +1,18 @@
+@use "../settings/breakpoints" as breakpointsSettings;
+@use "media" as mediaTools;
+
+@mixin breakpoints-min() {
+    @each $shortcut, $breakpoint in breakpointsSettings.$breakpoints-map-min {
+        @include mediaTools.media-min($breakpoint) {
+            @content($shortcut);
+        }
+    }
+}
+
+@mixin breakpoints-max() {
+    @each $shortcut, $breakpoint in breakpointsSettings.$breakpoints-map-max {
+        @include mediaTools.media-max($breakpoint) {
+            @content($shortcut);
+        }
+    }
+}

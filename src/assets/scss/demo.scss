@@ -1,0 +1,52 @@
+@use "sass:map";
+
+/*
+@use "settings" with (
+    $custom-colors: (
+        "primary": (
+            "hsl": 219 100% 55%
+        ),
+    ),
+    $grid: "mygrid"
+);
+*/
+@use "settings";
+@use "generic";
+@use "elements";
+@use "layouts";
+
+//@use "components";
+@forward "components/button";
+@forward "components/checkbox-radio";
+@forward "components/toggle-button";
+//@forward "components/input-field";
+//@forward "components/select";
+//@forward "components/textarea";
+@forward "components/list";
+
+
+@use "utilities";
+@use "external";
+
+/*
+:root {
+    --f-doc-font-size: 14px;
+    --f-doc-line-height: 20px;
+    --f-border-radius-base: 14px;
+}
+*/
+
+
+//@use "utilities/text-colors";
+//@use "utilities/font-sizes";
+//@use "utilities/js-focus-visible";
+
+.vertical-align-top {
+    > * {
+        vertical-align: top !important;
+    }
+}
+
+.di-rtl {
+    direction: rtl;
+}

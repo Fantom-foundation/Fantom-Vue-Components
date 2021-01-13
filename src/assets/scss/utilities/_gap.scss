@@ -1,0 +1,41 @@
+@use "sass:map";
+@use "../tools/sizes" as sizesTools;
+
+@mixin _gap($_type: 'bare', $_size: '', $_bp: '') {
+    $spacer: var(--f-spacer#{$_size});
+
+    @if $_size == '-0' {
+        $spacer: 0;
+    }
+
+    @if $_type == 'bare' {
+        .#{$_bp}gap#{$_size} {
+            --f-row-gap: #{$spacer};
+            --f-column-gap: #{$spacer};
+        }
+    } @else if $_type == 'row' {
+        // row gap
+        .#{$_bp}gapr#{$_size} {
+            --f-row-gap: #{$spacer};
+            --f-column-gap: #{$spacer};
+        }
+    } @else {
+        // column gap
+        .#{$_bp}gapc#{$_size} {
+            --f-row-gap: #{$spacer};
+            --f-column-gap: #{$spacer};
+        }
+    }
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _gap('bare', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _gap('row', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _gap('col', map.get($size, "suffix"));
+}

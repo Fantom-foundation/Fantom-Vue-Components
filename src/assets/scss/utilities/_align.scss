@@ -1,0 +1,21 @@
+@use "../tools/breakpoints" as breakpointsTools;
+
+@mixin _align($_bp: '') {
+    .#{$_bp}tea-left {
+        text-align: left;
+    }
+
+    .#{$_bp}tea-center#{$_bp} {
+        text-align: center;
+    }
+
+    .#{$_bp}tea-right {
+        text-align: right;
+    }
+}
+
+@include _align();
+
+@include breakpointsTools.breakpoints-min() using($shortcut) {
+    @include _align($shortcut + '\\:');
+}

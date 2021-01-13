@@ -1,0 +1,30 @@
+@use "custom-properties";
+@use "tools";
+
+@include tools.gridauto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--f-gridauto-min-width), 1fr));
+    grid-column-gap: var(--f-column-gap);
+    grid-row-gap: var(--f-row-gap);
+
+    &-colspadding > * {
+        padding: var(--f-gridauto-cols-padding);
+    }
+
+    // predefined min widths
+    &-miw-64 {
+        --f-gridauto-min-width: 64px;
+    }
+
+    &-miw-128 {
+        --f-gridauto-min-width: 128px;
+    }
+
+    &-miw-192 {
+        --f-gridauto-min-width: 192px;
+    }
+
+    &-miw-256 {
+        --f-gridauto-min-width: 256px;
+    }
+}

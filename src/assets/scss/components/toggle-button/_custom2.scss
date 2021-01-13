@@ -1,0 +1,53 @@
+@use "tools";
+
+.#{tools.$togglebtn}-c2 {
+    --f-togglebtn-background: var(--f-color-grey-4);
+    --f-togglebtn-border: 1px solid var(--f-color-grey-4);
+    //--f-togglebtn-border-radius: var(--f-border-radius-1);
+
+    // tmp
+    --f-togglebtn-switch-size: calc(var(--f-togglebtn-height) * 2);
+    --f-togglebtn-height: 12px;
+    --f-togglebtn-width: calc(var(--f-togglebtn-height) * 3.5);
+
+    /* focus */
+    --f-togglebtn-focus-border: var(--f-togglebtn-border);
+
+    /* disabled */
+    --f-togglebtn-disabled-background: var(--f-togglebtn-background);
+    --f-togglebtn-disabled-border: var(--f-togglebtn-border);
+    --f-togglebtn-disabled-opacity: 0.5;
+
+    /* checked */
+    --f-togglebtn-checked-switch-translate-x: calc(var(--f-togglebtn-width) - var(--f-togglebtn-switch-size) + 2px);
+
+    /* disabled + checked */
+    --f-togglebtn-disabled-checked-background: var(--f-togglebtn-checked-background);
+    --f-togglebtn-disabled-checked-border: var(--f-togglebtn-checked-border);
+
+    /* switch */
+    --f-togglebtn-switch-background: var(--f-togglebtn-theme-color);
+    --f-togglebtn-switch-border: 1px solid var(--f-togglebtn-switch-background);
+    //--f-togglebtn-switch-border-radius: var(--f-border-radius-1);
+
+    /* switch - checked */
+    --f-togglebtn-checked-switch-border: var(--f-togglebtn-switch-border);
+
+    /* switch - focus */
+    --f-togglebtn-focus-switch-border: var(--f-togglebtn-switch-border);
+    /* switch - hover (not disabled and checked) */
+    --f-togglebtn-hover-switch-border: var(--f-togglebtn-switch-border);
+
+    /* switch - disabled */
+    --f-togglebtn-disabled-switch-border: var(--f-togglebtn-checked-switch-border);
+
+    /* switch - disabled + checked */
+    --f-togglebtn-disabled-checked-switch-border: var(--f-togglebtn-checked-switch-border);
+    --f-togglebtn-disabled-checked-switch-background: #fff;
+
+    .#{tools.$togglebtn}_btn::before {
+        //top: -50%;
+        top: calc(var(--f-togglebtn-switch-size) * -0.5 + var(--f-togglebtn-height) * 0.5);
+        left: -2px;
+    }
+}

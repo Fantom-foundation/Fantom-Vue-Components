@@ -1,0 +1,20 @@
+@use "../../assets/scss/settings/custom-properties/form-inputs";
+@use "../../assets/scss/components/input-field";
+@use "../../assets/scss/components/textarea";
+
+.finput {
+    display: inline-block;
+    vertical-align: middle;
+
+    &_inputcont {
+        display: flex;
+        align-items: center;
+        align-content: center;
+    }
+
+    &-textarea {
+        .finput_inputcont {
+            height: auto;
+        }
+    }
+}

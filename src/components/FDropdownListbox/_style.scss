@@ -1,0 +1,54 @@
+@import 'custom-properties';
+
+.fdropdownlistbox {
+    display: inline-block;
+
+    &_button {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        //background: none;
+        //border: none;
+        cursor: pointer;
+
+        &_label {
+            padding-right: 4px;
+        }
+
+        &_arrow {
+            width: var(--fdropdownlistbox-arrow-size);
+            height: var(--fdropdownlistbox-arrow-size);
+            background-image: var(--fdropdownlistbox-arrow-image);
+            background-repeat: no-repeat;
+            margin: 0 0 0 auto;
+            //background-position: 50% 0;
+            background-position: 100% 0;
+        }
+    }
+}
+
+:root {
+    .fdropdownlistbox {
+        &_fwindow.fwindow-popover {
+            --fwindow-popover-padding: 0;
+            --fwindow-popover-body-padding: 0;
+            --fwindow-popover-color: #333;
+            --fwindow-popover-background: #fff;
+            --f-transition-length: 120ms;
+
+            width: auto;
+            max-width: 360px;
+        }
+
+        &_flistbox {
+            --f-listbox-item-background-color: #fff;
+            --f-listbox-item-hover-color: inherit;
+            //--f-listbox-item-hover-background-color: var(--f-primary-color-lighter);
+            --f-listbox-item-selected-color: #fff;
+            --f-listbox-item-selected-background-color: var(--f-primary-color);
+
+            max-height: 300px;
+            overflow: auto;
+        }
+    }
+}

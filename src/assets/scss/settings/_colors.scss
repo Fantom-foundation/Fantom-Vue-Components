@@ -1,0 +1,38 @@
+/**
+ Sass variables for generating css custom properties for basic colors and their variants.
+ */
+
+@use "sass:map";
+
+$default-colors: (
+    "primary": (
+        "hsl": 219 100% 55%,
+        "lightness": 99% 96% 87% 73% 40% 30% 20% 13%,
+    ),
+    "grey": (
+        "hsl": 0 0% 50%,
+        "lightness": 99% 96% 87% 73% 40% 30% 20% 13%,
+    ),
+    "blue": (
+        "hsl": 217 91% 60%,
+        "lightness": 99% 96% 87% 73% 40% 30% 20% 13%,
+    ),
+    "red": (
+        "hsl": 0 80% 44%,
+        "lightness": 99% 96% 87% 63% 33% 26% 19% 12%,
+    ),
+    "green": (
+        "hsl": 129 54% 41%,
+        "lightness": 99% 96% 87% 63% 33% 26% 19% 12%,
+    ),
+    "orange": (
+        "hsl": 38 92% 50%,
+        "lightness": 99% 96% 87% 73% 40% 30% 20% 13%,
+    ),
+    "yellow": (
+        "hsl": 50 100% 52%,
+        "lightness": 99% 96% 87% 73% 40% 30% 20% 13%,
+    ),
+) !default;
+$custom-colors: () !default;
+$colors: map.deep-merge($default-colors, $custom-colors) !default;

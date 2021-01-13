@@ -1,0 +1,35 @@
+@use "sass:map";
+@use "../tools/sizes" as sizesTools;
+
+.bor-round {
+    border-radius: 50%;
+}
+
+.bor-rounded {
+    border-radius: 100vh;
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    $size: map.get($size, "suffix");
+    $brSize: var(--f-border-radius#{$size});
+
+    @if $size == '-0' {
+        $brSize: 0;
+    }
+
+    .bor#{$size} {
+        border-radius: $brSize;
+    }
+
+    /* bottom border radius */
+    .bbor#{$size} {
+        border-bottom-left-radius: $brSize;
+        border-bottom-right-radius: $brSize;
+    }
+
+    /* top border radius */
+    .tbor#{$size} {
+        border-top-left-radius: $brSize;
+        border-top-right-radius: $brSize;
+    }
+}

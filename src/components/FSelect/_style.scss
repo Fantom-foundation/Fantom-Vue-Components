@@ -1,0 +1,12 @@
+@use "../../assets/scss/settings/custom-properties/form-inputs";
+@use "../../assets/scss/components/input-field";
+@use "../../assets/scss/components/select";
+
+.fselect {
+    display: inline-block;
+    vertical-align: middle;
+
+    select:not(:disabled) {
+        cursor: pointer;
+    }
+}

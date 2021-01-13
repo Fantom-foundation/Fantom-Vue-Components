@@ -1,0 +1,15 @@
+@use "../../settings/components" as componentsSettings;
+
+$list: componentsSettings.$list;
+
+@mixin list() {
+    .#{$list} {
+        @content
+    }
+}
+
+@mixin listbare() {
+    .#{componentsSettings.$listbare} {
+        @content
+    }
+}

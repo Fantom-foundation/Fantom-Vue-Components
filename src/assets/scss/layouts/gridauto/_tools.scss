@@ -1,0 +1,7 @@
+@use "../../settings/layouts" as layoutsSettings;
+
+@mixin gridauto() {
+    .#{layoutsSettings.$gridauto} {
+        @content
+    }
+}

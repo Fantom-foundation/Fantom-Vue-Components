@@ -1,0 +1,9 @@
+@use "../../settings/components" as componentsSettings;
+
+$sel: componentsSettings.$select;
+
+@mixin select() {
+    .#{$sel} {
+        @content
+    }
+}

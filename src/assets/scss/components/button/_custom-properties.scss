@@ -1,0 +1,82 @@
+@use "tools";
+
+.#{tools.$button} {
+    --f-btn-font-family: inherit;
+    --f-btn-font-size: var(--f-font-size-5);
+    --f-btn-font-weight: normal;
+
+    --f-btn-padding: var(--f-spacer-2) var(--f-spacer-4);
+    --f-btn-min-height: calc(var(--f-doc-line-height) * 1.5);
+    --f-btn-line-height: 1;
+
+    --f-btn-white-space: nowrap;
+    --f-btn-text-align: center;
+    --f-btn-text-transform: initial;
+    --f-btn-text-shadow: none;
+
+    --f-btn-border-color: transparent;
+    --f-btn-border: 1px solid var(--f-btn-border-color);
+    --f-btn-border-radius: 100vh;
+    //--f-btn-border-radius: var(--f-border-radius-5);
+
+    --f-btn-transition-length: var(--f-transition-length, 250ms);
+    --f-btn-transition-func: var(--f-transition-func, ease);
+    --f-btn-transition: color var(--f-btn-transition-length) var(--f-btn-transition-func),
+    background-color var(--f-btn-transition-length) var(--f-btn-transition-func),
+    border-color var(--f-btn-transition-length) var(--f-btn-transition-func);
+
+    --f-btn-color: #fff;
+    --f-btn-background: var(--f-color-primary-5);
+
+    --f-btn-hover-color: var(--f-btn-color);
+    --f-btn-hover-background: hsl(var(--f-color-primary-h), var(--f-color-primary-s), calc(var(--f-color-primary-l) - 10%));
+    --f-btn-hover-border-color: transparent;
+
+    --f-btn-focus-color: var(--f-btn-hover-color);
+    --f-btn-focus-background: var(--f-btn-hover-background);
+    --f-btn-focus-border-color: var(--f-btn-hover-border-color);
+
+    --f-btn-active-color: var(--f-btn-hover-color);
+    --f-btn-active-background: var(--f-btn-hover-background); /*darken --f-btn-hover-background 10%*/
+    --f-btn-active-border-color: var(--f-btn-hover-border-color);
+
+    --f-btn-disabled-color: var(--f-btn-color);
+    --f-btn-disabled-background: var(--f-btn-background);
+    --f-btn-disabled-border-color: var(--f-btn-border-color);
+    --f-btn-disabled-opacity: 0.5;
+
+    //--f-btn-xs-font-size: 12px;
+    --f-btn-xs-font-size: var(--f-font-size-2);
+    //--f-btn-xs-min-height: 1.2rem;
+    --f-btn-xs-min-height: calc(var(--f-doc-line-height) * 0.75);
+    --f-btn-xs-line-height: var(--f-btn-line-height);
+    --f-btn-xs-padding: 0 var(--f-spacer-2);
+    --f-btn-xs-border-radius: 100vh;
+    //--f-btn-xs-border-radius: var(--f-border-radius-5);
+
+    //--f-btn-sm-font-size: 14px;
+    --f-btn-sm-font-size: var(--f-font-size-3);
+    //--f-btn-sm-min-height: 1.75rem;
+    --f-btn-sm-min-height: var(--f-doc-line-height);
+    --f-btn-sm-line-height: var(--f-btn-line-height);
+    --f-btn-sm-padding: 0 var(--f-spacer-3);
+    --f-btn-sm-border-radius: 100vh;
+    //--f-btn-sm-border-radius: var(--f-border-radius-5);
+
+    //--f-btn-lg-font-size: 16px;
+    --f-btn-lg-font-size: var(--f-font-size-5);
+    //--f-btn-lg-min-height: 2.75rem;
+    --f-btn-lg-min-height: calc(var(--f-doc-line-height) * 2);
+    --f-btn-lg-line-height: 1.2;
+    --f-btn-lg-padding: var(--f-spacer-3) var(--f-spacer-6);
+    --f-btn-lg-border-radius: 100vh;
+    //--f-btn-lg-border-radius: var(--f-border-radius-8);
+
+    --f-btn-secondary-color: var(--f-color-primary-5);
+    --f-btn-secondary-border-color: var(--f-btn-background-color);
+    --f-btn-secondary-background: transparent;
+
+    --f-btn-tertiary-color: var(--f-color-primary-5);
+    --f-btn-tertiary-border-color: transparent;
+    --f-btn-tertiary-background: transparent;
+}

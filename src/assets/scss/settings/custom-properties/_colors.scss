@@ -1,0 +1,24 @@
+@use "../../tools/colors" as colorTools;
+@use "../colors";
+@use "sass:map";
+
+/**
+ CSS custom properties for basic colors and their variants.
+
+ Example of output for primary color:
+  --f-color-primary-h:210;
+  --f-color-primary-s:44%;
+  --f-color-primary-l:52%;
+  --f-color-primary-1: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 99%);
+  --f-color-primary-2: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 96%);
+  --f-color-primary-3: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 87%);
+  --f-color-primary-4: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 73%);
+  --f-color-primary-5: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 52%;
+  --f-color-primary-6: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 40%);
+  --f-color-primary-7: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 30%);
+  --f-color-primary-8: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 20%);
+  --f-color-primary-9: hsl(var(--f-color-primary-h), var(--f-color-primary-s), 13%);
+ */
+:root {
+    @include colorTools.create-custom-properties();
+}

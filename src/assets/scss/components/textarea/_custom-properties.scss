@@ -1,0 +1,9 @@
+@use "tools";
+
+@include tools.textarea {
+    --f-textarea-resize: vertical;
+    --f-textarea-line-height: var(--f-line-height-5);
+    --f-textarea-xs-line-height: var(--f-line-height-2);
+    --f-textarea-sm-line-height: var(--f-line-height-3);
+    --f-textarea-lg-line-height: var(--f-line-height-5);
+}

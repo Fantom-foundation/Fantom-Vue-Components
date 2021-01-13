@@ -1,0 +1,22 @@
+/**
+ CSS custom properties for various border radius sizes.
+ */
+
+:root {
+    --f-border-radius-base: 16px;
+
+    --f-border-radius-0: 0;
+
+    --f-border-radius-1: calc(var(--f-border-radius-base) * 0.125);
+    --f-border-radius-2: calc(var(--f-border-radius-base) * 0.25);
+    --f-border-radius-3: calc(var(--f-border-radius-base) * 0.5);
+    --f-border-radius-4: calc(var(--f-border-radius-base) * 0.75);
+    --f-border-radius-5: calc(var(--f-border-radius-base) * 1);
+    --f-border-radius-6: calc(var(--f-border-radius-base) * 1.25);
+    --f-border-radius-7: calc(var(--f-border-radius-base) * 1.5);
+    --f-border-radius-8: calc(var(--f-border-radius-base) * 2);
+    --f-border-radius-9: calc(var(--f-border-radius-base) * 2.5);
+
+    --f-border-radius-round: 50%;
+    --f-border-radius-rounded: 100vh;
+}

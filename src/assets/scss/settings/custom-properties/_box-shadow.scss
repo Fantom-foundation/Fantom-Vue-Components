@@ -1,0 +1,19 @@
+/**
+ CSS custom properties for elevations
+ */
+
+:root {
+    --f-box-shadow-rgb: 0,0,0;
+    --f-box-shadow-alpha: 0.2;
+
+    --f-box-shadow-0: none;
+    --f-box-shadow-1: 0 1px 1px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-2: 0 2px 2px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-3: 0 4px 4px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-4: 0 6px 6px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-5: 0 8px 8px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-6: 0 12px 12px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-7: 0 16px 16px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-8: 0 24px 24px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+    --f-box-shadow-9: 0 32px 32px rgba(var(--f-box-shadow-rgb),var(--f-box-shadow-alpha));
+}

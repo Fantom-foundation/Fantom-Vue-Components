@@ -1,0 +1,10 @@
+@use "sass:map";
+@use "../tools/sizes" as sizesTools;
+
+@include sizesTools.sizes() using ($size){
+    $size: map.get($size, "suffix");
+
+    .fos#{$size} {
+        font-size: var(--f-font-size#{$size});
+    }
+}

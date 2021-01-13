@@ -1,0 +1,151 @@
+@use "custom-properties";
+@use "tools";
+
+$cr: tools.$cr;
+
+@include tools.cr {
+    //position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--f-spacer-3, 12px);
+
+    &_input {
+        position: absolute;
+        opacity: 0;
+
+        &:checked + .#{$cr}_check {
+            background: var(--f-cr-checked-background);
+            border: var(--f-cr-checked-border);
+            box-shadow: var(--f-cr-checked-box-shadow);
+
+            &::before {
+                transform: scale(var(--f-cr-check-size));
+            }
+        }
+
+        &:focus + .#{$cr}_check {
+            //background: var(--f-cr-focus-background);
+            border: var(--f-cr-focus-border);
+            box-shadow: var(--f-cr-focus-box-shadow);
+        }
+
+        &:disabled {
+            & + .#{$cr}_check {
+                cursor: initial;
+                background: var(--f-cr-disabled-background);
+                border: var(--f-cr-disabled-border);
+                box-shadow: var(--f-cr-disabled-box-shadow);
+                opacity: var(--f-cr-disabled-opacity);
+
+                & + .#{$cr}_label {
+                    --f-cr-label-color: var(--f-cr-label-disabled-color);
+                }
+            }
+
+            &:checked + .#{$cr}_check {
+                background: var(--f-cr-disabled-checked-background);
+            }
+        }
+
+        &[aria-invalid="true"] {
+            & + .#{$cr}_check {
+                border: var(--f-cr-invalid-border);
+                box-shadow: var(--f-cr-invalid-box-shadow);
+            }
+
+            &:focus + .#{$cr}_check {
+                box-shadow: var(--f-cr-invalid-focus-box-shadow);
+            }
+        }
+    }
+
+    &_check {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+
+        font-size: var(--f-font-size-6, 24px);
+        width: var(--f-cr-size);
+        height: var(--f-cr-size);
+        margin-right: var(--f-spacer-1, 3px);
+        cursor: pointer;
+        transition: all 150ms ease;
+        background: var(--f-cr-background);
+        border: var(--f-cr-border);
+        border-radius: var(--f-cr-border-radius);
+        box-shadow: var(--f-cr-box-shadow);
+
+        &::before {
+            content: "";
+            width: var(--f-cr-size);
+            height: var(--f-cr-size);
+            transform: scale(0);
+            transition: transform 150ms ease;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: 50%;
+            mask-position: 50%;
+        }
+    }
+
+    &_label {
+        color: var(--f-cr-label-color);
+        padding-left: var(--f-spacer-2, 6px);
+    }
+
+    &:hover {
+        .#{$cr}_input:not(:disabled):not(:checked):not(:focus) + .#{$cr}_check {
+            background: var(--f-cr-hover-background);
+            border: var(--f-cr-hover-border);
+            box-shadow: var(--f-cr-hover-box-shadow);
+        }
+    }
+
+    &-checkbox {
+        .#{$cr}_check::before {
+            background-repeat: no-repeat;
+            background-color: var(--f-cr-checkbox-check-color);
+            -webkit-mask-image: var(--f-cr-checkbox-check-image);
+            mask-image: var(--f-cr-checkbox-check-image);
+        }
+
+        .#{$cr}_input {
+            &:disabled + .#{$cr}_check::before {
+                background-color: var(--f-cr-checkbox-check-disabled-color);
+            }
+        }
+    }
+
+    &-radio {
+        --f-cr-border-radius: 50%;
+        --f-cr-check-size: var(--f-cr-radio-check-size);
+        --f-cr-checked-background: none;
+
+        & > .#{$cr}_check::before {
+            background-repeat: no-repeat;
+            background-color: var(--f-cr-radio-check-color);
+            -webkit-mask-image: var(--f-cr-radio-check-image);
+            mask-image: var(--f-cr-radio-check-image);
+        }
+
+        .#{$cr}_input {
+            &:disabled + .#{$cr}_check::before {
+                background-color: var(--f-cr-radio-check-disabled-color);
+            }
+        }
+    }
+
+    &.#{$cr}-lg {
+        --f-cr-size: var(--f-cr-lg-size);
+    }
+
+    &.#{$cr}-sm {
+        --f-cr-size: var(--f-cr-sm-size);
+    }
+
+    &.#{$cr}-xs {
+        --f-cr-size: var(--f-cr-xs-size);
+    }
+}

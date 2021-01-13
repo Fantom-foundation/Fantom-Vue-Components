@@ -1,0 +1,27 @@
+@use "../tools/breakpoints" as breakpointsTools;
+
+@mixin _visibility($_bp: '') {
+    .#{$_bp}hidden {
+        display: none;
+    }
+
+    /*
+    .visible#{$_bp} {
+        display: inherit;
+        //display: initial;
+    }
+    */
+}
+
+.not-visible {
+    position: fixed !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+}
+
+@include _visibility();
+
+@include breakpointsTools.breakpoints-min() using($shortcut) {
+    @include _visibility($shortcut + '\\:');
+}

@@ -1,0 +1,57 @@
+@use "../../settings/components" as componentsSettings;
+@use "custom-properties";
+@use "tools";
+
+$inp: componentsSettings.$input;
+
+@include tools.textarea {
+    --f-input-line-height: var(--f-textarea-line-height);
+
+    height: auto;
+    resize: var(--f-textarea-resize);
+    line-height: var(--f-input-line-height);
+
+    &.#{$inp}-xs {
+        --f-input-line-height: var(--f-textarea-xs-line-height);
+
+        .textarea {
+            --f-input-line-height: var(--f-textarea-xs-line-height);
+        }
+    }
+
+    &.#{$inp}-sm {
+        --f-input-line-height: var(--f-textarea-sm-line-height);
+
+        .textarea {
+            --f-input-line-height: var(--f-textarea-sm-line-height);
+        }
+    }
+
+    &.#{$inp}-lg {
+        --f-input-line-height: var(--f-textarea-lg-line-height);
+
+        .textarea {
+            --f-input-line-height: var(--f-textarea-lg-line-height);
+        }
+    }
+}
+
+.#{$inp}-cont {
+    &.#{$inp}-xs {
+        .textarea {
+            --f-input-line-height: var(--f-textarea-xs-line-height);
+        }
+    }
+
+    &.#{$inp}-sm {
+        .textarea {
+            --f-input-line-height: var(--f-textarea-sm-line-height);
+        }
+    }
+
+    &.#{$inp}-lg {
+        .textarea {
+            --f-input-line-height: var(--f-textarea-lg-line-height);
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@use "tools";
+
+@include tools.headings() {
+    --f-headings-font-family: var(--f-doc-font-family);
+    --f-headings-font-weight: initial;
+    --f-headings-color: var(--f-doc-color);
+
+    --f-h1-font-family: var(--f-headings-font-family);
+    --f-h1-font-size: var(--f-font-size-8);
+    --f-h1-font-weight: var(--f-headings-font-weight);
+    --f-h1-line-height: var(--f-line-height-8);
+    --f-h1-margin-top: var(--f-spacer-8);
+    --f-h1-margin-bottom: var(--f-spacer-5);
+
+    --f-h2-font-family: var(--f-headings-font-family);
+    --f-h2-font-size: var(--f-font-size-7);
+    --f-h2-font-weight: var(--f-headings-font-weight);
+    --f-h2-line-height: var(--f-line-height-7);
+    --f-h2-margin-top: var(--f-spacer-8);
+    --f-h2-margin-bottom: var(--f-spacer-5);
+
+    --f-h3-font-family: var(--f-headings-font-family);
+    --f-h3-font-size: var(--f-font-size-6);
+    --f-h3-font-weight: var(--f-headings-font-weight);
+    --f-h3-line-height: var(--f-line-height-6);
+    --f-h3-margin-top: var(--f-spacer-5);
+    --f-h3-margin-bottom: var(--f-spacer-5);
+
+    --f-h4-font-family: var(--f-headings-font-family);
+    --f-h4-font-size: var(--f-font-size-5);
+    --f-h4-font-weight: 700;
+    --f-h4-line-height: var(--f-line-height-6);
+    --f-h4-margin-top: var(--f-spacer-5);
+    --f-h4-margin-bottom: var(--f-spacer-4);
+}

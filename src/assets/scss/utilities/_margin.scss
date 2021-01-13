@@ -1,0 +1,80 @@
+@use "sass:map";
+@use "../tools/breakpoints" as breakpointsTools;
+@use "../tools/sizes" as sizesTools;
+
+@mixin _margin($_type: 'bare', $_size: '', $_bp: '') {
+    $spacer: var(--f-spacer#{$_size});
+
+    @if $_size == '-0' {
+        $spacer: 0;
+    }
+
+    @if $_type == 'bare' {
+        .#{$_bp}ma#{$_size} {
+            margin: $spacer;
+        }
+    } @else if $_type == 'trbl' {
+        // top, right, bottom, left
+        .#{$_bp}mat#{$_size} {
+            margin-top: $spacer;
+        }
+
+        .#{$_bp}mar#{$_size} {
+            margin-right: $spacer;
+        }
+
+        .#{$_bp}mab#{$_size} {
+            margin-bottom: $spacer;
+        }
+
+        .#{$_bp}mal#{$_size} {
+            margin-left: $spacer;
+        }
+    } @else {
+        // vertical, horizontal
+        .#{$_bp}hma#{$_size} {
+            margin-left: $spacer;
+            margin-right: $spacer;
+        }
+
+        .#{$_bp}vma#{$_size} {
+            margin-top: $spacer;
+            margin-bottom: $spacer;
+        }
+    }
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _margin('bare', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _margin('vh', map.get($size, "suffix"));
+}
+
+@include sizesTools.sizes(0) using ($size) {
+    @include _margin('trbl', map.get($size, "suffix"));
+}
+
+.vma-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+@include breakpointsTools.breakpoints-min() using($shortcut) {
+    $bp: $shortcut + '\\:';
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _margin('bare', map.get($size, "suffix"), $bp);
+    }
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _margin('trbl', map.get($size, "suffix"), $bp);
+    }
+
+    @include sizesTools.sizes(0) using ($size){
+        @include _margin('vh', map.get($size, "suffix"), $bp);
+    }
+}
+*/

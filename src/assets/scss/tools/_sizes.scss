@@ -1,0 +1,7 @@
+@mixin sizes($_from: 1, $_to: 10) {
+    @for $i from $_from to $_to {
+        $size: '-#{$i}';
+
+        @content (("suffix": $size, "index": $i));
+    }
+}

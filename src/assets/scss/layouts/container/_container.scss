@@ -1,0 +1,19 @@
+@use "custom-properties";
+@use "../../settings/breakpoints" as breakpointsSettings;
+@use "../../settings/layouts" as layoutsSettings;
+@use "../../tools/media" as mediaTools;
+
+$container: layoutsSettings.$container;
+
+.#{$container} {
+    max-width: var(--f-container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--f-container-padding);
+}
+
+@include mediaTools.media-min(breakpointsSettings.$breakpoint-md) {
+    .#{$container} {
+        --f-container-padding: var(--f-container-md-padding);
+    }
+}

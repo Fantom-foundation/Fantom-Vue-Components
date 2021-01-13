@@ -1,0 +1,19 @@
+@use "custom-properties";
+@use "tools";
+
+@include tools.links() {
+    color: var(--f-link-color);
+    text-decoration: var(--f-link-text-decoration);
+}
+
+@include tools.links(':link') {
+    color: var(--f-link-link-color);
+}
+
+@include tools.links(':visited') {
+    color: var(--f-link-visited-color);
+}
+
+@include tools.links(':hover') {
+    color: var(--f-link-hover-color);
+}

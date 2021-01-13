@@ -1,0 +1,9 @@
+@use "../../settings/components" as componentsSettings;
+
+$togglebtn: componentsSettings.$togglebtn;
+
+@mixin togglebtn() {
+    .#{$togglebtn} {
+        @content;
+    }
+}

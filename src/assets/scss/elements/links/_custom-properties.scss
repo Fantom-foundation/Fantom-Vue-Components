@@ -1,0 +1,10 @@
+@use "tools";
+
+@include tools.links() {
+    --f-link-color: var(--f-color-primary-6, blue);
+    --f-link-link-color: var(--f-link-color);
+    --f-link-visited-color: var(--f-link-color);
+    --f-link-hover-color: var(--f-link-color);
+
+    --f-link-text-decoration: underline;
+}

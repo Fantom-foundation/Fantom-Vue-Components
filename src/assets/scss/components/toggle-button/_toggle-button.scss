@@ -1,0 +1,153 @@
+@use "custom-properties";
+@use "tools";
+
+$togglebtn: tools.$togglebtn;
+
+@include tools.togglebtn {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--f-spacer-3);
+
+    &_btn {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        transition: all 0.2s ease;
+        width: var(--f-togglebtn-width);
+        height: var(--f-togglebtn-height);
+        background: var(--f-togglebtn-background);
+        box-shadow: var(--f-togglebtn-box-shadow);
+        //font-size: 11px;
+        border: var(--f-togglebtn-border);
+        border-radius: var(--f-togglebtn-border-radius);
+        cursor: pointer;
+
+        /* switch */
+        &::before {
+            position: absolute;
+            z-index: 2;
+            content: "";
+            top: 1px;
+            left: 1px;
+            transition: all 0.2s ease;
+            width: var(--f-togglebtn-switch-size);
+            height: var(--f-togglebtn-switch-size);
+            //box-shadow: 0px 2px 2px #aaa;
+            background: var(--f-togglebtn-switch-background);
+            box-shadow: var(--f-togglebtn-switch-box-shadow);
+            border: var(--f-togglebtn-switch-border);
+            border-radius: var(--f-togglebtn-switch-border-radius);
+        }
+    }
+
+    &_input {
+        position: absolute;
+        opacity: 0;
+
+        &:checked + .#{$togglebtn}_btn {
+            background: var(--f-togglebtn-checked-background);
+            box-shadow: var(--f-togglebtn-checked-box-shadow);
+            border: var(--f-togglebtn-checked-border);
+
+            /* switch - checked */
+            &::before {
+                background: var(--f-togglebtn-checked-switch-background);
+                box-shadow: var(--f-togglebtn-checked-switch-box-shadow);
+                border: var(--f-togglebtn-checked-switch-border);
+                transform: translateX(var(--f-togglebtn-checked-switch-translate-x));
+            }
+        }
+
+        &:disabled + .#{$togglebtn}_btn {
+            background: var(--f-togglebtn-disabled-background);
+            box-shadow: var(--f-togglebtn-disabled-box-shadow);
+            border: var(--f-togglebtn-disabled-border);
+            cursor: default;
+            opacity: var(--f-togglebtn-disabled-opacity);
+
+            /* switch - disabled */
+            &::before {
+                background: var(--f-togglebtn-disabled-switch-background);
+                box-shadow: var(--f-togglebtn-disabled-switch-box-shadow);
+                border: var(--f-togglebtn-disabled-switch-border);
+            }
+
+            & + .#{$togglebtn}_label {
+                --f-togglebtn-label-color: var(--f-togglebtn-label-disabled-color);
+            }
+        }
+
+        &:disabled:checked + .#{$togglebtn}_btn {
+            background: var(--f-togglebtn-disabled-checked-background);
+            border: var(--f-togglebtn-disabled-checked-border);
+
+            /* switch - disabled and checked */
+            &::before {
+                background: var(--f-togglebtn-disabled-checked-switch-background);
+                border: var(--f-togglebtn-disabled-checked-switch-border);
+            }
+        }
+
+        &:focus + .#{$togglebtn}_btn {
+            //background: var(--f-togglebtn-focus-background);
+            box-shadow: var(--f-togglebtn-focus-box-shadow);
+            border: var(--f-togglebtn-focus-border);
+
+            /* switch - focus */
+            &::before {
+                //background: var(--f-togglebtn-focus-switch-background);
+                //box-shadow: var(--f-togglebtn-focus-switch-box-shadow);
+                border: var(--f-togglebtn-focus-switch-border);
+            }
+        }
+
+        &:focus:checked + .#{$togglebtn}_btn {
+            border: var(--f-togglebtn-focus-checked-border);
+        }
+
+        &:not(:disabled):not(:checked):not(:focus):hover + .#{$togglebtn}_btn {
+            border: var(--f-togglebtn-hover-border);
+
+            /* switch - hover */
+            &::before {
+                border: var(--f-togglebtn-hover-switch-border);
+            }
+        }
+    }
+
+    &_label {
+        color: var(--f-togglebtn-label-color);
+        padding-left: var(--f-spacer-2);
+    }
+
+    &-invalid {
+        --f-togglebtn-theme-color: #af0a0a;
+        --f-togglebtn-theme-color-h: 0;
+        --f-togglebtn-theme-color-s: 89%;
+        --f-togglebtn-theme-color-l: 36%;
+
+        --f-togglebtn-border: 1px solid var(--f-togglebtn-theme-color);
+
+        //& > input {
+        //    &[aria-invalid="true"] {
+        //
+        //    }
+        //}
+    }
+
+    &-lg {
+        --f-togglebtn-width: var(--f-togglebtn-lg-width);
+        --f-togglebtn-height: var(--f-togglebtn-lg-height);
+    }
+
+    &-sm {
+        --f-togglebtn-width: var(--f-togglebtn-sm-width);
+        --f-togglebtn-height: var(--f-togglebtn-sm-height);
+    }
+
+    &-xs {
+        --f-togglebtn-width: var(--f-togglebtn-xs-width);
+        --f-togglebtn-height: var(--f-togglebtn-xs-height);
+    }
+}
