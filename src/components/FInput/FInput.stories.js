@@ -4,6 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
 import FMessage from '../FMessage/FMessage.vue';
+import FButton from '../FButton/FButton.vue';
 
 export default {
     title: 'FInput',
@@ -215,12 +216,11 @@ export const Pattern = () => ({
 */
 
 export const Model = () => ({
-    components: { FInput },
+    components: { FInput, FButton },
     template: `
         <div>
             <f-input v-model="value" />
-            <br />
-            <button @click="onButtonClick">set value to '222'</button>
+            <f-button secondary @click.native="onButtonClick">set value to '222'</f-button>
             <span>value: {{ value }}</span>
         </div>
     `,

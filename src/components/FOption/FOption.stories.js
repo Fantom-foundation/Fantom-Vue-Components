@@ -3,6 +3,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FOption from './FOption.vue';
+import FButton from '../FButton/FButton.vue';
 
 export default {
     title: 'FOption',
@@ -146,26 +147,26 @@ export const Disabled = () => ({
 });
 
 export const Model = () => ({
-    components: { FOption },
+    components: { FOption, FButton },
     template: `
         <div>
             <h3>Checkbox</h3>
             <f-option v-model="checkboxValue" type="checkbox" name="checkbox_m" />
-            <button @click="checkboxValue = !checkboxValue">Toggle</button>
+            <f-button secondary size="small" @click.native="checkboxValue = !checkboxValue">Toggle</f-button>
             <br />
             Value: {{ checkboxValue }}
             <h3>Checkbox - multiselect</h3>
             <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="10" />
             <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="20" />
             <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="30" />
-            <button @click="checkboxValue2 = ['30']">Set value to 30</button>
+            <f-button secondary size="small" @click.native="checkboxValue2 = ['30']">Set value to 30</f-button>
             <br />
             Value: {{ checkboxValue2 }}
             <h3>Radio button</h3>
             <f-option v-model="radioValue" type="radio" name="radio_m" value="10" />
             <f-option v-model="radioValue" type="radio" name="radio_m" value="20" />
             <f-option v-model="radioValue" type="radio" name="radio_m" value="30" />
-            <button @click="radioValue = '30'">Set value to 30</button>
+            <f-button secondary size="small" @click.native="radioValue = '30'">Set value to 30</f-button>
             <br />
             Value: {{ radioValue }}
         </div>

@@ -2,6 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import FSelect from './FSelect.vue';
 import FMessage from '../FMessage/FMessage.vue';
+import FButton from '../FButton/FButton.vue';
 
 function validator(_value) {
     return _value === '2';
@@ -135,16 +136,16 @@ export const Validator = () => ({
 });
 
 export const Model = () => ({
-    components: { FSelect },
+    components: { FSelect, FButton },
     template: `
         <div>
             <f-select
                 name="bla"
-                select-size="large"
                 v-model="sel"
                 :data="data"
             />
-            <span @click="sel = '1'">{{ sel }}</span>
+            Selected: {{ sel }}
+            <f-button secondary size="small" @click.native="sel = '1'">Set value to '1'</f-button>
         </div>
     `,
     data() {

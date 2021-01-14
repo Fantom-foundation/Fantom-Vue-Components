@@ -1,6 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FListbox from './FListbox.vue';
+import FButton from '../FButton/FButton.vue';
 
 const data = [
     { label: 'item 1', value: '10' },
@@ -263,15 +264,14 @@ export const Scrollable = () => ({
 });
 
 export const Model = () => ({
-    components: { FListbox },
+    components: { FListbox, FButton },
     template: `
         <div>
             <span id="fllbl5" class="not-visible">Listbox example</span>
             <f-listbox v-model="value" :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" @component-change="onListboxItemSelected" />
             <br />
-            <button @click="onButtonClick">Set value to '30'</button>
-            <br />
             Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to '30'</f-button>
         </div>
     `,
     data() {
