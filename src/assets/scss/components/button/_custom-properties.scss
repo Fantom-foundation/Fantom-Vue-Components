@@ -1,12 +1,15 @@
 @use "tools";
 
 .#{tools.$button} {
+    --f-btn-main-color: var(--f-color-primary-5, #1a6aff);
+    --f-btn-main-color-hover: var(--f-color-primary-6, #0047cc);
+
     --f-btn-font-family: inherit;
     --f-btn-font-size: var(--f-font-size-5);
     --f-btn-font-weight: normal;
 
-    --f-btn-padding: var(--f-spacer-2) var(--f-spacer-4);
-    --f-btn-min-height: calc(var(--f-doc-line-height) * 1.5);
+    --f-btn-padding: var(--f-spacer-2, 6px) var(--f-spacer-4, 18px);
+    --f-btn-min-height: calc(var(--f-doc-line-height, 24px) * 1.5);
     --f-btn-line-height: 1;
 
     --f-btn-white-space: nowrap;
@@ -26,10 +29,10 @@
     border-color var(--f-btn-transition-length) var(--f-btn-transition-func);
 
     --f-btn-color: #fff;
-    --f-btn-background: var(--f-color-primary-5);
+    --f-btn-background: var(--f-btn-main-color);
 
     --f-btn-hover-color: var(--f-btn-color);
-    --f-btn-hover-background: hsl(var(--f-color-primary-h), var(--f-color-primary-s), calc(var(--f-color-primary-l) - 10%));
+    --f-btn-hover-background: var(--f-btn-main-color-hover);
     --f-btn-hover-border-color: transparent;
 
     --f-btn-focus-color: var(--f-btn-hover-color);
@@ -46,37 +49,37 @@
     --f-btn-disabled-opacity: 0.5;
 
     //--f-btn-xs-font-size: 12px;
-    --f-btn-xs-font-size: var(--f-font-size-2);
+    --f-btn-xs-font-size: var(--f-font-size-2, 10px);
     //--f-btn-xs-min-height: 1.2rem;
-    --f-btn-xs-min-height: calc(var(--f-doc-line-height) * 0.75);
+    --f-btn-xs-min-height: calc(var(--f-doc-line-height, 24px) * 0.75);
     --f-btn-xs-line-height: var(--f-btn-line-height);
-    --f-btn-xs-padding: 0 var(--f-spacer-2);
+    --f-btn-xs-padding: 0 var(--f-spacer-2, 6px);
     --f-btn-xs-border-radius: 100vh;
     //--f-btn-xs-border-radius: var(--f-border-radius-5);
 
     //--f-btn-sm-font-size: 14px;
-    --f-btn-sm-font-size: var(--f-font-size-3);
+    --f-btn-sm-font-size: var(--f-font-size-3, 12px);
     //--f-btn-sm-min-height: 1.75rem;
-    --f-btn-sm-min-height: var(--f-doc-line-height);
+    --f-btn-sm-min-height: var(--f-doc-line-height, 24px);
     --f-btn-sm-line-height: var(--f-btn-line-height);
-    --f-btn-sm-padding: 0 var(--f-spacer-3);
+    --f-btn-sm-padding: 0 var(--f-spacer-3, 12px);
     --f-btn-sm-border-radius: 100vh;
     //--f-btn-sm-border-radius: var(--f-border-radius-5);
 
     //--f-btn-lg-font-size: 16px;
-    --f-btn-lg-font-size: var(--f-font-size-5);
+    --f-btn-lg-font-size: var(--f-font-size-5, 16px);
     //--f-btn-lg-min-height: 2.75rem;
-    --f-btn-lg-min-height: calc(var(--f-doc-line-height) * 2);
+    --f-btn-lg-min-height: calc(var(--f-doc-line-height, 24px) * 2);
     --f-btn-lg-line-height: 1.2;
-    --f-btn-lg-padding: var(--f-spacer-3) var(--f-spacer-6);
+    --f-btn-lg-padding: var(--f-spacer-3, 12px) var(--f-spacer-6, 30px);
     --f-btn-lg-border-radius: 100vh;
     //--f-btn-lg-border-radius: var(--f-border-radius-8);
 
-    --f-btn-secondary-color: var(--f-color-primary-5);
-    --f-btn-secondary-border-color: var(--f-btn-background-color);
+    --f-btn-secondary-color: var(--f-btn-main-color);
+    --f-btn-secondary-border-color: var(--f-btn-main-color);
     --f-btn-secondary-background: transparent;
 
-    --f-btn-tertiary-color: var(--f-color-primary-5);
+    --f-btn-tertiary-color: var(--f-btn-main-color);
     --f-btn-tertiary-border-color: transparent;
     --f-btn-tertiary-background: transparent;
 }

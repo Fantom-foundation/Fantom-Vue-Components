@@ -98,6 +98,10 @@
         background: none;
         cursor: pointer;
     }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
 }
 
 @include tools.button('hover') {
@@ -120,8 +124,8 @@
 
 @include tools.button('disabled') {
     cursor: default;
-    color: var(--f-btn-disabled-color);
-    background: var(--f-btn-disabled-background);
-    border-color: var(--f-btn-disabled-border-color);
+    //color: var(--f-btn-disabled-color);
+    //background: var(--f-btn-disabled-background);
+    //border-color: var(--f-btn-disabled-border-color);
     opacity: var(--f-btn-disabled-opacity);
 }
