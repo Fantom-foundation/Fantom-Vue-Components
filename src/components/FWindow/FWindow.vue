@@ -24,8 +24,8 @@
                     <div class="fwindow_header_controls" @click="onControlsClick">
                         <!-- @slot Default to `close-btn` button -->
                         <slot name="controls">
-                            <button class="btn close-btn same-size round light" title="Close window">
-                                x
+                            <button class="close-btn btn btn-samesize btn-round btn-tertiary" title="Close window">
+                                &#10006;
                             </button>
                         </slot>
                     </div>
