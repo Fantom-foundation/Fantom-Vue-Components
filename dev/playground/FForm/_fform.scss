@@ -1,0 +1,65 @@
+.fform {
+    .fl {
+        display: flex;
+        gap: var(--f-spacer-3);
+    }
+
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        background: var(--f-color-grey-1);
+        padding: var(--f-spacer-5);
+        //box-shadow: var(--f-box-shadow-1);
+
+        legend {
+            display: block;
+            margin: 0;
+            font-weight: bold;
+        }
+    }
+
+    &_row {
+        &:not(:last-child) {
+            margin-bottom: var(--f-spacer-5);
+        }
+    }
+
+    .finput {
+        width: 100%;
+
+        &_inputcont {
+            width: 100%;
+        }
+
+        label {
+            display: block;
+        }
+    }
+
+    .fselect {
+        width: 100%;
+
+        .sel {
+            width: 100%;
+
+            select {
+                width: 100%;
+            }
+        }
+
+        label {
+            display: block;
+        }
+    }
+
+    .finput {
+        //width: 100%;
+    }
+
+    &.center-form {
+        .form-body {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
+}
