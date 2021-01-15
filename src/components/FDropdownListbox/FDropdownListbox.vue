@@ -8,6 +8,7 @@
             :disabled="disabled"
             aria-haspopup="listbox"
             class="fdropdownlistbox_button"
+            type="button"
             :class="[buttonClass]"
             @click="onButtonClick"
         >
