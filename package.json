@@ -24,9 +24,9 @@
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
     "release": "standard-version",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major"
+    "release:minor": "standard-version --no-verify --release-as minor",
+    "release:patch": "standard-version --no-verify --release-as patch",
+    "release:major": "standard-version --no-verify --release-as major"
   },
   "dependencies": {
     "shortid": "^2.2.16"
