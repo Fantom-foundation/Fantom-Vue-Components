@@ -11,3 +11,8 @@ npm install
 ```bash
 npm run storybook
 ```
+
+## Playground
+```bash
+npm run serve
+```
