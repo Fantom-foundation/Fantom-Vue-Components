@@ -4,10 +4,18 @@
         gap: var(--f-spacer-3);
     }
 
+    .fl-wrap {
+        flex-wrap: wrap;
+    }
+
+    .fl-center {
+        justify-content: center;
+    }
+
     fieldset {
         display: flex;
         flex-direction: column;
-        background: var(--f-color-grey-1);
+        background: var(--f-color-grey-2);
         padding: var(--f-spacer-5);
         //box-shadow: var(--f-box-shadow-1);
 
@@ -19,8 +27,11 @@
     }
 
     &_row {
+        display: flex;
+        gap: var(--f-spacer-3);
+
         &:not(:last-child) {
-            margin-bottom: var(--f-spacer-5);
+            margin-bottom: var(--f-spacer-6);
         }
     }
 
