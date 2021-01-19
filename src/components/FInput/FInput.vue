@@ -1,7 +1,7 @@
 <template>
     <span :id="id" class="finput" :class="classes" @click="onClick">
         <slot name="top" v-bind="slotProps">
-            <label :for="inputId">{{ label }}</label>
+            <label v-if="label" :for="inputId">{{ label }}</label>
         </slot>
         <template v-if="disabledAsText && disabled">
             {{ val }}
