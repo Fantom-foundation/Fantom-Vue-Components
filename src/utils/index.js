@@ -74,6 +74,30 @@ export function cloneObject(_obj, _except) {
 }
 
 /**
+ * Clone string, number, object or array. Just simple values.
+ *
+ * @param {*} _val
+ * @return {(number|string)|*|undefined}
+ */
+export function clone(_val) {
+    if (isObject(_val) || isArray(_val)) {
+        return cloneObject(_val);
+    }
+
+    if (
+        typeof _val === 'number' ||
+        typeof _val === 'string' ||
+        typeof _val === 'boolean' ||
+        _val === undefined ||
+        _val === null
+    ) {
+        return _val;
+    }
+
+    return undefined;
+}
+
+/**
  * @param {object} _obj
  * @return {boolean}
  */
