@@ -1,14 +1,20 @@
 <template>
-    <form ref="form" method="post" class="fform" novalidate @submit="onSubmit" @change="onChange">
+    <form ref="form" method="post" class="fform" novalidate @submit="onSubmit" @reset="onReset">
         <slot></slot>
     </form>
 </template>
 
 <script>
 import { eventBusMixin } from '../../mixins/event-bus.js';
+import { cloneObject } from '../../utils/index.js';
 
 export default {
     mixins: [eventBusMixin],
+
+    model: {
+        prop: 'formValues',
+        event: 'input',
+    },
 
     props: {
         /** Submit form when an element is changed */
@@ -21,15 +27,55 @@ export default {
             type: Boolean,
             default: true,
         },
+        values: {
+            type: Object,
+            default() {
+                return {};
+            },
+        },
+        formValues: {
+            type: Object,
+            default() {
+                return null;
+            },
+        },
+    },
+
+    provide() {
+        return {
+            elements: this.elements,
+            lastChangedElement: this.lastChangedElement,
+        };
+    },
+
+    data() {
+        return {
+            elements: this.formValues || { ...this.values },
+            lastChangedElement: {
+                name: '',
+                value: '',
+                oldValue: '',
+            },
+        };
+    },
+
+    watch: {
+        lastChangedElement: {
+            handler(_value) {
+                this.onElementChange(_value);
+            },
+            deep: true,
+        },
     },
 
     created() {
-        /**
-         * Reference to last changed form element
-         * @type {HTMLElement}
-         */
-        this._lastChangedElem = null;
-        this._submitAction = '';
+        /** Initial values */
+        this._initValues = {};
+    },
+
+    mounted() {
+        this._initValues = cloneObject(this.elements);
+        // this.getFFormInputs();
     },
 
     methods: {
@@ -64,7 +110,6 @@ export default {
                 for (let i = 0, len1 = elements.length; i < len1; i++) {
                     elem = elements[i];
                     if (elem.name && elem.willValidate && !elem.checkValidity()) {
-                        // console.log(elem.name, elem.validity, elem.validationMessage);
                         errorMessages.push(elem.validationMessage);
                     }
                 }
@@ -108,25 +153,8 @@ export default {
             return valid;
         },
 
-        /**
-         * Triggered when form element changes.
-         *
-         * @param {Event} _event
-         */
-        onChange(_event) {
-            // this.getElementValue()
-            this.$emit('component-change', {
-                eTarget: _event.target,
-                event: _event,
-            });
-
-            if (this.submitOnChange) {
-                this._lastChangedElem = _event.target;
-
-                this.submit();
-
-                this._lastChangedElem = null;
-            }
+        onElementChange(_value) {
+            this.$emit('element-change', cloneObject(_value));
         },
 
         /**
@@ -143,14 +171,39 @@ export default {
 
             if (valid) {
                 this.$emit('submit', {
-                    lastChangedElem: this._lastChangedElem || undefined,
+                    values: cloneObject(this.elements),
+                    lastChangedElem: cloneObject(this.lastChangedElement),
                     event: _event,
                 });
             } else {
                 _event.preventDefault();
-
-                this._submitAction = this.action;
             }
+        },
+
+        /**
+         * Triggered when form is about to reset.
+         *
+         * @param {Event} _event
+         */
+        onReset(_event) {
+            const initValues = cloneObject(this._initValues);
+            const { elements } = this;
+
+            _event.preventDefault();
+
+            Object.keys(elements).forEach(_key => {
+                if (_key in initValues) {
+                    elements[_key] = initValues[_key];
+                } else {
+                    // TODO: default value according to type
+                    elements[_key] = '';
+                }
+            });
+
+            this.$emit('reset', {
+                values: cloneObject(initValues),
+                event: _event,
+            });
         },
     },
 };
