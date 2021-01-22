@@ -1,0 +1,21 @@
+.foptiongroup {
+    display: inline-block;
+
+    &_label {
+        display: block;
+    }
+
+    &_options {
+        display: flex;
+    }
+
+    &-column {
+        .foptiongroup_options {
+            flex-direction: column;
+
+            > *:not(:last-child) {
+                margin-bottom: var(--f-spacer-2, 6px);
+            }
+        }
+    }
+}
