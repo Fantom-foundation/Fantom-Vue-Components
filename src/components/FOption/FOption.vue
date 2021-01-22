@@ -41,7 +41,6 @@ export default {
         type: {
             type: String,
             default: 'checkbox',
-            required: true,
             validator: function(_value) {
                 return ['checkbox', 'radio'].indexOf(_value) !== -1;
             },
