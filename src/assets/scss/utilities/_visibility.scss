@@ -1,4 +1,5 @@
 @use "../tools/breakpoints" as breakpointsTools;
+@use "../tools/visibility" as visibilityTools;
 
 @mixin _visibility($_bp: '') {
     .#{$_bp}hidden {
@@ -14,10 +15,7 @@
 }
 
 .not-visible {
-    position: fixed !important;
-    top: -9999px !important;
-    left: -9999px !important;
-    opacity: 0 !important;
+    @include visibilityTools.not-visible;
 }
 
 @include _visibility();
