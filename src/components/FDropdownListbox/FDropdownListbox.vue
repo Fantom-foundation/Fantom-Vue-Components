@@ -1,14 +1,15 @@
 <template>
     <div class="fdropdownlistbox">
         <slot name="top" v-bind="slotProps">
-            <label :for="id">{{ label }}</label>
+            <f-label v-if="label" :id="labeledById" :label="label" />
         </slot>
         <button
             :id="buttonId"
             :disabled="disabled"
-            aria-haspopup="listbox"
-            class="fdropdownlistbox_button"
             type="button"
+            aria-haspopup="listbox"
+            :aria-labelledby="label ? labeledById : null"
+            class="fdropdownlistbox_button"
             :class="[buttonClass]"
             @click="onButtonClick"
         >
@@ -57,7 +58,9 @@
 import FListbox from '../FListbox/FListbox.vue';
 import FWindow from '../FWindow/FWindow.vue';
 import FSelect from '../FSelect/FSelect.vue';
+import FLabel from '../FLabel/FLabel.vue';
 import { defer, getUniqueId } from '../../utils/index.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 
 /**
  * Listbox component created according to WAI-ARIA rules and practices.
@@ -65,9 +68,9 @@ import { defer, getUniqueId } from '../../utils/index.js';
 export default {
     name: 'FDropdownListbox',
 
-    components: { FWindow, FListbox },
+    components: { FWindow, FListbox, FLabel },
 
-    mixins: [FSelect, FListbox],
+    mixins: [FSelect, formInputMixin, FListbox],
 
     props: {
         /** Initial button label */
@@ -105,6 +108,14 @@ export default {
             showPopover: false,
             buttonId: getUniqueId(),
         };
+    },
+
+    computed: {
+        slotProps() {
+            return {
+                labeledById: this.labeledById,
+            };
+        },
     },
 
     watch: {
