@@ -94,42 +94,50 @@ export const Slots = () => ({
         <div>
             <h3>Input</h3>
             <f-input label="Large" field-size="large">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Default">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Small" field-size="small">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Mini" field-size="mini">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <h3>Textarea</h3>
             <f-input is-textarea label="Large" field-size="large">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Default">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Small" field-size="small">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Mini" field-size="mini">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
