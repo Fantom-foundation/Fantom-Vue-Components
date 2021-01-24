@@ -1,7 +1,7 @@
 <template>
     <span :id="id" class="finput" :class="classes" @click="onClick">
         <slot name="top" v-bind="slotProps">
-            <label :for="inputId">{{ label }}</label>
+            <f-label v-if="label" native :id="labeledById" :label="label" />
         </slot>
         <template v-if="disabledAsText && disabled">
             {{ val }}
@@ -23,7 +23,7 @@
             </template>
             <template v-else>
                 <input
-                    :id="inputId"
+                    :id="labeledById"
                     ref="input"
                     class="inp-nostyle"
                     v-bind="inputProps"
@@ -43,8 +43,10 @@
 <script>
 import { inputMixin } from '../../mixins/input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 import { getUniqueId } from '../../utils';
 import { eventBusMixin } from '../../mixins/event-bus.js';
+import FLabel from '../FLabel/FLabel.vue';
 
 /**
  * Input field (input or textarea) with slots.
@@ -52,7 +54,9 @@ import { eventBusMixin } from '../../mixins/event-bus.js';
 export default {
     name: 'FInput',
 
-    mixins: [inputMixin, helpersMixin, eventBusMixin],
+    components: { FLabel },
+
+    mixins: [inputMixin, formInputMixin, helpersMixin, eventBusMixin],
 
     props: {
         /** Use textarea instead of input element */
@@ -98,7 +102,6 @@ export default {
             isInvalid: this.invalid,
             errmsgslot: 'suffix',
             ariaDescribedBy: null,
-            inputId: `${this.id}-f-inp`,
         };
     },
 
@@ -143,7 +146,7 @@ export default {
             return {
                 showErrorMessage: this.isInvalid,
                 showInfoMessage: this.showInfoMessage,
-                inputId: this.inputId,
+                labeledById: this.labeledById,
                 label: this.label,
             };
         },
