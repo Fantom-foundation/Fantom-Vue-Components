@@ -1,11 +1,11 @@
 <template>
-    <span class="fselect">
+    <span :id="id" class="fselect">
         <slot name="top" v-bind="slotProps">
-            <label :for="id">{{ label }}</label>
+            <f-label v-if="label" native :id="labeledById" :label="label" />
         </slot>
         <span class="sel" :class="selClasses">
             <select
-                :id="id"
+                :id="labeledById"
                 ref="select"
                 v-bind="selectProps"
                 :value="val"
@@ -27,12 +27,16 @@
 <script>
 import { helpersMixin } from '../../mixins/helpers.js';
 import { selectMixin } from '../../mixins/select.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 import { getUniqueId } from '../../utils';
+import FLabel from '../FLabel/FLabel.vue';
 
 export default {
     name: 'FSelect',
 
-    mixins: [selectMixin, helpersMixin],
+    components: { FLabel },
+
+    mixins: [selectMixin, formInputMixin, helpersMixin],
 
     model: {
         prop: 'value',
@@ -100,6 +104,7 @@ export default {
             return {
                 showErrorMessage: this.isInvalid,
                 showInfoMessage: this.showInfoMessage,
+                labeledById: this.labeledById,
             };
         },
 
