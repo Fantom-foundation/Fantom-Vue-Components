@@ -1,9 +1,9 @@
 <template>
     <span class="foptiongroup" :class="classes">
-        <slot name="top">
-            <span v-if="label" class="foptiongroup_label">{{ label }}</span>
+        <slot name="top" v-bind="slotProps">
+            <f-label v-if="label" :id="labeledById" :label="label" class="foptiongroup_label" />
         </slot>
-        <span class="foptiongroup_options">
+        <span class="foptiongroup_options" role="group" :aria-labelledby="labeledById">
             <f-option
                 v-for="item in foptions"
                 :key="item.id"
@@ -11,13 +11,15 @@
                 v-model="inputValue"
             />
         </span>
-        <slot name="bottom"></slot>
+        <slot name="bottom" v-bind="slotProps"></slot>
     </span>
 </template>
 
 <script>
 import { cloneObject, getUniqueId, isArray, isObject } from '../../utils/index.js';
-import FOption from '@/components/FOption/FOption.vue';
+import FOption from '../FOption/FOption.vue';
+import FLabel from '../FLabel/FLabel.vue';
+import { formInputMixin } from '../../mixins/form-input.js';
 
 /**
  * Group of checkboxes or radio buttons.
@@ -27,7 +29,9 @@ import FOption from '@/components/FOption/FOption.vue';
 export default {
     name: 'FOptionGroup',
 
-    components: { FOption },
+    components: { FLabel, FOption },
+
+    mixins: [formInputMixin],
 
     // inheritAttrs: false,
 
@@ -121,6 +125,12 @@ export default {
         classes() {
             return {
                 'foptiongroup-column': this.column,
+            };
+        },
+
+        slotProps() {
+            return {
+                labeledById: this.labeledById,
             };
         },
     },
