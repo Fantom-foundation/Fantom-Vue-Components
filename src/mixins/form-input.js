@@ -17,4 +17,13 @@ export const formInputMixin = {
             labeledById: this.labeledBy || getUniqueId(),
         };
     },
+
+    computed: {
+        slotProps() {
+            return {
+                labeledById: this.labeledById,
+                label: this.label,
+            };
+        },
+    },
 };
