@@ -11,3 +11,5 @@ npm install
 ```bash
 npm run storybook
 ```
+
+[Live demo/docs](https://fantom-foundation.github.io/Fantom-Vue-Components/)
