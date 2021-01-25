@@ -88,6 +88,67 @@ export const Invalid = () => ({
     `,
 });
 
+export const Validator = () => ({
+    components: { FInput, FMessage },
+    template: `
+        <div class="vertical-align-top">
+            <f-input :validator="validator" label="input 1">
+                <template #bottom="sProps">
+                    <f-message v-if="sProps.showErrorMessage" type="error">
+                        an error
+                        <template #prefix>error: </template>
+                    </f-message>
+                    <f-message type="info">type 'yes'</f-message>
+                </template>
+            </f-input>
+            <f-input :validator="validator" validate-on-input label="oninput validation">
+                <template #bottom="sProps">
+                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
+                    <f-message type="info">type 'yes'</f-message>
+                </template>
+            </f-input>
+            <f-input :validator="validator" validate-on-input label="hide info message on error">
+                <template #bottom="sProps">
+                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
+                    <f-message v-if="!sProps.showErrorMessage" type="info">type 'yes'</f-message>
+                </template>
+            </f-input>
+        </div>
+    `,
+    methods: { validator },
+});
+
+/*
+export const Pattern = () => ({
+    components: { FInput },
+    template: `
+        <div>
+            <f-input error-message="je to blbe" pattern="" label="input 1" />
+        </div>
+    `,
+    methods: { validator },
+});
+*/
+
+export const Model = () => ({
+    components: { FInput, FButton },
+    template: `
+        <div>
+            <f-input v-model="value" />
+            <f-button secondary @click.native="onButtonClick">set value to '222'</f-button>
+            <span>value: {{ value }}</span>
+        </div>
+    `,
+    data() {
+        return { value: '111' };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = '222';
+        },
+    },
+});
+
 export const Slots = () => ({
     components: { FInput },
     template: `
@@ -179,65 +240,4 @@ export const Slots = () => ({
             </f-input>
         </div>
     `,
-});
-
-export const Validator = () => ({
-    components: { FInput, FMessage },
-    template: `
-        <div class="vertical-align-top">
-            <f-input :validator="validator" label="input 1">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">
-                        an error
-                        <template #prefix>error: </template>
-                    </f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="oninput validation">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="hide info message on error">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message v-if="!sProps.showErrorMessage" type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-        </div>
-    `,
-    methods: { validator },
-});
-
-/*
-export const Pattern = () => ({
-    components: { FInput },
-    template: `
-        <div>
-            <f-input error-message="je to blbe" pattern="" label="input 1" />
-        </div>
-    `,
-    methods: { validator },
-});
-*/
-
-export const Model = () => ({
-    components: { FInput, FButton },
-    template: `
-        <div>
-            <f-input v-model="value" />
-            <f-button secondary @click.native="onButtonClick">set value to '222'</f-button>
-            <span>value: {{ value }}</span>
-        </div>
-    `,
-    data() {
-        return { value: '111' };
-    },
-    methods: {
-        onButtonClick() {
-            this.value = '222';
-        },
-    },
 });

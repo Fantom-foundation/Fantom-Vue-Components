@@ -102,9 +102,9 @@ export default {
 
         slotProps() {
             return {
+                ...formInputMixin.computed.slotProps.call(this),
                 showErrorMessage: this.isInvalid,
                 showInfoMessage: this.showInfoMessage,
-                labeledById: this.labeledById,
             };
         },
 

@@ -10,7 +10,7 @@
         />
         <span class="cr_check"></span>
         <span class="cr_label">
-            <slot>{{ label }}</slot>
+            <slot v-bind="slotProps">{{ label }}</slot>
         </span>
     </label>
 </template>
@@ -104,6 +104,12 @@ export default {
 
                 return this.checked || this.modelValue === this.trueValue;
             }
+        },
+
+        slotProps() {
+            return {
+                label: this.label,
+            };
         },
     },
 

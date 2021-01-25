@@ -110,14 +110,6 @@ export default {
         };
     },
 
-    computed: {
-        slotProps() {
-            return {
-                labeledById: this.labeledById,
-            };
-        },
-    },
-
     watch: {
         value(_val) {
             this.val = _val;

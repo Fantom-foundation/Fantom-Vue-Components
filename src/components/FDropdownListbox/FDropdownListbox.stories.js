@@ -245,3 +245,21 @@ export const Model = () => ({
         },
     },
 });
+
+export const Slots = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <f-dropdown-listbox :data="data">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-dropdown-listbox>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});

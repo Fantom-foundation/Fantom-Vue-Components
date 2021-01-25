@@ -31,8 +31,7 @@ export const Default = () => ({
     components: { FListbox },
     template: `
         <div>
-            <span id="fllbl1" class="not-visible">Listbox example</span>
-            <f-listbox :data="data" labeled-by="fllbl1" @component-change="onListboxItemSelected" />
+            <f-listbox :data="data" label="Listbox label" @component-change="onListboxItemSelected" />
             <br />
             Selected: {{ selectedItem }}
         </div>
@@ -287,5 +286,22 @@ export const Model = () => ({
         onListboxItemSelected(_item) {
             this.selectedItem = _item.label;
         },
+    },
+});
+
+export const Slots = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <f-listbox :data="data" :focus-item-on-focus="true">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-listbox>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
     },
 });

@@ -127,12 +127,6 @@ export default {
                 'foptiongroup-column': this.column,
             };
         },
-
-        slotProps() {
-            return {
-                labeledById: this.labeledById,
-            };
-        },
     },
 
     watch: {

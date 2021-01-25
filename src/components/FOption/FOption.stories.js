@@ -179,3 +179,15 @@ export const Model = () => ({
         };
     },
 });
+
+export const Slots = () => ({
+    components: { FOption },
+    template: `
+        <div>
+            <f-option type="checkbox" name="checkbox1"><i>Checkbox</i> &#9733;</f-option>
+            <br /><br />
+            <f-option type="radio" name="radio1"><i>Radio 1</i> &#9733;</f-option>
+            <f-option type="radio" name="radio1"><i>Radio 2</i> &#9733;</f-option>
+        </div>
+    `,
+});

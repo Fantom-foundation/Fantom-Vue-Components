@@ -1,38 +1,45 @@
 <template>
-    <ul
-        :id="id"
-        role="listbox"
-        class="flistbox no-markers"
-        :tabindex="disabled ? -1 : 0"
-        :aria-activedescendant="focusedItem.id"
-        :aria-labelledby="labeledBy"
-        :aria-disabled="disabled"
-        @click="onClick"
-        @keydown="onKeydown"
-        @keyup="onKeyup"
-        @focus="onFocus"
-    >
-        <li
-            v-for="item in items"
-            :id="item.id"
-            :key="item.id"
-            role="option"
-            :aria-selected="item.id === focusedItem.id"
-            :aria-disabled="!!item.disabled"
-            class="flistbox_item"
+    <div :id="id" class="flistbox">
+        <slot name="top" v-bind="slotProps">
+            <f-label v-if="label" :id="labeledById" :label="label" />
+        </slot>
+        <ul
+            role="listbox"
+            class="flistbox_list no-markers"
+            :tabindex="disabled ? -1 : 0"
+            :aria-activedescendant="focusedItem.id"
+            :aria-labelledby="labeledById"
+            :aria-disabled="disabled"
+            @click="onClick"
+            @keydown="onKeydown"
+            @keyup="onKeyup"
+            @focus="onFocus"
         >
-            <slot :item="item">
-                {{ item.label }}
-            </slot>
-        </li>
-    </ul>
+            <li
+                v-for="item in items"
+                :id="item.id"
+                :key="item.id"
+                role="option"
+                :aria-selected="item.id === focusedItem.id"
+                :aria-disabled="!!item.disabled"
+                class="flistbox_list_item"
+            >
+                <slot :item="item">
+                    {{ item.label }}
+                </slot>
+            </li>
+        </ul>
+        <slot name="bottom" v-bind="slotProps"></slot>
+    </div>
 </template>
 
 <script>
 import { helpersMixin } from '../../mixins/helpers.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 import { cloneObject } from '../../utils';
 import { isKey, keyboardNavigation } from '../../utils/aria.js';
 import { selectMixin } from '../../mixins/select.js';
+import FLabel from '@/components/FLabel/FLabel.vue';
 
 /**
  * FListbox item.
@@ -51,7 +58,9 @@ import { selectMixin } from '../../mixins/select.js';
 export default {
     name: 'FListbox',
 
-    mixins: [selectMixin, helpersMixin],
+    components: { FLabel },
+
+    mixins: [selectMixin, formInputMixin, helpersMixin],
 
     model: {
         prop: 'value',
@@ -68,11 +77,6 @@ export default {
             default() {
                 return [];
             },
-        },
-        /** Id of element that represents label for the listbox */
-        labeledBy: {
-            type: String,
-            default: '',
         },
         /** If `true`, `component-change` event will be fired right on item focus (keyboard movement, click) */
         selectImmediately: {
@@ -95,7 +99,7 @@ export default {
         return {
             val: this.value,
             focusedItem: {},
-            selectableItemSelector: '.flistbox_item:not([aria-disabled="true"])',
+            selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
         };
     },
 

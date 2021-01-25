@@ -155,3 +155,20 @@ export const Model = () => ({
         };
     },
 });
+
+export const Slots = () => ({
+    components: { FSelect },
+    template: `
+        <div>
+            <f-select value="3" :data="data">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-select>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});
