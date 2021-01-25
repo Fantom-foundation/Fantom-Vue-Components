@@ -3,7 +3,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
-import FMessage from '../FMessage/FMessage.vue';
+// import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
 
 export default {
@@ -12,9 +12,11 @@ export default {
     decorators: [withA11y],
 };
 
+/*
 function validator(_value) {
     return _value === 'yes';
 }
+*/
 
 export const Default = () => ({
     components: { FInput },
@@ -88,6 +90,7 @@ export const Invalid = () => ({
     `,
 });
 
+/*
 export const Validator = () => ({
     components: { FInput, FMessage },
     template: `
@@ -117,6 +120,7 @@ export const Validator = () => ({
     `,
     methods: { validator },
 });
+*/
 
 /*
 export const Pattern = () => ({
@@ -238,6 +242,19 @@ export const Slots = () => ({
             <f-input label="Small" field-size="small">
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
+        </div>
+    `,
+});
+
+export const InfoText = () => ({
+    components: { FInput },
+    template: `
+        <div>
+            <h3>Input</h3>
+            <f-input info-text="Info text" label="Large" />
+
+            <h3>Textarea</h3>
+            <f-input info-text="Info text" is-textarea label="Large" />
         </div>
     `,
 });

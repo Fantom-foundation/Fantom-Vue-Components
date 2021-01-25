@@ -1,12 +1,14 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FSelect from './FSelect.vue';
-import FMessage from '../FMessage/FMessage.vue';
+// import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
 
+/*
 function validator(_value) {
     return _value === '2';
 }
+*/
 
 const data = [
     { label: 'Option 1', value: 1 },
@@ -115,6 +117,7 @@ export const Value = () => ({
     },
 });
 
+/*
 export const Validator = () => ({
     components: { FSelect, FMessage },
     template: `
@@ -134,6 +137,7 @@ export const Validator = () => ({
     `,
     methods: { validator },
 });
+*/
 
 export const Model = () => ({
     components: { FSelect, FButton },
@@ -164,6 +168,20 @@ export const Slots = () => ({
                 <template #top>Top</template>
                 <template #bottom>Bottom</template>
             </f-select>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});
+
+export const InfoText = () => ({
+    components: { FSelect },
+    template: `
+        <div>
+            <f-select info-text="Info text" label="Label" value="3" :data="data" />
         </div>
     `,
     data() {

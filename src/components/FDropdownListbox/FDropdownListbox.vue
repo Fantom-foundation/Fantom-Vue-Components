@@ -8,7 +8,8 @@
             :disabled="disabled"
             type="button"
             aria-haspopup="listbox"
-            :aria-labelledby="label ? labeledById : null"
+            :aria-labelledby="ariaLabeledByIds"
+            :aria-describedby="ariaDescribedByIds"
             class="fdropdownlistbox_button"
             :class="[buttonClass]"
             @click="onButtonClick"
@@ -50,7 +51,11 @@
                 </template>
             </f-listbox>
         </f-window>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </div>
 </template>
 

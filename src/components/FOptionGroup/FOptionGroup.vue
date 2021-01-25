@@ -3,7 +3,12 @@
         <slot name="top" v-bind="slotProps">
             <f-label v-if="label" :id="labeledById" :label="label" class="foptiongroup_label" />
         </slot>
-        <span class="foptiongroup_options" role="group" :aria-labelledby="labeledById">
+        <span
+            class="foptiongroup_options"
+            role="group"
+            :aria-labelledby="ariaLabeledByIds"
+            :aria-describedby="ariaDescribedByIds"
+        >
             <f-option
                 v-for="item in foptions"
                 :key="item.id"
@@ -11,7 +16,11 @@
                 v-model="inputValue"
             />
         </span>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </span>
 </template>
 

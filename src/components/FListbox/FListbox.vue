@@ -8,7 +8,8 @@
             class="flistbox_list no-markers"
             :tabindex="disabled ? -1 : 0"
             :aria-activedescendant="focusedItem.id"
-            :aria-labelledby="labeledById"
+            :aria-labelledby="ariaLabeledByIds"
+            :aria-describedby="ariaDescribedByIds"
             :aria-disabled="disabled"
             @click="onClick"
             @keydown="onKeydown"
@@ -29,7 +30,11 @@
                 </slot>
             </li>
         </ul>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </div>
 </template>
 

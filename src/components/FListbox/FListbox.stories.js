@@ -305,3 +305,17 @@ export const Slots = () => ({
         };
     },
 });
+
+export const InfoText = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <f-listbox info-text="Info text" label="Label" :data="data" :focus-item-on-focus="true" />
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});

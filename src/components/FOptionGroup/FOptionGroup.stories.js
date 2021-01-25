@@ -134,3 +134,15 @@ export const Slots = () => ({
         </div>
     `,
 });
+
+export const InfoText = () => ({
+    components: { FOptionGroup },
+    template: `
+        <div>
+            <h3>Checkboxes</h3>
+            <f-option-group info-text="Info text" label="Label" :data="{'10': 'Checkbox 1', '20': 'Checkbox 2', '30': 'Checkbox 3'}" name="checkboxes" />
+            <h3>Radio buttons</h3>
+            <f-option-group info-text="Info text" label="Label" checked="20" type="radio" :data="{'10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3'}" name="radios" />
+        </div>
+    `,
+});

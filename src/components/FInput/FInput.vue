@@ -10,13 +10,13 @@
             <slot name="prefix"></slot>
             <template v-if="isTextarea">
                 <textarea
-                    :id="`${id}-f-inp`"
+                    :id="labeledById"
                     ref="input"
                     class="inp-nostyle textarea"
                     v-bind="inputProps"
                     :value="val"
                     :aria-invalid="isInvalid"
-                    :aria-describedby="ariaDescribedBy"
+                    :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
                     @change="onChange"
                 ></textarea>
@@ -29,14 +29,18 @@
                     v-bind="inputProps"
                     :value="val"
                     :aria-invalid="isInvalid"
-                    :aria-describedby="ariaDescribedBy"
+                    :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
                     @change="onChange"
                 />
             </template>
             <slot name="suffix"></slot>
         </span>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </span>
 </template>
 

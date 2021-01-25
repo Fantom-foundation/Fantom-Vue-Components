@@ -263,3 +263,18 @@ export const Slots = () => ({
         };
     },
 });
+
+export const InfoText = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <f-dropdown-listbox :data="data" info-text="Info text" label="Label" />
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});

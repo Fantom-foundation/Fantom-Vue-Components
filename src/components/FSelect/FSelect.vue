@@ -11,7 +11,7 @@
                 :value="val"
                 class="inp"
                 :aria-invalid="isInvalid"
-                :aria-describedby="ariaDescribedBy"
+                :aria-describedby="ariaDescribedByIds"
                 :class="inpClasses"
                 @change="onChange"
             >
@@ -20,7 +20,11 @@
                 </option>
             </select>
         </span>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </span>
 </template>
 
