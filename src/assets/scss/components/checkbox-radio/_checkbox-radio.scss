@@ -137,6 +137,12 @@ $cr: tools.$cr;
         }
     }
 
+    &-invalid {
+        --f-cr-color: var(--f-cr-invalid-color);
+        --f-cr-color-hsl: var(--f-cr-invalid-color-hsl);
+        --f-cr-hover-border: var(--f-inputs-border) var(--f-cr-color);
+    }
+
     &.#{$cr}-lg {
         --f-cr-size: var(--f-cr-lg-size);
     }
