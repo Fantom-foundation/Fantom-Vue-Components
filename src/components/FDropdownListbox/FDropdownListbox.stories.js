@@ -223,6 +223,49 @@ export const Text = () => ({
     },
 });
 
+export const Validation = () => ({
+    components: { FDropdownListbox, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-dropdown-listbox
+                    :validator="validator"
+                    validate-on-change
+                    @invalid="submitDisabled = true"
+                    @valid="submitDisabled = false"
+                    ref="dropdownlistbox"
+                    :focus-item-on-focus="true"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            data: [{ label: '---', value: '' }, ...data],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        validator(_value) {
+            if (!_value) {
+                return 'Select an option';
+            } else if (_value === '20') {
+                return 'Select another option';
+            }
+
+            return '';
+        },
+        onSubmit(_event) {
+            this.$refs.dropdownlistbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Model = () => ({
     components: { FDropdownListbox, FButton },
     template: `

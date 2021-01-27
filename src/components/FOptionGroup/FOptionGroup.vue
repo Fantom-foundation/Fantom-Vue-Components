@@ -8,16 +8,23 @@
             role="group"
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
+            :aria-invalid="dInvalid"
         >
             <f-option
                 v-for="item in foptions"
                 :key="item.id"
                 v-bind="{ ...$attrs, type, ...item }"
+                :invalid="dInvalid"
                 v-model="inputValue"
             />
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="infoText" :id="infoTextId" class="finfotext">
+            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
                 {{ infoText }}
             </div>
         </slot>
@@ -42,7 +49,7 @@ export default {
 
     mixins: [formInputMixin],
 
-    // inheritAttrs: false,
+    inheritAttrs: false,
 
     model: {
         prop: 'checked',
@@ -96,6 +103,8 @@ export default {
     data() {
         return {
             inputValue: this.checked !== undefined ? this.checked : this.type === 'checkbox' ? [] : '',
+            emptyValue: this.type === 'checkbox' ? [] : '',
+            dInvalid: false,
         };
     },
 
@@ -134,17 +143,26 @@ export default {
         classes() {
             return {
                 'foptiongroup-column': this.column,
+                'foptiongroup-invalid': this.isInvalid,
             };
         },
     },
 
     watch: {
         inputValue(_value) {
+            if (this.validateOnChange) {
+                this.validate();
+            }
+
             this.$emit('change', _value);
         },
 
         checked(_value) {
             this.inputValue = _value;
+        },
+
+        isInvalid(_value) {
+            this.dInvalid = _value;
         },
     },
 };

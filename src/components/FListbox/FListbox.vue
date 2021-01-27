@@ -4,6 +4,7 @@
             <f-label v-if="label" :id="labeledById" :label="label" />
         </slot>
         <ul
+            ref="listbox"
             role="listbox"
             class="flistbox_list no-markers"
             :tabindex="disabled ? -1 : 0"
@@ -11,6 +12,7 @@
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
             :aria-disabled="disabled"
+            :aria-invalid="isInvalid"
             @click="onClick"
             @keydown="onKeydown"
             @keyup="onKeyup"
@@ -31,7 +33,12 @@
             </li>
         </ul>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="infoText" :id="infoTextId" class="finfotext">
+            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
                 {{ infoText }}
             </div>
         </slot>
@@ -102,7 +109,6 @@ export default {
 
     data() {
         return {
-            val: this.value,
             focusedItem: {},
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
         };
@@ -121,7 +127,7 @@ export default {
 
     watch: {
         value(_val) {
-            this.val = _val;
+            this.inputValue = _val;
 
             if (this.focusedItem.value !== _val) {
                 this.focusItem(_val, false, 'value');
@@ -161,8 +167,10 @@ export default {
         },
 
         focus() {
-            if (this.$el && !this.disabled) {
-                this.$el.focus();
+            const eListbox = this.$refs.listbox;
+
+            if (eListbox && !this.disabled) {
+                eListbox.focus();
             }
         },
 
@@ -217,10 +225,14 @@ export default {
                 return;
             }
 
-            this.val = _item.value || '';
+            this.inputValue = _item.value || '';
 
             this.$emit('component-change', _item);
-            this.$emit('change', this.val);
+            this.$emit('change', this.inputValue);
+
+            if (this.validateOnChange) {
+                this.validate();
+            }
         },
 
         /**

@@ -4,7 +4,7 @@
             <f-label v-if="label" native :id="labeledById" :label="label" />
         </slot>
         <template v-if="disabledAsText && disabled">
-            {{ val }}
+            {{ inputValue }}
         </template>
         <span v-else class="finput_inputcont" :class="inpClasses">
             <slot name="prefix"></slot>
@@ -14,7 +14,7 @@
                     ref="input"
                     class="inp-nostyle textarea"
                     v-bind="inputProps"
-                    :value="val"
+                    :value="inputValue"
                     :aria-invalid="isInvalid"
                     :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
@@ -27,7 +27,7 @@
                     ref="input"
                     class="inp-nostyle"
                     v-bind="inputProps"
-                    :value="val"
+                    :value="inputValue"
                     :aria-invalid="isInvalid"
                     :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
@@ -37,7 +37,12 @@
             <slot name="suffix"></slot>
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="infoText" :id="infoTextId" class="finfotext">
+            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
                 {{ infoText }}
             </div>
         </slot>
@@ -48,7 +53,6 @@
 import { inputMixin } from '../../mixins/input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
-import { getUniqueId } from '../../utils';
 import { eventBusMixin } from '../../mixins/event-bus.js';
 import FLabel from '../FLabel/FLabel.vue';
 
@@ -72,11 +76,6 @@ export default {
         type: {
             type: String,
             default: 'text',
-        },
-        /** Custom validator function */
-        validator: {
-            type: Function,
-            default: null,
         },
         /** Size of input, 'large' | 'small' */
         fieldSize: {
@@ -102,7 +101,6 @@ export default {
 
     data() {
         return {
-            val: this.value,
             isInvalid: this.invalid,
             errmsgslot: 'suffix',
             ariaDescribedBy: null,
@@ -139,117 +137,27 @@ export default {
                 ...this.inputProps,
                 label: this.label,
                 isTextarea: this.isTextarea,
-                validator: this.validator,
+                // validator: this.validator,
                 fieldSize: this.fieldSize,
                 validateOnInput: this.validateOnInput,
                 hideInfoOnError: this.hideInfoOnError,
             };
         },
-
-        slotProps() {
-            return {
-                ...formInputMixin.computed.slotProps.call(this),
-                showErrorMessage: this.isInvalid,
-                showInfoMessage: this.showInfoMessage,
-            };
-        },
-
-        showInfoMessage() {
-            return this.hideInfoOnError ? !this.isInvalid : true;
-        },
     },
 
     watch: {
         value(_val) {
-            const oldVal = this.val;
+            const oldVal = this.inputValue;
 
-            this.val = _val;
+            this.inputValue = _val;
 
             if (this.validateOnInput && oldVal !== _val) {
                 this.validate();
             }
         },
-
-        isInvalid() {
-            this.setAriaDescribedBy();
-        },
-    },
-
-    mounted() {
-        this.setAriaDescribedBy();
     },
 
     methods: {
-        /**
-         * Set aria-describedby attribute according to `isInvalid` property if FMessage child component exists.
-         */
-        setAriaDescribedBy() {
-            const eInput = this.$refs.input;
-            let fMessage;
-
-            if (this.isInvalid) {
-                fMessage = this.getFMessage('error');
-            } else {
-                fMessage = this.getFMessage('info');
-                // eInput.setCustomValidity('');
-                // this.ariaDescribedBy = null;
-            }
-
-            if (fMessage) {
-                if (eInput) {
-                    // set custom error message
-                    if (this.isInvalid) {
-                        eInput.setCustomValidity(fMessage.getMessage());
-                    } else {
-                        eInput.setCustomValidity('');
-                    }
-                }
-
-                const id = getUniqueId();
-                fMessage.$el.id = id;
-                this.ariaDescribedBy = id;
-            } else {
-                this.ariaDescribedBy = null;
-            }
-        },
-
-        async validate(_setError) {
-            if (this.validator) {
-                const result = this.validator(this.val);
-
-                if (result instanceof Promise) {
-                    const value = await result;
-                    this.isInvalid = !value;
-                } else {
-                    this.isInvalid = !result;
-                }
-
-                if (_setError) {
-                    this.setAriaDescribedBy();
-                }
-            }
-        },
-
-        /**
-         * Get FMessage child component by type.
-         *
-         * @param {string} _type
-         * @return {null|*|Vue}
-         */
-        getFMessage(_type) {
-            const fMessages = this.findChildrenByName('f-message', true);
-            let fMessage = null;
-
-            for (let i = 0, len1 = fMessages.length; i < len1; i++) {
-                fMessage = fMessages[i];
-                if (fMessage && fMessage.$props.type === _type) {
-                    break;
-                }
-            }
-
-            return fMessage;
-        },
-
         /**
          * @param {Event} _event
          */
@@ -265,7 +173,7 @@ export default {
          * @param {Event} _event
          */
         onInput(_event) {
-            this.val = _event.target.value;
+            this.inputValue = _event.target.value;
 
             /**
              * Passthrough input event
@@ -279,7 +187,9 @@ export default {
         },
 
         onChange() {
-            this.validate();
+            if (this.validateOnChange) {
+                this.validate();
+            }
         },
     },
 };

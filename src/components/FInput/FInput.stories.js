@@ -3,7 +3,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
-// import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
 
 export default {
@@ -11,12 +10,6 @@ export default {
     component: FInput,
     decorators: [withA11y],
 };
-
-/*
-function validator(_value) {
-    return _value === 'yes';
-}
-*/
 
 export const Default = () => ({
     components: { FInput },
@@ -90,37 +83,53 @@ export const Invalid = () => ({
     `,
 });
 
-/*
-export const Validator = () => ({
-    components: { FInput, FMessage },
+export const Validation = () => ({
+    components: { FInput, FButton },
     template: `
         <div class="vertical-align-top">
-            <f-input :validator="validator" label="input 1">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">
-                        an error
-                        <template #prefix>error: </template>
-                    </f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="oninput validation">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="hide info message on error">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message v-if="!sProps.showErrorMessage" type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
+            <form action="" @submit="onSubmit">
+                <f-input
+                    :validator="validator"
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp1"
+                    label="Validate on submit"
+                />
+                <f-input
+                    :validator="validator"
+                    validate-on-change
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp2"
+                    label="Validate on change"
+                />
+                <f-input
+                    :validator="validator"
+                    validate-on-change
+                    validate-on-input
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp3"
+                    label="Validate on change and input"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
         </div>
     `,
-    methods: { validator },
+    methods: {
+        validator(_value) {
+            return _value !== 'yes';
+        },
+        onSubmit(_event) {
+            this.$refs.inp1.validate();
+            this.$refs.inp2.validate();
+            this.$refs.inp3.validate();
+
+            _event.preventDefault();
+        },
+    },
 });
-*/
 
 /*
 export const Pattern = () => ({

@@ -5,6 +5,7 @@
             :type="type"
             :checked="cChecked"
             :value="value"
+            :aria-invalid="invalid"
             class="cr_input"
             @change="onChange"
         />
@@ -91,6 +92,7 @@ export default {
                 'cr-lg': optionSize === 'large',
                 'cr-sm': optionSize === 'small',
                 'cr-xs': optionSize === 'mini',
+                'cr-invalid': this.invalid,
             };
         },
 

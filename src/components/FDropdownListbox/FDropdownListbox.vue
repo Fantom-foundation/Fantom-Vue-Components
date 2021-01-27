@@ -10,6 +10,7 @@
             aria-haspopup="listbox"
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
+            :aria-invalid="isInvalid"
             class="fdropdownlistbox_button"
             :class="[buttonClass]"
             @click="onButtonClick"
@@ -39,7 +40,7 @@
             <f-listbox
                 ref="listbox"
                 v-bind="$props"
-                :value="val"
+                :value="inputValue"
                 :focus-item-on-focus="true"
                 class="fdropdownlistbox_flistbox"
                 @component-change="onListboxItemSelected"
@@ -52,7 +53,12 @@
             </f-listbox>
         </f-window>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="infoText" :id="infoTextId" class="finfotext">
+            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
                 {{ infoText }}
             </div>
         </slot>
@@ -107,7 +113,6 @@ export default {
 
     data() {
         return {
-            val: this.value,
             selectedItem: {},
             buttonLabel: this.buttonInitLabel,
             showPopover: false,
@@ -117,7 +122,7 @@ export default {
 
     watch: {
         value(_val) {
-            this.val = _val;
+            this.inputValue = _val;
         },
     },
 
@@ -150,7 +155,7 @@ export default {
                 this.selectedItem = data[0];
             }
 
-            this.val = this.selectedItem.value;
+            this.inputValue = this.selectedItem.value;
         },
 
         onButtonClick() {

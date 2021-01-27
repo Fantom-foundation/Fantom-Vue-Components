@@ -95,6 +95,77 @@ export const Model = () => ({
     },
 });
 
+export const Validation = () => ({
+    components: { FOptionGroup, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onChecbkoxesSubmit">
+                <f-option-group
+                    :validator="checkboxesValidator"
+                    validate-on-change
+                    @invalid="submit1Disabled = true"
+                    @valid="submit1Disabled = false"
+                    ref="checkboxes"
+                    :data="{'10': 'Checkbox 1', '20': 'Checkbox 2', '30': 'Checkbox 3'}"
+                    label="Checkboxes"
+                    info-text="Info text"
+                    column
+                    name="checkboxes"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submit1Disabled">Submit</f-button>
+            </form>
+
+            <br /><br />
+            
+            <form action="" @submit="onRadiosSubmit">
+                <f-option-group
+                    :validator="radiosValidator"
+                    @invalid="submit2Disabled = true"
+                    @valid="submit2Disabled = false"
+                    validate-on-change
+                    error-message="Select a value"
+                    type="radio"
+                    ref="radios"
+                    :data="{'10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3'}"
+                    label="Radios"
+                    name="radios"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submit2Disabled">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            submit1Disabled: false,
+            submit2Disabled: false,
+        };
+    },
+    methods: {
+        checkboxesValidator(_value) {
+            if (!_value || _value.length <= 1) {
+                return 'At least 2 checkboxes must be checked';
+            }
+
+            return '';
+        },
+        radiosValidator(_value) {
+            return !_value;
+        },
+        onChecbkoxesSubmit(_event) {
+            this.$refs.checkboxes.validate();
+
+            _event.preventDefault();
+        },
+        onRadiosSubmit(_event) {
+            this.$refs.radios.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Column = () => ({
     components: { FOptionGroup },
     template: `

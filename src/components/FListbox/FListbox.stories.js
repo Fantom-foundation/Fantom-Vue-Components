@@ -262,6 +262,48 @@ export const Scrollable = () => ({
     },
 });
 
+export const Validation = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-listbox
+                    :validator="validator"
+                    validate-on-change
+                    @invalid="submitDisabled = true"
+                    @valid="submitDisabled = false"
+                    ref="listbox"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        validator(_value) {
+            if (!_value) {
+                return 'Select an option';
+            } else if (_value === '20') {
+                return 'Select another option';
+            }
+
+            return '';
+        },
+        onSubmit(_event) {
+            this.$refs.listbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Model = () => ({
     components: { FListbox, FButton },
     template: `
