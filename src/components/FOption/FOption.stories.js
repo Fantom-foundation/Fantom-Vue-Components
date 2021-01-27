@@ -146,6 +146,46 @@ export const Disabled = () => ({
     `,
 });
 
+export const Colors = () => ({
+    components: { FOption },
+    template: `
+        <div>
+            <h3>Checkbox</h3>
+            <f-option type="checkbox" invalid label="Invalid" name="checkbox" />
+            <f-option type="checkbox" invalid checked label="Invalid" name="checkbox" />
+            <f-option type="checkbox" :style="blueStyle" label="Custom color 1" name="checkbox" />
+            <f-option type="checkbox" :style="blueStyle" checked label="Custom color 1" name="checkbox" />
+            <f-option type="checkbox" :style="lightStyle" label="Custom color 2" name="checkbox" />
+            <f-option type="checkbox" :style="lightStyle" checked label="Custom color 2" name="checkbox" />
+
+            <h3>Radio button</h3>
+            <f-option type="radio" invalid label="Invalid" name="radio1" />
+            <f-option type="radio" invalid checked label="Invalid" name="radio1" />
+            <f-option type="radio" :style="blueStyle" label="Custom color 1" name="radio2" />
+            <f-option type="radio" :style="blueStyle" checked label="Custom color 1" name="radio2" />
+            <f-option type="radio" :style="purpleStyle" label="Custom color 2" name="radio3" />
+            <f-option type="radio" :style="purpleStyle" checked label="Custom color 2" name="radio3" />
+        </div>
+    `,
+    data() {
+        return {
+            blueStyle: {
+                '--f-cr-color': '#08209e',
+                '--f-cr-color-hsl': '230, 90%, 33%',
+            },
+            lightStyle: {
+                '--f-cr-color': '#ffdda1',
+                '--f-cr-color-hsl': '38, 100%, 82%',
+                '--f-cr-checkbox-check-color': '#333',
+            },
+            purpleStyle: {
+                '--f-cr-color': '#800E99',
+                '--f-cr-color-hsl': '289, 83%, 33%',
+            },
+        };
+    },
+});
+
 export const Model = () => ({
     components: { FOption, FButton },
     template: `
