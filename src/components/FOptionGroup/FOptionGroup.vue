@@ -8,19 +8,23 @@
             role="group"
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
-            :aria-invalid="dInvalid"
+            :aria-invalid="validationState.invalid"
         >
             <f-option
                 v-for="item in foptions"
                 :key="item.id"
                 v-bind="{ ...$attrs, type, ...item }"
-                :invalid="dInvalid"
+                :invalid="validationState.invalid"
                 v-model="inputValue"
             />
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
                     {{ msg }}
                 </div>
             </div>
@@ -104,7 +108,6 @@ export default {
         return {
             inputValue: this.checked !== undefined ? this.checked : this.type === 'checkbox' ? [] : '',
             emptyValue: this.type === 'checkbox' ? [] : '',
-            dInvalid: false,
         };
     },
 
@@ -143,7 +146,7 @@ export default {
         classes() {
             return {
                 'foptiongroup-column': this.column,
-                'foptiongroup-invalid': this.isInvalid,
+                'foptiongroup-invalid': this.validationState.invalid,
             };
         },
     },
@@ -159,10 +162,6 @@ export default {
 
         checked(_value) {
             this.inputValue = _value;
-        },
-
-        isInvalid(_value) {
-            this.dInvalid = _value;
         },
     },
 };

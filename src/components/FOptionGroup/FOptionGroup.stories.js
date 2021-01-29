@@ -103,8 +103,7 @@ export const Validation = () => ({
                 <f-option-group
                     :validator="checkboxesValidator"
                     validate-on-change
-                    @invalid="submit1Disabled = true"
-                    @valid="submit1Disabled = false"
+                    @validation-state="_state => submit1Disabled = _state.invalid "
                     ref="checkboxes"
                     :data="{'10': 'Checkbox 1', '20': 'Checkbox 2', '30': 'Checkbox 3'}"
                     label="Checkboxes"
@@ -117,12 +116,11 @@ export const Validation = () => ({
             </form>
 
             <br /><br />
-            
+
             <form action="" @submit="onRadiosSubmit">
                 <f-option-group
                     :validator="radiosValidator"
-                    @invalid="submit2Disabled = true"
-                    @valid="submit2Disabled = false"
+                    @validation-state="_state => submit2Disabled = _state.invalid "
                     validate-on-change
                     error-message="Select a value"
                     type="radio"

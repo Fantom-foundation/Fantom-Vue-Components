@@ -270,8 +270,7 @@ export const Validation = () => ({
                 <f-listbox
                     :validator="validator"
                     validate-on-change
-                    @invalid="submitDisabled = true"
-                    @valid="submitDisabled = false"
+                    @validation-state="_state => submitDisabled = _state.invalid "
                     ref="listbox"
                     :data="data"
                 />

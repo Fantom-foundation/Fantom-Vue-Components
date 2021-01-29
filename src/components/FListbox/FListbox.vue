@@ -12,7 +12,7 @@
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
             :aria-disabled="disabled"
-            :aria-invalid="isInvalid"
+            :aria-invalid="validationState.invalid"
             @click="onClick"
             @keydown="onKeydown"
             @keyup="onKeyup"
@@ -33,8 +33,12 @@
             </li>
         </ul>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
                     {{ msg }}
                 </div>
             </div>

@@ -15,7 +15,7 @@
                     class="inp-nostyle textarea"
                     v-bind="inputProps"
                     :value="inputValue"
-                    :aria-invalid="isInvalid"
+                    :aria-invalid="validationState.invalid"
                     :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
                     @change="onChange"
@@ -28,7 +28,7 @@
                     class="inp-nostyle"
                     v-bind="inputProps"
                     :value="inputValue"
-                    :aria-invalid="isInvalid"
+                    :aria-invalid="validationState.invalid"
                     :aria-describedby="ariaDescribedByIds"
                     @input="onInput"
                     @change="onChange"
@@ -37,8 +37,12 @@
             <slot name="suffix"></slot>
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
                     {{ msg }}
                 </div>
             </div>
@@ -101,7 +105,6 @@ export default {
 
     data() {
         return {
-            isInvalid: this.invalid,
             errmsgslot: 'suffix',
             ariaDescribedBy: null,
         };
@@ -120,7 +123,7 @@ export default {
 
         inpClasses() {
             return {
-                'inp-invalid': this.isInvalid,
+                'inp-invalid': this.validationState.invalid,
                 'inp-lg': this.fieldSize === 'large',
                 'inp-sm': this.fieldSize === 'small',
                 'inp-xs': this.fieldSize === 'mini',

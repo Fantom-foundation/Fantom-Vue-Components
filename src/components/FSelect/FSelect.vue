@@ -10,7 +10,7 @@
                 v-bind="selectProps"
                 :value="inputValue"
                 class="inp"
-                :aria-invalid="isInvalid"
+                :aria-invalid="validationState.invalid"
                 :aria-describedby="ariaDescribedByIds"
                 :class="inpClasses"
                 @change="onChange"
@@ -21,8 +21,12 @@
             </select>
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
                     {{ msg }}
                 </div>
             </div>
@@ -97,7 +101,7 @@ export default {
 
         inpClasses() {
             return {
-                'inp-invalid': this.isInvalid,
+                'inp-invalid': this.validationState.invalid,
                 'inp-lg': this.selectSize === 'large',
                 'inp-sm': this.selectSize === 'small',
                 'inp-xs': this.selectSize === 'mini',
@@ -113,12 +117,6 @@ export default {
         data() {
             this.setSelected();
         },
-
-        /*
-        isInvalid(_value) {
-            this.dInvalid = _value;
-        },
-*/
     },
 
     mounted() {

@@ -10,7 +10,7 @@
             aria-haspopup="listbox"
             :aria-labelledby="ariaLabeledByIds"
             :aria-describedby="ariaDescribedByIds"
-            :aria-invalid="isInvalid"
+            :aria-invalid="validationState.invalid"
             class="fdropdownlistbox_button"
             :class="[buttonClass]"
             @click="onButtonClick"
@@ -40,6 +40,8 @@
             <f-listbox
                 ref="listbox"
                 v-bind="$props"
+                label=""
+                info-text=""
                 :value="inputValue"
                 :focus-item-on-focus="true"
                 class="fdropdownlistbox_flistbox"
@@ -53,8 +55,12 @@
             </f-listbox>
         </f-window>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="errorMsgs.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div v-for="(msg, idx) in errorMsgs" :key="`${errorMsgId}_${idx}_err`" class="ferrormessages_message">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
                     {{ msg }}
                 </div>
             </div>

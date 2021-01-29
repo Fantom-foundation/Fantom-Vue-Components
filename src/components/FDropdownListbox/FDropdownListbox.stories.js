@@ -231,8 +231,7 @@ export const Validation = () => ({
                 <f-dropdown-listbox
                     :validator="validator"
                     validate-on-change
-                    @invalid="submitDisabled = true"
-                    @valid="submitDisabled = false"
+                    @validation-state="_state => submitDisabled = _state.invalid "
                     ref="dropdownlistbox"
                     :focus-item-on-focus="true"
                     :data="data"
