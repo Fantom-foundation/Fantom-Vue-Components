@@ -51,10 +51,13 @@ export const formInputMixin = {
             inputValue: this.value || '',
             /** Identifies what represents empty value of form input component */
             emptyValue: '',
-            /** Identifies, if component is invalid or not */
-            isInvalid: !!this.invalid,
-            /** Current error messages */
-            errorMsgs: [],
+            validationState: {
+                valid: !this.invalid,
+                invalid: !!this.invalid,
+                pending: false,
+                validated: false,
+                errors: [],
+            },
             labeledById: this.labeledBy || getUniqueId(),
             infoTextId: getUniqueId(),
             errorMsgId: getUniqueId(),
@@ -72,7 +75,7 @@ export const formInputMixin = {
                 labeledById: this.labeledById,
                 label: this.label,
                 infoText: this.infoText,
-                errorMsgs: this.errorMsgs,
+                validationState: this.validationState,
             };
         },
 
@@ -107,7 +110,7 @@ export const formInputMixin = {
                 ids.push(this.infoTextId);
             }
 
-            if (this.errorMsgs.length > 0) {
+            if (this.validationState.errors.length > 0) {
                 ids.push(this.errorMsgId);
             }
 
@@ -115,38 +118,67 @@ export const formInputMixin = {
         },
     },
 
+    created() {
+        this._pendingValidation = null;
+    },
+
     methods: {
         async validate(_validator) {
             const validator = _validator || this.validator;
 
             if (typeof validator === 'function') {
+                if (this._pendingValidation) {
+                    return this._pendingValidation;
+                }
+
                 let result = validator(this.inputValue);
+                const validationState = { ...this.validationState };
 
                 if (result instanceof Promise) {
-                    result = await result;
-                }
+                    this._pendingValidation = result;
+                    validationState.pending = true;
 
-                const invalid = isArray(result) ? result.length > 0 : !!result;
+                    this.changeValidationState(validationState);
 
-                if (isArray(result)) {
-                    this.errorMsgs = result;
-                } else if (typeof result === 'string') {
-                    this.errorMsgs = result ? [result] : [];
-                } else {
-                    this.errorMsgs = invalid ? [this.errorMessage] : [];
-                }
+                    try {
+                        result = await result;
+                    } catch (_error) {
+                        this._pendingValidation = null;
+                        validationState.pending = false;
+                        validationState.errors = [_error];
 
-                // fire events only if isInvalid state changes
-                if (this.isInvalid !== invalid) {
-                    if (invalid) {
-                        this.$emit('invalid', this.errorMsgs);
-                    } else {
-                        this.$emit('valid');
+                        this.changeValidationState(validationState);
+
+                        throw _error;
                     }
                 }
 
-                this.isInvalid = invalid;
+                const invalid = isArray(result) ? result.length > 0 : !!result;
+                let errorMsgs = [];
+
+                if (isArray(result)) {
+                    errorMsgs = result;
+                } else if (typeof result === 'string') {
+                    errorMsgs = result ? [result] : [];
+                } else {
+                    errorMsgs = invalid ? [this.errorMessage] : [];
+                }
+
+                validationState.errors = [...errorMsgs];
+                validationState.invalid = invalid;
+                validationState.valid = !invalid;
+                validationState.pending = false;
+                validationState.validated = true;
+
+                this._pendingValidation = null;
+
+                this.changeValidationState(validationState);
             }
+        },
+
+        changeValidationState(_validationState) {
+            this.validationState = { ..._validationState };
+            this.$emit('validation-state', _validationState);
         },
     },
 };
