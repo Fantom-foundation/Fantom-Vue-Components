@@ -5,12 +5,13 @@
             :type="type"
             :checked="cChecked"
             :value="value"
+            :aria-invalid="invalid"
             class="cr_input"
             @change="onChange"
         />
         <span class="cr_check"></span>
         <span class="cr_label">
-            <slot>{{ label }}</slot>
+            <slot v-bind="slotProps">{{ label }}</slot>
         </span>
     </label>
 </template>
@@ -41,7 +42,6 @@ export default {
         type: {
             type: String,
             default: 'checkbox',
-            required: true,
             validator: function(_value) {
                 return ['checkbox', 'radio'].indexOf(_value) !== -1;
             },
@@ -92,6 +92,7 @@ export default {
                 'cr-lg': optionSize === 'large',
                 'cr-sm': optionSize === 'small',
                 'cr-xs': optionSize === 'mini',
+                'cr-invalid': this.invalid,
             };
         },
 
@@ -105,6 +106,12 @@ export default {
 
                 return this.checked || this.modelValue === this.trueValue;
             }
+        },
+
+        slotProps() {
+            return {
+                label: this.label,
+            };
         },
     },
 

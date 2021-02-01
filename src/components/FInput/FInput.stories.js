@@ -3,7 +3,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
-import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
 
 export default {
@@ -11,10 +10,6 @@ export default {
     component: FInput,
     decorators: [withA11y],
 };
-
-function validator(_value) {
-    return _value === 'yes';
-}
 
 export const Default = () => ({
     components: { FInput },
@@ -88,48 +83,135 @@ export const Invalid = () => ({
     `,
 });
 
+export const Validation = () => ({
+    components: { FInput, FButton },
+    template: `
+        <div class="vertical-align-top">
+            <form action="" @submit="onSubmit">
+                <f-input
+                    :validator="validator"
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp1"
+                    label="Validate on submit"
+                />
+                <f-input
+                    :validator="validator"
+                    validate-on-change
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp2"
+                    label="Validate on change"
+                />
+                <f-input
+                    :validator="validator"
+                    validate-on-change
+                    validate-on-input
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp3"
+                    label="Validate on change and input"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
+        </div>
+    `,
+    methods: {
+        validator(_value) {
+            return _value !== 'yes';
+        },
+        onSubmit(_event) {
+            this.$refs.inp1.validate();
+            this.$refs.inp2.validate();
+            this.$refs.inp3.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
+/*
+export const Pattern = () => ({
+    components: { FInput },
+    template: `
+        <div>
+            <f-input error-message="je to blbe" pattern="" label="input 1" />
+        </div>
+    `,
+    methods: { validator },
+});
+*/
+
+export const Model = () => ({
+    components: { FInput, FButton },
+    template: `
+        <div>
+            <f-input v-model="value" />
+            <f-button secondary @click.native="onButtonClick">set value to '222'</f-button>
+            <span>value: {{ value }}</span>
+        </div>
+    `,
+    data() {
+        return { value: '111' };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = '222';
+        },
+    },
+});
+
 export const Slots = () => ({
     components: { FInput },
     template: `
         <div>
             <h3>Input</h3>
             <f-input label="Large" field-size="large">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Default">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Small" field-size="small">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input label="Mini" field-size="mini">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <h3>Textarea</h3>
             <f-input is-textarea label="Large" field-size="large">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Default">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Small" field-size="small">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <f-input is-textarea label="Mini" field-size="mini">
+                <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
@@ -173,63 +255,15 @@ export const Slots = () => ({
     `,
 });
 
-export const Validator = () => ({
-    components: { FInput, FMessage },
-    template: `
-        <div class="vertical-align-top">
-            <f-input :validator="validator" label="input 1">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">
-                        an error
-                        <template #prefix>error: </template>
-                    </f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="oninput validation">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-            <f-input :validator="validator" validate-on-input label="hide info message on error">
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error">an error</f-message>
-                    <f-message v-if="!sProps.showErrorMessage" type="info">type 'yes'</f-message>
-                </template>
-            </f-input>
-        </div>
-    `,
-    methods: { validator },
-});
-
-/*
-export const Pattern = () => ({
+export const InfoText = () => ({
     components: { FInput },
     template: `
         <div>
-            <f-input error-message="je to blbe" pattern="" label="input 1" />
-        </div>
-    `,
-    methods: { validator },
-});
-*/
+            <h3>Input</h3>
+            <f-input info-text="Info text" label="Large" />
 
-export const Model = () => ({
-    components: { FInput, FButton },
-    template: `
-        <div>
-            <f-input v-model="value" />
-            <f-button secondary @click.native="onButtonClick">set value to '222'</f-button>
-            <span>value: {{ value }}</span>
+            <h3>Textarea</h3>
+            <f-input info-text="Info text" is-textarea label="Large" />
         </div>
     `,
-    data() {
-        return { value: '111' };
-    },
-    methods: {
-        onButtonClick() {
-            this.value = '222';
-        },
-    },
 });

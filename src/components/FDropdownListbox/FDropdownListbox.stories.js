@@ -223,6 +223,48 @@ export const Text = () => ({
     },
 });
 
+export const Validation = () => ({
+    components: { FDropdownListbox, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-dropdown-listbox
+                    :validator="validator"
+                    validate-on-change
+                    @validation-state="_state => submitDisabled = _state.invalid "
+                    ref="dropdownlistbox"
+                    :focus-item-on-focus="true"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            data: [{ label: '---', value: '' }, ...data],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        validator(_value) {
+            if (!_value) {
+                return 'Select an option';
+            } else if (_value === '20') {
+                return 'Select another option';
+            }
+
+            return '';
+        },
+        onSubmit(_event) {
+            this.$refs.dropdownlistbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Model = () => ({
     components: { FDropdownListbox, FButton },
     template: `
@@ -243,5 +285,38 @@ export const Model = () => ({
         onButtonClick() {
             this.value = '30';
         },
+    },
+});
+
+export const Slots = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <f-dropdown-listbox :data="data">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-dropdown-listbox>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});
+
+export const InfoText = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <f-dropdown-listbox :data="data" info-text="Info text" label="Label" />
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
     },
 });

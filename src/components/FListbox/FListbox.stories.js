@@ -31,8 +31,7 @@ export const Default = () => ({
     components: { FListbox },
     template: `
         <div>
-            <span id="fllbl1" class="not-visible">Listbox example</span>
-            <f-listbox :data="data" labeled-by="fllbl1" @component-change="onListboxItemSelected" />
+            <f-listbox :data="data" label="Listbox label" @component-change="onListboxItemSelected" />
             <br />
             Selected: {{ selectedItem }}
         </div>
@@ -263,6 +262,47 @@ export const Scrollable = () => ({
     },
 });
 
+export const Validation = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-listbox
+                    :validator="validator"
+                    validate-on-change
+                    @validation-state="_state => submitDisabled = _state.invalid "
+                    ref="listbox"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        validator(_value) {
+            if (!_value) {
+                return 'Select an option';
+            } else if (_value === '20') {
+                return 'Select another option';
+            }
+
+            return '';
+        },
+        onSubmit(_event) {
+            this.$refs.listbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Model = () => ({
     components: { FListbox, FButton },
     template: `
@@ -287,5 +327,36 @@ export const Model = () => ({
         onListboxItemSelected(_item) {
             this.selectedItem = _item.label;
         },
+    },
+});
+
+export const Slots = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <f-listbox :data="data" :focus-item-on-focus="true">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-listbox>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});
+
+export const InfoText = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <f-listbox info-text="Info text" label="Label" :data="data" :focus-item-on-focus="true" />
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
     },
 });

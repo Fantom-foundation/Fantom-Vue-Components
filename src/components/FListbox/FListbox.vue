@@ -1,38 +1,61 @@
 <template>
-    <ul
-        :id="id"
-        role="listbox"
-        class="flistbox no-markers"
-        :tabindex="disabled ? -1 : 0"
-        :aria-activedescendant="focusedItem.id"
-        :aria-labelledby="labeledBy"
-        :aria-disabled="disabled"
-        @click="onClick"
-        @keydown="onKeydown"
-        @keyup="onKeyup"
-        @focus="onFocus"
-    >
-        <li
-            v-for="item in items"
-            :id="item.id"
-            :key="item.id"
-            role="option"
-            :aria-selected="item.id === focusedItem.id"
-            :aria-disabled="!!item.disabled"
-            class="flistbox_item"
+    <div :id="id" class="flistbox">
+        <slot name="top" v-bind="slotProps">
+            <f-label v-if="label" :id="labeledById" :label="label" />
+        </slot>
+        <ul
+            ref="listbox"
+            role="listbox"
+            class="flistbox_list no-markers"
+            :tabindex="disabled ? -1 : 0"
+            :aria-activedescendant="focusedItem.id"
+            :aria-labelledby="ariaLabeledByIds"
+            :aria-describedby="ariaDescribedByIds"
+            :aria-disabled="disabled"
+            :aria-invalid="validationState.invalid"
+            @click="onClick"
+            @keydown="onKeydown"
+            @keyup="onKeyup"
+            @focus="onFocus"
         >
-            <slot :item="item">
-                {{ item.label }}
-            </slot>
-        </li>
-    </ul>
+            <li
+                v-for="item in items"
+                :id="item.id"
+                :key="item.id"
+                role="option"
+                :aria-selected="item.id === focusedItem.id"
+                :aria-disabled="!!item.disabled"
+                class="flistbox_list_item"
+            >
+                <slot :item="item">
+                    {{ item.label }}
+                </slot>
+            </li>
+        </ul>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
+    </div>
 </template>
 
 <script>
 import { helpersMixin } from '../../mixins/helpers.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 import { cloneObject } from '../../utils';
 import { isKey, keyboardNavigation } from '../../utils/aria.js';
 import { selectMixin } from '../../mixins/select.js';
+import FLabel from '@/components/FLabel/FLabel.vue';
 
 /**
  * FListbox item.
@@ -51,7 +74,9 @@ import { selectMixin } from '../../mixins/select.js';
 export default {
     name: 'FListbox',
 
-    mixins: [selectMixin, helpersMixin],
+    components: { FLabel },
+
+    mixins: [selectMixin, formInputMixin, helpersMixin],
 
     model: {
         prop: 'value',
@@ -68,11 +93,6 @@ export default {
             default() {
                 return [];
             },
-        },
-        /** Id of element that represents label for the listbox */
-        labeledBy: {
-            type: String,
-            default: '',
         },
         /** If `true`, `component-change` event will be fired right on item focus (keyboard movement, click) */
         selectImmediately: {
@@ -93,9 +113,8 @@ export default {
 
     data() {
         return {
-            val: this.value,
             focusedItem: {},
-            selectableItemSelector: '.flistbox_item:not([aria-disabled="true"])',
+            selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
         };
     },
 
@@ -112,7 +131,7 @@ export default {
 
     watch: {
         value(_val) {
-            this.val = _val;
+            this.inputValue = _val;
 
             if (this.focusedItem.value !== _val) {
                 this.focusItem(_val, false, 'value');
@@ -152,8 +171,10 @@ export default {
         },
 
         focus() {
-            if (this.$el && !this.disabled) {
-                this.$el.focus();
+            const eListbox = this.$refs.listbox;
+
+            if (eListbox && !this.disabled) {
+                eListbox.focus();
             }
         },
 
@@ -208,10 +229,14 @@ export default {
                 return;
             }
 
-            this.val = _item.value || '';
+            this.inputValue = _item.value || '';
 
             this.$emit('component-change', _item);
-            this.$emit('change', this.val);
+            this.$emit('change', this.inputValue);
+
+            if (this.validateOnChange) {
+                this.validate();
+            }
         },
 
         /**

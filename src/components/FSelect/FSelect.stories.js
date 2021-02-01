@@ -1,12 +1,14 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FSelect from './FSelect.vue';
-import FMessage from '../FMessage/FMessage.vue';
+// import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
 
+/*
 function validator(_value) {
     return _value === '2';
 }
+*/
 
 const data = [
     { label: 'Option 1', value: 1 },
@@ -115,24 +117,53 @@ export const Value = () => ({
     },
 });
 
-export const Validator = () => ({
-    components: { FSelect, FMessage },
+export const Validation = () => ({
+    components: { FSelect, FButton },
     template: `
         <div>
-            <f-select
-                label="onchange validation"
-                value="2"
-                :validator="validator"
-                :data="[{label: 'Option 1', value: 1}, {label: 'Option 2', value: 2}, {label: 'Option 3', value: 3}]"
-            >
-                <template #bottom="sProps">
-                    <f-message v-if="sProps.showErrorMessage" type="error" with-icon>an error</f-message>
-                    <f-message type="info" with-icon>Option 2 must be selected</f-message>
-                </template>
-            </f-select>
+            <form action="" @submit="onSubmit">
+                <f-select
+                    :validator="_value => !_value"
+                    validate-on-change
+                    error-message="Select an option"
+                    ref="select1"
+                    label="Select 1"
+                    :data="[
+                        {label: '---', value: ''},
+                        {label: 'Option 1', value: 1},
+                        {label: 'Option 2', value: 2},
+                        {label: 'Option 3', value: 3}
+                    ]"
+                />
+                <f-select
+                    :validator="validator"
+                    validate-on-change
+                    error-message__="Option 2 must be selected"
+                    ref="select2"
+                    label="Select 2"
+                    value="1"
+                    :data="[{label: 'Option 1', value: 1}, {label: 'Option 2', value: 2}, {label: 'Option 3', value: 3}]"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
         </div>
     `,
-    methods: { validator },
+    methods: {
+        validator(_value) {
+            if (_value !== '2') {
+                return 'Option 2 must be selected';
+            }
+
+            return '';
+        },
+        onSubmit(_event) {
+            this.$refs.select1.validate();
+            this.$refs.select2.validate();
+
+            _event.preventDefault();
+        },
+    },
 });
 
 export const Model = () => ({
@@ -152,6 +183,37 @@ export const Model = () => ({
         return {
             sel: '3',
             data: [...data3],
+        };
+    },
+});
+
+export const Slots = () => ({
+    components: { FSelect },
+    template: `
+        <div>
+            <f-select value="3" :data="data">
+                <template #top>Top</template>
+                <template #bottom>Bottom</template>
+            </f-select>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+        };
+    },
+});
+
+export const InfoText = () => ({
+    components: { FSelect },
+    template: `
+        <div>
+            <f-select info-text="Info text" label="Label" value="3" :data="data" />
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
         };
     },
 });

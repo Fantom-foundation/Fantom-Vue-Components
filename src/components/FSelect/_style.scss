@@ -6,6 +6,15 @@
     display: inline-block;
     vertical-align: middle;
 
+    .sel {
+        display: block;
+        width: 100%;
+
+        .inp {
+            width: 100%;
+        }
+    }
+
     select:not(:disabled) {
         cursor: pointer;
     }

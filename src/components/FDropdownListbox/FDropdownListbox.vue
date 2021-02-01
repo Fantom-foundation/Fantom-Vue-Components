@@ -1,14 +1,17 @@
 <template>
     <div class="fdropdownlistbox">
         <slot name="top" v-bind="slotProps">
-            <label :for="id">{{ label }}</label>
+            <f-label v-if="label" :id="labeledById" :label="label" />
         </slot>
         <button
             :id="buttonId"
             :disabled="disabled"
-            aria-haspopup="listbox"
-            class="fdropdownlistbox_button"
             type="button"
+            aria-haspopup="listbox"
+            :aria-labelledby="ariaLabeledByIds"
+            :aria-describedby="ariaDescribedByIds"
+            :aria-invalid="validationState.invalid"
+            class="fdropdownlistbox_button"
             :class="[buttonClass]"
             @click="onButtonClick"
         >
@@ -37,7 +40,9 @@
             <f-listbox
                 ref="listbox"
                 v-bind="$props"
-                :value="val"
+                label=""
+                info-text=""
+                :value="inputValue"
                 :focus-item-on-focus="true"
                 class="fdropdownlistbox_flistbox"
                 @component-change="onListboxItemSelected"
@@ -49,7 +54,20 @@
                 </template>
             </f-listbox>
         </f-window>
-        <slot name="bottom" v-bind="slotProps"></slot>
+        <slot name="bottom" v-bind="slotProps">
+            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
+                <div
+                    v-for="(msg, idx) in validationState.errors"
+                    :key="`${errorMsgId}_${idx}_err`"
+                    class="ferrormessages_message"
+                >
+                    {{ msg }}
+                </div>
+            </div>
+            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
+                {{ infoText }}
+            </div>
+        </slot>
     </div>
 </template>
 
@@ -57,7 +75,9 @@
 import FListbox from '../FListbox/FListbox.vue';
 import FWindow from '../FWindow/FWindow.vue';
 import FSelect from '../FSelect/FSelect.vue';
+import FLabel from '../FLabel/FLabel.vue';
 import { defer, getUniqueId } from '../../utils/index.js';
+import { formInputMixin } from '../../mixins/form-input.js';
 
 /**
  * Listbox component created according to WAI-ARIA rules and practices.
@@ -65,9 +85,9 @@ import { defer, getUniqueId } from '../../utils/index.js';
 export default {
     name: 'FDropdownListbox',
 
-    components: { FWindow, FListbox },
+    components: { FWindow, FListbox, FLabel },
 
-    mixins: [FSelect, FListbox],
+    mixins: [FSelect, formInputMixin, FListbox],
 
     props: {
         /** Initial button label */
@@ -99,7 +119,6 @@ export default {
 
     data() {
         return {
-            val: this.value,
             selectedItem: {},
             buttonLabel: this.buttonInitLabel,
             showPopover: false,
@@ -109,7 +128,7 @@ export default {
 
     watch: {
         value(_val) {
-            this.val = _val;
+            this.inputValue = _val;
         },
     },
 
@@ -142,7 +161,7 @@ export default {
                 this.selectedItem = data[0];
             }
 
-            this.val = this.selectedItem.value;
+            this.inputValue = this.selectedItem.value;
         },
 
         onButtonClick() {
