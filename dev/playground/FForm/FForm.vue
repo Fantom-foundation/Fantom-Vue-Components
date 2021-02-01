@@ -2,23 +2,25 @@
     <section>
         <h1 class="h2">Form</h1>
 
-        <f-form v-model="values" @submit="onFormSubmit" @reset="onFormReset" class="grid">
+        <f-form v-model="values" @submit="onFormSubmit" @reset="onFormReset" class="grid" v-slot="fprops">
             <fieldset class="col-8">
                 <legend>Test form</legend>
                 <div class="fform_fieldset_body">
+                    <h4>elementStates</h4>
+                    <p>{{ fprops.elementStates }}</p>
+                    <h4>lastChangedElement</h4>
+                    <p>{{ fprops.lastChangedElement }}</p>
+
                     <div class="fform_row">
-                        <f-form-input name="input1" label="input 1" validate-on-input :validator="inputValidator">
-                            <template #bottom="sProps">
-                                <f-message v-show="sProps.showErrorMessage" type="error" role="alert">
-                                    Fill input 1
-                                </f-message>
-                            </template>
-                        </f-form-input>
+                        <f-form-input name="input1" label="input 1" validate-on-input :validator="inputValidator" />
                         <div>
                             <f-form-input v-if="c1 === true" key="fff" name="input2" placeholder="12345">
-                                <template #label="labelProps">
-                                    <label :for="labelProps.id"><b>&#9742; Phone</b></label>
+                                <template #top="props">
+                                    <label :for="props.labeledById"><b>&#9742; Phone</b></label>
                                 </template>
+                                <!--                                <template #label="labelProps">
+                                    <label :for="labelProps.id"><b>&#9742; Phone</b></label>
+                                </template>-->
                             </f-form-input>
                         </div>
                     </div>
@@ -41,12 +43,12 @@
                     </div>
 
                     <div class="fform_row">
-                        <f-form-input type="checkbox" name="checkbox3" label="Multi checkboxes" :data="testos" />
+                        <f-form-input type="checkboxgroup" name="checkbox3" label="Multi checkboxes" :data="testos" />
                     </div>
 
                     <div class="fform_row">
                         <f-form-input
-                            type="checkbox"
+                            type="checkboxgroup"
                             label="Multi checkboxes"
                             v-model="c3"
                             :data="{ '10': 'c3 1', '20': 'c3 2' }"
@@ -55,7 +57,7 @@
 
                     <div class="fform_row">
                         <f-form-input
-                            type="checkbox"
+                            type="checkboxgroup"
                             name="checkbox4"
                             label="Multi checkboxes 2"
                             :data="[
@@ -67,10 +69,10 @@
 
                     <div class="fform_row">
                         <f-form-input
-                            type="radio"
+                            type="radiogroup"
                             name="radio1"
                             label="Radio"
-                            class="fforminput-column"
+                            column
                             :data="{ '10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3' }"
                         />
                     </div>
@@ -80,7 +82,10 @@
                             type="select"
                             name="select1"
                             label="Select"
+                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            validate-on-change
                             :data="[
+                                { label: '---', value: '' },
                                 { label: 'Option 1', value: 1 },
                                 { label: 'Option 2', value: 2 },
                                 { label: 'Option 3', value: 3 },
@@ -111,7 +116,7 @@
                             label="Listbox"
                             :data="[
                                 { label: 'item 100', value: '100' },
-                                { label: 'item 200', id: 'myid', value: '200' },
+                                { label: 'item 200', id: 'myid3', value: '200' },
                                 { label: 'item 300 Lorem ipsum', value: '300' },
                             ]"
                         />
@@ -132,8 +137,19 @@ c1: {{ c1 }}, c2: {{ c2 }}, c3: {{ c3 }} <br />
 </pre>
             </div>
             <div>
-                <f-button type="submit" label="Submit" />
-                <f-button type="reset" label="Reset" />
+                {{ fprops.errorMessages }}
+            </div>
+            <div>
+                <f-button
+                    type="submit"
+                    label="Submit"
+                    :disabled="fprops.pendingValidation || fprops.errorMessages.length > 0"
+                />
+                <f-button
+                    type="reset"
+                    label="Reset"
+                    :disabled="fprops.pendingValidation || fprops.errorMessages.length > 0"
+                />
             </div>
         </f-form>
     </section>
@@ -145,12 +161,11 @@ import FButton from '@/components/FButton/FButton.vue';
 
 import FFormInput from '@/components/FFormInput/FFormInput.vue';
 import FOption from '@/components/FOption/FOption.vue';
-import FMessage from '@/components/FMessage/FMessage.vue';
 
 export default {
-    name: 'FFormPlayground2',
+    name: 'FFormPlayground',
 
-    components: { FMessage, FOption, FFormInput, FButton, FForm },
+    components: { FOption, FFormInput, FButton, FForm },
 
     data() {
         return {
@@ -171,7 +186,7 @@ export default {
                 ],
                 listbox: [
                     { label: 'item 100', value: '100' },
-                    { label: 'item 200', id: 'myid', value: '200' },
+                    { label: 'item 200', id: 'myid2', value: '200' },
                     { label: 'item 300 Lorem ipsum', value: '300' },
                 ],
             },
@@ -207,7 +222,16 @@ export default {
 
     methods: {
         inputValidator(_value) {
-            return !!_value.trim();
+            return new Promise((_resolve, _reject) =>
+                setTimeout(() => {
+                    if (Math.random() < 0.5) {
+                        _reject('error!!');
+                    } else {
+                        _resolve(!_value.trim() ? 'Required' : '');
+                    }
+                }, 2000)
+            );
+            // return !_value.trim() ? 'Required' : '';
         },
 
         updateTestos() {
