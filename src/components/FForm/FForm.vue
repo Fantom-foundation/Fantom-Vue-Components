@@ -1,13 +1,17 @@
 <template>
     <form ref="form" method="post" class="fform" novalidate @submit="onSubmit" @reset="onReset">
-        <slot></slot>
+        <slot v-bind="slotProps"></slot>
     </form>
 </template>
 
 <script>
 import { eventBusMixin } from '../../mixins/event-bus.js';
 import { cloneObject } from '../../utils/index.js';
+import { findChildrenByName } from '../../utils/vue-helpers.js';
 
+/**
+ * The component is intended to work only with the `FFormInput` components.
+ */
 export default {
     mixins: [eventBusMixin],
 
@@ -44,6 +48,7 @@ export default {
     provide() {
         return {
             elements: this.elements,
+            elementStates: this.elementStates,
             lastChangedElement: this.lastChangedElement,
         };
     },
@@ -51,6 +56,9 @@ export default {
     data() {
         return {
             elements: this.formValues || { ...this.values },
+            elementStates: {},
+            errorMessages: [],
+            pendingValidation: false,
             lastChangedElement: {
                 name: '',
                 value: '',
@@ -59,10 +67,31 @@ export default {
         };
     },
 
+    computed: {
+        slotProps() {
+            return {
+                lastChangedElement: this.lastChangedElement,
+                elementStates: this.elementStates,
+                pendingValidation: this.pendingValidation,
+                errorMessages: this.errorMessages,
+            };
+        },
+    },
+
     watch: {
         lastChangedElement: {
             handler(_value) {
                 this.onElementChange(_value);
+            },
+            deep: true,
+        },
+
+        elementStates: {
+            handler(_value) {
+                const states = cloneObject(_value);
+
+                this.pendingValidation = this.pendingValidationExists(states);
+                this.errorMessages = this.collectErrors(states);
             },
             deep: true,
         },
@@ -99,23 +128,41 @@ export default {
         },
 
         /**
-         * @return {string[]}
+         * Collect validation error messages from elements.
+         *
+         * @param {object} _elementStates
+         * @return {array}
          */
-        getErrorMessages() {
-            const errorMessages = [];
-            const elements = this.$refs.form.elements;
-            let elem;
+        collectErrors(_elementStates) {
+            let errors = [];
 
-            if (elements) {
-                for (let i = 0, len1 = elements.length; i < len1; i++) {
-                    elem = elements[i];
-                    if (elem.name && elem.willValidate && !elem.checkValidity()) {
-                        errorMessages.push(elem.validationMessage);
-                    }
+            Object.keys(_elementStates).forEach(_key => {
+                const elementState = _elementStates[_key];
+
+                if (elementState.invalid) {
+                    errors = errors.concat(elementState.errors);
+                }
+            });
+
+            return errors;
+        },
+
+        /**
+         * Check if a pending validation exits.
+         *
+         * @param {object} _elementStates
+         * @return {boolean}
+         */
+        pendingValidationExists(_elementStates) {
+            const keys = Object.keys(_elementStates);
+
+            for (let i = 0, len1 = keys.length; i < len1; i++) {
+                if (_elementStates[keys[i]].pending) {
+                    return true;
                 }
             }
 
-            return errorMessages;
+            return false;
         },
 
         /**
@@ -124,33 +171,33 @@ export default {
          * @return {Boolean}
          */
         async checkValidity() {
-            const children = this.$children;
-            let valid = true;
-            let child;
+            const inputs = findChildrenByName(this.$children, 'f-form-input');
+            const validationPromises = [];
 
-            if (this.$refs.form) {
-                for (let i = 0, len1 = children.length; i < len1; i++) {
-                    child = children[i];
-                    if (typeof child.validate === 'function') {
-                        await child.validate(true);
-                    }
+            // this.pendingValidation = true;
+
+            // collect promises from validation functions
+            inputs.forEach(_input => {
+                if (_input.willValidate) {
+                    validationPromises.push(_input.validate());
                 }
+            });
 
-                valid = this.$refs.form.checkValidity();
-                if (!valid) {
-                    const errorMessages = this.getErrorMessages();
+            try {
+                // await for all promises to settle
+                await Promise.all(validationPromises);
 
-                    if (errorMessages.length > 0) {
-                        this._eventBus.emit('aria-alert-replace', errorMessages.join(''));
-                    }
+                // this.pendingValidation = false;
 
-                    this.$emit('not-valid');
-                }
+                this.errorMessages = this.collectErrors(this.elementStates);
 
-                return valid;
+                return this.errorMessages.length === 0;
+            } catch (_error) {
+                this.pendingValidation = false;
+                this.errorMessages.push(_error);
+                console.error(_error);
+                return false;
             }
-
-            return valid;
         },
 
         onElementChange(_value) {
@@ -167,16 +214,21 @@ export default {
                 _event.preventDefault();
             }
 
-            const valid = await this.checkValidity();
+            try {
+                const valid = await this.checkValidity();
 
-            if (valid) {
-                this.$emit('submit', {
-                    values: cloneObject(this.elements),
-                    lastChangedElem: cloneObject(this.lastChangedElement),
-                    event: _event,
-                });
-            } else {
+                if (valid) {
+                    this.$emit('submit', {
+                        values: cloneObject(this.elements),
+                        lastChangedElem: cloneObject(this.lastChangedElement),
+                        event: _event,
+                    });
+                } else {
+                    _event.preventDefault();
+                }
+            } catch (_error) {
                 _event.preventDefault();
+                throw _error;
             }
         },
 
