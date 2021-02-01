@@ -162,6 +162,19 @@ export const Model = () => ({
     },
 });
 
+export const InputThrottling = () => ({
+    components: { FInput, FButton },
+    template: `
+        <div>
+            <f-input v-model="value" :throttle-input-interval="400" label="Type fast" />
+            <span>value: {{ value }}</span>
+        </div>
+    `,
+    data() {
+        return { value: '' };
+    },
+});
+
 export const Slots = () => ({
     components: { FInput },
     template: `
