@@ -129,6 +129,16 @@ export default {
     watch: {
         value(_val) {
             this.inputValue = _val;
+
+            // set selected item by new value
+            this.$nextTick(() => {
+                const value = this.inputValue;
+                const selectedItem = this.data.find(_item => _item.value === value);
+
+                if (selectedItem) {
+                    this.selectedItem = selectedItem;
+                }
+            });
         },
     },
 
@@ -150,7 +160,7 @@ export default {
 
             let selectedItem = data.find(_item => !!_item.selected);
 
-            if (!selectedItem && value) {
+            if (!selectedItem && value !== undefined) {
                 selectedItem = data.find(_item => _item.value === value);
             }
 
