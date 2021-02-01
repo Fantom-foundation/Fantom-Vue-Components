@@ -122,11 +122,13 @@ export default {
 
     watch: {
         inputValue(_value) {
-            if (this.validateOnChange) {
+            if (this.validateOnChange && !this._firstChange) {
                 this.validate();
             }
 
             this.$emit('change', _value);
+
+            this._firstChange = false;
         },
 
         data: {
@@ -144,6 +146,9 @@ export default {
     },
 
     created() {
+        /** Signals first change of the component */
+        this._firstChange = true;
+
         this.foptions = this.getFOptionsProps();
     },
 
