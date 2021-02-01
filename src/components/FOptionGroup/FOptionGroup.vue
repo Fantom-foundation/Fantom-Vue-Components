@@ -87,7 +87,6 @@ export default {
          */
         data: {
             type: [Object, Array],
-            required: true,
             default() {
                 return [];
             },
@@ -106,13 +105,50 @@ export default {
 
     data() {
         return {
+            foptions: [],
             inputValue: this.checked !== undefined ? this.checked : this.type === 'checkbox' ? [] : '',
             emptyValue: this.type === 'checkbox' ? [] : '',
         };
     },
 
     computed: {
-        foptions() {
+        classes() {
+            return {
+                'foptiongroup-column': this.column,
+                'foptiongroup-invalid': this.validationState.invalid,
+            };
+        },
+    },
+
+    watch: {
+        inputValue(_value) {
+            if (this.validateOnChange) {
+                this.validate();
+            }
+
+            this.$emit('change', _value);
+        },
+
+        data: {
+            handler(_value, _oldValue) {
+                if (JSON.stringify(_value) !== JSON.stringify(_oldValue)) {
+                    this.foptions = this.getFOptionsProps();
+                }
+            },
+            deep: true,
+        },
+
+        checked(_value) {
+            this.inputValue = _value;
+        },
+    },
+
+    created() {
+        this.foptions = this.getFOptionsProps();
+    },
+
+    methods: {
+        getFOptionsProps() {
             let items = [];
             const { data } = this;
 
@@ -141,27 +177,6 @@ export default {
             });
 
             return items;
-        },
-
-        classes() {
-            return {
-                'foptiongroup-column': this.column,
-                'foptiongroup-invalid': this.validationState.invalid,
-            };
-        },
-    },
-
-    watch: {
-        inputValue(_value) {
-            if (this.validateOnChange) {
-                this.validate();
-            }
-
-            this.$emit('change', _value);
-        },
-
-        checked(_value) {
-            this.inputValue = _value;
         },
     },
 };
