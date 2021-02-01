@@ -10,6 +10,7 @@ export const formInputMixin = {
          * If return value is `true`, `errorMessage` will be displayed.
          * If returns non-empty string, the string will be displayed as an error message.
          * If returns non-empty array, all error messages in the array will be displayed.
+         * Can return also Promise (asynchronous validation) or array of error messages.
          * @param {*} _value
          */
         validator: {
@@ -119,10 +120,17 @@ export const formInputMixin = {
     },
 
     created() {
+        /** @type {Promise} */
         this._pendingValidation = null;
+        /** Helper */
+        this._pendingValue = '';
     },
 
     methods: {
+        /**
+         * @param {function} [_validator]
+         * @return {Promise<null|*>}
+         */
         async validate(_validator) {
             const validator = _validator || this.validator;
 
@@ -138,10 +146,23 @@ export const formInputMixin = {
                     this._pendingValidation = result;
                     validationState.pending = true;
 
+                    // store current value
+                    this._pendingValue = this.inputValue;
+
                     this.changeValidationState(validationState);
 
                     try {
                         result = await result;
+
+                        // if current value is different than pending value, validate again
+                        if (this._pendingValue !== this.inputValue) {
+                            this._pendingValue = '';
+                            this._pendingValidation = null;
+
+                            this.validate(_validator);
+
+                            return;
+                        }
                     } catch (_error) {
                         this._pendingValidation = null;
                         validationState.pending = false;
@@ -176,6 +197,9 @@ export const formInputMixin = {
             }
         },
 
+        /**
+         * @param {object} _validationState
+         */
         changeValidationState(_validationState) {
             this.validationState = { ..._validationState };
             this.$emit('validation-state', _validationState);
