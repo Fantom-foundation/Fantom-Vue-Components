@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.2.0...v0.3.0) (2021-02-01)
+
+
+### Features
+
+* **f-form:** add inputs validation process ([e467fe7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e467fe7f1719b1a159e5ad810e9510dd65651577))
+* **f-form:** adjust component to work with f-form-input components ([933443b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/933443b094ec5d978fba55b91b8b4edcba619248))
+* **f-form:** create skeleton ([bfa93df](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/bfa93dfaf04fd11a977f2bb6693fc51ab8f18c6e))
+* **f-form-input:** add validation process ([832bf75](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/832bf75bd856a834307a72482230de3a887cd19e))
+* **f-form-input:** create f-form-input component ([adf76cf](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/adf76cfac06e6a0132e16df39bc0f3d5ae224c37))
+* **f-input:** create input throttling ([2009c2d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/2009c2d7e17e7141de867cdc2282964a97a484da))
+* **f-input:** show label only if it is not empty ([98717ec](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/98717ec928d854f1590950b6ba10a569e08c9f08))
+* **utils:** create `clone` function ([01f460c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/01f460cd362ab25f8c046b1e76504644150a16a1))
+* **vue-helpers:** create helper functions for working with vue components ([aa40bca](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/aa40bca287a91f0623f35e4422cb24aae677ffa1))
+
+
+### Bug Fixes
+
+* **f-dropdown-listbox:** fix updating of selected item ([7d6feb4](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7d6feb464583766485369deaa794b6c0a2bda794))
+* **f-listbox:** fix unnecessary re-rendering of the component ([456d5e9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/456d5e914f3075adbc7ae18ad349ee2a8e5725b1))
+* **f-option-group:** don't validate on the first component change ([fbfb423](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fbfb4233fa38cb56ba1a89c84b2a76e86c5f93c8))
+* **f-option-group:** fix unnecessary re-rendering ([b7fe6cc](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b7fe6ccd91b9bd6b0b7e1fb656a88fa240d3c4ac))
+* **form-input:** fix asynchronous validations ([ad646a5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ad646a517b9b5f032a045d55e894a4b28440ec3d))
+
 ## [0.2.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.1.0...v0.2.0) (2021-01-29)
 
 
