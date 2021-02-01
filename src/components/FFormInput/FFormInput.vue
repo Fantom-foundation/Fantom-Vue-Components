@@ -1,17 +1,15 @@
 <template>
     <div class="fforminput">
-        <slot v-if="useLabel" name="label" v-bind="{ id: `${id}-f-inp`, label: label }">
-            <label v-if="type !== 'checkbox' && type !== 'radio'" :for="`${id}-f-inp`" class="fforminput_label">
-                {{ label }}
-            </label>
-            <span v-else class="fforminput_label">{{ label }}</span>
-        </slot>
         <div class="fforminput_input">
             <f-input
                 v-if="_fInputTypes.includes(type)"
+                ref="input"
                 :is-textarea="type === 'textarea'"
                 v-bind="{ ...$attrs, ...inputProps }"
+                :type="type"
+                :name="name"
                 v-model="inputValue"
+                @validation-state="onValidationState"
             >
                 <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
                     <slot :name="name" v-bind="data"></slot>
@@ -19,101 +17,114 @@
             </f-input>
             <template v-else-if="type === 'checkbox' || type === 'radio'">
                 <f-option
-                    v-for="item in foptions"
-                    :key="item.id"
+                    ref="input"
                     :type="type"
-                    v-bind="{ ...$attrs, ...inputProps, ...item }"
+                    v-bind="{ ...$attrs, ...inputProps }"
+                    :name="name"
                     v-model="inputValue"
                 />
             </template>
-            <f-select
-                v-else-if="type === 'select'"
+            <f-option-group
+                v-else-if="type === 'checkboxgroup' || type === 'radiogroup'"
+                ref="input"
+                :type="type === 'checkboxgroup' ? 'checkbox' : 'radio'"
                 v-bind="{ ...$attrs, ...inputProps }"
+                :name="name"
                 v-model="inputValue"
-                :data="data"
+                @validation-state="onValidationState"
             >
                 <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
                     <slot :name="name" v-bind="data"></slot>
                 </template>
-            </f-select>
-            <f-dropdown-listbox
-                v-else-if="type === 'dropdownlistbox'"
+            </f-option-group>
+            <component
+                v-else
+                :is="getComponentName(type)"
+                ref="input"
                 v-bind="{ ...$attrs, ...inputProps }"
+                :name="name"
                 v-model="inputValue"
-                :data="data"
+                @validation-state="onValidationState"
             >
                 <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
                     <slot :name="name" v-bind="data"></slot>
                 </template>
-            </f-dropdown-listbox>
-            <f-listbox
-                v-else-if="type === 'listbox'"
-                v-bind="{ ...$attrs, ...inputProps }"
-                v-model="inputValue"
-                :data="data"
-            >
-                <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-                    <slot :name="name" v-bind="data"></slot>
-                </template>
-            </f-listbox>
+            </component>
         </div>
     </div>
 </template>
 
 <script>
-import { inputMixin } from '../../mixins/input.js';
 import FOption from '../FOption/FOption.vue';
-import { clone, cloneObject, getUniqueId, isArray, isObject } from '../../utils/index.js';
+import { clone, cloneObject } from '../../utils/index.js';
 import FInput from '../FInput/FInput.vue';
 import FDropdownListbox from '../FDropdownListbox/FDropdownListbox.vue';
 import FSelect from '../FSelect/FSelect.vue';
 import FListbox from '../FListbox/FListbox.vue';
+import FOptionGroup from '@/components/FOptionGroup/FOptionGroup.vue';
 
-/*
-Bude emitovat 'change' a 'input', FForm se potom musi nabindovat na tyto udalosti u kazdeho FFormInputu.
+const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'time'];
+const types = [
+    ...fInputTypes,
+    'select',
+    'dropdownlistbox',
+    'checkbox',
+    'checkboxgroup',
+    'radio',
+    'radiogroup',
+    'listbox',
+];
+
+/**
+ * Wrapper for form inputs (based on form-input mixin) intended to be used in `FForm` component.
  */
-
 export default {
     name: 'FFormInput',
 
-    components: { FListbox, FSelect, FDropdownListbox, FInput, FOption },
-
-    mixins: [inputMixin],
+    components: { FOptionGroup, FListbox, FSelect, FDropdownListbox, FInput, FOption },
 
     model: {
         prop: 'modelValue',
         event: 'input',
     },
 
-    inheritAttrs: false,
+    // inheritAttrs: false,
 
-    inject: ['elements', 'lastChangedElement'],
+    inject: ['elements', 'elementStates', 'lastChangedElement'],
 
     props: {
+        /**
+         * Type of input
+         *
+         * @type {('text' | 'textarea' | 'number' | 'email' | 'date' | 'time' | 'select' | 'dropdownlistbox' | 'checkbox' | 'checkboxgroup' | 'radio' | 'radiogroup' | 'listbox')}
+         */
         type: {
             type: String,
             default: 'text',
+            validator: function(_value) {
+                return types.indexOf(_value) !== -1;
+            },
+        },
+        name: {
+            type: String,
+            default: '',
         },
         modelValue: {},
-        data: {},
     },
 
     data() {
         return {
-            foptions: [],
             inputValue: this.modelValue || this.getInitialValue(),
+
+            inputProps: {},
         };
     },
 
     computed: {
-        useLabel() {
-            switch (this.type) {
-                case 'checkbox':
-                case 'radio':
-                    return this.foptions.length > 1;
-                default:
-                    return true;
-            }
+        willValidate() {
+            const { input } = this.$refs;
+
+            return input ? typeof input.validate === 'function' : false;
         },
     },
 
@@ -130,15 +141,6 @@ export default {
             this.inputValue = _value;
         },
 
-        data: {
-            handler(_value, _oldValue) {
-                if (JSON.stringify(_value) !== JSON.stringify(_oldValue)) {
-                    this.foptions = this.getFOptionsProps();
-                }
-            },
-            deep: true,
-        },
-
         elements: {
             handler(_value) {
                 const { name } = this;
@@ -150,6 +152,8 @@ export default {
                             lastChangedElement.name = name;
                             lastChangedElement.value = clone(_value[name]);
                             lastChangedElement.oldValue = clone(this._oldInputValue);
+
+                            this._updateValidationState(cloneObject(lastChangedElement));
                         }
 
                         this.inputValue = clone(_value[name]);
@@ -166,18 +170,15 @@ export default {
 
     created() {
         /** Array of allowed types for f-input component */
-        this._fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'time'];
+        this._fInputTypes = fInputTypes;
         /** Previous value of the component */
         this._oldInputValue = '';
         /** Signals first change of the component */
         this._firstChange = true;
 
-        if (this.type === 'checkbox' || this.type === 'radio') {
-            this.foptions = this.getFOptionsProps();
-        }
-
         if (this.name) {
             this.$set(this.elements, this.name, this.modelValue || this.getInitialValue());
+            this.$set(this.elementStates, this.name, {});
         }
     },
 
@@ -188,51 +189,75 @@ export default {
     },
 
     methods: {
-        getFOptionsProps() {
-            let items = [];
-            const { data } = this;
+        /**
+         * @return {Promise<null|*>}
+         */
+        async validate() {
+            const { input } = this.$refs;
 
-            if (isObject(data)) {
-                Object.keys(data).forEach(_key => {
-                    items.push({
-                        value: _key,
-                        label: data[_key],
-                    });
-                });
-            } else if (isArray(data)) {
-                items = cloneObject(data);
-            }
-
-            if (items.length === 0) {
-                items.push({
-                    // value: this.elements[this.name],
-                    label: this.label,
-                });
-            }
-
-            items.forEach(_item => {
-                if (!_item.id) {
-                    _item.id = getUniqueId();
-                }
-            });
-
-            return items;
+            return input && typeof input.validate === 'function' ? input.validate() : undefined;
         },
 
-        getDefaultValue() {
-            const { data } = this;
+        /**
+         * Get component name by type.
+         *
+         * @param {string} _type
+         * @return {string}
+         */
+        getComponentName(_type) {
+            switch (_type) {
+                case 'select':
+                    return 'f-select';
+                case 'dropdownlistbox':
+                    return 'f-dropdown-listbox';
+                case 'listbox':
+                    return 'f-listbox';
+                case this._fInputTypes.indexOf(_type) > -1:
+                case 'textarea':
+                    return 'f-input';
+                case 'checkbox':
+                case 'radio':
+                    return 'f-option';
+                case 'checkboxgroup':
+                case 'radiogroup':
+                    return 'f-option-group';
+            }
 
+            return '';
+        },
+
+        getValidationState() {
+            const { input } = this.$refs;
+
+            return input && input.validationState ? cloneObject(input.validationState) : {};
+        },
+
+        getEmptyValue() {
             switch (this.type) {
                 case 'checkbox':
                 case 'radio':
-                    return data && ('length' in data || Object.keys(data).length > 1) ? [] : false;
+                    return false;
+                case 'checkboxgroup':
+                case 'radiogroup':
+                    return [];
                 default:
                     return '';
             }
         },
 
         getInitialValue() {
-            return this.name in this.elements ? this.elements[this.name] : this.getDefaultValue();
+            return this.name in this.elements ? this.elements[this.name] : this.getEmptyValue();
+        },
+
+        _updateValidationState(_data) {
+            this.elementStates[this.name] = {
+                ...(this.elementStates[this.name] || {}),
+                ..._data,
+            };
+        },
+
+        onValidationState(_data) {
+            this._updateValidationState(cloneObject(_data));
         },
     },
 };
