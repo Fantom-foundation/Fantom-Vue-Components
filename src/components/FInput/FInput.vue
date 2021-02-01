@@ -59,6 +59,7 @@ import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { eventBusMixin } from '../../mixins/event-bus.js';
 import FLabel from '../FLabel/FLabel.vue';
+import { throttle } from '../../utils/index.js';
 
 /**
  * Input field (input or textarea) with slots.
@@ -85,6 +86,11 @@ export default {
         fieldSize: {
             type: String,
             default: '',
+        },
+        /** Throttle onInput callback interval in milliseconds */
+        throttleInputInterval: {
+            type: Number,
+            default: 0,
         },
         /** Validate on input event as well */
         validateOnInput: {
@@ -146,6 +152,10 @@ export default {
                 hideInfoOnError: this.hideInfoOnError,
             };
         },
+
+        throttledInput() {
+            return throttle(_event => this._onInput(_event), this.throttleInputInterval, true);
+        },
     },
 
     watch: {
@@ -176,6 +186,17 @@ export default {
          * @param {Event} _event
          */
         onInput(_event) {
+            if (this.throttleInputInterval > 0) {
+                this.throttledInput(_event);
+            } else {
+                this._onInput(_event);
+            }
+        },
+
+        /**
+         * @param {Event} _event
+         */
+        _onInput(_event) {
             this.inputValue = _event.target.value;
 
             /**
