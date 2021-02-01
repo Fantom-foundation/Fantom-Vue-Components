@@ -112,6 +112,15 @@ export const Validation = () => ({
                     ref="inp3"
                     label="Validate on change and input"
                 />
+                <f-input
+                    :validator="asyncValidator"
+                    validate-on-change
+                    validate-on-input
+                    error-message="an error"
+                    info-text="hint: type 'yes'"
+                    ref="inp3"
+                    label="Asynchronous validation"
+                />
                 <br /><br />
                 <f-button type="submit" size="small">Submit</f-button>
             </form>
@@ -120,6 +129,13 @@ export const Validation = () => ({
     methods: {
         validator(_value) {
             return _value !== 'yes';
+        },
+        asyncValidator(_value) {
+            return new Promise(_resolve =>
+                setTimeout(() => {
+                    _resolve(_value !== 'yes');
+                }, 1500)
+            );
         },
         onSubmit(_event) {
             this.$refs.inp1.validate();
