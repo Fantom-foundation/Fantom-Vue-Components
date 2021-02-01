@@ -27,9 +27,7 @@
                 :aria-disabled="!!item.disabled"
                 class="flistbox_list_item"
             >
-                <slot :item="item">
-                    {{ item.label }}
-                </slot>
+                <slot :item="item"> {{ item.label }} </slot>
             </li>
         </ul>
         <slot name="bottom" v-bind="slotProps">
@@ -113,20 +111,10 @@ export default {
 
     data() {
         return {
+            items: [],
             focusedItem: {},
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
         };
-    },
-
-    computed: {
-        items() {
-            const items = [...this.data];
-
-            this.setIds(items);
-            this.setSelected();
-
-            return items;
-        },
     },
 
     watch: {
@@ -137,13 +125,35 @@ export default {
                 this.focusItem(_val, false, 'value');
             }
         },
+
+        data: {
+            handler(_value, _oldValue) {
+                if (JSON.stringify(_value) !== JSON.stringify(_oldValue)) {
+                    this.items = this.getItems();
+                }
+            },
+            deep: true,
+        },
+
+        items() {
+            this.setSelected();
+        },
     },
 
     created() {
         this._firstKeyup = true;
+        this.items = this.getItems();
     },
 
     methods: {
+        getItems() {
+            const items = cloneObject(this.data);
+
+            this.setIds(items);
+
+            return items;
+        },
+
         /**
          * Select item by `_key`.
          *
@@ -154,7 +164,7 @@ export default {
         focusItem(_value, _selectItem, _key = 'id') {
             let item;
 
-            if (_value && !this.disabled) {
+            if (_value !== undefined && !this.disabled) {
                 item = this.items.find(_item => _item[_key] === _value);
 
                 // if (item && item.id !== this.focusedItem.id) {
@@ -183,10 +193,10 @@ export default {
          */
         setSelected() {
             const { value } = this;
-            let selectedItem = this.data.find(_item => !!_item.selected);
+            let selectedItem = this.items.find(_item => !!_item.selected);
 
             if (!selectedItem && value) {
-                selectedItem = this.data.find(_item => _item.value === value);
+                selectedItem = this.items.find(_item => _item.value === value);
             }
 
             this.focusedItem = {};
