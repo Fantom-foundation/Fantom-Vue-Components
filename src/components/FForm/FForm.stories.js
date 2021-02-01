@@ -382,7 +382,7 @@ export const Validation = () => ({
                             ]"
                         />
                     </div>
-<!--                    <div class="mab-5">
+                    <div class="mab-5">
                         <f-form-input
                             :validator="_value => (_value.length === 0 ? 'Required' : '')"
                             validate-on-change
@@ -401,7 +401,7 @@ export const Validation = () => ({
                             name="radiogroup"
                             :data="{ '10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3' }"
                         />
-                    </div>-->
+                    </div>
                     <div class="mab-5">
                         <f-form-input
                             :validator="_value => (!_value.trim() ? 'Required' : '')"
