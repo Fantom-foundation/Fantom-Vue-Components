@@ -1,9 +1,12 @@
 import { getUniqueId, isArray } from '../utils/index.js';
+import { eventBusMixin } from './event-bus.js';
 
 /**
  * Common props and methods for inputs with validation
  */
 export const formInputMixin = {
+    mixins: [eventBusMixin],
+
     props: {
         /**
          * Custom validator function.
@@ -201,6 +204,19 @@ export const formInputMixin = {
          * @param {object} _validationState
          */
         changeValidationState(_validationState) {
+            const { errors } = _validationState;
+
+            if (!this.validateOnInput && errors && errors.length > 0) {
+                // const { activeElement } = document;
+
+                // if (activeElement && this.id && activeElement.closest(`#${this.id}`) === null) {
+                this._eventBus.emit('aria-alert-clear');
+                errors.forEach(_error => {
+                    this._eventBus.emit('aria-alert-append', _error);
+                });
+                // }
+            }
+
             this.validationState = { ..._validationState };
             this.$emit('validation-state', _validationState);
         },
