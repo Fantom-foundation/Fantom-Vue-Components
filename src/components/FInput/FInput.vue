@@ -57,7 +57,6 @@
 import { inputMixin } from '../../mixins/input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
-import { eventBusMixin } from '../../mixins/event-bus.js';
 import FLabel from '../FLabel/FLabel.vue';
 import { throttle } from '../../utils/index.js';
 
@@ -69,7 +68,7 @@ export default {
 
     components: { FLabel },
 
-    mixins: [inputMixin, formInputMixin, helpersMixin, eventBusMixin],
+    mixins: [inputMixin, formInputMixin, helpersMixin],
 
     props: {
         /** Use textarea instead of input element */
