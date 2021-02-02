@@ -26,10 +26,19 @@ export default {
             type: Boolean,
             default: false,
         },
-        /** Call preventDefault() on form submit event. */
+        /** Call preventDefault() on form submit event */
         cancelSubmit: {
             type: Boolean,
             default: true,
+        },
+        /**
+         * Text used before error list on form submit, if any form element error exist.
+         * Text is invisible and read by screen readers.
+         * `%n` will be replaced by actual number of error messages
+         */
+        formErrorText: {
+            type: String,
+            default: '%n form errors:',
         },
         values: {
             type: Object,
@@ -191,12 +200,25 @@ export default {
 
                 this.errorMessages = this.collectErrors(this.elementStates);
 
+                this.ariaReportErrors(this.errorMessages);
+
                 return this.errorMessages.length === 0;
             } catch (_error) {
                 this.pendingValidation = false;
                 this.errorMessages.push(_error);
                 console.error(_error);
                 return false;
+            }
+        },
+
+        ariaReportErrors(_errors = []) {
+            const eventBus = this._eventBus;
+
+            if (_errors.length > 0) {
+                eventBus.emit(
+                    'aria-alert-replace',
+                    `${this.formErrorText.replace('%n', _errors.length)} ${_errors.join(' ')}`
+                );
             }
         },
 
