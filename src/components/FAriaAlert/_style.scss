@@ -1,0 +1,5 @@
+@use "../../assets/scss/tools/visibility";
+
+.fariaalert {
+    @include visibility.not-visible;
+}
