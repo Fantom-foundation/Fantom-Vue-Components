@@ -3,6 +3,7 @@ import shortid from 'shortid';
 const uppercaseCharsRE = /([A-Z])/;
 const camelSplitRE = /[ _-]+/;
 const kebabSplitRE = /([A-Z]|[ _-]+)/;
+const stripHTMLRE = /(<([^>]+)>)/gi;
 
 /**
  * @return {string}
@@ -230,6 +231,10 @@ export function toKebabCase(_str) {
         return spl.join('-');
     }
     return '';
+}
+
+export function stripHTMLTags(_str) {
+    return _str && typeof _str === 'string' ? _str.replace(stripHTMLRE, '') : '';
 }
 
 /**
