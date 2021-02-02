@@ -4,6 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import FOptionGroup from './FOptionGroup.vue';
 import FButton from '../FButton/FButton.vue';
+import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 
 export default {
     title: 'FOptionGroup',
@@ -96,7 +97,7 @@ export const Model = () => ({
 });
 
 export const Validation = () => ({
-    components: { FOptionGroup, FButton },
+    components: { FOptionGroup, FButton, FAriaAlert },
     template: `
         <div>
             <form action="" @submit="onChecbkoxesSubmit">
@@ -132,6 +133,8 @@ export const Validation = () => ({
                 <br /><br />
                 <f-button type="submit" size="small" :disabled="submit2Disabled">Submit</f-button>
             </form>
+
+            <f-aria-alert />
         </div>
     `,
     data() {

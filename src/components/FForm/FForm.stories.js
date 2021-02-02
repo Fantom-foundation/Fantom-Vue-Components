@@ -5,6 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import FForm from './FForm.vue';
 import FFormInput from '../FFormInput/FFormInput.vue';
 import FButton from '../FButton/FButton.vue';
+import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 
 export default {
     title: 'FForm',
@@ -322,7 +323,7 @@ On submit:
 });
 
 export const Validation = () => ({
-    components: { FForm, FFormInput, FButton },
+    components: { FForm, FFormInput, FButton, FAriaAlert },
     template: `
         <f-form :values="values" class="grid" @submit="onSubmit" v-slot="fprops">
             <fieldset class="col-6">
@@ -436,6 +437,7 @@ elementStates
 lastChangedElement
 {{ fprops.lastChangedElement }}
             </pre>
+            <f-aria-alert />
         </f-form>
     `,
     data() {

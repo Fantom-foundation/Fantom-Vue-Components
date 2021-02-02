@@ -2,6 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import FListbox from './FListbox.vue';
 import FButton from '../FButton/FButton.vue';
+import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 
 const data = [
     { label: 'item 1', value: '10' },
@@ -263,7 +264,7 @@ export const Scrollable = () => ({
 });
 
 export const Validation = () => ({
-    components: { FListbox, FButton },
+    components: { FListbox, FButton, FAriaAlert },
     template: `
         <div>
             <form action="" @submit="onSubmit">
@@ -277,6 +278,8 @@ export const Validation = () => ({
                 <br /><br />
                 <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
             </form>
+
+            <f-aria-alert />
         </div>
     `,
     data() {

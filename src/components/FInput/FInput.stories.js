@@ -4,6 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
 import FButton from '../FButton/FButton.vue';
+import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 
 export default {
     title: 'FInput',
@@ -84,13 +85,13 @@ export const Invalid = () => ({
 });
 
 export const Validation = () => ({
-    components: { FInput, FButton },
+    components: { FInput, FButton, FAriaAlert },
     template: `
         <div class="vertical-align-top">
             <form action="" @submit="onSubmit">
                 <f-input
                     :validator="validator"
-                    error-message="an error"
+                    error-message="Input 1 error. Type 'yes'."
                     info-text="hint: type 'yes'"
                     ref="inp1"
                     label="Validate on submit"
@@ -98,7 +99,7 @@ export const Validation = () => ({
                 <f-input
                     :validator="validator"
                     validate-on-change
-                    error-message="an error"
+                    error-message="Input 2 error. Type 'yes'."
                     info-text="hint: type 'yes'"
                     ref="inp2"
                     label="Validate on change"
@@ -107,7 +108,7 @@ export const Validation = () => ({
                     :validator="validator"
                     validate-on-change
                     validate-on-input
-                    error-message="an error"
+                    error-message="Input 3 error. Type 'yes'."
                     info-text="hint: type 'yes'"
                     ref="inp3"
                     label="Validate on change and input"
@@ -116,14 +117,16 @@ export const Validation = () => ({
                     :validator="asyncValidator"
                     validate-on-change
                     validate-on-input
-                    error-message="an error"
+                    error-message="Input 4 error. Type 'yes'."
                     info-text="hint: type 'yes'"
-                    ref="inp3"
+                    ref="inp4"
                     label="Asynchronous validation"
                 />
                 <br /><br />
                 <f-button type="submit" size="small">Submit</f-button>
             </form>
+
+            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -141,6 +144,7 @@ export const Validation = () => ({
             this.$refs.inp1.validate();
             this.$refs.inp2.validate();
             this.$refs.inp3.validate();
+            this.$refs.inp4.validate();
 
             _event.preventDefault();
         },

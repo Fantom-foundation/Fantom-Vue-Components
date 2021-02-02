@@ -3,6 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import FSelect from './FSelect.vue';
 // import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
+import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 
 /*
 function validator(_value) {
@@ -118,7 +119,7 @@ export const Value = () => ({
 });
 
 export const Validation = () => ({
-    components: { FSelect, FButton },
+    components: { FSelect, FButton, FAriaAlert },
     template: `
         <div>
             <form action="" @submit="onSubmit">
@@ -147,6 +148,8 @@ export const Validation = () => ({
                 <br /><br />
                 <f-button type="submit" size="small">Submit</f-button>
             </form>
+
+            <f-aria-alert />
         </div>
     `,
     methods: {
