@@ -104,7 +104,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
             }
         }
 
-        *:not(.inp-nostyle) {
+        > *:not(.inp-nostyle) {
             &:last-child {
                 margin-left: var(--f-inp-cont-gap-h);
                 margin-right: var(--f-inp-cont-gap-h);
