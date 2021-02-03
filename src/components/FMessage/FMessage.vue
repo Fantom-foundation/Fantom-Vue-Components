@@ -3,29 +3,15 @@
         <!-- @slot Default to `type` prop -->
         <slot name="prefix">
             <template v-if="withIcon">
-                <!--
-                <icon
-                    v-if="type === 'success'"
-                    data="@/assets/svg/message/check-circle.svg"
-                    width="16"
-                    height="16"
-                    aria-hidden="true"
-                />
-                <icon
-                    v-if="type === 'error' || type === 'warning'"
-                    data="@/assets/svg/message/exclamation-circle.svg"
-                    width="16"
-                    height="16"
-                    aria-hidden="true"
-                />
-                <icon
-                    v-if="type === 'info'"
-                    data="@/assets/svg/message/info-circle.svg"
-                    width="16"
-                    height="16"
-                    aria-hidden="true"
-                />
-            -->
+                <f-svg-icon v-if="type === 'success'" size="16px" aria-hidden="true">
+                    <icon-check-circle />
+                </f-svg-icon>
+                <f-svg-icon v-else-if="type === 'error' || type === 'warning'" size="16px" aria-hidden="true">
+                    <icon-exclamation-circle />
+                </f-svg-icon>
+                <f-svg-icon v-else-if="type === 'info'" size="16px" aria-hidden="true">
+                    <icon-info-circle />
+                </f-svg-icon>
             </template>
         </slot>
         <span class="fmessage_body"><slot></slot></span>
@@ -35,11 +21,16 @@
 
 <script>
 import { helpersMixin } from '../../mixins/helpers.js';
+import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
+import IconCheckCircle from '@/components/icons/IconCheckCircle.vue';
+import IconExclamationCircle from '@/components/icons/IconExclamationCircle.vue';
+import IconInfoCircle from '../icons/IconInfoCircle.vue';
 
 /**
  * Component for displaying simple messages.
  */
 export default {
+    components: { IconExclamationCircle, IconCheckCircle, FSvgIcon, IconInfoCircle },
     mixins: [helpersMixin],
 
     props: {
@@ -66,9 +57,9 @@ export default {
     computed: {
         classes() {
             return {
-                '-withicon': this.withIcon,
-                '-prefixslot': this.hasSlot('prefix'),
-                '-suffixslot': this.hasSlot('suffix'),
+                'fmessage-withicon': this.withIcon,
+                'fmessage-prefixslot': this.hasSlot('prefix'),
+                'fmessage-suffixslot': this.hasSlot('suffix'),
             };
         },
 
