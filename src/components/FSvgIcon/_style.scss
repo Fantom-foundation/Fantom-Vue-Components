@@ -1,0 +1,25 @@
+@use "custom-properties";
+
+.fsvgicon {
+    display: inline-block;
+    vertical-align: middle;
+    width: var(--fsvgicon-width);
+    height: var(--fsvgicon-height);
+    color: var(--fsvgicon-color);
+
+    &-icon {
+        display: inline-block;
+    }
+
+    &-icon, svg {
+        width: 100%;
+        height: 100%;
+        //stroke: #0000cc;
+    }
+
+    &:not(&-original) {
+        svg, svg g, svg path {
+            fill: currentColor;
+        }
+    }
+}
