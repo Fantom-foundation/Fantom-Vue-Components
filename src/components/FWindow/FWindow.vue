@@ -25,7 +25,7 @@
                         <!-- @slot Default to `close-btn` button -->
                         <slot name="controls">
                             <button class="close-btn btn btn-samesize btn-round btn-tertiary" title="Close window">
-                                &#10006;
+                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
                             </button>
                         </slot>
                     </div>
@@ -67,6 +67,8 @@ import {
     getAutoAttachPosition,
     getElemRect,
 } from '../../utils/DOM.js';
+import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
+import IconTimes from '../icons/IconTimes.vue';
 
 /**
  * Basic window following WAI-ARIA practices.
@@ -75,7 +77,7 @@ import {
 export default {
     name: 'FWindow',
 
-    components: { FOverlay },
+    components: { IconTimes, FSvgIcon, FOverlay },
 
     mixins: [helpersMixin],
 
