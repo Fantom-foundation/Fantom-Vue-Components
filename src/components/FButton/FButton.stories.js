@@ -3,6 +3,8 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FButton from './FButton.vue';
+import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
+import IconTimes from '../icons/IconTimes.vue';
 
 export default {
     title: 'FButton',
@@ -11,7 +13,7 @@ export default {
 };
 
 export const Default = () => ({
-    components: { FButton },
+    components: { FButton, FSvgIcon, IconTimes },
     template: `
         <div>
             <h3>Primary (default)</h3>
@@ -29,12 +31,16 @@ export const Default = () => ({
             <f-button tertiary label="Default" />
             <f-button tertiary size="small" label="Small" />
             <f-button tertiary size="mini" label="Mini" />
+            <h3>Round</h3>
+            <f-button round><f-svg-icon><icon-times /></f-svg-icon></f-button>
+            <f-button round secondary><f-svg-icon><icon-times /></f-svg-icon></f-button>
+            <f-button round tertiary><f-svg-icon><icon-times /></f-svg-icon></f-button>
         </div>
     `,
 });
 
 export const Disabled = () => ({
-    components: { FButton },
+    components: { FButton, FSvgIcon, IconTimes },
     template: `
         <div>
             <h3>Primary (default)</h3>
@@ -52,17 +58,21 @@ export const Disabled = () => ({
             <f-button disabled tertiary label="Default" />
             <f-button disabled tertiary size="small" label="Small" />
             <f-button disabled tertiary size="mini" label="Mini" />
+            <h3>Round</h3>
+            <f-button disabled round><f-svg-icon><icon-times /></f-svg-icon></f-button>
+            <f-button disabled round secondary><f-svg-icon><icon-times /></f-svg-icon></f-button>
+            <f-button disabled round tertiary><f-svg-icon><icon-times /></f-svg-icon></f-button>
         </div>
     `,
 });
 
 export const Slot = () => ({
-    components: { FButton },
+    components: { FButton, FSvgIcon, IconTimes },
     template: `
         <div>
-            <f-button>&#9742; <i>Primary</i></f-button>
-            <f-button secondary>&#9742; <i>Secondary</i></f-button>
-            <f-button tertiary>&#9742; <i>Tertiary</i></f-button>
+            <f-button><f-svg-icon size="16px"><icon-times /></f-svg-icon> <i>Primary</i></f-button>
+            <f-button secondary><f-svg-icon size="16px"><icon-times /></f-svg-icon> <i>Secondary</i></f-button>
+            <f-button tertiary><f-svg-icon size="16px"><icon-times /></f-svg-icon> <i>Tertiary</i></f-button>
         </div>
     `,
 });
