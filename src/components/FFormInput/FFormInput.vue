@@ -61,7 +61,8 @@ import FInput from '../FInput/FInput.vue';
 import FDropdownListbox from '../FDropdownListbox/FDropdownListbox.vue';
 import FSelect from '../FSelect/FSelect.vue';
 import FListbox from '../FListbox/FListbox.vue';
-import FOptionGroup from '@/components/FOptionGroup/FOptionGroup.vue';
+import FOptionGroup from '../FOptionGroup/FOptionGroup.vue';
+import FPasswordField from '../FPasswordField/FPasswordField.vue';
 
 const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'time'];
 const types = [
@@ -73,6 +74,7 @@ const types = [
     'radio',
     'radiogroup',
     'listbox',
+    'passwordfield',
 ];
 
 /**
@@ -81,7 +83,7 @@ const types = [
 export default {
     name: 'FFormInput',
 
-    components: { FOptionGroup, FListbox, FSelect, FDropdownListbox, FInput, FOption },
+    components: { FOptionGroup, FListbox, FSelect, FDropdownListbox, FInput, FOption, FPasswordField },
 
     model: {
         prop: 'modelValue',
@@ -96,7 +98,7 @@ export default {
         /**
          * Type of input
          *
-         * @type {('text' | 'textarea' | 'number' | 'email' | 'date' | 'time' | 'select' | 'dropdownlistbox' | 'checkbox' | 'checkboxgroup' | 'radio' | 'radiogroup' | 'listbox')}
+         * @type {('text' | 'textarea' | 'number' | 'email' | 'date' | 'time' | 'select' | 'dropdownlistbox' | 'checkbox' | 'checkboxgroup' | 'radio' | 'radiogroup' | 'listbox' | 'passwordfield')}
          */
         type: {
             type: String,
@@ -221,6 +223,8 @@ export default {
                 case 'checkboxgroup':
                 case 'radiogroup':
                     return 'f-option-group';
+                case 'passwordfield':
+                    return 'f-password-field';
             }
 
             return '';

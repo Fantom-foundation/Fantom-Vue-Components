@@ -26,6 +26,9 @@ export const Default = () => ({
                 <f-form-input type="textarea" label="textarea" name="textarea" />
             </div>
             <div class="mab-5">
+                <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+            </div>
+            <div class="mab-5">
                 <f-form-input
                     type="select"
                     label="select"
