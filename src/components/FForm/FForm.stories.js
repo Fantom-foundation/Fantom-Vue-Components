@@ -31,6 +31,9 @@ export const Default = () => ({
                         <f-form-input type="textarea" label="textarea" name="textarea" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input
                             type="select"
                             label="select"
@@ -123,6 +126,9 @@ export const Values = () => ({
                         <f-form-input type="textarea" label="textarea" name="textarea" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input
                             type="select"
                             label="select"
@@ -195,6 +201,7 @@ export const Values = () => ({
             values: {
                 text: 'text',
                 textarea: 'text',
+                passwordfield: 'pwdpwd',
                 select: '20',
                 dropdownlistbox: '10',
                 checkbox: true,
@@ -229,6 +236,9 @@ export const Model = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="textarea" label="textarea" name="textarea" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
                     </div>
                     <div class="mab-5">
                         <f-form-input
@@ -354,6 +364,15 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="textarea" label="textarea" name="textarea" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input
+                            type="passwordfield"
+                            :validator="_value => _value.length < 9 ? 'Password must be at least 8 characters long' : ''"
+                            validate-on-change
+                            label="passwordfield"
+                            name="passwordfield"
+                        />
                     </div>
                     <div class="mab-5">
                         <f-form-input
