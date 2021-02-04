@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" v-bind="buttonProps" :class="classes">
+    <button class="fbutton btn" v-bind="buttonProps" :class="classes">
         <slot>{{ label }}</slot>
     </button>
 </template>
