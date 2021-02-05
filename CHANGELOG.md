@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.3.0...v0.4.0) (2021-02-05)
+
+
+### Features
+
+* **f-aria-alert:** create component ([9dd1f65](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/9dd1f656400447b658c187178d76c6a9ce1a2902))
+* **f-button:** add `round` property ([3a47062](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3a4706216602bd6914e482d948b7d4d5fa681b9e))
+* **f-form:** add support for reporting form errors to screen readers ([781c2e5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/781c2e55991e324f582cb00655b3d6a549790355))
+* **f-form-input:** add FPasswordField component ([c4f8d2c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c4f8d2c52a1e9e92fe67f83e44979b4f6113fd97))
+* **f-message:** use FSvgIcon component ([961243b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/961243b651ee48220b978758d398f4a5ff8e335b))
+* **f-password-field:** create component ([00bd404](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/00bd404a8b9193cfec5ad45469d8c4977efc0426))
+* **f-password-field:** localize component ([da93f43](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/da93f43f536af4eb9c4e05408a7aa2ef11e4435d))
+* **f-svg-icon:** create component ([d815b44](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d815b44645406ef8a018bcce997cd1f5811ab435))
+* **f-window:** localize component ([fa4c6a3](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fa4c6a3486ac85f0b4716d8e9f93023d49d6f3d0))
+* **f-window:** use FSvgIcon component ([69b6c35](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/69b6c35e205b99dc87976727df170e1eb07ebba1))
+* **form-input:** add event bus mixin and report errors ([7d8ef94](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7d8ef940d24a8505b96da79b00b3f3d73517d6c6))
+* **locales:** create translations into English ([698ef9c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/698ef9cb57de26dfffe17c42543f70ab90c39aef))
+* **translations:** create translations mixin ([8829f8c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8829f8c4d62df820162351e0b9270a7141f2a377))
+* **utils:** create `stripHTMLTags` function ([a6deab8](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a6deab8cd819a0911b7b6c53ead64f2c3a5a9c0b))
+
+
+### Bug Fixes
+
+* **scss:** correct children style in `input-field` ([4da7a2e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4da7a2e2a1897b1481d3b874a9742f0f1a842b75))
+
 ## [0.3.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.2.0...v0.3.0) (2021-02-01)
 
 
