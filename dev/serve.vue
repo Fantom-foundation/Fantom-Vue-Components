@@ -24,7 +24,8 @@
             </f-tabs>
         </section>
 
-        <f-form-playground />
+        <f-form-playground hidden />
+        <translations-playground />
     </main>
 </template>
 
@@ -33,6 +34,7 @@ import Vue from 'vue';
 import FTabs from '@/components/FTabs/FTabs.vue';
 import FTab from '@/components/FTabs/FTab.vue';
 import FFormPlayground from './playground/FForm/FForm.vue';
+import TranslationsPlayground from './playground/Translations/TranslationsPlayground.vue';
 
 // import components from '../src/entry.js';
 // components.install(Vue);
@@ -40,7 +42,7 @@ import FFormPlayground from './playground/FForm/FForm.vue';
 export default Vue.extend({
     name: 'ServeDev',
 
-    components: { FFormPlayground, FTab, FTabs },
+    components: { TranslationsPlayground, FFormPlayground, FTab, FTabs },
 });
 </script>
 
