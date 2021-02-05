@@ -42,12 +42,15 @@ import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconEye from '../icons/IconEye.vue';
 import IconEyeSlash from '../icons/IconEyeSlash.vue';
 import { inputCommonMixin } from '../../mixins/input-common.js';
+import { translationsMixin } from '../../mixins/translations.js';
 
 /**
  * Has the same props as FInput.
  */
 export default {
     components: { IconEyeSlash, IconEye, FSvgIcon, FButton, FInput },
+
+    mixins: [translationsMixin],
 
     props: {
         /** Specifies if component is disabled */
@@ -79,7 +82,9 @@ export default {
         },
 
         buttonTitle() {
-            return this.dType === 'password' ? 'Show password' : 'Hide password';
+            return this.dType === 'password'
+                ? this._('fpasswordfield.showPassword')
+                : this._('fpasswordfield.hidePassword');
         },
 
         /**
