@@ -24,7 +24,10 @@
                     <div class="fwindow_header_controls" @click="onControlsClick">
                         <!-- @slot Default to `close-btn` button -->
                         <slot name="controls">
-                            <button class="close-btn btn btn-samesize btn-round btn-tertiary" title="Close window">
+                            <button
+                                class="close-btn btn btn-samesize btn-round btn-tertiary"
+                                :title="_('fwindow.closeWindow')"
+                            >
                                 <f-svg-icon size="20px"><icon-times /></f-svg-icon>
                             </button>
                         </slot>
@@ -69,6 +72,7 @@ import {
 } from '../../utils/DOM.js';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
+import { translationsMixin } from '../../mixins/translations.js';
 
 /**
  * Basic window following WAI-ARIA practices.
@@ -79,7 +83,7 @@ export default {
 
     components: { IconTimes, FSvgIcon, FOverlay },
 
-    mixins: [helpersMixin],
+    mixins: [helpersMixin, translationsMixin],
 
     props: {
         /** Is window visible on initialization? */
