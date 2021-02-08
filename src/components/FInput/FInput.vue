@@ -135,7 +135,8 @@ export default {
                 'inp-readonly': this.readonly,
                 'inp-disabled': this.disabled,
                 inp: !this.noInputStyle,
-                'inp-cont': !this.noInputStyle,
+                // 'inp-cont': !this.noInputStyle,
+                'inp-cont': true,
                 // 'textarea': this.isTextarea && !this.noInputStyle,
             };
         },
