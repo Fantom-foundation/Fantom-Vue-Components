@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.4.0...v0.5.0) (2021-02-08)
+
+
+### Features
+
+* **f-message:** add support for hiding and animating message ([403053c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/403053cb231bbaa128bda3473f13a36410c912ac))
+* **f-notifications:** create component and stories ([2e0e5d9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/2e0e5d9ac31789644f48add1b365d9de6cb53d21))
+* **notifications:** create Notifications plugin ([e0564ec](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e0564ece6f18b3fbc356b3505081d6d106984a16))
+* **scss:** add new animations ([619c18f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/619c18f0eeba9f5c961bc7b1b5d106eea340db28))
+
 ## [0.4.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.3.0...v0.4.0) (2021-02-05)
 
 
