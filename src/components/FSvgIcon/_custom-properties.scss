@@ -1,5 +1,6 @@
 .fsvgicon {
-    --fsvgicon-width: 24px;
-    --fsvgicon-height: 24px;
+    --fsvgicon-size: 24px;
+    --fsvgicon-width: var(--fsvgicon-size);
+    --fsvgicon-height: var(--fsvgicon-size);
     --fsvgicon-color: inherit;
 }
