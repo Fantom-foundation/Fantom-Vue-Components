@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 const root = new Vue();
 
-class EventBus {
+export class EventBus {
     constructor() {
         this._events = {};
     }
