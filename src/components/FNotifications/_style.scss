@@ -1,0 +1,119 @@
+@use "custom-properties";
+
+.fnotifications {
+    padding: var(--f-spacer-3, 12px);
+    //background: #f00;
+
+    .fmessage {
+        //color: #fff;
+        width: 100%;
+        padding: var(--f-spacer-3, 12px);
+        border-radius: var(--f-border-radius-1, 2px);
+        box-shadow: var(--f-box-shadow-2);
+        background: var(--f-color-grey-1, #fcfcfc);
+        line-height: var(--f-line-height-2, 1.3);
+
+        &_closebtn {
+            --f-btn-color: var(--f-doc-color, #333);
+            --f-btn-hover-color: #fff;
+            --f-btn-main-color: var(--fmessage-main-color);
+            --f-btn-main-color-hover: var(--fmessage-main-color);
+            --f-btn-background: var(--f-color-grey-1, #fcfcfc);
+            box-shadow: var(--f-box-shadow-1);
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translateX(50%) translateY(-50%);
+            opacity: 0;
+            transition: opacity var(--f-transition-length, 220ms) var(--f-transition-func, ease);
+        }
+
+        &:hover {
+            .fmessage_closebtn {
+                opacity: 1;
+            }
+        }
+
+        /*
+        &-success {
+            border-left: 1px solid var(--fmessage-success-color);
+        }
+
+        &-info {
+            border-left: 1px solid var(--f-doc-color);
+        }
+
+        &-warning {
+            border-left: 1px solid var(--fmessage-warning-color);
+        }
+
+        &-error {
+            border-left: 1px solid var(--fmessage-error-color);
+        }
+        */
+
+        /*
+        &-success {
+            background: var(--fmessage-success-color);
+        }
+
+        &-info {
+            background: var(--fmessage-warning-color);
+        }
+
+        &-warning {
+            background: var(--fmessage-warning-color);
+        }
+
+        &-error {
+            background: var(--fmessage-error-color);
+        }
+        */
+
+        + .fmessage {
+            margin-top: var(--f-spacer-1, 3px);
+        }
+    }
+
+    &-fixed {
+        position: fixed;
+        z-index: var(--fnotifications-fixed-z-index);
+        width: 100%;
+        max-width: var(--fnotifications-fixed-width);
+
+        .fmessage {
+            width: 100%;
+        }
+    }
+
+    &-topleft, &-topcenter {
+        top: 0;
+        left: 0;
+    }
+
+    &-topcenter {
+        transform: translateX(-50%);
+        left: 50%;
+    }
+
+    &-topright {
+        top: 0;
+        right: 0;
+    }
+
+    &-bottomleft, &-bottomcenter {
+        bottom: 0;
+        left: 0;
+    }
+
+    &-bottomcenter {
+        transform: translateX(-50%);
+        left: 50%;
+    }
+
+    &-bottomright {
+        bottom: 0;
+        right: 0;
+    }
+}
