@@ -57,7 +57,7 @@
     }
 }
 
-@mixin slide-in($_type: '', $_from: 100%, $_to: 0) {
+@mixin slide-in-x($_type: '', $_from: 100%, $_to: 0) {
     @keyframes slide-in-#{$_type} {
         0% {
             -webkit-transform: translateX($_from);
@@ -72,7 +72,7 @@
     }
 }
 
-@mixin slide-out($_type: '', $_from: 100%, $_to: 0) {
+@mixin slide-out-x($_type: '', $_from: 100%, $_to: 0) {
     @keyframes slide-out-#{$_type} {
         0% {
             -webkit-transform: translateX($_from);
@@ -82,6 +82,36 @@
         100% {
             -webkit-transform: translateX($_to);
             transform: translateX($_to);
+            opacity: 0;
+        }
+    }
+}
+
+@mixin slide-in-y($_type: '', $_from: 100%, $_to: 0) {
+    @keyframes slide-in-#{$_type} {
+        0% {
+            -webkit-transform: translateY($_from);
+            transform: translateY($_from);
+            opacity: 0;
+        }
+        100% {
+            -webkit-transform: translateY($_to);
+            transform: translateY($_to);
+            opacity: 1;
+        }
+    }
+}
+
+@mixin slide-out-y($_type: '', $_from: 100%, $_to: 0) {
+    @keyframes slide-out-#{$_type} {
+        0% {
+            -webkit-transform: translateY($_from);
+            transform: translateY($_from);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateY($_to);
+            transform: translateY($_to);
             opacity: 0;
         }
     }
