@@ -1,31 +1,53 @@
-@import "custom-properties";
+@import 'custom-properties';
 
 .fmessage {
+    --f-transition-length: var(--fmessage-transition-length);
+
+    position: relative;
     display: flex;
     align-items: center;
     align-content: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+
+    color: var(--fmessage-main-color);
 
     &-success {
-        color: var(--f-message-success-color);
+        --fmessage-main-color: var(--fmessage-success-color);
     }
 
     &-info {
-        color: var(--f-message-info-color);
+        --fmessage-main-color: var(--fmessage-info-color);
     }
 
     &-warning {
-        color: var(--f-message-warning-color);
+        --fmessage-main-color: var(--fmessage-warning-color);
     }
 
     &-error {
-        color: var(--f-message-error-color);
+        --fmessage-main-color: var(--fmessage-error-color);
     }
 
     &_body {
         width: 100%;
     }
 
-    &-prefixslot, &-withicon {
+    &_icon {
+        --fsvgicon-size: var(--fmessage-icon-size);
+    }
+
+    &_closebtn {
+        --f-btn-color: var(--fmessage-main-color);
+        --f-btn-main-color: var(--fmessage-main-color);
+        --f-btn-main-color-hover: none;
+        --f-btn-background: none;
+
+        //margin-left: var(--f-spacer-2);
+    }
+
+    &-prefixslot,
+    &-withicon {
         .fmessage_body {
             padding-left: 8px;
         }

@@ -1,6 +1,10 @@
 .fmessage {
-    --f-message-success-color: var(--f-color-green-5, #30a141);
-    --f-message-warning-color: var(--f-color-orange-5, #f59f0a);
-    --f-message-error-color: var(--f-color-red-5, #ca1616);
-    --f-message-info-color: inherit;
+    --fmessage-main-color: inherit;
+
+    --fmessage-success-color: var(--f-color-green-5, #30a141);
+    --fmessage-warning-color: var(--f-color-orange-7, #935f06);
+    --fmessage-error-color: var(--f-color-red-5, #ca1616);
+    --fmessage-info-color: var(--f-doc-color, #333);
+    --fmessage-icon-size: 20px;
+    --fmessage-transition-length: 220ms;
 }
