@@ -80,6 +80,8 @@ export const formInputMixin = {
                 label: this.label,
                 infoText: this.infoText,
                 validationState: this.validationState,
+                errorMsgId: this.errorMsgId,
+                infoTextId: this.infoTextId,
             };
         },
 

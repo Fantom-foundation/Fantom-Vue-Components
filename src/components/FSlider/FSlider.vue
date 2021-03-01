@@ -2,12 +2,13 @@
     <div class="fslider" :class="classes">
         <f-input
             ref="input"
+            v-bind="{ ...$attrs, ...fInputProps }"
             v-model="val"
             type="range"
-            v-bind="fInputProps"
             no-input-style
             preserve-focus
             @input="onInput"
+            @validation-state="onValidationState"
         >
             <template #top="sProps">
                 <slot name="top" v-bind="sProps"></slot>
@@ -32,6 +33,23 @@
                                 </span>
                             </template>
                         </div>
+                    </div>
+
+                    <div
+                        v-if="sProps.validationState.errors.length > 0"
+                        :id="sProps.errorMsgId"
+                        class="ferrormessages fslider_messages"
+                    >
+                        <div
+                            v-for="(msg, idx) in sProps.validationState.errors"
+                            :key="`${sProps.errorMsgId}_${idx}_err`"
+                            class="ferrormessages_message"
+                        >
+                            {{ msg }}
+                        </div>
+                    </div>
+                    <div v-else-if="sProps.infoText" :id="sProps.infoTextId" class="finfotext fslider_messages">
+                        {{ sProps.infoText }}
                     </div>
                 </slot>
             </template>
@@ -100,6 +118,8 @@ export default {
     data() {
         return {
             val: this.value,
+            dDisabled: this.disabled,
+            dInvalid: this.invalid,
         };
     },
 
@@ -114,6 +134,9 @@ export default {
             return {
                 'use-lower-fill-bar': this.useLowerFillBar,
                 'use-upper-fill-bar': this.useUpperFillBar,
+                'fslider-disabled': this.dDisabled,
+                'fslider-invalid': this.dInvalid,
+                'fslider-withlabels': !!this.labels.length,
             };
         },
     },
@@ -152,6 +175,10 @@ export default {
     },
 
     methods: {
+        async validate() {
+            await this.$refs.input.validate();
+        },
+
         /**
          * Update fill bars according to slider value.
          */
@@ -230,6 +257,12 @@ export default {
             this.updateFills(_value);
 
             this.$emit('input', _value);
+        },
+
+        onValidationState(_validationState) {
+            this.dInvalid = _validationState.invalid;
+
+            this.$emit('validation-state', _validationState);
         },
     },
 };

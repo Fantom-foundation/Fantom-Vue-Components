@@ -1,6 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 
 import FSlider from './FSlider.vue';
+import FButton from '@/components/FButton/FButton.vue';
 
 export default {
     title: 'FSlider',
@@ -19,34 +20,22 @@ export const Default = () => ({
     `,
 });
 
-export const Slots = () => ({
+export const Disabled = () => ({
     components: { FSlider },
     template: `
-        <p>
-            <f-slider label="Default">
-                <template #prefix><span>prefix</span></template>
-                <template #suffix>
-                    <span>suffix</span>
-                </template>
-                <template #bottom><span>bottom</span></template>
-            </f-slider>
-        </p>
+        <div>
+            <p><f-slider disabled label="min: 10, max: 20, step: 2, use-lower-fill-bar" min="10" max="20" step="2" use-lower-fill-bar /></p>
+        </div>
     `,
 });
 
-export const Model = () => ({
+export const Invalid = () => ({
     components: { FSlider },
     template: `
-        <p>
-            <input v-model="val" type="number" min="-30" max="30" step="2" />
-            <f-slider label="v-model" min="-30" max="30" step="2" use-lower-fill-bar v-model="val" />
-            <br /><br />
-            value: {{ val }}
-        </p>
+        <div>
+          <p><f-slider invalid label="min: 10, max: 20, step: 2, use-lower-fill-bar" min="10" max="20" step="2" use-lower-fill-bar /></p>
+        </div>
     `,
-    data() {
-        return { val: '-26' };
-    },
 });
 
 export const Labels = () => ({
@@ -67,4 +56,73 @@ export const Labels = () => ({
             val2: '0',
         };
     },
+});
+
+export const Validation = () => ({
+    components: { FSlider, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-slider
+                    ref="fslider"
+                    :validator="validator"
+                    :labels="labels"
+                    min="0"
+                    max="100"
+                    validate-on-change
+                    use-lower-fill-bar
+                    clickable-labels
+                    label="Validation"
+                    name="sldr1"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            labels: ['0%', '50%', '100%'],
+        };
+    },
+    methods: {
+        validator(_value) {
+            return parseInt(_value) < 50 ? 'Value must be greater than 50' : '';
+        },
+        onSubmit(_event) {
+            this.$refs.fslider.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
+export const Model = () => ({
+    components: { FSlider },
+    template: `
+        <p>
+            <input v-model="val" type="number" min="-30" max="30" step="2" />
+            <f-slider label="v-model" min="-30" max="30" step="2" use-lower-fill-bar v-model="val" />
+            <br /><br />
+            value: {{ val }}
+        </p>
+    `,
+    data() {
+        return { val: '-26' };
+    },
+});
+
+export const Slots = () => ({
+    components: { FSlider },
+    template: `
+        <p>
+            <f-slider label="Default">
+                <template #prefix><span>prefix</span></template>
+                <template #suffix>
+                    <span>suffix</span>
+                </template>
+                <template #bottom><span>bottom</span></template>
+            </f-slider>
+        </p>
+    `,
 });
