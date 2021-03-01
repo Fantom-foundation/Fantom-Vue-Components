@@ -34,6 +34,9 @@ export const Default = () => ({
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input
                             type="select"
                             label="select"
@@ -129,6 +132,9 @@ export const Values = () => ({
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input
                             type="select"
                             label="select"
@@ -202,6 +208,7 @@ export const Values = () => ({
                 text: 'text',
                 textarea: 'text',
                 passwordfield: 'pwdpwd',
+                slider: '70',
                 select: '20',
                 dropdownlistbox: '10',
                 checkbox: true,
@@ -239,6 +246,9 @@ export const Model = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
                     </div>
                     <div class="mab-5">
                         <f-form-input
@@ -372,6 +382,17 @@ export const Validation = () => ({
                             validate-on-change
                             label="passwordfield"
                             name="passwordfield"
+                        />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input
+                            type="slider"
+                            :validator="_value => parseInt(_value) < 50 ? 'Value must be greater than 50' : ''"
+                            validate-on-change
+                            use-lower-fill-bar
+                            step="10"
+                            label="slider"
+                            name="slider"
                         />
                     </div>
                     <div class="mab-5">
