@@ -13,6 +13,7 @@
                     :id="labeledById"
                     ref="input"
                     class="inp-nostyle textarea"
+                    :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
                     v-bind="inputProps"
                     :value="inputValue"
                     :aria-invalid="validationState.invalid"
@@ -26,6 +27,7 @@
                     :id="labeledById"
                     ref="input"
                     class="inp-nostyle"
+                    :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
                     v-bind="inputProps"
                     :value="inputValue"
                     :aria-invalid="validationState.invalid"
@@ -103,6 +105,11 @@ export default {
         },
         /** Don't style f-input as input field */
         noInputStyle: {
+            type: Boolean,
+            default: false,
+        },
+        /** Preserve focus when `noInputStyle` is `true` */
+        preserveFocus: {
             type: Boolean,
             default: false,
         },
