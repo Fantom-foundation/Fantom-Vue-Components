@@ -1,0 +1,23 @@
+.fslider {
+    --fslider-value: 10; /* Currect slider value in percentage */
+    --fslider-labels-num: 0; /* Number of labels */
+
+    --fslider-border-radius: 12px;
+
+    --fslider-thumb-width: 24px;
+    --fslider-thumb-height: 24px;
+    --fslider-thumb-background-color: #fff;
+    --fslider-thumb-border-radius: 50%;
+    --fslider-thumb-box-shadow: 0 4px 8px 0 hsla(0,0%,39.2%,.28);
+    --fslider-thumb-hover-background-color: #fff;
+    --fslider-thumb-hover-box-shadow: 0 6px 12px 0 hsla(0,0%,39.2%,.32);
+
+    --fslider-track-color: #e6e6e6;
+    --fslider-track-height: 8px;
+
+    --fslider-fill-bar-background-color: var(--f-color-primary-5, #1a6aff);
+
+    --fslider-label-color: inherit;
+    --fslider-label-font-size: inherit;
+    --fslider-label-font-weight: normal;
+}
