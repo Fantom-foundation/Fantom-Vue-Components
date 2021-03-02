@@ -1,0 +1,40 @@
+@use "custom-properties";
+
+.fpagination {
+    display: inline-block;
+
+    &_body {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 calc(-1 * var(--fpagination-gap)) 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > * {
+            margin: 0 var(--fpagination-gap) 0 0;
+        }
+    }
+
+    &_item {
+        > * {
+            //font-size: 20px;
+        }
+    }
+
+    &_pages {
+        padding: var(--fpagination-pages-padding);
+
+        &_curr {
+            font-weight: bold;
+        }
+    }
+
+    &-disabled {
+        .fpagination {
+            &_pages {
+                opacity: var(--fpagination-disabled-opacity);
+            }
+        }
+    }
+}
