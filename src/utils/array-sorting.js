@@ -10,7 +10,15 @@ import { getNestedProp } from './index.js';
  * @return {number}
  */
 export function stringSort(_a, _b) {
-    return _a - _b;
+    if (_a < _b) {
+        return -1;
+    }
+
+    if (_a > _b) {
+        return 1;
+    }
+
+    return 0;
 }
 
 /**
@@ -34,9 +42,10 @@ export function sortByString(_itemProp, _direction = 'asc') {
 /**
  * @param {string} _itemProp Name of object's property. Can be nested - 'prop1.prop2'
  * @param {'asc'|'desc'} [_direction]
+ * @param {string} [_locale]
  * @return {number}
  */
-export function sortByLocaleString(_itemProp, _direction = 'asc') {
+export function sortByLocaleString(_itemProp, _direction = 'asc', _locale = 'en-GB') {
     return (_a, _b) => {
         const a = getNestedProp(_a, _itemProp);
         const b = getNestedProp(_b, _itemProp);
@@ -45,7 +54,7 @@ export function sortByLocaleString(_itemProp, _direction = 'asc') {
             return 0;
         }
 
-        return (_direction === 'desc' ? -1 : 1) * a.localeCompare(b, 'en-GB');
+        return (_direction === 'desc' ? -1 : 1) * a.localeCompare(b, _locale);
     };
 }
 
