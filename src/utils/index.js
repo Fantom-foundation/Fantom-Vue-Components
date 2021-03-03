@@ -126,6 +126,14 @@ export function isArray(_obj) {
 }
 
 /**
+ * @param {*} _obj
+ * @return {boolean}
+ */
+export function isPromise(_obj) {
+    return typeof _obj === 'object' && typeof _obj.then === 'function';
+}
+
+/**
  *
  * @param {int} _i
  * @param {Array} _ar
