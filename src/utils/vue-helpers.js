@@ -1,3 +1,5 @@
+import { getUniqueId } from './index.js';
+
 /**
  * Find child components by name recursively.
  *
@@ -39,4 +41,19 @@ export function findChildrenByName(_children, _name, _notRecursively, _foundCall
     }
 
     return components;
+}
+
+/**
+ * Generate unique id if there is no 'id' property in object.
+ *
+ * @param {Object[]} _items
+ */
+export function setIds(_items) {
+    if (_items && _items.length) {
+        for (let i = 0, len1 = _items.length; i < len1; i += 1) {
+            if (!('id' in _items[i])) {
+                _items[i].id = getUniqueId();
+            }
+        }
+    }
 }
