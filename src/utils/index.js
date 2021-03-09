@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+import { nanoid } from 'nanoid';
 
 const uppercaseCharsRE = /([A-Z])/;
 const camelSplitRE = /[ _-]+/;
@@ -9,7 +9,7 @@ const stripHTMLRE = /(<([^>]+)>)/gi;
  * @return {string}
  */
 export function getUniqueId() {
-    return `i${shortid.generate()}`;
+    return `i${nanoid(16)}`;
 }
 
 /**
