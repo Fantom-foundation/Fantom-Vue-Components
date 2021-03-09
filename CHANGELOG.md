@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.5.0...v0.6.0) (2021-03-09)
+
+
+### Features
+
+* **breakpoints:** create Breakpoints class and vue mixin ([ca0e8e4](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ca0e8e4a050059f7b28725959f4daf832b11853a))
+* **f-form-input:** add FSlider component ([fbe0d24](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fbe0d247e61541f3d7e9239d0c8aa4920fcb639d))
+* **f-head-style:** create component ([1edfd1b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1edfd1b64c29a12a0148dbd6fb5db2ffb3fd8dd5))
+* **f-input:** add preserveFocus prop ([c14ce3f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c14ce3f0a7e9efcdadbb0eaff711a55bf0e7abad))
+* **f-pagination:** create component ([618f88b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/618f88b2f23de6df91c022c4f488ea3cc1d78432))
+* **f-slider:** add disabled and invalid variants and validations ([2dac350](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/2dac350bc9b170c2e9201c5f73f4bce4c8091450))
+* **f-slider:** create component ([f271adf](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f271adf28a057fb5123bf091ff37fe0fbfe17675))
+* **scss:** add default-focus-ring mixin ([72975ae](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/72975ae44498d6dd827d6c3e89efceda525afe01))
+* **utils:** create isPromise function ([79b32b2](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/79b32b2ccd90adfb16f71e54ca8771bd87c7c8a6))
+* **vue-helpers:** create setIds function ([f6d0d07](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f6d0d07e3038947551d188a6eec2bf643ed4ce21))
+
+
+### Bug Fixes
+
+* **array-sorting:** fix stringSort function ([ca706be](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ca706be0e25e01f1996eb28ef2f870771ebb8cac))
+
 ## [0.5.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.4.0...v0.5.0) (2021-02-08)
 
 
