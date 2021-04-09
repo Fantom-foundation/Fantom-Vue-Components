@@ -64,3 +64,59 @@ export function getComputedStyle(_elem, _style, _toFloat) {
 
     return css;
 }
+
+export function getComputedCustomProperty(_customProperty, _cssProperty) {
+    let elem = document.createElement('div');
+    let value;
+
+    if (_customProperty && _cssProperty) {
+        elem.style[_cssProperty] = `var(${_customProperty})`;
+
+        document.body.append(elem);
+
+        value = window.getComputedStyle(elem)[_cssProperty];
+
+        elem.remove();
+    }
+
+    elem = null;
+
+    return value;
+}
+
+export function getCustomProperty(_customProperty = '', _computedCssProperty = '', _elem = document.documentElement) {
+    let value = _customProperty ? window.getComputedStyle(_elem).getPropertyValue(_customProperty) : '';
+
+    if (_computedCssProperty && value) {
+        value = getComputedCustomProperty(_customProperty, _computedCssProperty);
+    }
+
+    return value;
+}
+
+export function getCustomProperties(
+    _customProperties = [],
+    _computedCssProperty = '',
+    _elem = document.documentElement
+) {
+    const elemStyle = window.getComputedStyle(_elem);
+    const values = [];
+
+    if (elemStyle) {
+        _customProperties.forEach(_customProperty => {
+            let value = elemStyle.getPropertyValue(_customProperty);
+
+            if (_computedCssProperty && value) {
+                value = getComputedCustomProperty(_customProperty, _computedCssProperty);
+            }
+
+            values.push(value);
+        });
+    }
+
+    return values;
+}
+
+export function setCustomProperty(_customProperty = '', _value = '', _elem = document.documentElement) {
+    _elem.style.setProperty(_customProperty, _value);
+}
