@@ -30,6 +30,7 @@ export function detect(_window) {
     let nameOffset;
     let verOffset;
     let ix;
+    let match;
 
     // Opera
     if ((verOffset = nAgt.indexOf('Opera')) !== -1) {
@@ -154,7 +155,8 @@ export function detect(_window) {
 
     if (/Windows/.test(os)) {
         // eslint-disable-next-line prefer-destructuring
-        osVersion = /Windows (.*)/.exec(os)[1];
+        match = /Windows (.*)/.exec(os);
+        osVersion = match ? match[1] : 0;
         os = 'Windows';
     }
 
@@ -162,12 +164,14 @@ export function detect(_window) {
     switch (os) {
         case 'Mac OS X':
             // eslint-disable-next-line prefer-destructuring,no-useless-escape
-            osVersion = /Mac OS X (10[\.\_\d]+)/.exec(nAgt)[1];
+            match = /Mac OS X ([\.\_\d]+)/.exec(nAgt);
+            osVersion = match ? match[1] : 0;
             break;
 
         case 'Android':
             // eslint-disable-next-line prefer-destructuring,no-useless-escape
-            osVersion = /Android ([\.\_\d]+)/.exec(nAgt)[1];
+            match = /Android ([\.\_\d]+)/.exec(nAgt);
+            osVersion = match ? match[1] : 0;
             break;
 
         case 'iOS':
@@ -211,6 +215,11 @@ export function detect(_window) {
 
 export const clientInfo = detect(window);
 
+/**
+ * Get language code by browser (os) locale.
+ *
+ * @returns {string}
+ */
 export function getLanguageCode() {
     const re = /(\w+)-?/;
     const lang = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language;
