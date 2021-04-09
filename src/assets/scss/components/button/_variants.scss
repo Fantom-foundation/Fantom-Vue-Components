@@ -1,0 +1,40 @@
+@use "tools";
+
+@mixin light-button {
+    --f-btn-main-color: var(--f-color-grey-2, #f5f5f5);
+    --f-btn-main-color-hover: var(--f-color-grey-3, #dedede);
+    --f-btn-color: var(--f-color-grey-8, #333333);
+    --f-btn-hover-color: var(--f-color-grey-9, #212121);
+}
+
+@include tools.button() {
+    &-red {
+        --f-btn-main-color: var(--f-color-red-5, #ca1616);
+        --f-btn-main-color-hover: var(--f-color-red-6, #971111);
+    }
+
+    &-green {
+        --f-btn-main-color: var(--f-color-green-7, #1e6629);
+        --f-btn-main-color-hover: var(--f-color-green-8, #164b1e);
+    }
+
+    &-orange {
+        --f-btn-main-color: var(--f-color-orange-7, #935f06);
+        --f-btn-main-color-hover: var(--f-color-orange-8, #624004);
+    }
+
+    &-grey {
+        --f-btn-main-color: var(--f-color-grey-6, #666666);
+        --f-btn-main-color-hover: var(--f-color-grey-7, #4d4d4d);
+    }
+
+    &-light {
+        @include light-button;
+    }
+}
+
+.darktheme {
+    .fbutton {
+        @include light-button;
+    }
+}

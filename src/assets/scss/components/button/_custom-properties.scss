@@ -4,6 +4,9 @@
     --f-btn-main-color: var(--f-color-primary-5, #1a6aff);
     --f-btn-main-color-hover: var(--f-color-primary-6, #0047cc);
 
+    /* gap between buttons */
+    --f-btn-gap: var(--f-spacer-1, 3px);
+
     --f-btn-font-family: inherit;
     --f-btn-font-size: var(--f-font-size-5);
     --f-btn-font-weight: normal;
