@@ -3,7 +3,7 @@
 @include tools.headings() {
     --f-headings-font-family: var(--f-doc-font-family);
     --f-headings-font-weight: initial;
-    --f-headings-color: var(--f-doc-color);
+    --f-headings-color: inherit;
 
     --f-h1-font-family: var(--f-headings-font-family);
     --f-h1-font-size: var(--f-font-size-8);

@@ -17,12 +17,10 @@
         // row gap
         .#{$_bp}gapr#{$_size} {
             --f-row-gap: #{$spacer};
-            --f-column-gap: #{$spacer};
         }
     } @else {
         // column gap
         .#{$_bp}gapc#{$_size} {
-            --f-row-gap: #{$spacer};
             --f-column-gap: #{$spacer};
         }
     }
