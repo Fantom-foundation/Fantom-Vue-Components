@@ -16,6 +16,86 @@
 
 @include _align();
 
+.ali-center {
+    align-items: center;
+}
+
+.ali-start {
+    align-items: start;
+}
+
+.ali-end {
+    align-items: end;
+}
+
+.ali-flex-start {
+    align-items: flex-start;
+}
+
+.ali-flex-end {
+    align-items: flex-end;
+}
+
+.ali-baseline {
+    align-items: baseline;
+}
+
+.juc-center {
+    justify-content: center;
+}
+
+.juc-start {
+    justify-content: start;
+}
+
+.juc-end {
+    justify-content: end;
+}
+
+.juc-flex-start {
+    justify-content: flex-start;
+}
+
+.juc-flex-end {
+    justify-content: flex-end;
+}
+
+.juc-space-around {
+    justify-content: space-around;
+}
+
+.juc-space-evenly {
+    justify-content: space-evenly;
+}
+
+.alc-center {
+    align-content: center;
+}
+
+.alc-start {
+    align-content: start;
+}
+
+.alc-end {
+    align-content: end;
+}
+
+.alc-flex-start {
+    align-content: flex-start;
+}
+
+.alc-flex-end {
+    align-content: flex-end;
+}
+
+.alc-baseline {
+    align-content: baseline;
+}
+
+.alc-space-between {
+    align-content: space-between;
+}
+
 @include breakpointsTools.breakpoints-min() using($shortcut) {
     @include _align($shortcut + '\\:');
 }
