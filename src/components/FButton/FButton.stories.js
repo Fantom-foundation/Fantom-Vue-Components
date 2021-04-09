@@ -70,7 +70,7 @@ export const Variants = () => ({
     components: { FButton, FSvgIcon, IconTimes },
     template: `
         <div>
-            <h3><code>.fbutton-red</code></h3>
+            <h3><code>.btn-red</code></h3>
             <f-button label="Default" class="btn-red" />
             <f-button secondary label="Default" class="btn-red" />
             <f-button tertiary label="Default" class="btn-red" />
