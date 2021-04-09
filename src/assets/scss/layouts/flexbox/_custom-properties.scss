@@ -1,0 +1,6 @@
+@use "../../settings/layouts";
+
+.#{layouts.$flexbox} {
+    --f-column-gap: 0;
+    --f-row-gap: 0;
+}

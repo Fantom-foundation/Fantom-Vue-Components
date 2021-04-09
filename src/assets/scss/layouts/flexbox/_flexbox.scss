@@ -1,0 +1,32 @@
+@use "../../settings/layouts";
+@use "custom-properties";
+
+$flexbox: layouts.$flexbox;
+
+.#{$flexbox} {
+    display: flex;
+    column-gap: var(--f-column-gap);
+    row-gap: var(--f-row-gap);
+}
+
+.#{$flexbox}-inline {
+    display: inline-flex;
+    column-gap: var(--f-column-gap);
+    row-gap: var(--f-row-gap);
+}
+
+.#{$flexbox}-wrap {
+    flex-wrap: wrap;
+}
+
+.#{$flexbox}-nowrap {
+    flex-wrap: nowrap;
+}
+
+.#{$flexbox}-wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+.#{$flexbox}-column {
+    flex-direction: column;
+}
