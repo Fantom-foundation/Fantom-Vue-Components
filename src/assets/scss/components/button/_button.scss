@@ -30,6 +30,10 @@
 
     cursor: pointer;
 
+    + .#{tools.$button} {
+        margin-inline-start: var(--f-btn-gap);
+    }
+
     &-xs {
         font-size: var(--f-btn-xs-font-size);
         min-height: var(--f-btn-xs-min-height);
@@ -53,12 +57,16 @@
     }
 
     &-secondary {
+        --f-btn-hover-background: var(--f-btn-main-color);
+
         color: var(--f-btn-secondary-color);
         border-color: var(--f-btn-secondary-border-color);
         background: var(--f-btn-secondary-background);
     }
 
     &-tertiary {
+        --f-btn-hover-background: var(--f-btn-main-color);
+
         color: var(--f-btn-tertiary-color);
         border-color: var(--f-btn-tertiary-border-color);
         background: var(--f-btn-tertiary-background);

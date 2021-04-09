@@ -18,6 +18,7 @@
     --f-cr-hover-box-shadow: none;
 
     --f-cr-checked-background: var(--f-cr-color);
+    --f-cr-radio-checked-background: var(--f-cr-background);
     --f-cr-checked-border: var(--f-inputs-border) var(--f-cr-color);
     --f-cr-checked-box-shadow: none;
 
@@ -42,6 +43,7 @@
     --f-cr-invalid-box-shadow: none;
     --f-cr-invalid-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-cr-invalid-color-hsl), 0.35);
 
+    /* check element */
     //--f-cr-check-size: 0.61;
     --f-cr-checkbox-check-size: 0.75;
     --f-cr-radio-check-size: 0.65;

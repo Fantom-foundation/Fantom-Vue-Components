@@ -7,7 +7,7 @@ $cr: tools.$cr;
     //position: relative;
     display: inline-block;
     vertical-align: middle;
-    margin-right: var(--f-spacer-3, 12px);
+    margin-inline-end: var(--f-spacer-3, 12px);
 
     &_input {
         position: absolute;
@@ -69,7 +69,7 @@ $cr: tools.$cr;
         font-size: var(--f-font-size-6, 24px);
         width: var(--f-cr-size);
         height: var(--f-cr-size);
-        margin-right: var(--f-spacer-1, 3px);
+        margin-inline-end: var(--f-spacer-1, 3px);
         cursor: pointer;
         transition: all 150ms ease;
         background: var(--f-cr-background);
@@ -92,7 +92,7 @@ $cr: tools.$cr;
 
     &_label {
         color: var(--f-cr-label-color);
-        padding-left: var(--f-spacer-2, 6px);
+        padding-inline-start: var(--f-spacer-2, 6px);
     }
 
     &:hover {
@@ -121,7 +121,7 @@ $cr: tools.$cr;
     &-radio {
         --f-cr-border-radius: 50%;
         --f-cr-check-size: var(--f-cr-radio-check-size);
-        --f-cr-checked-background: none;
+        --f-cr-checked-background: var(--f-cr-radio-checked-background);
 
         & > .#{$cr}_check::before {
             background-repeat: no-repeat;

@@ -8,7 +8,7 @@
     display: inline-block;
     vertical-align: middle;
     font-size: var(--f-input-font-size);
-    //padding-right: 24px;
+    //padding-inline-end: 24px;
 
     /* chevron icon */
     &::after {
@@ -44,7 +44,7 @@
     .#{componentsSettings.$input} {
         padding-top: 0;
         padding-bottom: 0;
-        padding-right: var(--f-sel-padding-right);
+        padding-inline-end: var(--f-sel-padding-inline-end);
 
         appearance: none;
         -moz-appearance: none;
@@ -66,5 +66,15 @@
 
     &-xs {
         --f-sel-icon-size: var(--f-sel-icon-xs-size);
+    }
+}
+
+html[dir="rtl"] {
+    @include tools.select {
+        /* chevron icon */
+        &::after {
+            right: unset;
+            left: var(--f-sel-icon-right-margin);
+        }
     }
 }

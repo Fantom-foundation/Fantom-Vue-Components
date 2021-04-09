@@ -30,6 +30,14 @@
         .#{$_bp}mal#{$_size} {
             margin-left: $spacer;
         }
+
+        .#{$_bp}mais#{$_size} {
+            margin-inline-start: $spacer;
+        }
+
+        .#{$_bp}maie#{$_size} {
+            margin-inline-end: $spacer;
+        }
     } @else {
         // vertical, horizontal
         .#{$_bp}hma#{$_size} {

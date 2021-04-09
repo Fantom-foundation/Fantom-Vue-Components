@@ -32,6 +32,12 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         display: none;
     }
 
+    input::placeholder {
+        color: var(--f-input-placholder-color);
+        opacity: var(--f-input-placholder-opacity);
+    }
+
+
     &-lg {
         --f-input-font-size: var(--f-input-lg-font-size);
         --f-input-font-weight: var(--f-input-lg-font-weight);
@@ -83,8 +89,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 
     &-cont {
         padding: 0;
-        //padding-left: 0;
-        //padding-right: 0;
+        //padding-inline-start: 0;
+        //padding-inline-end: 0;
 
         .#{tools.$inp}-nostyle {
             width: 100%;
@@ -92,26 +98,26 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 
             &:not(:only-child) {
                 &:last-child {
-                    margin-left: 0;
+                    margin-inline-start: 0;
                 }
                 &:first-child {
-                    margin-right: 0;
+                    margin-inline-end: 0;
                 }
                 &:not(:first-child):not(:last-child) {
-                    margin-left: 0;
-                    margin-right: 0;
+                    margin-inline-start: 0;
+                    margin-inline-end: 0;
                 }
             }
         }
 
         > *:not(.#{tools.$inp}-nostyle) {
             &:last-child {
-                margin-left: var(--f-inp-cont-gap-h);
-                margin-right: var(--f-inp-cont-gap-h);
+                margin-inline-start: var(--f-inp-cont-gap-h);
+                margin-inline-end: var(--f-inp-cont-gap-h);
             }
             &:first-child {
-                margin-left: var(--f-inp-cont-gap-h);
-                margin-right: var(--f-inp-cont-gap-h);
+                margin-inline-start: var(--f-inp-cont-gap-h);
+                margin-inline-end: var(--f-inp-cont-gap-h);
             }
         }
     }

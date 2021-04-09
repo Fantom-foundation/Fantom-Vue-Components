@@ -23,6 +23,8 @@
     //--f-input-border: var(--f-inputs-border) #d7dce1;
     --f-input-border-radius: var(--f-border-radius-2, 4px);
     --f-input-box-shadow: none;
+    --f-input-placholder-color: inherit;
+    --f-input-placholder-opacity: 0.5;
 
     --f-input-hover-color: inherit;
     --f-input-hover-background: var(--f-input-background);
@@ -31,7 +33,7 @@
     --f-input-hover-box-shadow: none;
 
     --f-input-focus-color: inherit;
-    --f-input-focus-background: #fff;
+    --f-input-focus-background: var(--f-inputs-background);
     --f-input-focus-border: var(--f-inputs-border) var(--f-color-primary-5, #1a6aff);
     --f-input-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-color-primary-h, 219), var(--f-color-primary-s, 100%), var(--f-color-primary-l, 55%), 0.35);
 
