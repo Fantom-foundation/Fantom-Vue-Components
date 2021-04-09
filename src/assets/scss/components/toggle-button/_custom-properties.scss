@@ -59,6 +59,13 @@
     --f-togglebtn-switch-box-shadow: none;
     --f-togglebtn-switch-border: var(--f-togglebtn-border);
     --f-togglebtn-switch-border-radius: 50%;
+    /* switch content */
+    --f-togglebtn-switch-content-content: "";
+    --f-togglebtn-switch-content-background: none;
+    --f-togglebtn-checked-switch-content-background: none;
+    --f-togglebtn-switch-content-mask-size: 100%;
+    --f-togglebtn-switch-content-mask-image: none;
+    --f-togglebtn-checked-switch-content-mask-image: none;
     /* switch - checked */
     --f-togglebtn-checked-switch-background: var(--f-togglebtn-switch-background);
     --f-togglebtn-checked-switch-box-shadow: none;

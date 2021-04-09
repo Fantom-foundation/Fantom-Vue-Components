@@ -7,7 +7,7 @@ $togglebtn: tools.$togglebtn;
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    margin-right: var(--f-spacer-3);
+    margin-inline-end: var(--f-spacer-3);
 
     &_btn {
         position: relative;
@@ -24,7 +24,7 @@ $togglebtn: tools.$togglebtn;
         cursor: pointer;
 
         /* switch */
-        &::before {
+        &::before, &::after {
             position: absolute;
             z-index: 2;
             content: "";
@@ -38,6 +38,24 @@ $togglebtn: tools.$togglebtn;
             box-shadow: var(--f-togglebtn-switch-box-shadow);
             border: var(--f-togglebtn-switch-border);
             border-radius: var(--f-togglebtn-switch-border-radius);
+        }
+
+        /* switch content */
+        &::after {
+            z-index: 3;
+            text-align: center;
+            content: var(--f-togglebtn-switch-content-content);
+            background: var(--f-togglebtn-switch-content-background);
+            border: none;
+            pointer-events: none;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: 50% 50%;
+            mask-position: 50% 50%;
+            -webkit-mask-size: var(--f-togglebtn-switch-content-mask-size) var(--f-togglebtn-switch-content-mask-size);
+            mask-size: var(--f-togglebtn-switch-content-mask-size) var(--f-togglebtn-switch-content-mask-size);
+            -webkit-mask-image: var(--f-togglebtn-switch-content-mask-image);
+            mask-image: var(--f-togglebtn-switch-content-mask-image);
         }
     }
 
@@ -57,6 +75,14 @@ $togglebtn: tools.$togglebtn;
                 border: var(--f-togglebtn-checked-switch-border);
                 transform: translateX(var(--f-togglebtn-checked-switch-translate-x));
             }
+
+            /* switch content - checked */
+            &::after {
+                background: var(--f-togglebtn-checked-switch-content-background);
+                -webkit-mask-image: var(--f-togglebtn-checked-switch-content-mask-image);
+                mask-image: var(--f-togglebtn-checked-switch-content-mask-image);
+                transform: translateX(var(--f-togglebtn-checked-switch-translate-x));
+            }
         }
 
         &:disabled + .#{$togglebtn}_btn {
@@ -71,6 +97,11 @@ $togglebtn: tools.$togglebtn;
                 background: var(--f-togglebtn-disabled-switch-background);
                 box-shadow: var(--f-togglebtn-disabled-switch-box-shadow);
                 border: var(--f-togglebtn-disabled-switch-border);
+            }
+
+            /* switch content - disabled */
+            &::after {
+                /*color: #eee;*/
             }
 
             & + .#{$togglebtn}_label {
@@ -118,7 +149,7 @@ $togglebtn: tools.$togglebtn;
 
     &_label {
         color: var(--f-togglebtn-label-color);
-        padding-left: var(--f-spacer-2);
+        padding-inline-start: var(--f-spacer-2);
     }
 
     &-invalid {
@@ -149,5 +180,13 @@ $togglebtn: tools.$togglebtn;
     &-xs {
         --f-togglebtn-width: var(--f-togglebtn-xs-width);
         --f-togglebtn-height: var(--f-togglebtn-xs-height);
+    }
+}
+
+html[dir=rtl] {
+    @include tools.togglebtn {
+        &_btn {
+            transform: scale(-1);
+        }
     }
 }
