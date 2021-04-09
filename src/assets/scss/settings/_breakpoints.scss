@@ -6,15 +6,19 @@ $breakpoint-sm: 36em !default;
 $breakpoint-md: 48em !default;
 $breakpoint-lg: 64em !default;
 $breakpoint-xl: 80em !default;
+/* mobile view breakpoint */
+$breakpoint-mw: $breakpoint-lg !default;
 
 $breakpoints-map-min: (
     'sm': $breakpoint-sm,
     'md': $breakpoint-md,
     'lg': $breakpoint-lg,
     'xl': $breakpoint-xl,
+    'mw': $breakpoint-mw,
 ) !default;
 
 $breakpoints-map-max: (
+    'mw': $breakpoint-mw,
     'xl': $breakpoint-xl,
     'lg': $breakpoint-lg,
     'md': $breakpoint-md,
