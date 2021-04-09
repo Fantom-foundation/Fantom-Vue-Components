@@ -18,7 +18,7 @@
                     <div :id="_ids.title" class="fwindow_header_title">
                         <!-- @slot Default to `title` prop -->
                         <slot name="title">
-                            <h2>{{ title }}</h2>
+                            <h1 class="h3">{{ title }}</h1>
                         </slot>
                     </div>
                     <div class="fwindow_header_controls" @click="onControlsClick">
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getLengthAndUnit, getComputedStyle } from '../../utils/css.js';
+import { getLengthAndUnit, getComputedStyle, getCustomProperty, setCustomProperty } from '../../utils/css.js';
 import { getUniqueId, throttle } from '../../utils/index.js';
 import FOverlay from '../FOverlay/FOverlay.vue';
 import { focusTrap, isKey, returnFocus, setReceiveFocusFromAttr } from '../../utils/aria.js';
@@ -149,7 +149,7 @@ export default {
         /** `z-index` of window, if overlay is used, it has `z-index` `zIndex -1`. */
         zIndex: {
             type: Number,
-            default: 10,
+            default: 6,
         },
         /** CSS selector. If window is popover, it will be attached to elemnet given by this selector. */
         attachTo: {
@@ -297,9 +297,19 @@ export default {
         };
         /** `hideAfter` timeout id. */
         this._hideAfterId = -1;
+        /** Value of `--f-zindex-modal-base` custom property */
+        this._modalZIndex = -1;
     },
 
     mounted() {
+        const modalZIndex = parseInt(getCustomProperty('--f-zindex-modal-base', 'zIndex'));
+
+        if (!isNaN(modalZIndex)) {
+            this._modalZIndex = modalZIndex;
+            this.dZIndex = modalZIndex + 1;
+            this._updateStyle({ zIndex: this.dZIndex });
+        }
+
         document.body.appendChild(this.$el);
 
         if (this.hideOnDocumentResize) {
@@ -319,6 +329,8 @@ export default {
 
     beforeDestroy() {
         this._firstLastFocusables = null;
+
+        this.hide();
 
         if (this.hideOnDocumentResize) {
             window.removeEventListener('resize', this._resizeCallback);
@@ -345,6 +357,10 @@ export default {
                 if (parentWindow) {
                     this.dZIndex = parentWindow.dZIndex + 2;
                     this._updateStyle({ zIndex: this.dZIndex });
+                }
+
+                if (this._modalZIndex > -1) {
+                    setCustomProperty('--f-zindex-modal-curr', this.dZIndex);
                 }
 
                 if (_animationIn) {
@@ -374,6 +390,10 @@ export default {
 
         hide(_animationOut, _byOverlay) {
             if (this.isVisible) {
+                if (this._modalZIndex > -1 && this.dZIndex - 1 > this._modalZIndex) {
+                    setCustomProperty('--f-zindex-modal-curr', this.dZIndex - 2);
+                }
+
                 if (!_byOverlay) {
                     if (_animationOut) {
                         this.dAnimationOut = _animationOut;

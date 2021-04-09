@@ -1,0 +1,14 @@
+:root {
+    --f-zindex-base: 0;
+    --f-zindex-above: 2;
+    --f-zindex-below: -1;
+
+    /* sticky containers - headers, ... */
+    --f-zindex-sticky: calc(var(--f-zindex-above) + var(--f-zindex-base));
+    /* fixed containers - header, hamburger switch, ... */
+    --f-zindex-fixed: calc(var(--f-zindex-above) + var(--f-zindex-sticky));
+    /* base z-index for windows - modals, popovers, ... */
+    --f-zindex-modal-base: calc(var(--f-zindex-above) + var(--f-zindex-fixed));
+    /* this value will be changed dynamically in f-window component (modal, popover) because of overlay and windows drilldown */
+    --f-zindex-modal-curr: calc(var(--f-zindex-above) + var(--f-zindex-modal-base));
+}

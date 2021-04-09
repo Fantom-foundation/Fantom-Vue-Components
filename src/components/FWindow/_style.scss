@@ -32,6 +32,10 @@
         //width: 100%;
         height: 100%;
         overflow: auto;
+
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
     }
 
     &_header {
@@ -43,20 +47,22 @@
 
         &_title {
             width: 100%;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            padding-right: 1rem;
+            //padding-right: 1rem;
             outline: none;
+            min-width: 0;
 
             h1,
             h2,
             h3,
             h4,
             h5 {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
                 margin: 0;
-                text-align: center;
-                padding-left: 36px;
+                padding-inline-end: var(--f-spacer-1, 3px);
+                //text-align: center;
+                //padding-left: 36px;
             }
         }
 
@@ -104,6 +110,10 @@
     }
 
     &-popover {
+        &-light {
+            --fwindow-popover-background: #fff;
+        }
+
         font-size: var(--fwindow-popover-font-size);
         color: var(--fwindow-popover-color);
         background: var(--fwindow-popover-background);
