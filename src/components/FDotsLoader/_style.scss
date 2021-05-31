@@ -1,0 +1,38 @@
+@use "custom-properties";
+
+@keyframes fdotsloader_anim {
+    0%, 80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    45% {
+        opacity: 0.5;
+        transform: scale(0.2);
+    }
+}
+
+.fdotsloader {
+    display: inline-flex;
+
+    > span {
+        display: block;
+        width: var(--fdotsloader-size);
+        height: var(--fdotsloader-size);
+        background: var(--fdotsloader-background);
+        border-radius: var(--fdotsloader-border-radius);
+        margin-right: var(--fdotsloader-gap);
+        //opacity: 0;
+
+        animation: fdotsloader_anim var(--fdotsloader-anim-duration) infinite ease-in-out;
+        //animation-delay: calc(var(--fdotsloader-anim-duration) * 0.2);
+
+        &:nth-child(2) {
+            animation-delay: calc(var(--fdotsloader-anim-duration) * 0.2);
+        }
+
+        &:last-child {
+            margin-right: 0;
+            animation-delay: calc(var(--fdotsloader-anim-duration) * 0.4);
+        }
+    }
+}

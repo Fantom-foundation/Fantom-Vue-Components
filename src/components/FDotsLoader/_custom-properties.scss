@@ -1,0 +1,7 @@
+.fdotsloader {
+    --fdotsloader-size: var(--f-spacer-3, 12px);
+    --fdotsloader-background: var(--f-color-primary-5, #1a6aff);
+    --fdotsloader-border-radius: 50%;
+    --fdotsloader-gap: calc(var(--fdotsloader-size) * 0.2);
+    --fdotsloader-anim-duration: 0.7s;
+}
