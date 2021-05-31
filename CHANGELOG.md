@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.6.0...v0.7.0) (2021-05-31)
+
+
+### Features
+
+* update f-form and f-form-input components ([714eaba](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/714eaba80706e8bc5721aa5dc674c006570fc182))
+* **f-button, scss:** add color variants ([537a4f6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/537a4f6cc21d73684983eecf4755e8c0e09edbdd))
+* **f-combo-box:** create component ([c590c4c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c590c4c98d6c9012841ed6fa335edd59141c84d9))
+* **f-dots-loader:** create component ([a4fd6c4](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a4fd6c4812d0348944cfdace3fcb1979f51a63c5))
+* **f-intersection-observer:** create component ([a362714](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a362714fae76f68509970ddca6b87cecadb3e854))
+* **f-search-field:** create component ([ca2be99](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ca2be996e4922e49b2d9802f31c1e8c4fa07d0cd))
+* **f-toggle-button:** create component ([e04a3e9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e04a3e9a5d138482dee5e5e51f02e2151bf15af2))
+* **f-window:** add new options ([d8dab46](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d8dab46fe0afbd6fe75d5fc289e79a7a256f5786))
+* update and add new locales ([0ea849d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0ea849d3831ee6bde06946464d8da028f7b829e8))
+* update components ([f124871](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f124871fcff7b6ba6de0676e691796bd53be69ea))
+* **mixins:** update and add new mixins ([7e31e69](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7e31e690f1c07eb21c71b6b6d7fbfb7ea49e15e8))
+* **scss:** add flexbox layout utils ([a7d6ecb](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a7d6ecb3ef811937639de639dfaaf77336582516))
+* **scss:** add mobile view breakpoint ([0d532b1](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0d532b16111476141de1bc129a9f3e73d7f481be))
+* **scss:** add more align utils ([c03bccf](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c03bccfc58fef2077ba325e05493a4415d766064))
+* **scss:** add support for rtl direction ([b09591d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b09591d803e68e5ce558d0fb8012817cd2c7e0dd))
+* **scss:** add toggle-button variants ([1aba04e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1aba04eb755a9c6ca59c8e4a1a839f935ae6f4ff))
+* **scss:** update styles ([dd4cf00](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/dd4cf00366dfc40cc450445554e051c677aa5688))
+* **utils:** add functions for handling custom properties ([34e20d6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/34e20d6b8587b5ca465ce77523e0e7abe4210690))
+* **utils:** create array utils ([19d4d58](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/19d4d587370cf74c2a6804d7710874136c543bff))
+* **utils:** update and add new utilities ([a2802ef](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a2802eff3b5ce5c6884b70dc30b788758b9e17f5))
+* add better handling of z-index ([34a25a9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/34a25a98729df0b832e3a5d9b006748cc000b00b))
+* add new icons ([8d15d25](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8d15d251fa79116be9fa05c364320cfd17ff731a))
+* **utils:** create simple tree utils ([e622454](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e6224547296ef3950f073cd23708540077b68284))
+
 ## [0.6.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.5.0...v0.6.0) (2021-03-09)
 
 
