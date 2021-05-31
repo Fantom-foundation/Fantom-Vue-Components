@@ -1,56 +1,54 @@
 <template>
-    <div class="fforminput">
-        <div class="fforminput_input">
-            <f-input
-                v-if="_fInputTypes.includes(type)"
-                ref="input"
-                :is-textarea="type === 'textarea'"
-                v-bind="{ ...$attrs, ...inputProps }"
-                :type="type"
-                :name="name"
-                v-model="inputValue"
-                @validation-state="onValidationState"
-            >
-                <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-                    <slot :name="name" v-bind="data"></slot>
-                </template>
-            </f-input>
-            <template v-else-if="type === 'checkbox' || type === 'radio'">
-                <f-option
-                    ref="input"
-                    :type="type"
-                    v-bind="{ ...$attrs, ...inputProps }"
-                    :name="name"
-                    v-model="inputValue"
-                />
+    <div class="fforminput" :class="`fforminput_${type}`">
+        <f-input
+            v-if="_fInputTypes.includes(type)"
+            ref="input"
+            :is-textarea="type === 'textarea'"
+            v-bind="{ ...$attrs, ...inputProps }"
+            :type="type"
+            :name="name"
+            v-model="inputValue"
+            @validation-state="onValidationState"
+        >
+            <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+                <slot :name="name" v-bind="data"></slot>
             </template>
-            <f-option-group
-                v-else-if="type === 'checkboxgroup' || type === 'radiogroup'"
+        </f-input>
+        <template v-else-if="type === 'checkbox' || type === 'radio'">
+            <f-option
                 ref="input"
-                :type="type === 'checkboxgroup' ? 'checkbox' : 'radio'"
+                :type="type"
                 v-bind="{ ...$attrs, ...inputProps }"
                 :name="name"
                 v-model="inputValue"
-                @validation-state="onValidationState"
-            >
-                <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-                    <slot :name="name" v-bind="data"></slot>
-                </template>
-            </f-option-group>
-            <component
-                v-else
-                :is="getComponentName(type)"
-                ref="input"
-                v-bind="{ ...$attrs, ...inputProps }"
-                :name="name"
-                v-model="inputValue"
-                @validation-state="onValidationState"
-            >
-                <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-                    <slot :name="name" v-bind="data"></slot>
-                </template>
-            </component>
-        </div>
+            />
+        </template>
+        <f-option-group
+            v-else-if="type === 'checkboxgroup' || type === 'radiogroup'"
+            ref="input"
+            :type="type === 'checkboxgroup' ? 'checkbox' : 'radio'"
+            v-bind="{ ...$attrs, ...inputProps }"
+            :name="name"
+            v-model="inputValue"
+            @validation-state="onValidationState"
+        >
+            <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+                <slot :name="name" v-bind="data"></slot>
+            </template>
+        </f-option-group>
+        <component
+            v-else
+            :is="getComponentName(type)"
+            ref="input"
+            v-bind="{ ...$attrs, ...inputProps }"
+            :name="name"
+            v-model="inputValue"
+            @validation-state="onValidationState"
+        >
+            <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+                <slot :name="name" v-bind="data"></slot>
+            </template>
+        </component>
     </div>
 </template>
 
@@ -64,8 +62,10 @@ import FListbox from '../FListbox/FListbox.vue';
 import FOptionGroup from '../FOptionGroup/FOptionGroup.vue';
 import FPasswordField from '../FPasswordField/FPasswordField.vue';
 import FSlider from '../FSlider/FSlider.vue';
+import FToggleButton from '../FToggleButton/FToggleButton.vue';
+import FComboBox from '../FComboBox/FComboBox.vue';
 
-const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'time'];
+const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'datetime-local', 'time'];
 const types = [
     ...fInputTypes,
     'select',
@@ -77,6 +77,8 @@ const types = [
     'listbox',
     'passwordfield',
     'slider',
+    'toggle',
+    'combobox',
 ];
 
 /**
@@ -85,28 +87,39 @@ const types = [
 export default {
     name: 'FFormInput',
 
-    components: { FSlider, FOptionGroup, FListbox, FSelect, FDropdownListbox, FInput, FOption, FPasswordField },
+    components: {
+        FSlider,
+        FOptionGroup,
+        FListbox,
+        FSelect,
+        FDropdownListbox,
+        FInput,
+        FOption,
+        FPasswordField,
+        FToggleButton,
+        FComboBox,
+    },
 
     model: {
         prop: 'modelValue',
         event: 'input',
     },
 
-    // inheritAttrs: false,
+    inheritAttrs: false,
 
     inject: ['elements', 'elementStates', 'lastChangedElement'],
 
     props: {
         /**
-         * Type of input
+         * Type of input. Can also be a name of a global component.
          *
-         * @type {('text' | 'textarea' | 'number' | 'email' | 'date' | 'time' | 'select' | 'dropdownlistbox' | 'checkbox' | 'checkboxgroup' | 'radio' | 'radiogroup' | 'listbox' | 'passwordfield' | 'slider')}
+         * @type {('text' | 'textarea' | 'number' | 'email' | 'date' | 'time' | 'select' | 'dropdownlistbox' | 'checkbox' | 'checkboxgroup' | 'radio' | 'radiogroup' | 'listbox' | 'passwordfield' | 'slider' | 'toggle')}
          */
         type: {
             type: String,
             default: 'text',
             validator: function(_value) {
-                return types.indexOf(_value) !== -1;
+                return types.indexOf(_value) !== -1 || !!_value;
             },
         },
         name: {
@@ -134,10 +147,12 @@ export default {
 
     watch: {
         inputValue(_value, _oldValue) {
+            this._firstChange = false;
+
             this._oldInputValue = clone(_oldValue);
             this.$emit('input', _value);
-            if (this.name) {
-                this.elements[this.name] = _value;
+            if (this.name && this.elements.elements) {
+                this.elements.elements[this.name] = _value;
             }
         },
 
@@ -145,12 +160,18 @@ export default {
             this.inputValue = _value;
         },
 
-        elements: {
+        'elements.reset': function(_value) {
+            if (_value && this.name) {
+                this._setElementValue();
+            }
+        },
+
+        'elements.elements': {
             handler(_value) {
                 const { name } = this;
                 const { lastChangedElement } = this;
 
-                if (_value && name in _value) {
+                if (_value && name && name in _value) {
                     if (JSON.stringify(_value[name]) !== JSON.stringify(this._oldInputValue)) {
                         if (!this._firstChange) {
                             lastChangedElement.name = name;
@@ -181,14 +202,14 @@ export default {
         this._firstChange = true;
 
         if (this.name) {
-            this.$set(this.elements, this.name, this.modelValue || this.getInitialValue());
+            this._setElementValue();
             this.$set(this.elementStates, this.name, {});
         }
     },
 
     beforeDestroy() {
         if (this.name) {
-            this.$delete(this.elements, this.name);
+            this.$delete(this.elements.elements, this.name);
         }
     },
 
@@ -212,6 +233,8 @@ export default {
             switch (_type) {
                 case 'select':
                     return 'f-select';
+                case 'combobox':
+                    return 'f-combo-box';
                 case 'dropdownlistbox':
                     return 'f-dropdown-listbox';
                 case 'listbox':
@@ -229,9 +252,11 @@ export default {
                     return 'f-password-field';
                 case 'slider':
                     return 'f-slider';
+                case 'toggle':
+                    return 'f-toggle-button';
             }
 
-            return '';
+            return _type;
         },
 
         getValidationState() {
@@ -254,7 +279,7 @@ export default {
         },
 
         getInitialValue() {
-            return this.name in this.elements ? this.elements[this.name] : this.getEmptyValue();
+            return this.name in this.elements.elements ? this.elements.elements[this.name] : this.getEmptyValue();
         },
 
         _updateValidationState(_data) {
@@ -262,6 +287,22 @@ export default {
                 ...(this.elementStates[this.name] || {}),
                 ..._data,
             };
+        },
+
+        _setElementValue() {
+            let value = this.modelValue;
+
+            if (value === undefined) {
+                value = this.getInitialValue();
+            }
+
+            if (!value && value !== null) {
+                value = this.inputValue;
+            }
+
+            // this.$set(this.elements.elements, this.name, this.modelValue || this.getInitialValue());
+            // this.$set(this.elements.elements, this.name, this.modelValue || this.getInitialValue() || this.inputValue);
+            this.$set(this.elements.elements, this.name, value);
         },
 
         onValidationState(_data) {

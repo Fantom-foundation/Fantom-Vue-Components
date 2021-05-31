@@ -34,7 +34,7 @@ export const Default = () => ({
             <div class="mab-5">
                 <f-form-input
                     type="select"
-                    label="select"
+                    label="select"checkbox
                     name="select"
                     :data="[
                         { label: '---', value: '' },
@@ -77,6 +77,9 @@ export const Default = () => ({
                     column
                     :data="{ '10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3' }"
                 />
+            </div>
+            <div class="mab-5">
+                <f-form-input type="toggle" label="toggle" name="toggle" />
             </div>
             <div class="mab-5">
                 <f-form-input

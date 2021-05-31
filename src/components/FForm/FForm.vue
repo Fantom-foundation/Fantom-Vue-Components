@@ -6,7 +6,7 @@
 
 <script>
 import { eventBusMixin } from '../../mixins/event-bus.js';
-import { cloneObject } from '../../utils/index.js';
+import { cloneObject, objectEquals } from '../../utils/index.js';
 import { findChildrenByName } from '../../utils/vue-helpers.js';
 
 /**
@@ -21,16 +21,6 @@ export default {
     },
 
     props: {
-        /** Submit form when an element is changed */
-        submitOnChange: {
-            type: Boolean,
-            default: false,
-        },
-        /** Call preventDefault() on form submit event */
-        cancelSubmit: {
-            type: Boolean,
-            default: true,
-        },
         /**
          * Text used before error list on form submit, if any form element error exist.
          * Text is invisible and read by screen readers.
@@ -52,11 +42,32 @@ export default {
                 return null;
             },
         },
+        /** Submit form when an element is changed */
+        submitOnChange: {
+            type: Boolean,
+            default: false,
+        },
+        /** Call preventDefault() on form submit event */
+        cancelSubmit: {
+            type: Boolean,
+            default: true,
+        },
+        /** Method `isChanged` returns always `false` */
+        noChangeCheck: {
+            type: Boolean,
+            default: false,
+        },
+        /** Submit form only if form has been changed */
+        submitIfChanged: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     provide() {
         return {
             elements: this.elements,
+            // elements: this.elements,
             elementStates: this.elementStates,
             lastChangedElement: this.lastChangedElement,
         };
@@ -64,7 +75,11 @@ export default {
 
     data() {
         return {
-            elements: this.formValues || { ...this.values },
+            // elements: this.formValues || { ...this.values },
+            elements: {
+                elements: this.formValues || { ...this.values },
+                reset: false,
+            },
             elementStates: {},
             errorMessages: [],
             pendingValidation: false,
@@ -104,6 +119,27 @@ export default {
             },
             deep: true,
         },
+
+        formValues(_value, _oldValue) {
+            if (_value === _oldValue) {
+                return;
+            }
+
+            if (_value) {
+                this.elements.reset = false;
+
+                this.$nextTick(() => {
+                    this.elements.reset = true;
+                    this.elements.elements = _value;
+
+                    this.$nextTick(() => {
+                        this.refreshInitValues();
+                    });
+                });
+            } else {
+                this.refreshInitValues();
+            }
+        },
     },
 
     created() {
@@ -112,21 +148,33 @@ export default {
     },
 
     mounted() {
-        this._initValues = cloneObject(this.elements);
-        // this.getFFormInputs();
+        this.$nextTick(() => {
+            this.refreshInitValues();
+        });
     },
 
     methods: {
         /**
          * Submit form.
          */
-        submit(_buttonSelector) {
-            const buttonSelector = _buttonSelector || '[type="submit"]';
-            const eSubmitBtn = this.$refs.form.querySelector(buttonSelector);
+        submit() {
+            let eSubmitBtn = this.$refs.form.querySelector('[type="submit"]');
 
-            if (eSubmitBtn) {
-                eSubmitBtn.click();
+            if (!eSubmitBtn) {
+                eSubmitBtn = this.createSubmitButton();
+                this.$refs.form.appendChild(eSubmitBtn);
             }
+
+            eSubmitBtn.click();
+        },
+
+        createSubmitButton() {
+            const elem = document.createElement('button');
+
+            elem.type = 'submit';
+            elem.style.display = 'none';
+
+            return elem;
         },
 
         /**
@@ -222,8 +270,29 @@ export default {
             }
         },
 
+        isChanged() {
+            // return this.noChangeCheck ? false : !objectEquals(this._initValues, this.elements);
+            return this.noChangeCheck ? false : !objectEquals(this._initValues, this.elements.elements);
+        },
+
+        getElements() {
+            return cloneObject(this.elements.elements);
+        },
+
+        getLastChangedElement() {
+            return cloneObject(this.lastChangedElement);
+        },
+
+        refreshInitValues() {
+            this._initValues = this.getElements();
+        },
+
         onElementChange(_value) {
             this.$emit('element-change', cloneObject(_value));
+
+            if (this.submitOnChange) {
+                this.submit();
+            }
         },
 
         /**
@@ -236,15 +305,22 @@ export default {
                 _event.preventDefault();
             }
 
+            if (this.submitIfChanged && !this.isChanged()) {
+                return;
+            }
+
             try {
                 const valid = await this.checkValidity();
 
                 if (valid) {
-                    this.$emit('submit', {
-                        values: cloneObject(this.elements),
-                        lastChangedElem: cloneObject(this.lastChangedElement),
+                    const payload = {
+                        values: this.getElements(),
+                        lastChangedElem: this.getLastChangedElement(),
                         event: _event,
-                    });
+                        form: this,
+                    };
+
+                    this.$emit('submit', payload);
                 } else {
                     _event.preventDefault();
                 }

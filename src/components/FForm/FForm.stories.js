@@ -16,7 +16,7 @@ export default {
 export const Default = () => ({
     components: { FForm, FFormInput, FButton },
     template: `
-        <f-form class="grid" @submit="_data => { data = {..._data, event: undefined} }">
+        <f-form class="grid" @submit="onSubmit">
             <fieldset class="col-6">
                 <legend>Default form</legend>
                 <div>
@@ -32,6 +32,14 @@ export const Default = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
+                            { label: '---', value: '' },
+                            { label: 'Option 1', value: '10' },
+                            { label: 'Option 2', value: '20' },
+                            { label: 'Option 3', value: '30' },
+                        ]" />
                     </div>
                     <div class="mab-5">
                         <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
@@ -109,6 +117,11 @@ export const Default = () => ({
             data: {},
         };
     },
+    methods: {
+        onSubmit(_data) {
+            this.data = { ..._data, event: undefined, form: undefined };
+        },
+    },
 });
 
 export const Values = () => ({
@@ -130,6 +143,14 @@ export const Values = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
+                            { label: '---', value: '' },
+                            { label: 'Option 1', value: '10' },
+                            { label: 'Option 2', value: '20' },
+                            { label: 'Option 3', value: '30' },
+                        ]" />
                     </div>
                     <div class="mab-5">
                         <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
@@ -210,6 +231,7 @@ export const Values = () => ({
                 passwordfield: 'pwdpwd',
                 slider: '70',
                 select: '20',
+                combobox: '20',
                 dropdownlistbox: '10',
                 checkbox: true,
                 checkboxgroup: ['10', '20'],
@@ -222,7 +244,7 @@ export const Values = () => ({
     },
     methods: {
         onSubmit(_data) {
-            this.data = { ..._data, event: undefined };
+            this.data = { ..._data, event: undefined, form: undefined };
         },
     },
 });
@@ -238,7 +260,8 @@ export const Model = () => ({
                         <f-form-input type="text" label="text" name="text" />
                         <f-form-input type="email" label="email" name="email" />
                         <f-form-input type="number" label="number" name="number" />
-                        <f-form-input type="date" label="date" name="date" />
+                        <f-form-input type="date" label="date" name="date" :in-formatter="inDateFormatter" :out-formatter="outDateFormatter" />
+                        <f-form-input type="datetime-local" label="datetime" name="datetime" :in-formatter="inDatetimeFormatter" :out-formatter="outDatetimeFormatter" />
                         <f-form-input type="time" label="time" name="time" />
                     </div>
                     <div class="mab-5">
@@ -246,6 +269,14 @@ export const Model = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
+                            { label: '---', value: '' },
+                            { label: 'Option 1', value: '10' },
+                            { label: 'Option 2', value: '20' },
+                            { label: 'Option 3', value: '30' },
+                        ]" />
                     </div>
                     <div class="mab-5">
                         <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
@@ -331,13 +362,40 @@ On submit:
                 radio: '10',
                 radiogroup: '30',
                 listbox: '10',
+                date: '2002-09-02T15:00:00Z',
+                datetime: '2002-09-02T15:00:00Z',
+                // date: '2002-10-02',
             },
             data: {},
         };
     },
     methods: {
         onSubmit(_data) {
-            this.data = { ..._data, event: undefined };
+            this.data = { ..._data, event: undefined, form: undefined };
+        },
+
+        inDateFormatter(_value) {
+            const date = new Date(_value);
+
+            return !isNaN(date) ? _value.split(/[Tt]/)[0] : _value;
+        },
+
+        outDateFormatter(_value) {
+            const date = new Date(_value);
+
+            return !isNaN(date) ? `${_value}T00:00:00Z` : _value;
+        },
+
+        inDatetimeFormatter(_value) {
+            const date = new Date(_value);
+
+            return !isNaN(date) ? _value.replace(/[Zz]/, '') : _value;
+        },
+
+        outDatetimeFormatter(_value) {
+            const date = new Date(_value);
+
+            return !isNaN(date) ? `${_value}:00Z` : _value;
         },
     },
 });
@@ -382,6 +440,21 @@ export const Validation = () => ({
                             validate-on-change
                             label="passwordfield"
                             name="passwordfield"
+                        />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input
+                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            type="combobox"
+                            select-mode
+                            label="combobox"
+                            name="combobox"
+                            :data="[
+                                { label: '---', value: '' },
+                                { label: 'Option 1', value: '10' },
+                                { label: 'Option 2', value: '20' },
+                                { label: 'Option 3', value: '30' },
+                            ]"
                         />
                     </div>
                     <div class="mab-5">
@@ -511,7 +584,7 @@ lastChangedElement
         },
 
         onSubmit(_data) {
-            this.data = { ..._data, event: undefined };
+            this.data = { ..._data, event: undefined, form: undefined };
         },
     },
 });

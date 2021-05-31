@@ -1,22 +1,3 @@
 .fforminput {
     display: inline-block;
-
-    &_label {
-        display: inline-block;
-        //padding-bottom: var(--f-spacer-1);
-    }
-
-    &_input {
-        display: flex;
-    }
-
-    &-column {
-        .fforminput_input {
-            flex-direction: column;
-
-            > *:not(:last-child) {
-                margin-bottom: var(--f-spacer-2);
-            }
-        }
-    }
 }
