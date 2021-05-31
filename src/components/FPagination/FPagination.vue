@@ -19,7 +19,7 @@
                     }"
                 >
                     <f-button
-                        secondary
+                        tertiary
                         round
                         :label="firstLabel"
                         :disabled="disablePrevBtns || disabled"
@@ -38,7 +38,7 @@
                     }"
                 >
                     <f-button
-                        secondary
+                        tertiary
                         round
                         :label="prevLabel"
                         :disabled="disablePrevBtns || disabled"
@@ -75,7 +75,7 @@
                     }"
                 >
                     <f-button
-                        secondary
+                        tertiary
                         round
                         :label="nextLabel"
                         :disabled="disableNextBtns || disabled"
@@ -93,13 +93,9 @@
                         type: 'last',
                     }"
                 >
-                    <f-button
-                        secondary
-                        round
-                        :label="lastLabel"
-                        :disabled="disableNextBtns || disabled"
-                        :title="_('fpagination.lastPage')"
-                    />
+                    <f-button tertiary round :disabled="disableNextBtns || disabled" :title="_('fpagination.lastPage')"
+                        ><slot name="btn-last">{{ lastLabel }}</slot></f-button
+                    >
                 </slot>
             </li>
         </ul>
@@ -203,6 +199,8 @@ export default {
         return {
             /** Current page index. */
             dCurrPage: this.currPage,
+            /** Previous page index. */
+            prevPage: -1,
         };
     },
 
@@ -211,10 +209,15 @@ export default {
          * @return {FPaginationState}
          */
         state() {
+            this.updateCurrPage(this.dCurrPage);
+
             return {
                 totalItems: this.totalItems,
                 perPage: this.perPage,
                 currPage: this.dCurrPage,
+                prevPage: this.prevPage,
+                isFirstPage: this.dCurrPage === 1,
+                isLastPage: this.dCurrPage === this.numPages,
                 numPages: this.numPages,
                 itemsIndices: this.itemsIndices,
             };
@@ -239,7 +242,7 @@ export default {
 
             return {
                 from: (this.dCurrPage - 1) * this.perPage,
-                to: to > this.totalItems ? this.totalItems - 1 : to,
+                to: to >= this.totalItems ? this.totalItems - 1 : to,
             };
         },
 
@@ -275,6 +278,7 @@ export default {
                     value = this.numPages;
                 }
 
+                this.prevPage = this.dCurrPage;
                 this.dCurrPage = value;
                 this.goToPage(this.dCurrPage);
             },
@@ -291,7 +295,8 @@ export default {
                 return;
             }
 
-            this.dCurrPage = Math.min(Math.max(_pageNum, 1), this.numPages);
+            this.prevPage = this.dCurrPage;
+            this.updateCurrPage(_pageNum);
 
             /**
              * Triggers when the page changes
@@ -305,6 +310,10 @@ export default {
              * @property {number} currPage
              */
             this.$emit('change', this.dCurrPage);
+        },
+
+        updateCurrPage(_pageNum) {
+            this.dCurrPage = Math.min(Math.max(_pageNum, 1), this.numPages);
         },
 
         /**

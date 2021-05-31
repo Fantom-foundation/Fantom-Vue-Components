@@ -63,11 +63,20 @@ export default {
 
         hide(_hiddenByClick = false) {
             if (this.isVisible) {
-                this.isVisible = false;
+                const payload = {
+                    preventDefault: false,
+                    hiddenByClick: _hiddenByClick,
+                };
 
-                this.$nextTick(() => {
-                    this.$emit('overlay-hide', _hiddenByClick);
-                });
+                this.$emit('before-overlay-hide', payload);
+
+                if (!payload.preventDefault) {
+                    this.isVisible = false;
+
+                    this.$nextTick(() => {
+                        this.$emit('overlay-hide', _hiddenByClick);
+                    });
+                }
             }
         },
 

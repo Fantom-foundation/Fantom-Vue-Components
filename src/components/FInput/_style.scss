@@ -6,6 +6,10 @@
     display: inline-block;
     vertical-align: middle;
 
+    + .finput {
+        margin-left: var(--f-spacer-1);
+    }
+
     &_inputcont {
         display: flex;
         align-items: center;

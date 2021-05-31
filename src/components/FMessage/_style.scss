@@ -49,13 +49,13 @@
     &-prefixslot,
     &-withicon {
         .fmessage_body {
-            padding-left: 8px;
+            padding-inline-start: var(--f-spacer-3, 8px);
         }
     }
 
     &-suffixslot {
         .fmessage_body {
-            padding-right: 8px;
+            padding-inline-end: var(--f-spacer-3, 8px);
         }
     }
 }

@@ -22,6 +22,11 @@ for (let i = 1; i < 200; i++) {
     });
 }
 
+const data3 = [
+    { label: 'item 1', value: '10' },
+    { label: 'item 2 Looooooooooooooooong', id: 'myid', value: '20' },
+];
+
 export default {
     title: 'FDropdownListbox',
     component: FDropdownListbox,
@@ -57,11 +62,13 @@ export const SelectedItem = () => ({
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             <f-dropdown-listbox :data="data" />
+            <button @click="data = [...newData]">new data</button>
         </div>
     `,
     data() {
         return {
             data: data.map((_item, _idx) => (_idx === 3 ? { ..._item, selected: true } : _item)),
+            newData: [...data3],
         };
     },
     methods: {},
@@ -131,6 +138,44 @@ export const DisabledItems = () => ({
             data: data.map((_item, _idx) =>
                 _idx === 0 || _idx === 3 || _idx === 4 ? { ..._item, disabled: true } : _item
             ),
+        };
+    },
+    methods: {},
+});
+
+export const SelectOnMainAction = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Select an item only by pressing the 'Enter' key or by clicking on the item.
+            <f-dropdown-listbox select-on-main-action :data="data" />
+            <br />
+            Selected: {{ selectedItem }}
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            selectedItem: '',
+        };
+    },
+    methods: {},
+});
+
+export const VariableWidth = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
+            Width of the component will not be automatically adjusted according to the longest item.
+            <f-dropdown-listbox variable-width :data="data" />
+            <br />
+            Selected: {{ selectedItem }}
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            selectedItem: '',
         };
     },
     methods: {},

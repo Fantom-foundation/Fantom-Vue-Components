@@ -10,17 +10,13 @@
             <!-- @slot Default to `type` prop -->
             <slot name="prefix">
                 <template v-if="withIcon">
-                    <f-svg-icon v-if="type === 'success'" aria-hidden="true" class="fmessage_icon">
+                    <f-svg-icon v-if="type === 'success'" class="fmessage_icon">
                         <icon-check-circle />
                     </f-svg-icon>
-                    <f-svg-icon
-                        v-else-if="type === 'error' || type === 'warning'"
-                        aria-hidden="true"
-                        class="fmessage_icon"
-                    >
+                    <f-svg-icon v-else-if="type === 'error' || type === 'warning'" class="fmessage_icon">
                         <icon-exclamation-circle />
                     </f-svg-icon>
-                    <f-svg-icon v-else-if="type === 'info'" aria-hidden="true" class="fmessage_icon">
+                    <f-svg-icon v-else-if="type === 'info'" class="fmessage_icon">
                         <icon-info-circle />
                     </f-svg-icon>
                 </template>
@@ -46,7 +42,7 @@ import IconExclamationCircle from '../icons/IconExclamationCircle.vue';
 import IconInfoCircle from '../icons/IconInfoCircle.vue';
 import { getUniqueId } from '../../utils/index.js';
 import IconTimes from '../icons/IconTimes.vue';
-import FButton from '@/components/FButton/FButton.vue';
+import FButton from '../FButton/FButton.vue';
 // import { returnFocus, setReceiveFocusFromAttr } from '@/utils/aria.js';
 // import { getComputedStyle } from '@/utils/css.js';
 

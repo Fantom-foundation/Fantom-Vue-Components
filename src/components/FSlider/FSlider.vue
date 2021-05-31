@@ -59,7 +59,7 @@
 
 <script>
 import FInput from '../FInput/FInput.vue';
-import { inputMixin } from '@/mixins/input.js';
+import { inputMixin } from '../../mixins/input.js';
 
 /**
  * Wrapper around input[type="range"] field with fill bars.

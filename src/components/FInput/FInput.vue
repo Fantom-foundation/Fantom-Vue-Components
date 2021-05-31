@@ -1,12 +1,14 @@
 <template>
     <span :id="id" class="finput" :class="classes" @click="onClick">
         <slot name="top" v-bind="slotProps">
-            <f-label v-if="label" native :id="labeledById" :label="label" />
+            <f-label native :id="labeledById">
+                <slot name="label">{{ label }}</slot>
+            </f-label>
         </slot>
         <template v-if="disabledAsText && disabled">
             {{ inputValue }}
         </template>
-        <span v-else class="finput_inputcont" :class="inpClasses">
+        <span v-else class="finput_inputcont" :class="inpClasses" :id="inputContId || null">
             <slot name="prefix"></slot>
             <template v-if="isTextarea">
                 <textarea
@@ -16,10 +18,15 @@
                     :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
                     v-bind="inputProps"
                     :value="inputValue"
-                    :aria-invalid="validationState.invalid"
+                    :aria-invalid="validationState.invalid || invalid"
                     :aria-describedby="ariaDescribedByIds"
+                    :aria-controls="controlsId || null"
+                    :aria-activedescendant="ariaActivedescendant || null"
+                    :aria-autocomplete="ariaAutocomplete || null"
                     @input="onInput"
                     @change="onChange"
+                    @focus="$emit('focus')"
+                    @blur="$emit('blur')"
                 ></textarea>
             </template>
             <template v-else>
@@ -30,10 +37,15 @@
                     :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
                     v-bind="inputProps"
                     :value="inputValue"
-                    :aria-invalid="validationState.invalid"
+                    :aria-invalid="validationState.invalid || invalid"
                     :aria-describedby="ariaDescribedByIds"
+                    :aria-controls="controlsId || null"
+                    :aria-activedescendant="ariaActivedescendant || null"
+                    :aria-autocomplete="ariaAutocomplete || null"
                     @input="onInput"
                     @change="onChange"
+                    @focus="$emit('focus')"
+                    @blur="$emit('blur')"
                 />
             </template>
             <slot name="suffix"></slot>
@@ -60,13 +72,15 @@ import { inputMixin } from '../../mixins/input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import FLabel from '../FLabel/FLabel.vue';
-import { throttle } from '../../utils/index.js';
+import { debounce } from '../../utils/index.js';
 
 /**
  * Input field (input or textarea) with slots.
  */
 export default {
     name: 'FInput',
+
+    inheritAttrs: false,
 
     components: { FLabel },
 
@@ -85,6 +99,11 @@ export default {
         },
         /** Size of input, 'large' | 'small' */
         fieldSize: {
+            type: String,
+            default: '',
+        },
+        /** */
+        inputContId: {
             type: String,
             default: '',
         },
@@ -135,7 +154,7 @@ export default {
 
         inpClasses() {
             return {
-                'inp-invalid': this.validationState.invalid,
+                'inp-invalid': this.validationState.invalid || this.invalid,
                 'inp-lg': this.fieldSize === 'large',
                 'inp-sm': this.fieldSize === 'small',
                 'inp-xs': this.fieldSize === 'mini',
@@ -161,7 +180,11 @@ export default {
         },
 
         throttledInput() {
-            return throttle(_event => this._onInput(_event), this.throttleInputInterval, true);
+            return debounce(_event => this._onInput(_event), this.throttleInputInterval, {
+                leading: false,
+                trailing: true,
+            });
+            // return throttle(_event => this._onInput(_event), this.throttleInputInterval, true);
         },
     },
 
@@ -169,7 +192,7 @@ export default {
         value(_val) {
             const oldVal = this.inputValue;
 
-            this.inputValue = _val;
+            this.inputValue = this.formatIn(_val);
 
             if (this.validateOnInput && oldVal !== _val) {
                 this.validate();
@@ -178,14 +201,30 @@ export default {
     },
 
     methods: {
+        focus() {
+            const { input } = this.$refs;
+
+            if (input) {
+                input.focus();
+            }
+        },
+
+        select() {
+            const { input } = this.$refs;
+
+            if (input) {
+                input.select();
+            }
+        },
+
         /**
          * @param {Event} _event
          */
         onClick(_event) {
-            const eInput = this.$refs.input;
+            const { input } = this.$refs;
 
-            if (eInput && _event.target !== eInput) {
-                eInput.focus();
+            if (input && _event.target !== input) {
+                input.focus();
             }
         },
 
@@ -204,13 +243,13 @@ export default {
          * @param {Event} _event
          */
         _onInput(_event) {
-            this.inputValue = _event.target.value;
+            this.inputValue = this.formatIn(_event.target.value);
 
             /**
              * Passthrough input event
              * @type {Event}
              */
-            this.$emit('input', _event.target.value);
+            this.$emit('input', this.formatOut(_event.target.value));
 
             if (this.validateOnInput) {
                 this.validate();

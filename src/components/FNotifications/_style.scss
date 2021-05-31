@@ -1,8 +1,9 @@
 @use "custom-properties";
 
 .fnotifications {
-    padding: var(--f-spacer-3, 12px);
+    margin: var(--f-spacer-3, 12px) 0;
     //background: #f00;
+    //pointer-events: none;
 
     .fmessage {
         //color: #fff;
@@ -72,7 +73,7 @@
         */
 
         + .fmessage {
-            margin-top: var(--f-spacer-1, 3px);
+            margin-top: var(--f-spacer-2, 6px);
         }
     }
 

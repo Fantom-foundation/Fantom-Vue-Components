@@ -1,4 +1,4 @@
 .fnotifications {
     --fnotifications-fixed-width: 320px;
-    --fnotifications-fixed-z-index: 4;
+    --fnotifications-fixed-z-index: calc(var(--f-zindex-above, 2) + var(--f-zindex-modal-curr, 4));
 }

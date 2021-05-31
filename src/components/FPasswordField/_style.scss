@@ -1,19 +1,4 @@
-@use "../../assets/scss/components/input-field/tools";
-
 .fpasswordfield {
     display: inline-block;
     vertical-align: middle;
-
-    &-invalid {
-        .fbutton {
-            --f-btn-main-color: var(--f-color-red-5, #ca1616);
-            --f-btn-main-color-hover: var(--f-color-red-6, #971111);
-        }
-    }
-
-    .finput {
-        .#{tools.$inp} {
-            --f-inp-cont-lg-gap-h: var(--f-spacer-2, 6px);
-        }
-    }
 }

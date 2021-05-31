@@ -1,5 +1,5 @@
 <template>
-    <span class="fsvgicon" :class="classes" :style="styles">
+    <span class="fsvgicon" :class="classes" :style="styles" :aria-hidden="ariaHidden">
         <span class="fsvgicon-icon" :style="iconStyles"><slot /></span>
     </span>
 </template>
@@ -41,6 +41,10 @@ export default {
         rotate: {
             type: String,
             default: '',
+        },
+        ariaHidden: {
+            type: Boolean,
+            default: true,
         },
     },
 
