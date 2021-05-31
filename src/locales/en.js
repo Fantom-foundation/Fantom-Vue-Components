@@ -6,6 +6,9 @@ export const enTranslations = {
         showPassword: 'Show password',
         hidePassword: 'Hide password',
     },
+    fsearchfield: {
+        deleteInputText: 'Delete input text',
+    },
     fpagination: {
         paginationNavigation: 'Pagination navigation',
         firstPage: 'Go to first page',
@@ -14,5 +17,17 @@ export const enTranslations = {
         nextPage: 'Go to next page',
         page: 'page',
         of: 'of',
+    },
+    fdatagrid: {
+        noItems: 'No Items',
+    },
+    fnetworkstatus: {
+        message: 'Network error, trying to reconnect',
+    },
+    flistbox: {
+        notFound: 'Nothing found',
+    },
+    componentChangeMessages: {
+        'f-form': 'A form has been changed but not saved. Do you want to continue anyway?',
     },
 };
