@@ -25,6 +25,16 @@ export const formInputMixin = {
             type: Boolean,
             default: false,
         },
+        /** To presentation format */
+        inFormatter: {
+            type: Function,
+            default: null,
+        },
+        /** From presentation format */
+        outFormatter: {
+            type: Function,
+            default: null,
+        },
         /** Error message to be displayed when validation fails */
         errorMessage: {
             type: String,
@@ -47,12 +57,25 @@ export const formInputMixin = {
             type: String,
             default: '',
         },
+        /** Id (or ids separated by space) of element(s) that represents control (aria-controls) for the component */
+        controlsId: {
+            type: String,
+            default: '',
+        },
+        ariaAutocomplete: {
+            type: String,
+            default: '',
+        },
+        ariaActivedescendant: {
+            type: String,
+            default: '',
+        },
     },
 
     data() {
         return {
             /** Represents current value of form input component */
-            inputValue: this.value || '',
+            inputValue: this.formatIn(this.value || ''),
             /** Identifies what represents empty value of form input component */
             emptyValue: '',
             validationState: {
@@ -221,6 +244,30 @@ export const formInputMixin = {
 
             this.validationState = { ..._validationState };
             this.$emit('validation-state', _validationState);
+        },
+
+        /**
+         * @param {*} _value
+         * @returns {*}
+         */
+        formatIn(_value) {
+            if (typeof this.inFormatter === 'function') {
+                return this.inFormatter(_value);
+            }
+
+            return _value;
+        },
+
+        /**
+         * @param {*} _value
+         * @returns {*}
+         */
+        formatOut(_value) {
+            if (typeof this.outFormatter === 'function') {
+                return this.outFormatter(_value);
+            }
+
+            return _value;
         },
     },
 };

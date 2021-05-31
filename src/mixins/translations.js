@@ -25,7 +25,9 @@ class Translations {
      * @param {string} [_locale]
      */
     setLocale(_locale = 'en') {
-        this.locale.code = _locale;
+        if (_locale in this.translations) {
+            this.locale.code = _locale;
+        }
     }
 
     /**
