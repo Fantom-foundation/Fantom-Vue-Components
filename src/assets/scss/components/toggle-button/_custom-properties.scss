@@ -8,9 +8,10 @@
 
     /* colors */
     --f-togglebtn-theme-color: var(--f-color-primary-5);
-    --f-togglebtn-theme-color-h: var(--f-color-primary-h);
+    --f-togglebtn-theme-color-hsl: var(--f-color-primary-h, 219), var(--f-color-primary-s, 100%), var(--f-color-primary-l, 55%);
+    /*--f-togglebtn-theme-color-h: var(--f-color-primary-h);
     --f-togglebtn-theme-color-s: var(--f-color-primary-s);
-    --f-togglebtn-theme-color-l: var(--f-color-primary-l);
+    --f-togglebtn-theme-color-l: var(--f-color-primary-l);*/
 
     --f-togglebtn-disabled-theme-color: var(--f-inputs-disabled-background-color);
 
@@ -44,7 +45,8 @@
 
     /* focus */
     --f-togglebtn-focus-background: var(--f-togglebtn-background);
-    --f-togglebtn-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-togglebtn-theme-color-h), var(--f-togglebtn-theme-color-s), var(--f-togglebtn-theme-color-l), 0.35);
+    --f-togglebtn-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-togglebtn-theme-color-hsl), 0.35);
+    //--f-togglebtn-focus-box-shadow: var(--f-inputs-focus-box-shadow) hsla(var(--f-togglebtn-theme-color-h), var(--f-togglebtn-theme-color-s), var(--f-togglebtn-theme-color-l), 0.35);
     --f-togglebtn-focus-border: 1px solid var(--f-togglebtn-theme-color);
 
     /* focus + checked*/

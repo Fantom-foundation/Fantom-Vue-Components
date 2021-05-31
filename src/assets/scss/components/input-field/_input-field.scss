@@ -1,8 +1,15 @@
 @use "custom-properties";
 @use "tools";
 
-input:-webkit-autofill, input:-webkit-autofill:focus {
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
 }
 
 @include tools.inp {
@@ -36,7 +43,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         color: var(--f-input-placholder-color);
         opacity: var(--f-input-placholder-opacity);
     }
-
 
     &-lg {
         --f-input-font-size: var(--f-input-lg-font-size);
@@ -75,7 +81,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         padding: 0;
         border: none;
 
-        &:not(&-preservefocus):focus, &-preservefocus:focus:not(:focus-visible) {
+        &:not(&-preservefocus):focus,
+        &-preservefocus:focus:not(:focus-visible) {
             box-shadow: none;
             outline: none;
         }
@@ -119,6 +126,14 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
                 margin-inline-start: var(--f-inp-cont-gap-h);
                 margin-inline-end: var(--f-inp-cont-gap-h);
             }
+        }
+    }
+
+    &-withbutton {
+        --f-inp-cont-lg-gap-h: var(--f-spacer-2, 6px);
+
+        .#{tools.$inp} {
+            --f-inp-cont-lg-gap-h: var(--f-spacer-2, 6px);
         }
     }
 }
@@ -165,7 +180,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         box-shadow: var(--f-input-readonly-hover-box-shadow);
     }
 
-    &:focus, &:focus-within {
+    &:focus,
+    &:focus-within {
         color: var(--f-input-readonly-focus-color);
         background: var(--f-input-readonly-focus-background);
         border: var(--f-input-readonly-focus-border);
@@ -186,10 +202,16 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         box-shadow: var(--f-input-invalid-hover-box-shadow);
     }
 
-    &:focus, &:focus-within {
+    &:focus,
+    &:focus-within {
         color: var(--f-input-invalid-focus-color);
         background: var(--f-input-invalid-focus-background);
         border: var(--f-input-invalid-focus-border);
         box-shadow: var(--f-input-invalid-focus-box-shadow);
+    }
+
+    .#{tools.$btn} {
+        --f-btn-main-color: var(--f-input-invalid-color);
+        --f-btn-main-color-hover: var(--f-input-invalid-focus-color);
     }
 }

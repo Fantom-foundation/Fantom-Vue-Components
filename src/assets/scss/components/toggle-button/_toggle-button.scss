@@ -154,9 +154,10 @@ $togglebtn: tools.$togglebtn;
 
     &-invalid {
         --f-togglebtn-theme-color: #af0a0a;
-        --f-togglebtn-theme-color-h: 0;
+        --f-togglebtn-theme-color-hsl: 0, 89%, 36%;
+        /*--f-togglebtn-theme-color-h: 0;
         --f-togglebtn-theme-color-s: 89%;
-        --f-togglebtn-theme-color-l: 36%;
+        --f-togglebtn-theme-color-l: 36%;*/
 
         --f-togglebtn-border: 1px solid var(--f-togglebtn-theme-color);
 
