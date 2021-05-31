@@ -319,10 +319,18 @@ export function keyboardNavigation({
             }
         }
 
-        if (_useHomeAndEnd && !move) {
-            if (isKey('Home', _event)) {
+        if (!move) {
+            if (_useHomeAndEnd) {
+                if (isKey('Home', _event)) {
+                    move = 'first';
+                } else if (isKey('End', _event)) {
+                    move = 'last';
+                }
+            }
+
+            if (isKey('PageUp', _event)) {
                 move = 'first';
-            } else if (isKey('End', _event)) {
+            } else if (isKey('PageDown', _event)) {
                 move = 'last';
             }
         }

@@ -9,7 +9,7 @@ import { getNestedProp } from './index.js';
  * @param {string} _b
  * @return {number}
  */
-export function stringSort(_a, _b) {
+function compare(_a, _b) {
     if (_a < _b) {
         return -1;
     }
@@ -26,7 +26,7 @@ export function stringSort(_a, _b) {
  * @param {'asc'|'desc'} [_direction]
  * @return {number}
  */
-export function sortByString(_itemProp, _direction = 'asc') {
+export function compareProperty(_itemProp, _direction = 'asc') {
     return (_a, _b) => {
         const a = getNestedProp(_a, _itemProp);
         const b = getNestedProp(_b, _itemProp);
@@ -35,7 +35,7 @@ export function sortByString(_itemProp, _direction = 'asc') {
             return 0;
         }
 
-        return (_direction === 'desc' ? -1 : 1) * stringSort(a, b);
+        return (_direction === 'desc' ? -1 : 1) * compare(a, b);
     };
 }
 
@@ -45,7 +45,7 @@ export function sortByString(_itemProp, _direction = 'asc') {
  * @param {string} [_locale]
  * @return {number}
  */
-export function sortByLocaleString(_itemProp, _direction = 'asc', _locale = 'en-GB') {
+export function compareLocalizedStringProperty(_itemProp, _direction = 'asc', _locale = 'en-GB') {
     return (_a, _b) => {
         const a = getNestedProp(_a, _itemProp);
         const b = getNestedProp(_b, _itemProp);
@@ -63,7 +63,7 @@ export function sortByLocaleString(_itemProp, _direction = 'asc', _locale = 'en-
  * @param {number} _b
  * @return {number}
  */
-export function numberSort(_a, _b) {
+function compareNumbers(_a, _b) {
     return _a - _b;
 }
 
@@ -72,7 +72,7 @@ export function numberSort(_a, _b) {
  * @param {'asc'|'desc'} [_direction]
  * @return {number}
  */
-export function sortByNumber(_itemProp, _direction = 'asc') {
+export function compareNumericProperty(_itemProp, _direction = 'asc') {
     return (_a, _b) => {
         const a = getNestedProp(_a, _itemProp);
         const b = getNestedProp(_b, _itemProp);
@@ -81,7 +81,7 @@ export function sortByNumber(_itemProp, _direction = 'asc') {
             return 0;
         }
 
-        return (_direction === 'desc' ? -1 : 1) * numberSort(a, b);
+        return (_direction === 'desc' ? -1 : 1) * compareNumbers(a, b);
     };
 }
 
@@ -92,16 +92,16 @@ export function sortByNumber(_itemProp, _direction = 'asc') {
  * @param {string} _b
  * @return {number}
  */
-function hexadecimalSort(_a, _b) {
+function compareHexadecimal(_a, _b) {
     const ax = parseInt(_a, 16);
     const bx = parseInt(_b, 16);
 
     if (isNaN(ax)) {
-        throw new Error('First value is not a hexidecimal number');
+        throw new Error('First value is not a hexadecimal number');
     }
 
     if (isNaN(bx)) {
-        throw new Error('Second value is not a hexidecimal number');
+        throw new Error('Second value is not a hexadecimal number');
     }
 
     // easiest check
@@ -146,7 +146,7 @@ function hexadecimalSort(_a, _b) {
  * @param {'asc'|'desc'} [_direction]
  * @return {number}
  */
-export function sortByHex(_itemProp, _direction) {
+export function compareHexadecimalProperty(_itemProp, _direction) {
     return (_a, _b) => {
         const a = getNestedProp(_a, _itemProp);
         const b = getNestedProp(_b, _itemProp);
@@ -155,6 +155,6 @@ export function sortByHex(_itemProp, _direction) {
             return 0;
         }
 
-        return (_direction === 'desc' ? -1 : 1) * hexadecimalSort(a, b);
+        return (_direction === 'desc' ? -1 : 1) * compareHexadecimal(a, b);
     };
 }

@@ -515,8 +515,20 @@ export function getAutoAttachPosition(_pos, _attachPosition, _preferredAttachPos
             } else {
                 attachPosition = 'bottom';
             }
+        } else if (attachPosition === 'auto-vertical-exact') {
+            if (_pos.bottom < 0) {
+                attachPosition = 'top';
+            } else {
+                attachPosition = 'bottom';
+            }
         } else if (attachPosition === 'auto-horizontal') {
             if (_pos.left > _pos.right) {
+                attachPosition = 'left';
+            } else {
+                attachPosition = 'right';
+            }
+        } else if (attachPosition === 'auto-horizontal-exact') {
+            if (_pos.right < 0) {
                 attachPosition = 'left';
             } else {
                 attachPosition = 'right';

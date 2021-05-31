@@ -241,6 +241,13 @@ export function toKebabCase(_str) {
     return '';
 }
 
+/**
+ * @param {string} _str
+ */
+export function toPascalCase(_str) {
+    return uppercaseFirstChar(toCamelCase(_str));
+}
+
 export function stripHTMLTags(_str) {
     return _str && typeof _str === 'string' ? _str.replace(stripHTMLRE, '') : '';
 }
@@ -458,6 +465,36 @@ export function deepExtend(_out, ..._args) {
     }
 
     return out;
+}
+
+export function objectEquals(_obj1 = {}, _obj2 = {}) {
+    const keys1 = Object.keys(_obj1);
+    let bothAreObjects = false;
+    let prop = null;
+    let val1;
+    let val2;
+
+    if (keys1.length !== Object.keys(_obj2).length) {
+        return false;
+    }
+
+    for (let i = 0, len = keys1.length; i < len; i++) {
+        prop = keys1[i];
+        val1 = _obj1[prop];
+        val2 = _obj2[prop];
+
+        bothAreObjects = typeof val1 === 'object' && typeof val2 === 'object';
+
+        if (bothAreObjects && (val1 === null || val2 === null)) {
+            bothAreObjects = false;
+        }
+
+        if ((!bothAreObjects && val1 !== val2) || (bothAreObjects && !objectEquals(val1, val2))) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 /**

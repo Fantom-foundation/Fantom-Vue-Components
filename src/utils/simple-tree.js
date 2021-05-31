@@ -40,7 +40,12 @@ export function findNodeBy(_nodes, _value, _prop = 'id') {
         if (_level > level) {
             parents.push(_parent);
         } else if (_level < level) {
-            parents.pop();
+            let n = level - _level;
+
+            while (n > 0) {
+                parents.pop();
+                n--;
+            }
         }
 
         if (getNestedProp(_node, _prop) === _value) {
