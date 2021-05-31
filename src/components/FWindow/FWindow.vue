@@ -1,5 +1,10 @@
 <template>
-    <transition :enter-active-class="dAnimationIn" :leave-active-class="dAnimationOut">
+    <transition
+        :enter-active-class="dAnimationIn"
+        :leave-active-class="dAnimationOut"
+        @after-enter="onAfterEnterAnim"
+        @after-leave="onAfterLeaveAnim"
+    >
         <div
             v-if="isVisible"
             :id="id"
@@ -28,7 +33,9 @@
                                 class="close-btn btn btn-samesize btn-round btn-tertiary"
                                 :title="_('fwindow.closeWindow')"
                             >
-                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
+                                <f-svg-icon size="20px">
+                                    <icon-times />
+                                </f-svg-icon>
                             </button>
                         </slot>
                     </div>
@@ -49,6 +56,7 @@
                     class="fwindow_overlay"
                     :hide-on-click="hideOnEscapeKey"
                     @overlay-hide="onOverlayHide"
+                    @before-overlay-hide="onBeforeOverlayHide"
                 />
             </div>
         </div>
@@ -73,6 +81,7 @@ import {
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
 import { translationsMixin } from '../../mixins/translations.js';
+import { isAnyComponentChanged } from '../../utils/vue-helpers.js';
 
 /**
  * Basic window following WAI-ARIA practices.
@@ -188,6 +197,11 @@ export default {
                 return _value.length === 4;
             },
         },
+        /** Set the minimum width of the window as the element to which the window is attached */
+        widthAsAttach: {
+            type: Boolean,
+            default: false,
+        },
         /** Hide window after this amout of milliseconds. 0 means no auto hiding. */
         hideAfter: {
             type: Number,
@@ -222,6 +236,21 @@ export default {
         hideOnEscapeKey: {
             type: Boolean,
             default: true,
+        },
+        /** Correct window's position and size on document scroll */
+        correctPosOnScroll: {
+            type: Boolean,
+            default: true,
+        },
+        /** Check (when window is about to hide) if any descendant component has changed */
+        checkComponentsChange: {
+            type: Boolean,
+            default: true,
+        },
+        /** Prevent window to focus */
+        preventFocus: {
+            type: Boolean,
+            default: false,
         },
     },
 
@@ -288,6 +317,8 @@ export default {
         };
         /** Debounce function used as window resize callback. */
         this._resizeCallback = throttle(_event => this.onWindowResize(_event), 300, true);
+        /** Debounce function used as document scroll callback. */
+        this._scrollCallback = throttle(_event => this.onDocumentScroll(_event), 300, true);
         /** Instance of ResizeObserver. */
         this._resizeObserver = null;
         /** Stores first and last focusable elements in window. */
@@ -299,6 +330,8 @@ export default {
         this._hideAfterId = -1;
         /** Value of `--f-zindex-modal-base` custom property */
         this._modalZIndex = -1;
+        /** Is animation in progress? */
+        this._animInProgress = false;
     },
 
     mounted() {
@@ -318,6 +351,10 @@ export default {
 
         if (this.hideOnDocumentMousedown) {
             window.addEventListener('mousedown', this.onWindowMousedown, false);
+        }
+
+        if (this.correctPosOnScroll) {
+            document.addEventListener('scroll', this._scrollCallback, false);
         }
 
         if (this.visible) {
@@ -369,18 +406,23 @@ export default {
                     this.dAnimationIn = this.animationIn;
                 }
 
-                setReceiveFocusFromAttr(this._ids.comp);
+                if (!this.preventFocus) {
+                    setReceiveFocusFromAttr(this._ids.comp);
+                }
 
                 this._firstLastFocusables.first = null;
                 this._firstLastFocusables.last = null;
 
                 this.$nextTick(() => {
                     this.isVisible = true;
+                    this._animInProgress = true;
 
                     this.$nextTick(() => {
                         getComputedStyle(this.$el, this._windowStyle);
                         this.setPosition();
-                        this.focus();
+                        if (!this.preventFocus) {
+                            this.focus();
+                        }
                         this.createResizeObserver();
                         this.startHideAfterTimeout();
                     });
@@ -390,6 +432,14 @@ export default {
 
         hide(_animationOut, _byOverlay) {
             if (this.isVisible) {
+                if (
+                    this.checkComponentsChange &&
+                    !this.dWithOverlay &&
+                    isAnyComponentChanged(this, this._('componentChangeMessages'))
+                ) {
+                    return;
+                }
+
                 if (this._modalZIndex > -1 && this.dZIndex - 1 > this._modalZIndex) {
                     setCustomProperty('--f-zindex-modal-curr', this.dZIndex - 2);
                 }
@@ -402,8 +452,10 @@ export default {
                     }
                 }
 
+                this._animInProgress = true;
+
                 this.$nextTick(() => {
-                    if (this.dWithOverlay && !_byOverlay) {
+                    if (this.dWithOverlay && !_byOverlay && this.$refs.overlay) {
                         this.$refs.overlay.hide();
                     } else {
                         this.destroyResizeObserver();
@@ -412,7 +464,9 @@ export default {
                         this.$emit('window-hide');
                     }
 
-                    returnFocus(this._ids.comp);
+                    if (!this.preventFocus) {
+                        returnFocus(this._ids.comp);
+                    }
                 });
             }
         },
@@ -519,10 +573,15 @@ export default {
             } else if (this.dPosition === 'absolute') {
                 if (this.attachTo || this.attachToPoint) {
                     const attachMargin = this.attachMargin;
+                    const elem = !this.attachToPoint ? document.querySelector(this.attachTo) : null;
+
+                    if (elem && this.widthAsAttach) {
+                        this.$el.style.minWidth = `${elem.clientWidth}px`;
+                    }
 
                     rect = attachElemTo(
                         this.$el,
-                        this.attachToPoint || document.querySelector(this.attachTo),
+                        this.attachToPoint || elem,
                         this._getAlignment(),
                         this.stayInViewport,
                         {
@@ -680,17 +739,29 @@ export default {
             }
         },
 
+        onDocumentScroll() {
+            if (this.isVisible) {
+                this.correctPositionAndSize();
+            }
+        },
+
         /**
          * Called by ResizeObserver when FWindow is resized.
          */
         onResize() {
-            if (this.isVisible) {
+            if (this.isVisible && !this._animInProgress) {
                 this.correctPositionAndSize();
             }
         },
 
         onOverlayHide(_hiddenByClick) {
             this.hide('', true, _hiddenByClick);
+        },
+
+        onBeforeOverlayHide(_payload) {
+            if (this.checkComponentsChange && isAnyComponentChanged(this, this._('componentChangeMessages'))) {
+                _payload.preventDefault = true;
+            }
         },
 
         onControlsClick(_event) {
@@ -709,6 +780,14 @@ export default {
 
         onKeydown(_event) {
             focusTrap(_event, this.$el, this._firstLastFocusables);
+        },
+
+        onAfterEnterAnim() {
+            this._animInProgress = false;
+        },
+
+        onAfterLeaveAnim() {
+            this._animInProgress = false;
         },
     },
 };
