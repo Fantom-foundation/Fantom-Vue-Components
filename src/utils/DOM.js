@@ -516,7 +516,7 @@ export function getAutoAttachPosition(_pos, _attachPosition, _preferredAttachPos
                 attachPosition = 'bottom';
             }
         } else if (attachPosition === 'auto-vertical-exact') {
-            if (_pos.bottom < 0) {
+            if (_pos.bottom < 0 && _pos.bottom >= _pos.top) {
                 attachPosition = 'top';
             } else {
                 attachPosition = 'bottom';
@@ -528,7 +528,7 @@ export function getAutoAttachPosition(_pos, _attachPosition, _preferredAttachPos
                 attachPosition = 'right';
             }
         } else if (attachPosition === 'auto-horizontal-exact') {
-            if (_pos.right < 0) {
+            if (_pos.right < 0 && _pos.right >= _pos.left) {
                 attachPosition = 'left';
             } else {
                 attachPosition = 'right';

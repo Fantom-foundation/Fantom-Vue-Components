@@ -489,12 +489,56 @@ export function objectEquals(_obj1 = {}, _obj2 = {}) {
             bothAreObjects = false;
         }
 
-        if ((!bothAreObjects && val1 !== val2) || (bothAreObjects && !objectEquals(val1, val2))) {
+        if ((!bothAreObjects && val1 != val2) || (bothAreObjects && !objectEquals(val1, val2))) {
             return false;
         }
     }
 
     return true;
+}
+
+/**
+ * Check if two objects are equal and return first diff prop.
+ *
+ * @param {Object} _obj1
+ * @param {Object} _obj2
+ * @return {boolean}
+ */
+export function objectEqualsProp(_obj1 = {}, _obj2 = {}) {
+    const keys1 = Object.keys(_obj1);
+    let bothAreObjects = false;
+    let prop = null;
+    let val1;
+    let val2;
+    let ret = null;
+
+    for (let i = 0, len = keys1.length; i < len; i++) {
+        ret = null;
+
+        prop = keys1[i];
+        val1 = _obj1[prop];
+        val2 = _obj2[prop];
+
+        bothAreObjects = typeof val1 === 'object' && typeof val2 === 'object';
+
+        if (bothAreObjects && (val1 === null || val2 === null)) {
+            bothAreObjects = false;
+        }
+
+        if (!bothAreObjects && val1 != val2) {
+            return {
+                equals: false,
+                prop,
+            };
+        } else if (bothAreObjects && !(ret = objectEqualsProp(val1, val2)).equals) {
+            return ret;
+        }
+    }
+
+    return {
+        equals: true,
+        prop: '',
+    };
 }
 
 /**

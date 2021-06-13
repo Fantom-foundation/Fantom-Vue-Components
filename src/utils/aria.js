@@ -5,37 +5,65 @@ const KEY_EVENTS = {
     keydown: null,
 };
 
-export function isKey(_key, _event) {
+/**
+ * @param {string} key Name of the key or 'Shift|Ctrl|Alt|Meta+key_name'
+ * @param {KeyboardEvent} event
+ * @return {boolean}
+ */
+export function isKey(key, event) {
     let isKey = false;
+    const ks = key.split('+');
+    let k = key;
 
-    if (_event) {
-        switch (_event.key) {
+    if (ks.length === 2) {
+        k = ks[1];
+    }
+
+    if (event) {
+        switch (event.key) {
             case 'Esc': // IE/Edge
             case 'Escape':
-                isKey = _key === 'Escape';
+                isKey = k === 'Escape';
                 break;
             case 'Up': // IE/Edge
             case 'ArrowUp':
-                isKey = _key === 'ArrowUp';
+                isKey = k === 'ArrowUp';
                 break;
             case 'Right': // IE/Edge
             case 'ArrowRight':
-                isKey = _key === 'ArrowRight';
+                isKey = k === 'ArrowRight';
                 break;
             case 'Left': // IE/Edge
             case 'ArrowLeft':
-                isKey = _key === 'ArrowLeft';
+                isKey = k === 'ArrowLeft';
                 break;
             case 'Down': // IE/Edge
             case 'ArrowDown':
-                isKey = _key === 'ArrowDown';
+                isKey = k === 'ArrowDown';
                 break;
             case 'Spacebar': // IE/Edge
             case ' ':
-                isKey = _key === ' ';
+                isKey = k === ' ';
                 break;
             default:
-                isKey = _key === _event.key;
+                isKey = k === event.key;
+        }
+
+        if (isKey && ks.length === 2) {
+            switch (ks[0]) {
+                case 'Shift':
+                    isKey = event.shiftKey;
+                    break;
+                case 'Ctrl':
+                    isKey = event.ctrlKey;
+                    break;
+                case 'Alt':
+                    isKey = event.altKey;
+                    break;
+                case 'Meta': // mac
+                    isKey = event.metaKey;
+                    break;
+            }
         }
     }
 
