@@ -40,7 +40,8 @@
                             :disabled="disabled"
                             tertiary
                             round
-                            :title="_('fsearchfield.deleteInputText')"
+                            :title="_('fcombobox.showOptions')"
+                            :tabindex="selectMode ? '-1' : null"
                         >
                             <slot name="icon" v-bind="{ ...sProps, ...slotProps, ...loading }">
                                 <f-svg-icon v-if="!loading" size="1em">
@@ -100,17 +101,21 @@
         </f-window>
 
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div
-                    v-for="(msg, idx) in validationState.errors"
-                    :key="`${errorMsgId}_${idx}_err`"
-                    class="ferrormessages_message"
-                >
-                    {{ msg }}
-                </div>
+            <div v-if="validationState.errors.length > 0">
+                <component
+                    :is="
+                        typeof errorMessagesComponent === 'object'
+                            ? errorMessagesComponent.name
+                            : errorMessagesComponent
+                    "
+                    :errors-cont-id="errorMsgId"
+                    :errors="validationState.errors"
+                    :input-cont-id="dInputContId"
+                    v-bind="{ ...(typeof errorMessagesComponent === 'object' ? errorMessagesComponent.props : {}) }"
+                />
             </div>
-            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
-                {{ infoText }}
+            <div v-else-if="infoText">
+                <f-info-text :text="infoText" :info-text-id="infoTextId" />
             </div>
         </slot>
     </div>
@@ -130,13 +135,15 @@ import FButton from '../FButton/FButton.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconChevronDown from '../icons/IconChevronDown.vue';
 import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
+import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
+import FInfoText from '../FInfoText/FInfoText.vue';
 import { selectMixin } from '../../mixins/select.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 
 /**
  * @param {Object} _data
- * @return {{totalItems: number, data: array}}
+ * @return {{data: array, isLastPage?: boolean, totalItems?: number}}
  */
 function defaultTransformDataFunc(_data) {
     return {
@@ -153,7 +160,17 @@ export default {
 
     inheritAttrs: false,
 
-    components: { FDotsLoader, IconChevronDown, FSvgIcon, FButton, FInput, FListbox, FWindow },
+    components: {
+        FDotsLoader,
+        IconChevronDown,
+        FSvgIcon,
+        FButton,
+        FInput,
+        FListbox,
+        FWindow,
+        FErrorMessages,
+        FInfoText,
+    },
 
     // mixins: [popoverAnimationMixin, translationsMixin, fieldWithButtonMixin, selectMixin, formInputMixin, helpersMixin],
     mixins: [popoverAnimationMixin, translationsMixin, selectMixin, formInputMixin, helpersMixin],
@@ -171,7 +188,7 @@ export default {
          * @type {FListboxItem[]}
          */
         data: { ...FListbox.props.data },
-        /** Used for transforming data from promise. Have to return object `{totalItems: number, data: array}` */
+        /** Used for transforming data from promise. Has to return object `{data: array, isLastPage?: boolean, totalItems?: number}` (isLastPage or totalItems) */
         transformDataFunc: {
             type: Function,
             default: defaultTransformDataFunc,
@@ -214,7 +231,6 @@ export default {
         return {
             listboxData: [],
             selectedItem: {},
-            dInputContId: getUniqueId(),
             listboxId: getUniqueId(),
             iValue: '',
             listboxFilterText: '',
@@ -308,6 +324,10 @@ export default {
     },
 
     methods: {
+        activate() {
+            this.onButtonClick();
+        },
+
         async setSelectedItem() {
             const data = isPromise(this.data) ? this.transformDataFunc(await this.data).data : this.data;
             const { value } = this;

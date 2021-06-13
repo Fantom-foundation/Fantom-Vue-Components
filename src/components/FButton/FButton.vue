@@ -43,8 +43,13 @@ export default {
             type: Boolean,
             default: false,
         },
-        /** Specifies that button have the same width and height and is rounded */
+        /** Specifies that the button has the same width and height and is rounded */
         round: {
+            type: Boolean,
+            default: false,
+        },
+        /** Specifies that the button has the same width and height */
+        sameSize: {
             type: Boolean,
             default: false,
         },
@@ -70,7 +75,8 @@ export default {
                 'btn-lg': size === 'large',
                 'btn-sm': size === 'small',
                 'btn-xs': size === 'mini',
-                'btn-round btn-samesize': this.round,
+                'btn-round': this.round,
+                'btn-samesize': this.sameSize || this.round,
             };
         },
     },
