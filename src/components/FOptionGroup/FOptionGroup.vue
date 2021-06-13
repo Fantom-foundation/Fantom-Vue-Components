@@ -19,17 +19,21 @@
             />
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div
-                    v-for="(msg, idx) in validationState.errors"
-                    :key="`${errorMsgId}_${idx}_err`"
-                    class="ferrormessages_message"
-                >
-                    {{ msg }}
-                </div>
+            <div v-if="validationState.errors.length > 0">
+                <component
+                    :is="
+                        typeof errorMessagesComponent === 'object'
+                            ? errorMessagesComponent.name
+                            : errorMessagesComponent
+                    "
+                    :errors-cont-id="errorMsgId"
+                    :errors="validationState.errors"
+                    :input-cont-id="dInputContId"
+                    v-bind="{ ...(typeof errorMessagesComponent === 'object' ? errorMessagesComponent.props : {}) }"
+                />
             </div>
-            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
-                {{ infoText }}
+            <div v-else-if="infoText">
+                <f-info-text :text="infoText" :info-text-id="infoTextId" />
             </div>
         </slot>
     </span>
@@ -39,6 +43,8 @@
 import { cloneObject, getUniqueId, isArray, isObject } from '../../utils/index.js';
 import FOption from '../FOption/FOption.vue';
 import FLabel from '../FLabel/FLabel.vue';
+import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
+import FInfoText from '../FInfoText/FInfoText.vue';
 import { formInputMixin } from '../../mixins/form-input.js';
 
 /**
@@ -49,7 +55,7 @@ import { formInputMixin } from '../../mixins/form-input.js';
 export default {
     name: 'FOptionGroup',
 
-    components: { FLabel, FOption },
+    components: { FLabel, FOption, FErrorMessages, FInfoText },
 
     mixins: [formInputMixin],
 

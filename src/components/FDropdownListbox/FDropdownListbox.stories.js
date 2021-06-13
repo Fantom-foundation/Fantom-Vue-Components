@@ -3,6 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import FDropdownListbox from './FDropdownListbox.vue';
 import FButton from '../FButton/FButton.vue';
 import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
+import { clone } from '@/utils';
 
 const data = [
     { label: 'item 1', value: '10' },
@@ -291,7 +292,7 @@ export const Validation = () => ({
     `,
     data() {
         return {
-            data: [{ label: '---', value: '' }, ...data],
+            data: [{ label: '---', value: '' }, ...clone(data)],
             submitDisabled: false,
         };
     },

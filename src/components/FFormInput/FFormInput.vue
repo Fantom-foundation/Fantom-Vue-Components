@@ -8,6 +8,7 @@
             :type="type"
             :name="name"
             v-model="inputValue"
+            v-on="$listeners"
             @validation-state="onValidationState"
         >
             <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -30,6 +31,7 @@
             v-bind="{ ...$attrs, ...inputProps }"
             :name="name"
             v-model="inputValue"
+            v-on="$listeners"
             @validation-state="onValidationState"
         >
             <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -43,6 +45,7 @@
             v-bind="{ ...$attrs, ...inputProps }"
             :name="name"
             v-model="inputValue"
+            v-on="$listeners"
             @validation-state="onValidationState"
         >
             <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">

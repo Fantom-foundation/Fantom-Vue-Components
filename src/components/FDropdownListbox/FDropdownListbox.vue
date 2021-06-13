@@ -59,17 +59,21 @@
             </f-listbox>
         </f-window>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div
-                    v-for="(msg, idx) in validationState.errors"
-                    :key="`${errorMsgId}_${idx}_err`"
-                    class="ferrormessages_message"
-                >
-                    {{ msg }}
-                </div>
+            <div v-if="validationState.errors.length > 0">
+                <component
+                    :is="
+                        typeof errorMessagesComponent === 'object'
+                            ? errorMessagesComponent.name
+                            : errorMessagesComponent
+                    "
+                    :errors-cont-id="errorMsgId"
+                    :errors="validationState.errors"
+                    :input-cont-id="dInputContId"
+                    v-bind="{ ...(typeof errorMessagesComponent === 'object' ? errorMessagesComponent.props : {}) }"
+                />
             </div>
-            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
-                {{ infoText }}
+            <div v-else-if="infoText">
+                <f-info-text :text="infoText" :info-text-id="infoTextId" />
             </div>
         </slot>
     </div>
@@ -80,6 +84,8 @@ import FListbox from '../FListbox/FListbox.vue';
 import FWindow from '../FWindow/FWindow.vue';
 import FSelect from '../FSelect/FSelect.vue';
 import FLabel from '../FLabel/FLabel.vue';
+import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
+import FInfoText from '../FInfoText/FInfoText.vue';
 import { cloneObject, defer, getUniqueId } from '../../utils/index.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { isKey } from '../../utils/aria.js';
@@ -91,7 +97,7 @@ import { popoverAnimationMixin } from '../../mixins/popover-animation.js';
 export default {
     name: 'FDropdownListbox',
 
-    components: { FWindow, FListbox, FLabel },
+    components: { FWindow, FListbox, FLabel, FErrorMessages, FInfoText },
 
     mixins: [FSelect, FListbox, formInputMixin, popoverAnimationMixin],
 

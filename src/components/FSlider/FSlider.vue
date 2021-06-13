@@ -5,7 +5,7 @@
             v-bind="{ ...$attrs, ...fInputProps }"
             v-model="val"
             type="range"
-            no-input-style
+            no-style
             preserve-focus
             @input="onInput"
             @validation-state="onValidationState"

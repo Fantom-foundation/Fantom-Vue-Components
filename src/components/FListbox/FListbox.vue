@@ -54,17 +54,21 @@
             hidden
         />
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div
-                    v-for="(msg, idx) in validationState.errors"
-                    :key="`${errorMsgId}_${idx}_err`"
-                    class="ferrormessages_message"
-                >
-                    {{ msg }}
-                </div>
+            <div v-if="validationState.errors.length > 0">
+                <component
+                    :is="
+                        typeof errorMessagesComponent === 'object'
+                            ? errorMessagesComponent.name
+                            : errorMessagesComponent
+                    "
+                    :errors-cont-id="errorMsgId"
+                    :errors="validationState.errors"
+                    :input-cont-id="dInputContId"
+                    v-bind="{ ...(typeof errorMessagesComponent === 'object' ? errorMessagesComponent.props : {}) }"
+                />
             </div>
-            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
-                {{ infoText }}
+            <div v-else-if="infoText">
+                <f-info-text :text="infoText" :info-text-id="infoTextId" />
             </div>
         </slot>
     </div>
@@ -82,6 +86,8 @@ import FLabel from '../FLabel/FLabel.vue';
 import FPagination from '../FPagination/FPagination.vue';
 import FIntersectionObserver from '../FIntersectionObserver/FIntersectionObserver.vue';
 import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
+import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
+import FInfoText from '../FInfoText/FInfoText.vue';
 
 /**
  * FListbox item.
@@ -103,7 +109,7 @@ function defaultListboxFilter(_item, _text) {
 
 /**
  * @param {Object} _data
- * @return {{totalItems: number, data: array}}
+ * @return {{data: array, isLastPage?: boolean, totalItems?: number}}
  */
 function defaultTransformDataFunc(_data) {
     return {
@@ -122,7 +128,7 @@ export default {
 
     inheritAttrs: false,
 
-    components: { FDotsLoader, FIntersectionObserver, FPagination, FLabel },
+    components: { FDotsLoader, FIntersectionObserver, FPagination, FLabel, FErrorMessages, FInfoText },
 
     mixins: [selectMixin, formInputMixin, helpersMixin, translationsMixin],
 
@@ -161,7 +167,7 @@ export default {
                 return ['local', 'remote'].indexOf(_value) !== -1;
             },
         },
-        /** Used for transforming data from promise. Have to return object `{totalItems: number, data: array}` */
+        /** Used for transforming data from promise. Has to return object `{data: array, isLastPage?: boolean, totalItems?: number}` (isLastPage or totalItems) */
         transformDataFunc: {
             type: Function,
             default: defaultTransformDataFunc,
@@ -312,7 +318,12 @@ export default {
                     if (this.data === _items) {
                         data = this.transformDataFunc(data);
 
-                        this.dTotalItems = data.totalItems;
+                        this.dTotalItems = parseInt(data.totalItems);
+
+                        if (isNaN(this.dTotalItems)) {
+                            this.dTotalItems = Number.MAX_SAFE_INTEGER;
+                        }
+
                         if (this.currentPage() === 1) {
                             this.items = this.getItems(cloneObject(data.data));
                         } else {
@@ -322,34 +333,40 @@ export default {
 
                         this.loading = false;
 
-                        this.$nextTick(() => {
-                            const pagination = this.getPaginationState();
-                            this.lastPage = !!pagination.isLastPage;
+                        this.lastPage = !!data.isLastPage;
 
-                            if (this.lastPage) {
-                                this._loadNextPage = false;
-                            }
+                        if (!this.lastPage) {
+                            this.$nextTick(() => {
+                                const pagination = this.getPaginationState();
+                                this.lastPage = !!pagination.isLastPage;
 
-                            if (this._loadNextPage) {
-                                defer(() => {
-                                    if (this._loadNextPage) {
-                                        this.goToPage('next');
-
-                                        this._loadNextPage = false;
-                                    }
-                                }, 5); // ?
-                            }
-
-                            // preserve focused item
-                            if (focusedItemValue) {
-                                const idx = this.items.findIndex(_item => _item.value === focusedItemValue);
-
-                                // if currently focused item is near the bottom edge (trying to guess keyboard movement)
-                                if (this.items.length - pagination.perPage - 2 < idx) {
-                                    this.focusItem(focusedItemValue, false, 'value');
+                                if (this.lastPage) {
+                                    this._loadNextPage = false;
                                 }
-                            }
-                        });
+
+                                if (this._loadNextPage) {
+                                    defer(() => {
+                                        if (this._loadNextPage) {
+                                            this.goToPage('next');
+
+                                            this._loadNextPage = false;
+                                        }
+                                    }, 5); // ?
+                                }
+
+                                // preserve focused item
+                                if (focusedItemValue) {
+                                    const idx = this.items.findIndex(_item => _item.value === focusedItemValue);
+
+                                    // if currently focused item is near the bottom edge (trying to guess keyboard movement)
+                                    if (this.items.length - pagination.perPage - 2 < idx) {
+                                        this.focusItem(focusedItemValue, false, 'value');
+                                    }
+                                }
+                            });
+                        } else {
+                            this._loadNextPage = false;
+                        }
                     }
                 } catch (_error) {
                     this.loading = false;
