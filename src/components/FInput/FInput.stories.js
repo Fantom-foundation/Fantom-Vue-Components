@@ -26,6 +26,11 @@ export const Default = () => ({
             <f-input is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
             <f-input is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
             <f-input is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+            <h3>Textarea - auto resizable</h3>
+            <f-input auto-resizable-textarea is-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input auto-resizable-textarea is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input auto-resizable-textarea is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input auto-resizable-textarea is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
         </div>
     `,
 });
@@ -44,6 +49,11 @@ export const Readonly = () => ({
             <f-input readonly is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
             <f-input readonly is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
             <f-input readonly is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+            <h3>Textarea - auto resizable</h3>
+            <f-input readonly is-textarea auto-resizable-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input readonly is-textarea auto-resizable-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input readonly is-textarea auto-resizable-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input readonly is-textarea auto-resizable-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
         </div>
     `,
 });
@@ -62,6 +72,11 @@ export const Disabled = () => ({
             <f-input disabled is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
             <f-input disabled is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
             <f-input disabled is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+            <h3>Textarea - auto resizable</h3>
+            <f-input disabled is-textarea auto-resizable-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input disabled is-textarea auto-resizable-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input disabled is-textarea auto-resizable-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input disabled is-textarea auto-resizable-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
         </div>
     `,
 });
@@ -80,6 +95,11 @@ export const Invalid = () => ({
             <f-input invalid is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
             <f-input invalid is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
             <f-input invalid is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+            <h3>Textarea</h3>
+            <f-input invalid is-textarea auto-resizable-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input invalid is-textarea auto-resizable-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input invalid is-textarea auto-resizable-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input invalid is-textarea auto-resizable-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
         </div>
     `,
 });

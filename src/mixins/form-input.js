@@ -50,6 +50,11 @@ export const formInputMixin = {
             type: String,
             default: '',
         },
+        /** Hide label element */
+        noLabel: {
+            type: Boolean,
+            default: false,
+        },
         /**
          * Id (or ids separated by space) of element(s) that represents description (besided label) for the component
          */
@@ -70,12 +75,33 @@ export const formInputMixin = {
             type: String,
             default: '',
         },
+        /**
+         * Component to be used for displaying error messages.
+         * String (component name) or object {name: string, props: object}.
+         */
+        errorMessagesComponent: {
+            type: [String, Object],
+            default: 'f-error-messages',
+        },
+        /**
+         * Component to be used for displaying info text in a form input element.
+         * String (component name) or object {name: string, props: object}.
+         */
+        infoTextComponent: {
+            type: [String, Object],
+            default: 'f-info-text',
+        },
+        /** */
+        inputContId: {
+            type: String,
+            default: '',
+        },
     },
 
     data() {
         return {
             /** Represents current value of form input component */
-            inputValue: this.formatIn(this.value || ''),
+            inputValue: this.formatIn(this.value !== undefined ? this.value : ''),
             /** Identifies what represents empty value of form input component */
             emptyValue: '',
             validationState: {
@@ -88,6 +114,7 @@ export const formInputMixin = {
             labeledById: this.labeledBy || getUniqueId(),
             infoTextId: getUniqueId(),
             errorMsgId: getUniqueId(),
+            dInputContId: this.inputContId || getUniqueId(),
         };
     },
 

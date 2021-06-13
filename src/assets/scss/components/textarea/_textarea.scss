@@ -36,6 +36,25 @@ $inp: componentsSettings.$input;
     }
 }
 
+.#{$inp}-xs {
+    .textarea {
+        --f-input-line-height: var(--f-textarea-xs-line-height);
+    }
+}
+
+.#{$inp}-sm {
+    .textarea {
+        --f-input-line-height: var(--f-textarea-sm-line-height);
+    }
+}
+
+.#{$inp}-lg {
+    .textarea {
+        --f-input-line-height: var(--f-textarea-lg-line-height);
+    }
+}
+
+/*
 .#{$inp}-cont {
     &.#{$inp}-xs {
         .textarea {
@@ -55,3 +74,4 @@ $inp: componentsSettings.$input;
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+@use "custom-properties";
 @use "../../assets/scss/settings/custom-properties/form-inputs";
 @use "../../assets/scss/components/input-field";
 @use "../../assets/scss/components/textarea";
@@ -19,6 +20,56 @@
     &-textarea {
         .finput_inputcont {
             height: auto;
+        }
+    }
+
+    &-autoresizetextarea {
+        .finput_inputcont {
+            position: relative;
+        }
+
+        textarea {
+            /*
+            top: 0;
+            left: 0;
+            padding: var(--f-input-padding);
+            */
+            //top: var(--f-spacer-2, 6px);
+            //left: var(--f-inp-cont-gap-h);
+            width: 100%;
+            height: 100%;
+            //background: red;
+            //opacity: 0.7;
+            resize: none;
+            overflow: hidden;
+        }
+    }
+
+    &_textarea_wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: var(--f-input-padding);
+    }
+
+    &_textarea_ghost {
+        visibility: hidden;
+        min-width: var(--finput-autoresizetextarea-min-width);
+        min-height: var(--finput-autoresizetextarea-min-height);
+    }
+
+    &-noinputstyle {
+        .finput_textarea_ghost {
+            min-width: auto;
+        }
+
+        &.finput-autoresizetextarea {
+            textarea {
+                top: 0;
+                left: 0;
+            }
         }
     }
 }

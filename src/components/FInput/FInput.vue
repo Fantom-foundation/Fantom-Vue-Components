@@ -1,33 +1,57 @@
 <template>
     <span :id="id" class="finput" :class="classes" @click="onClick">
         <slot name="top" v-bind="slotProps">
-            <f-label native :id="labeledById">
+            <f-label v-if="!noLabel" native :id="labeledById">
                 <slot name="label">{{ label }}</slot>
             </f-label>
         </slot>
         <template v-if="disabledAsText && disabled">
             {{ inputValue }}
         </template>
-        <span v-else class="finput_inputcont" :class="inpClasses" :id="inputContId || null">
+        <span v-else class="finput_inputcont" :class="inpClasses" :id="dInputContId">
             <slot name="prefix"></slot>
             <template v-if="isTextarea">
-                <textarea
-                    :id="labeledById"
-                    ref="input"
-                    class="inp-nostyle textarea"
-                    :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
-                    v-bind="inputProps"
-                    :value="inputValue"
-                    :aria-invalid="validationState.invalid || invalid"
-                    :aria-describedby="ariaDescribedByIds"
-                    :aria-controls="controlsId || null"
-                    :aria-activedescendant="ariaActivedescendant || null"
-                    :aria-autocomplete="ariaAutocomplete || null"
-                    @input="onInput"
-                    @change="onChange"
-                    @focus="$emit('focus')"
-                    @blur="$emit('blur')"
-                ></textarea>
+                <template v-if="autoResizableTextarea">
+                    <span class="finput_textarea_wrapper">
+                        <textarea
+                            :id="labeledById"
+                            ref="input"
+                            class="inp-nostyle textarea"
+                            :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
+                            v-bind="inputProps"
+                            :value="inputValue"
+                            :aria-invalid="validationState.invalid || invalid"
+                            :aria-describedby="ariaDescribedByIds"
+                            :aria-controls="controlsId || null"
+                            :aria-activedescendant="ariaActivedescendant || null"
+                            :aria-autocomplete="ariaAutocomplete || null"
+                            @input="onInput"
+                            @change="onChange"
+                            @focus="onFocus"
+                            @blur="onBlur"
+                        ></textarea>
+                    </span>
+                    <span ref="ghost" class="inp-nostyle textarea finput_textarea_ghost" aria-hidden="true"></span>
+                </template>
+                <template v-else>
+                    <textarea
+                        :id="labeledById"
+                        ref="input"
+                        class="inp-nostyle textarea"
+                        :class="{ 'inp-nostyle-preservefocus': preserveFocus }"
+                        v-bind="inputProps"
+                        :value="inputValue"
+                        :aria-invalid="validationState.invalid || invalid"
+                        :aria-describedby="ariaDescribedByIds"
+                        :aria-controls="controlsId || null"
+                        :aria-activedescendant="ariaActivedescendant || null"
+                        :aria-autocomplete="ariaAutocomplete || null"
+                        @input="onInput"
+                        @change="onChange"
+                        @focus="onFocus"
+                        @blur="onBlur"
+                    ></textarea>
+                </template>
             </template>
             <template v-else>
                 <input
@@ -44,24 +68,28 @@
                     :aria-autocomplete="ariaAutocomplete || null"
                     @input="onInput"
                     @change="onChange"
-                    @focus="$emit('focus')"
-                    @blur="$emit('blur')"
+                    @focus="onFocus"
+                    @blur="onBlur"
                 />
             </template>
             <slot name="suffix"></slot>
         </span>
         <slot name="bottom" v-bind="slotProps">
-            <div v-if="validationState.errors.length > 0" :id="errorMsgId" class="ferrormessages">
-                <div
-                    v-for="(msg, idx) in validationState.errors"
-                    :key="`${errorMsgId}_${idx}_err`"
-                    class="ferrormessages_message"
-                >
-                    {{ msg }}
-                </div>
+            <div v-if="validationState.errors.length > 0">
+                <component
+                    :is="
+                        typeof errorMessagesComponent === 'object'
+                            ? errorMessagesComponent.name
+                            : errorMessagesComponent
+                    "
+                    :errors-cont-id="errorMsgId"
+                    :errors="validationState.errors"
+                    :input-cont-id="dInputContId"
+                    v-bind="{ ...(typeof errorMessagesComponent === 'object' ? errorMessagesComponent.props : {}) }"
+                />
             </div>
-            <div v-else-if="infoText" :id="infoTextId" class="finfotext">
-                {{ infoText }}
+            <div v-else-if="infoText">
+                <f-info-text :text="infoText" :info-text-id="infoTextId" />
             </div>
         </slot>
     </span>
@@ -73,6 +101,8 @@ import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import FLabel from '../FLabel/FLabel.vue';
 import { debounce } from '../../utils/index.js';
+import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
+import FInfoText from '../FInfoText/FInfoText.vue';
 
 /**
  * Input field (input or textarea) with slots.
@@ -82,7 +112,7 @@ export default {
 
     inheritAttrs: false,
 
-    components: { FLabel },
+    components: { FInfoText, FErrorMessages, FLabel },
 
     mixins: [inputMixin, formInputMixin, helpersMixin],
 
@@ -102,15 +132,15 @@ export default {
             type: String,
             default: '',
         },
-        /** */
-        inputContId: {
-            type: String,
-            default: '',
-        },
         /** Throttle onInput callback interval in milliseconds */
         throttleInputInterval: {
             type: Number,
             default: 0,
+        },
+        /** Set this value on the blur event if input's value is not valid */
+        autoCorrection: {
+            type: [String, Number, Object],
+            default: null,
         },
         /** Validate on input event as well */
         validateOnInput: {
@@ -123,12 +153,17 @@ export default {
             default: false,
         },
         /** Don't style f-input as input field */
-        noInputStyle: {
+        noStyle: {
             type: Boolean,
             default: false,
         },
-        /** Preserve focus when `noInputStyle` is `true` */
+        /** Preserve focus when `noStyle` is `true` */
         preserveFocus: {
+            type: Boolean,
+            default: false,
+        },
+        /**  */
+        autoResizableTextarea: {
             type: Boolean,
             default: false,
         },
@@ -148,7 +183,8 @@ export default {
                 'finput-suffixslot': this.hasSlot('suffix'),
                 'finput-bottomslot': this.hasSlot('bottom'),
                 'finput-textarea': this.isTextarea,
-                'finput-noinputstyle': this.noInputStyle,
+                'finput-autoresizetextarea': this.autoResizableTextarea,
+                'finput-noinputstyle': this.noStyle,
             };
         },
 
@@ -160,10 +196,10 @@ export default {
                 'inp-xs': this.fieldSize === 'mini',
                 'inp-readonly': this.readonly,
                 'inp-disabled': this.disabled,
-                inp: !this.noInputStyle,
-                // 'inp-cont': !this.noInputStyle,
-                'inp-cont': true,
-                // 'textarea': this.isTextarea && !this.noInputStyle,
+                inp: !this.noStyle,
+                // 'inp-cont': !this.noStyle,
+                'inp-cont': !this.autoResizableTextarea,
+                // 'textarea': this.isTextarea && !this.noStyle,
             };
         },
 
@@ -200,6 +236,10 @@ export default {
         },
     },
 
+    mounted() {
+        this.setGhostHtml(this.inputValue);
+    },
+
     methods: {
         focus() {
             const { input } = this.$refs;
@@ -214,6 +254,26 @@ export default {
 
             if (input) {
                 input.select();
+            }
+        },
+
+        activate() {
+            // this.focus();
+            this.select();
+        },
+
+        /**
+         * Set ghost element's html if auto resizing of textarea is on.
+         *
+         * @param {string} text
+         */
+        setGhostHtml(text) {
+            const { ghost } = this.$refs;
+
+            if (this.autoResizableTextarea && ghost) {
+                const lastChar = text.charAt(text.length - 1);
+
+                ghost.innerHTML = text.replace(/(\n|\r|\n\r|\r\n)/g, '<br>') + (lastChar === '\n' ? '<br>' : '');
             }
         },
 
@@ -237,6 +297,8 @@ export default {
             } else {
                 this._onInput(_event);
             }
+
+            this.setGhostHtml(_event.target.value);
         },
 
         /**
@@ -258,6 +320,20 @@ export default {
 
         onChange() {
             if (this.validateOnChange) {
+                this.validate();
+            }
+        },
+
+        onFocus(event) {
+            this.$emit('focus', event);
+        },
+
+        onBlur(event) {
+            this.$emit('blur', event);
+
+            if (this.autoCorrection !== null && this.validationState.invalid) {
+                this.inputValue = this.autoCorrection;
+                this.$emit('input', this.inputValue);
                 this.validate();
             }
         },
