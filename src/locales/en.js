@@ -9,6 +9,9 @@ export const enTranslations = {
     fsearchfield: {
         deleteInputText: 'Delete input text',
     },
+    fcombobox: {
+        showOptions: 'Show options',
+    },
     fpagination: {
         paginationNavigation: 'Pagination navigation',
         firstPage: 'Go to first page',
@@ -29,5 +32,6 @@ export const enTranslations = {
     },
     componentChangeMessages: {
         'f-form': 'A form has been changed but not saved. Do you want to continue anyway?',
+        'f-data-grid': 'A table has been changed but not saved. Do you want to continue anyway?',
     },
 };

@@ -9,6 +9,9 @@ export const faTranslations = {
     fsearchfield: {
         deleteInputText: 'متن ورودی را حذف کنید',
     },
+    fcombobox: {
+        showOptions: 'گزینه های نمایش',
+    },
     fpagination: {
         paginationNavigation: 'ناوبری صفحه بندی',
         firstPage: 'به صفحه اول بروید',
@@ -29,5 +32,6 @@ export const faTranslations = {
     },
     componentChangeMessages: {
         'f-form': 'فرم تغییر کرد اما ذخیره نشد. می خواهید ادامه دهید؟',
+        'f-data-grid': 'جدول تغییر کرده اما ذخیره نشده است. آیا به هر حال می خواهید ادامه دهید؟',
     },
 };
