@@ -460,7 +460,7 @@ export const PopoverWithArrow = () => ({
                 :attach-position="attachPosition"
                 :attach-margin="[4, 4, 4, 4]"
                 :with-header="false"
-                :__hide-after="1000"
+                :hide-after="1000"
                 animation-in="scale-center-enter-active"
                 animation-out="scale-center-leave-active"
                 title="Popover window"
