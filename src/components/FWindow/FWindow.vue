@@ -49,6 +49,12 @@
                     <slot name="footer"></slot>
                 </footer>
 
+                <div v-if="withArrow" ref="arrow" class="fwindow_arrow" :data-arrow-dir="arrowDir" :style="arrowStyle">
+                    <slot name="arrow-icon">
+                        <f-svg-icon rotate="-90deg"><icon-popover-arrow /></f-svg-icon>
+                    </slot>
+                </div>
+
                 <f-overlay
                     v-if="dWithOverlay && isVisible"
                     ref="overlay"
@@ -82,6 +88,7 @@ import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
 import { translationsMixin } from '../../mixins/translations.js';
 import { isAnyComponentChanged } from '../../utils/vue-helpers.js';
+import IconPopoverArrow from '@/components/icons/IconPopoverArrow.vue';
 
 /**
  * Basic window following WAI-ARIA practices.
@@ -90,7 +97,7 @@ import { isAnyComponentChanged } from '../../utils/vue-helpers.js';
 export default {
     name: 'FWindow',
 
-    components: { IconTimes, FSvgIcon, FOverlay },
+    components: { IconPopoverArrow, IconTimes, FSvgIcon, FOverlay },
 
     mixins: [helpersMixin, translationsMixin],
 
@@ -149,6 +156,11 @@ export default {
         withOverlay: {
             type: Boolean,
             default: true,
+        },
+        /** Use arrow with popover */
+        withArrow: {
+            type: Boolean,
+            default: false,
         },
         /** 'fixed' | 'absolute' */
         position: {
@@ -266,6 +278,8 @@ export default {
             style: {
                 zIndex: this.zIndex,
             },
+            arrowDir: 'up',
+            arrowStyle: {},
         };
     },
 
@@ -276,6 +290,7 @@ export default {
                 'fwindow-fixed': this.dPosition === 'fixed',
                 'fwindow-withheader': this.withHeader,
                 'fwindow-withfooter': this.withFooter,
+                'fwindow-witharrow': this.withArrow,
                 'fwindow-notitle': this.noTitle,
                 modal: this.modal,
                 'fwindow-popover': this.popover,
@@ -332,6 +347,10 @@ export default {
         this._modalZIndex = -1;
         /** Is animation in progress? */
         this._animInProgress = false;
+        this._arrowSize = {
+            width: 0,
+            height: 0,
+        };
     },
 
     mounted() {
@@ -419,6 +438,16 @@ export default {
 
                     this.$nextTick(() => {
                         getComputedStyle(this.$el, this._windowStyle);
+
+                        if (this.withArrow) {
+                            getComputedStyle(this.$refs.arrow, this._arrowSize, true);
+
+                            this.attachMargin[0] += this._arrowSize.height;
+                            this.attachMargin[1] += this._arrowSize.width;
+                            this.attachMargin[2] += this._arrowSize.height;
+                            this.attachMargin[3] += this._arrowSize.width;
+                        }
+
                         this.setPosition();
                         if (!this.preventFocus) {
                             this.focus();
@@ -593,7 +622,82 @@ export default {
                     );
 
                     this.attachToPoint = null;
+
+                    if (this.withArrow) {
+                        this._correctArrowPosition(rect);
+                    }
                 }
+            }
+        },
+
+        _correctArrowPosition(_rects) {
+            const contRect = _rects.elem1Rect;
+            const elemRect = _rects.elem2Rect;
+            const arrowDir = this.arrowDir;
+            const windowStyle = this._windowStyle;
+            let arrowSize = 16;
+            let arrowPos = 0;
+            const arrowStyle = { display: 'block' };
+
+            if (contRect && elemRect) {
+                if (
+                    _rects.pos &&
+                    (((arrowDir === 'down' || arrowDir === 'up') && _rects.pos.top !== -1) ||
+                        ((arrowDir === 'left' || arrowDir === 'right') && _rects.pos.left !== -1))
+                ) {
+                    this.arrowStyle = { display: 'none' };
+                    return;
+                }
+
+                if (arrowDir === 'up' || arrowDir === 'down') {
+                    arrowSize = this._arrowSize.width || arrowSize;
+
+                    if (contRect.width > elemRect.width) {
+                        // widths
+                        arrowPos = elemRect.left + elemRect.width / 2 - arrowSize / 2 - contRect.left;
+                    } else {
+                        arrowPos = contRect.width / 2 - arrowSize / 2;
+                    }
+
+                    if (arrowPos < 0) {
+                        arrowPos =
+                            arrowDir === 'up' ? windowStyle.borderTopLeftRadius : windowStyle.borderBottomLeftRadius;
+                    } else if (arrowPos > contRect.width - arrowSize) {
+                        arrowPos =
+                            contRect.width -
+                            arrowSize -
+                            (arrowDir === 'up'
+                                ? windowStyle.borderTopRightRadius
+                                : windowStyle.borderBottomRightRadius);
+                    }
+
+                    arrowStyle.left = `${arrowPos}px`;
+                } else {
+                    arrowSize = this._arrowSize.height || arrowSize;
+
+                    if (contRect.height > elemRect.height) {
+                        // heights
+                        arrowPos = elemRect.top + elemRect.height / 2 - arrowSize / 2 - contRect.top;
+                    } else {
+                        arrowPos = contRect.height / 2 - arrowSize / 2;
+                    }
+
+                    if (arrowPos < 0) {
+                        arrowPos =
+                            arrowDir === 'left' ? windowStyle.borderTopLeftRadius : windowStyle.borderTopRightRadius;
+                    } else if (arrowPos > contRect.height - arrowSize) {
+                        arrowPos =
+                            contRect.height -
+                            arrowSize -
+                            (arrowDir === 'left'
+                                ? windowStyle.borderBottomLeftRadius
+                                : windowStyle.borderBottomRightRadius);
+                    }
+
+                    arrowStyle.top = `${arrowPos}px`;
+                }
+
+                this.arrowStyle = arrowStyle;
             }
         },
 
@@ -701,6 +805,18 @@ export default {
                 }
 
                 alignment = getAlignment(attachPosition);
+            }
+
+            if (this.withArrow) {
+                if (alignment[0].charAt(1) === 'b' && alignment[1].charAt(1) === 't') {
+                    this.arrowDir = 'down';
+                } else if (alignment[0].charAt(1) === 't' && alignment[1].charAt(1) === 'b') {
+                    this.arrowDir = 'up';
+                } else if (alignment[0].charAt(0) === 'l' && alignment[1].charAt(0) === 'r') {
+                    this.arrowDir = 'left';
+                } else {
+                    this.arrowDir = 'right';
+                }
             }
 
             return alignment;

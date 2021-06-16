@@ -81,6 +81,10 @@ export function cloneObject(_obj, _except) {
  * @return {(number|string)|*|undefined}
  */
 export function clone(_val) {
+    if (_val instanceof Date) {
+        return new Date(_val.getTime());
+    }
+
     if (isObject(_val) || isArray(_val)) {
         return cloneObject(_val);
     }

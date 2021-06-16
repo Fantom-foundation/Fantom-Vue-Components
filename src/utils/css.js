@@ -31,7 +31,7 @@ export function getComputedStyle(_elem, _style, _toFloat) {
     let css = {};
     let cStyle;
     let val;
-    let propVal;
+    let propVal = '';
 
     if (_elem) {
         cStyle = window.getComputedStyle(_elem);
