@@ -86,9 +86,9 @@ import {
 } from '../../utils/DOM.js';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
+import IconPopoverArrow from '../icons/IconPopoverArrow.vue';
 import { translationsMixin } from '../../mixins/translations.js';
 import { isAnyComponentChanged } from '../../utils/vue-helpers.js';
-import IconPopoverArrow from '@/components/icons/IconPopoverArrow.vue';
 
 /**
  * Basic window following WAI-ARIA practices.
