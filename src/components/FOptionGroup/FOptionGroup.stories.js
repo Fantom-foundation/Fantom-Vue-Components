@@ -96,6 +96,67 @@ export const Model = () => ({
     },
 });
 
+export const Required = () => ({
+    components: { FOptionGroup, FButton, FAriaAlert },
+    template: `
+        <div>
+            <form action="" @submit="onChecbkoxesSubmit">
+                <f-option-group
+                    required
+                    validate-on-change
+                    @validation-state="_state => submit1Disabled = _state.invalid "
+                    ref="checkboxes"
+                    :data="{'10': 'Checkbox 1', '20': 'Checkbox 2', '30': 'Checkbox 3'}"
+                    label="Checkboxes"
+                    info-text="Info text"
+                    column
+                    name="checkboxes"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submit1Disabled">Submit</f-button>
+            </form>
+
+            <br /><br />
+
+            <form action="" @submit="onRadiosSubmit">
+                <f-option-group
+                    required
+                    @validation-state="_state => submit2Disabled = _state.invalid "
+                    validate-on-change
+                    error-message="Select a value"
+                    type="radio"
+                    ref="radios"
+                    :data="{'10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3'}"
+                    label="Radios"
+                    name="radios"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submit2Disabled">Submit</f-button>
+            </form>
+
+            <f-aria-alert />
+        </div>
+    `,
+    data() {
+        return {
+            submit1Disabled: false,
+            submit2Disabled: false,
+        };
+    },
+    methods: {
+        onChecbkoxesSubmit(_event) {
+            this.$refs.checkboxes.validate();
+
+            _event.preventDefault();
+        },
+        onRadiosSubmit(_event) {
+            this.$refs.radios.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FOptionGroup, FButton, FAriaAlert },
     template: `

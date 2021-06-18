@@ -118,6 +118,40 @@ export const Value = () => ({
     },
 });
 
+export const Required = () => ({
+    components: { FSelect, FButton, FAriaAlert },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit" novalidate>
+                <f-select
+                    required
+                    validate-on-change
+                    error-message="Select an option"
+                    ref="select"
+                    label="Select"
+                    :data="[
+                        {label: '---', value: ''},
+                        {label: 'Option 1', value: 1},
+                        {label: 'Option 2', value: 2},
+                        {label: 'Option 3', value: 3}
+                    ]"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
+
+            <f-aria-alert />
+        </div>
+    `,
+    methods: {
+        onSubmit(_event) {
+            this.$refs.select.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FSelect, FButton, FAriaAlert },
     template: `

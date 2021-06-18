@@ -1,7 +1,7 @@
 <template>
     <span class="foptiongroup" :class="classes">
         <slot name="top" v-bind="slotProps">
-            <f-label v-if="label" :id="labeledById" :label="label" class="foptiongroup_label" />
+            <f-label v-if="label" :id="labeledById" :label="label" :required="required" class="foptiongroup_label" />
         </slot>
         <span
             class="foptiongroup_options"
@@ -107,6 +107,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        ignoreFirstChange: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -128,8 +132,15 @@ export default {
 
     watch: {
         inputValue(_value) {
-            if (this.validateOnChange && !this._firstChange) {
-                this.validate();
+            // if (this.validateOnChange && !this._firstChange) {
+            if (this.validateOnChange) {
+                if (this.ignoreFirstChange) {
+                    if (!this._firstChange) {
+                        this.validate();
+                    }
+                } else {
+                    this.validate();
+                }
             }
 
             this.$emit('change', _value);

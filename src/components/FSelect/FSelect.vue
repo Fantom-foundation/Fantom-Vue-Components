@@ -1,7 +1,7 @@
 <template>
     <span :id="id" class="fselect">
         <slot name="top" v-bind="slotProps">
-            <f-label v-if="label" native :id="labeledById" :label="label" />
+            <f-label v-if="label" native :id="labeledById" :label="label" :required="required" />
         </slot>
         <span class="sel" :class="selClasses">
             <select

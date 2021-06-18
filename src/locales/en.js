@@ -1,4 +1,8 @@
 export const enTranslations = {
+    // general translations
+    requiredField: 'Required',
+
+    // component translations
     fwindow: {
         closeWindow: 'Close window',
     },

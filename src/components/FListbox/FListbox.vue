@@ -1,7 +1,7 @@
 <template>
     <div :id="id" class="flistbox" :class="classes">
         <slot name="top" v-bind="slotProps">
-            <f-label v-if="label" :id="labeledById" :label="label" />
+            <f-label v-if="label" :id="labeledById" :label="label" :required="required" />
         </slot>
         <ul
             ref="listbox"

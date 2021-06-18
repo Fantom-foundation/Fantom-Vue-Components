@@ -340,6 +340,8 @@ export const Model = () => ({
                     </div>
                     <div>
                         <f-button type="submit" label="Submit" />
+                        <f-button type="submit" name="submit2" label="Submit 2" />
+                        <f-button type="submit" name="submit3" label="Submit 3" />
                         <f-button type="reset" label="Reset" />
                     </div>
                 </div>
@@ -403,13 +405,13 @@ On submit:
 export const Validation = () => ({
     components: { FForm, FFormInput, FButton, FAriaAlert },
     template: `
-        <f-form :values="values" class="grid" @submit="onSubmit" v-slot="fprops">
+        <f-form v-model="values" class="grid" @submit="onSubmit" v-slot="fprops">
             <fieldset class="col-6">
                 <legend>Initial values</legend>
                 <div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            required
                             validate-on-input
                             type="text"
                             label="text"
@@ -444,7 +446,7 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            required
                             type="combobox"
                             select-mode
                             label="combobox"
@@ -470,7 +472,7 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            required
                             validate-on-change
                             type="select"
                             label="select"
@@ -483,7 +485,7 @@ export const Validation = () => ({
                             ]"
                         />
                         <f-form-input
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            required
                             validate-on-change
                             type="dropdownlistbox"
                             label="dropdownlistbox"
@@ -498,7 +500,7 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (_value.length === 0 ? 'Required' : '')"
+                            required
                             validate-on-change
                             type="checkboxgroup"
                             label="checkboxgroup"
@@ -508,7 +510,7 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (_value.length === 0 ? 'Required' : '')"
+                            required
                             validate-on-change
                             type="radiogroup"
                             label="radiogroup"
@@ -518,7 +520,7 @@ export const Validation = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
+                            required
                             validate-on-change
                             type="listbox"
                             name="listbox"
@@ -538,6 +540,7 @@ export const Validation = () => ({
                 </div>
             </fieldset>
             <pre class="col-6">
+                {{ values }}
 pendingValidation
 {{ fprops.pendingValidation }}
 

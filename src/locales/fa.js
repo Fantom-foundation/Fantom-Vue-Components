@@ -1,4 +1,8 @@
 export const faTranslations = {
+    // general translations
+    requiredField: 'رشته مورد نیاز',
+
+    // component translations
     fwindow: {
         closeWindow: 'پنجره بسته',
     },

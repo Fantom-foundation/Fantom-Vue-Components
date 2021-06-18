@@ -263,6 +263,40 @@ export const Scrollable = () => ({
     },
 });
 
+export const Required = () => ({
+    components: { FListbox, FButton, FAriaAlert },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-listbox
+                    required
+                    validate-on-change
+                    @validation-state="_state => submitDisabled = _state.invalid "
+                    ref="listbox"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+
+            <f-aria-alert />
+        </div>
+    `,
+    data() {
+        return {
+            data: [{ label: '---', value: '' }, ...data],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        onSubmit(_event) {
+            this.$refs.listbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FListbox, FButton, FAriaAlert },
     template: `

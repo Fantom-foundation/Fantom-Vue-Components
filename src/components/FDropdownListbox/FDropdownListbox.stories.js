@@ -270,6 +270,41 @@ export const Text = () => ({
     },
 });
 
+export const Required = () => ({
+    components: { FDropdownListbox, FButton, FAriaAlert },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-dropdown-listbox
+                    required
+                    validate-on-change
+                    @validation-state="_state => submitDisabled = _state.invalid "
+                    ref="dropdownlistbox"
+                    :focus-item-on-focus="true"
+                    :data="data"
+                />
+                <br /><br />
+                <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
+            </form>
+
+            <f-aria-alert />
+        </div>
+    `,
+    data() {
+        return {
+            data: [{ label: '---', value: '' }, ...clone(data)],
+            submitDisabled: false,
+        };
+    },
+    methods: {
+        onSubmit(_event) {
+            this.$refs.dropdownlistbox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FDropdownListbox, FButton, FAriaAlert },
     template: `

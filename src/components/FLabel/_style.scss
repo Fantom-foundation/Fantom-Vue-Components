@@ -7,4 +7,10 @@
     &-notvisible {
         @include visibility.not-visible;
     }
+
+    &_asterisk {
+        font-size: 0.9em;
+        padding-inline-start: var(--f-spacer-1, 3px);
+        color: var(--f-color-red-5, #ca1616);
+    }
 }

@@ -331,12 +331,37 @@ export const Invalid = () => ({
     },
 });
 
+export const Required = () => ({
+    components: { FComboBox, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit">
+                <f-combo-box ref="combobox" required validate-on-change select-mode :data="data" label="Required combobox" />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...[{ label: '---', value: '' }], ...clone(comboboxData)],
+        };
+    },
+    methods: {
+        onSubmit(_event) {
+            this.$refs.combobox.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FComboBox, FButton },
     template: `
         <div>
             <form action="" @submit="onSubmit">
-                <f-combo-box ref="combobox" :validator="validator" __validate-on-change select-mode :data="data" />
+                <f-combo-box ref="combobox" :validator="validator" validate-on-change select-mode :data="data" />
                 <br /><br />
                 <f-button type="submit" size="small">Submit</f-button>
             </form>

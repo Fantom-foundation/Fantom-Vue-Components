@@ -32,6 +32,7 @@
             :name="name"
             v-model="inputValue"
             v-on="$listeners"
+            ignore-first-change
             @validation-state="onValidationState"
         >
             <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">

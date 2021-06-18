@@ -44,14 +44,41 @@ export const Invalid = () => ({
     `,
 });
 
+export const Required = () => ({
+    components: { FPasswordField, FButton },
+    template: `
+        <div>
+            <form action="" @submit="onSubmit" novalidate>
+                <f-password-field
+                    ref="passwordfield"
+                    required
+                    validate-on-input
+                    label="Validation"
+                    name="pwd1"
+                />
+                <br /><br />
+                <f-button type="submit" size="small">Submit</f-button>
+            </form>
+        </div>
+    `,
+    methods: {
+        onSubmit(_event) {
+            this.$refs.passwordfield.validate();
+
+            _event.preventDefault();
+        },
+    },
+});
+
 export const Validation = () => ({
     components: { FPasswordField, FButton },
     template: `
         <div>
-            <form action="" @submit="onSubmit">
+            <form action="" @submit="onSubmit" novalidate>
                 <f-password-field
                     ref="passwordfield"
                     :validator="validator"
+                    required
                     validate-on-change
                     label="Validation"
                     name="pwd1"

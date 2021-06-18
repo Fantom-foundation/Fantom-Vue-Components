@@ -1,4 +1,8 @@
 export const psTranslations = {
+    // general translations
+    requiredField: 'اړین ډګر',
+
+    // component translations
     fwindow: {
         closeWindow: 'کړکۍ بنده کړئ',
     },

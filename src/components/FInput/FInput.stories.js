@@ -104,6 +104,29 @@ export const Invalid = () => ({
     `,
 });
 
+export const Required = () => ({
+    components: { FInput },
+    template: `
+        <div>
+            <h3>Input</h3>
+            <f-input required field-size="large" label="Large" />
+            <f-input required label="Default" placeholder="placehodler" />
+            <f-input required field-size="small" label="Small" value="value" />
+            <f-input required field-size="mini" label="Mini" value="value" />
+            <h3>Textarea</h3>
+            <f-input required is-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input required is-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input required is-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input required is-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+            <h3>Textarea</h3>
+            <f-input required is-textarea auto-resizable-textarea cols="20" rows="5" field-size="large" label="Large" />
+            <f-input required is-textarea auto-resizable-textarea cols="20" rows="5" label="Default" placeholder="placehodler" />
+            <f-input required is-textarea auto-resizable-textarea cols="20" rows="5" field-size="small" label="Small" value="value" />
+            <f-input required is-textarea auto-resizable-textarea cols="20" rows="5" field-size="mini" label="Mini" value="value" />
+        </div>
+    `,
+});
+
 export const Validation = () => ({
     components: { FInput, FButton, FAriaAlert },
     template: `

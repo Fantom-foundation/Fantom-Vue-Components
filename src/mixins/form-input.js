@@ -1,5 +1,6 @@
 import { getUniqueId, isArray } from '../utils/index.js';
 import { eventBusMixin } from './event-bus.js';
+import { requiredValidator } from '../components/validators.js';
 
 /**
  * Common props and methods for inputs with validation
@@ -19,6 +20,14 @@ export const formInputMixin = {
         validator: {
             type: Function,
             default: null,
+        },
+        /**
+         * Validator for required field.
+         * @param {*} _value
+         */
+        requiredValidator: {
+            type: Function,
+            default: requiredValidator,
         },
         /** Validate on change or input event */
         validateOnChange: {
@@ -96,6 +105,11 @@ export const formInputMixin = {
             type: String,
             default: '',
         },
+        /** */
+        required: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -132,6 +146,7 @@ export const formInputMixin = {
                 validationState: this.validationState,
                 errorMsgId: this.errorMsgId,
                 infoTextId: this.infoTextId,
+                required: this.required,
             };
         },
 
@@ -188,14 +203,18 @@ export const formInputMixin = {
          */
         async validate(_validator) {
             const validator = _validator || this.validator;
+            const validationState = { ...this.validationState };
+            const validatorExists = typeof validator === 'function';
+            let errorMsgs = [];
+            let invalid = false;
+            let result;
 
-            if (typeof validator === 'function') {
+            if (validatorExists) {
                 if (this._pendingValidation) {
                     return this._pendingValidation;
                 }
 
-                let result = validator(this.inputValue);
-                const validationState = { ...this.validationState };
+                result = validator(this.inputValue);
 
                 if (result instanceof Promise) {
                     this._pendingValidation = result;
@@ -229,8 +248,7 @@ export const formInputMixin = {
                     }
                 }
 
-                const invalid = isArray(result) ? result.length > 0 : !!result;
-                let errorMsgs = [];
+                invalid = isArray(result) ? result.length > 0 : !!result;
 
                 if (isArray(result)) {
                     errorMsgs = result;
@@ -240,13 +258,27 @@ export const formInputMixin = {
                     errorMsgs = invalid ? [this.errorMessage] : [];
                 }
 
+                this._pendingValidation = null;
+            }
+
+            if (this.required) {
+                result = this.requiredValidator(this.inputValue);
+
+                if (result) {
+                    errorMsgs.push(result);
+                }
+
+                if (!invalid) {
+                    invalid = !!result;
+                }
+            }
+
+            if (validatorExists || this.required) {
                 validationState.errors = [...errorMsgs];
                 validationState.invalid = invalid;
                 validationState.valid = !invalid;
                 validationState.pending = false;
                 validationState.validated = true;
-
-                this._pendingValidation = null;
 
                 this.changeValidationState(validationState);
             }

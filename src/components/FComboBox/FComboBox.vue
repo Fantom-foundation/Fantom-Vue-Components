@@ -407,7 +407,9 @@ export default {
 
             this.inputValue = this.textIsValue ? _item.label : _item.value;
 
-            this.validate();
+            if (this.validateOnChange) {
+                this.validate();
+            }
 
             // this.$emit('input', this.inputValue);
             /*if (!this.inlineAutocomplete || _selectionAction !== 'enterKey') {

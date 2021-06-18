@@ -1,7 +1,7 @@
 <template>
     <div class="fdropdownlistbox">
         <slot name="top" v-bind="slotProps">
-            <f-label v-if="label" :id="labeledById" :label="label" />
+            <f-label v-if="label" :id="labeledById" :label="label" :required="required" />
         </slot>
         <button
             :id="buttonId"
@@ -246,9 +246,9 @@ export default {
         onListboxItemSelected(_item, _selectionAction) {
             this.selectedItem = _item;
 
-            /*if (this.selectOnMainAction || _selectionAction !== 'enterKey') {
+            if (this.selectOnMainAction || _selectionAction !== 'enterKey') {
                 this.emitChangeEvent(_item, _selectionAction);
-            }*/
+            }
 
             if (this.selectOnMainAction || _selectionAction === 'click' || _selectionAction === 'enterKey') {
                 this.$refs.popover.hide(this.animationOutSuccess);
