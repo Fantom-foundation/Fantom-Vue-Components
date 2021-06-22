@@ -6,6 +6,8 @@ export function requiredValidator(value, errMessage = translations._('requiredFi
         return !value.trim() ? errMessage : '';
     } else if (isArray(value)) {
         return value.length === 0 ? errMessage : '';
+    } else if (value === null) {
+        return errMessage;
     }
 
     return '';
