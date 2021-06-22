@@ -89,6 +89,7 @@ import IconTimes from '../icons/IconTimes.vue';
 import IconPopoverArrow from '../icons/IconPopoverArrow.vue';
 import { translationsMixin } from '../../mixins/translations.js';
 import { isAnyComponentChanged } from '../../utils/vue-helpers.js';
+import './directives.js';
 
 /**
  * Basic window following WAI-ARIA practices.
@@ -180,7 +181,7 @@ export default {
         /**
          * How to place popover to `attachTo` element. (`'top'` | `'right'` | `'bottom'` | `'left'` | `'auto'` | `'[lcrm][tcbm] [lcrm][tcbm]'`)
          *
-         * @type {('top' | 'right' | 'bottom' | 'left' | 'auto' | '[lcrm][tcbm] [lcrm][tcbm]')}
+         * @type {('top' | 'right' | 'bottom' | 'left' | 'auto' | 'auto-vertical' | 'auto-vertical-exact' | 'auto-horizontal' | 'auto-horizontal-exact' | '[lcrm][tcbm] [lcrm][tcbm]')}
          */
         attachPosition: {
             type: String,
@@ -189,7 +190,7 @@ export default {
         /**
          * Prefered attach position, if `attachPosition` is `'auto'`. (`'top'` | `'right'` | `'bottom'` | `'left'` | `'auto'` | `'[lcrm][tcbm] [lcrm][tcbm]'`)
          *
-         * @type {('top' | 'right' | 'bottom' | 'left' | 'auto' | '[lcrm][tcbm] [lcrm][tcbm]')}
+         * @type {('top' | 'right' | 'bottom' | 'left' | '[lcrm][tcbm] [lcrm][tcbm]')}
          */
         preferredAttachPosition: {
             type: String,
@@ -351,6 +352,8 @@ export default {
             width: 0,
             height: 0,
         };
+        /** Signals if arrow size was added to `attachMargin` */
+        this._arrowSizeAdded = false;
     },
 
     mounted() {
@@ -394,6 +397,10 @@ export default {
 
         if (this.hideOnDocumentMousedown) {
             window.removeEventListener('mousedown', this.onWindowMousedown);
+        }
+
+        if (this.correctPosOnScroll) {
+            document.removeEventListener('scroll', this._scrollCallback);
         }
 
         this.clearHideAfterTimeout();
@@ -440,12 +447,7 @@ export default {
                         getComputedStyle(this.$el, this._windowStyle);
 
                         if (this.withArrow) {
-                            getComputedStyle(this.$refs.arrow, this._arrowSize, true);
-
-                            this.attachMargin[0] += this._arrowSize.height;
-                            this.attachMargin[1] += this._arrowSize.width;
-                            this.attachMargin[2] += this._arrowSize.height;
-                            this.attachMargin[3] += this._arrowSize.width;
+                            this._setAttachMargin();
                         }
 
                         this.setPosition();
@@ -774,6 +776,19 @@ export default {
                 return -(lau.len / 2) + lau.unit;
             }
             return '';
+        },
+
+        _setAttachMargin() {
+            if (this.withArrow && !this._arrowSizeAdded) {
+                getComputedStyle(this.$refs.arrow, this._arrowSize, true);
+
+                this.attachMargin[0] += this._arrowSize.height;
+                this.attachMargin[1] += this._arrowSize.width;
+                this.attachMargin[2] += this._arrowSize.height;
+                this.attachMargin[3] += this._arrowSize.width;
+
+                this._arrowSizeAdded = true;
+            }
         },
 
         _updateStyle(_css) {
