@@ -25,15 +25,12 @@
                 <span class="fdropdownlistbox_button_arrow"></span>
             </slot>
         </button>
-        <f-window
+        <f-popover
             v-if="showPopover"
             ref="popover"
-            popover
-            correct-pos-on-scroll
-            :with-header="false"
-            :stay-in-viewport="false"
             :attach-to="`#${buttonId}`"
             attach-position="auto-vertical-exact"
+            :attach-margin="[0, 0, 0, 0]"
             :animation-in="animationIn"
             :animation-out="animationOut"
             hide-on-document-mousedown
@@ -57,7 +54,7 @@
                     </slot>
                 </template>
             </f-listbox>
-        </f-window>
+        </f-popover>
         <slot name="bottom" v-bind="slotProps">
             <div v-if="validationState.errors.length > 0">
                 <component
@@ -90,6 +87,7 @@ import { cloneObject, defer, getUniqueId } from '../../utils/index.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { isKey } from '../../utils/aria.js';
 import { popoverAnimationMixin } from '../../mixins/popover-animation.js';
+import FPopover from '../FPopover/FPopover.vue';
 
 /**
  * Listbox component created according to WAI-ARIA rules and practices.
@@ -97,7 +95,7 @@ import { popoverAnimationMixin } from '../../mixins/popover-animation.js';
 export default {
     name: 'FDropdownListbox',
 
-    components: { FWindow, FListbox, FLabel, FErrorMessages, FInfoText },
+    components: { FPopover, FWindow, FListbox, FLabel, FErrorMessages, FInfoText },
 
     mixins: [FSelect, FListbox, formInputMixin, popoverAnimationMixin],
 

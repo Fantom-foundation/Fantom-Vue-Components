@@ -19,15 +19,13 @@
 
 :root {
     .fcombobox {
-        &_fwindow.fwindow-popover {
+        &_fwindow.fpopover {
+            --fwindow-popover-font-size: var(--f-font-size-5, 16px);
             --fwindow-popover-padding: 0;
             --fwindow-popover-body-padding: 0;
             --fwindow-popover-color: #333;
             --fwindow-popover-background: #fff;
             --f-transition-length: 120ms;
-
-            width: fit-content;
-            max-width: 360px;
         }
 
         &_flistbox {

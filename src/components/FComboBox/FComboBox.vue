@@ -55,20 +55,15 @@
             </template>
         </f-input>
 
-        <f-window
+        <f-popover
             v-if="popoverVisible"
             ref="popover"
-            popover
-            correct-pos-on-scroll
-            :with-header="false"
-            :stay-in-viewport="false"
             :attach-to="`#${dInputContId}`"
             attach-position="auto-vertical-exact"
-            __attach-position="lt lb"
+            :attach-margin="[0, 0, 0, 0]"
             :animation-in="animationIn"
             :animation-out="animationOut"
             __hide-on-document-mousedown
-            prevent-focus
             width-as-attach
             class="fcombobox_fwindow"
             @window-hide="onPopoverHide"
@@ -98,7 +93,7 @@
                     </slot>
                 </template>
             </f-listbox>
-        </f-window>
+        </f-popover>
 
         <slot name="bottom" v-bind="slotProps">
             <div v-if="validationState.errors.length > 0">
@@ -124,7 +119,6 @@
 <script>
 // import FSelect from '../FSelect/FSelect.vue';
 import FListbox from '../FListbox/FListbox.vue';
-import FWindow from '../FWindow/FWindow.vue';
 import { popoverAnimationMixin } from '../../mixins/popover-animation.js';
 import { fieldWithButtonMixin } from '../../mixins/field-with-button.js';
 import { translationsMixin } from '../../mixins/translations.js';
@@ -140,6 +134,7 @@ import FInfoText from '../FInfoText/FInfoText.vue';
 import { selectMixin } from '../../mixins/select.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
+import FPopover from '../FPopover/FPopover.vue';
 
 /**
  * @param {Object} _data
@@ -161,13 +156,13 @@ export default {
     inheritAttrs: false,
 
     components: {
+        FPopover,
         FDotsLoader,
         IconChevronDown,
         FSvgIcon,
         FButton,
         FInput,
         FListbox,
-        FWindow,
         FErrorMessages,
         FInfoText,
     },
