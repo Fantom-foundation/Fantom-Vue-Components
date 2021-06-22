@@ -74,7 +74,26 @@ export function findChildrenByName(_children, _name, _notRecursively, _foundCall
 }
 
 /**
- * @param {Object} _startComponent Vue component
+ * @param {Object} component Vue component
+ * @param {string} parentName
+ * @return {Object|null} Vue component or null
+ */
+export function findParentByName(component, parentName) {
+    let parent = component ? component.$parent : null;
+
+    while (parent) {
+        if (getComponentName(parent) === parentName) {
+            return parent;
+        }
+
+        parent = parent.$parent;
+    }
+
+    return null;
+}
+
+/**
+ * @param {Object} startComponent Vue component
  * @param {string} id
  * @return {Object|null} Vue component or null
  */
@@ -142,4 +161,62 @@ export function setIds(_items, _key = 'id') {
             }
         }
     }
+}
+
+/**
+ * Copy component's methods.
+ *
+ * @param {Object} component Vue component
+ * @param {string[]} methods
+ * @param {string} refName
+ * @return {Object} Keys are method names, values are functions
+ */
+export function copyMethods(component, methods, refName = '') {
+    const cMethods = {};
+    const compMethods = component.methods;
+
+    if (compMethods && methods && refName) {
+        methods.forEach(methodName => {
+            if (methodName in compMethods) {
+                cMethods[methodName] = function(...args) {
+                    const ref = this.$refs[refName];
+
+                    if (ref) {
+                        compMethods[methodName].apply(ref, args);
+                    }
+                };
+            }
+        });
+    }
+
+    return cMethods;
+}
+
+/**
+ * Copy component's properties.
+ *
+ * @param {Object} component Vue component
+ * @param {Object} props Keys are prop names, values are default values or null (default value won't be set)
+ * @return {Object} Keys are prop names, values prop definition objects
+ */
+export function copyProps(component, props = {}) {
+    const cProps = {};
+    const compProps = component.props;
+
+    if (compProps) {
+        Object.keys(props).forEach(propName => {
+            const prop = props[propName];
+
+            if (propName in compProps) {
+                cProps[propName] = { ...compProps[propName] };
+
+                if (prop !== null) {
+                    // cProps[propName].default = clone(prop);
+                    cProps[propName].default = prop;
+                }
+            }
+        });
+    }
+
+    return cProps;
 }
