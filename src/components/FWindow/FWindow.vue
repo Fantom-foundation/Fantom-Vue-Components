@@ -230,9 +230,9 @@ export default {
             type: Boolean,
             default: true,
         },
-        /** Make window stay in viewport. */
+        /** Make window stay in viewport. `'horizontal'` - correct just horizontal position if it's necessary */
         stayInViewport: {
-            type: Boolean,
+            type: [Boolean, String],
             default: true,
         },
         /** Hide window when browser window is resized. */

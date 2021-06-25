@@ -238,7 +238,7 @@ export function isElemOutOfViewport(_elem, _margin, _positionedBottom, _simple) 
  * @param {HTMLElement} _elem1.
  * @param {HTMLElement|array} _elem2 Element or point `[left, top]`.
  * @param {array} [_alignment] [_elem1Alignment, _elem2Alignment], defaults - `['lt', 'lb']`
- * @param {boolean} [_fitToViewport] Correct position so `_elem1` is in viewport.
+ * @param {boolean|string} [_fitToViewport] Correct position so `_elem1` is in viewport. `'horizontal'` - correct just horizontal position if it's necessary
  * @param {array} [_margin] Margin of element position. `[top, right, bottom, left]` - numbers (pixels)
  * @param {boolean} [_adjustHeight] Automatically adjust height of `_elem1`, if it overlaps viewport.
  * @param {boolean} [_elemFixed] Elements (`_elem1` and `_elem2`) are fixed (position: fixed).
@@ -362,20 +362,22 @@ export function attachElemTo(
             }
             elem1Rect.left = pos[0];
 
-            if (pos2.top !== -1) {
-                if (_adjustHeight) {
-                    // alert(pos2)
-                    elem1Rect.height = pos2.height;
-                    css.height = `${elem1Rect.height}px`;
+            if (_fitToViewport !== 'horizontal') {
+                if (pos2.top !== -1) {
+                    if (_adjustHeight) {
+                        // alert(pos2)
+                        elem1Rect.height = pos2.height;
+                        css.height = `${elem1Rect.height}px`;
 
-                    if (elem1C.charAt(1) === 't') {
-                        pos2.top = pos[1]; // don't change top position
+                        if (elem1C.charAt(1) === 't') {
+                            pos2.top = pos[1]; // don't change top position
+                        }
                     }
-                }
 
-                pos[1] = pos2.top;
+                    pos[1] = pos2.top;
+                }
+                elem1Rect.top = pos[1];
             }
-            elem1Rect.top = pos[1];
         }
     }
 

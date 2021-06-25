@@ -59,7 +59,7 @@ export default {
             attachPosition: 'auto',
             preferredAttachPosition: 'top',
             withHeader: false,
-            stayInViewport: false,
+            stayInViewport: 'horizontal',
             preventFocus: true,
             attachMargin: function() {
                 return [4, 4, 4, 4];
