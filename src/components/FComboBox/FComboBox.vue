@@ -375,11 +375,14 @@ export default {
             });
         },
 
-        hidePopover() {
+        /**
+         * @param {string} [animation]
+         */
+        hidePopover(animation = '') {
             const { popover } = this.$refs;
 
             if (popover && this.popoverVisible) {
-                popover.hide();
+                popover.hide(animation);
             }
         },
 
@@ -412,7 +415,7 @@ export default {
             }*/
 
             if (!this.inlineAutocomplete || _selectionAction === 'click' || _selectionAction === 'enterKey') {
-                this.hidePopover();
+                this.hidePopover('scale-center-forward-leave-active');
             }
 
             this.$nextTick(() => {
