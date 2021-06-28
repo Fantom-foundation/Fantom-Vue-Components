@@ -20,6 +20,8 @@
         "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
         "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
         "test:unit": "vue-cli-service test:unit",
+        "test:watch": "web-test-runner --watch",
+        "test": "web-test-runner",
         "lint": "vue-cli-service lint",
         "storybook": "start-storybook -p 6006 --no-manager-cache",
         "build-storybook": "build-storybook",
@@ -37,6 +39,8 @@
         "@babel/preset-env": "^7.12.11",
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
+        "@open-wc/testing": "^2.5.33",
+        "@open-wc/testing-helpers": "^1.8.12",
         "@rollup/plugin-alias": "^3.1.1",
         "@rollup/plugin-babel": "^5.2.2",
         "@rollup/plugin-commonjs": "^17.0.0",
@@ -54,6 +58,7 @@
         "@vue/cli-service": "~4.5.0",
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/test-utils": "^1.0.3",
+        "@web/test-runner": "^0.13.12",
         "babel-eslint": "^10.1.0",
         "chai": "^4.1.2",
         "cross-env": "^7.0.3",
@@ -69,13 +74,14 @@
         "rollup-plugin-vue": "^5.1.9",
         "sass": "^1.32.2",
         "sass-loader": "^10.1.0",
+        "sinon": "^11.1.1",
         "standard-version": "^9.1.0",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
     },
     "peerDependencies": {
-        "vue": "^2.6.12",
-        "nanoid": "^3.1.20"
+        "nanoid": "^3.1.20",
+        "vue": "^2.6.12"
     },
     "husky": {
         "hooks": {
