@@ -346,8 +346,10 @@ export default {
         this._hideAfterId = -1;
         /** Value of `--f-zindex-modal-base` custom property */
         this._modalZIndex = -1;
-        /** Is animation in progress? */
-        this._animInProgress = false;
+        /** Is show animation in progress? */
+        this._showAnimInProgress = false;
+        /** Is hide animation in progress? */
+        this._hideAnimInProgress = false;
         this._arrowSize = {
             width: 0,
             height: 0,
@@ -414,7 +416,7 @@ export default {
 
     methods: {
         show(_animationIn) {
-            if (!this.isVisible) {
+            if (!this.isVisible || this._hideAnimInProgress) {
                 const parentWindow = this.findParentByName('f-window');
 
                 if (parentWindow) {
@@ -441,7 +443,7 @@ export default {
 
                 this.$nextTick(() => {
                     this.isVisible = true;
-                    this._animInProgress = true;
+                    this._showAnimInProgress = true;
 
                     this.$nextTick(() => {
                         getComputedStyle(this.$el, this._windowStyle);
@@ -462,7 +464,7 @@ export default {
         },
 
         hide(_animationOut, _byOverlay) {
-            if (this.isVisible) {
+            if (this.isVisible || this._showAnimInProgress) {
                 if (
                     this.checkComponentsChange &&
                     !this.dWithOverlay &&
@@ -483,7 +485,7 @@ export default {
                     }
                 }
 
-                this._animInProgress = true;
+                this._hideAnimInProgress = true;
 
                 this.$nextTick(() => {
                     if (this.dWithOverlay && !_byOverlay && this.$refs.overlay) {
@@ -704,6 +706,8 @@ export default {
         },
 
         createResizeObserver() {
+            this.destroyResizeObserver();
+
             if (!this._resizeObserver && window.ResizeObserver) {
                 this._resizeObserver = new window.ResizeObserver(
                     throttle(_entries => this.onResize(_entries), 300, true)
@@ -880,7 +884,7 @@ export default {
          * Called by ResizeObserver when FWindow is resized.
          */
         onResize() {
-            if (this.isVisible && !this._animInProgress) {
+            if (this.isVisible && !(this._showAnimInProgress || this._hideAnimInProgress)) {
                 this.correctPositionAndSize();
             }
         },
@@ -914,11 +918,11 @@ export default {
         },
 
         onAfterEnterAnim() {
-            this._animInProgress = false;
+            this._showAnimInProgress = false;
         },
 
         onAfterLeaveAnim() {
-            this._animInProgress = false;
+            this._hideAnimInProgress = false;
         },
     },
 };
