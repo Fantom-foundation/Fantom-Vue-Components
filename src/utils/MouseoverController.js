@@ -46,8 +46,8 @@ export class MouseoverController {
     }
 
     /**
-     * @param {HTMLElement} elem
-     * @param {MouseEvent} event
+     * @param {HTMLElement|EventTarget} elem
+     * @param {Event} event
      */
     testElem(elem, event) {
         const el = elem.closest(this.elemSelector);
@@ -66,7 +66,7 @@ export class MouseoverController {
 
     /**
      * @param {HTMLElement} elem
-     * @param {MouseEvent} event
+     * @param {Event} event
      */
     _elemEntered(elem, event) {
         const { onElemEnter } = this;
@@ -79,7 +79,7 @@ export class MouseoverController {
     }
 
     /**
-     * @param {MouseEvent} event
+     * @param {Event} event
      */
     _elemLeaved(event) {
         const { onElemLeave } = this;
@@ -126,14 +126,14 @@ export class MouseoverController {
     }
 
     /**
-     * @param {MouseEvent} event
+     * @param {Event} event
      */
     _onMouseover(event) {
         this.testElem(event.target, event);
     }
 
     /**
-     * @param {MouseEvent} event
+     * @param {Event} event
      */
     _onMouseleave(event) {
         this._elemLeaved(event);
