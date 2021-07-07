@@ -1,4 +1,4 @@
-import { uppercaseFirstChar } from '../utils';
+import { uppercaseFirstChar } from '../utils/string.js';
 
 /**
  * @param {String} _eventName

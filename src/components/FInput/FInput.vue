@@ -100,7 +100,7 @@ import { inputMixin } from '../../mixins/input.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import FLabel from '../FLabel/FLabel.vue';
-import { debounce } from '../../utils/index.js';
+import { debounce } from '../../utils/function.js';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
 
@@ -216,11 +216,7 @@ export default {
         },
 
         throttledInput() {
-            return debounce(_event => this._onInput(_event), this.throttleInputInterval, {
-                leading: false,
-                trailing: true,
-            });
-            // return throttle(_event => this._onInput(_event), this.throttleInputInterval, true);
+            return debounce(_event => this._onInput(_event), this.throttleInputInterval);
         },
     },
 

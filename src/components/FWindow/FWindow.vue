@@ -71,7 +71,8 @@
 
 <script>
 import { getLengthAndUnit, getComputedStyle, getCustomProperty, setCustomProperty } from '../../utils/css.js';
-import { getUniqueId, throttle } from '../../utils/index.js';
+import { getUniqueId } from '../../utils/index.js';
+import { throttle } from '../../utils/function.js';
 import FOverlay from '../FOverlay/FOverlay.vue';
 import { focusTrap, isKey, returnFocus, setReceiveFocusFromAttr } from '../../utils/aria.js';
 // import ResizeObserver from 'resize-observer-polyfill';

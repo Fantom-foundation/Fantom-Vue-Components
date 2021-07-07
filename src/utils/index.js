@@ -1,8 +1,6 @@
 import { nanoid } from 'nanoid';
+import { toKebabCase } from './string.js';
 
-const uppercaseCharsRE = /([A-Z])/;
-const camelSplitRE = /[ _-]+/;
-const kebabSplitRE = /([A-Z]|[ _-]+)/;
 const stripHTMLRE = /(<([^>]+)>)/gi;
 
 /**
@@ -163,95 +161,6 @@ export function obj2css(_cssObj) {
     return cssStr;
 }
 
-/**
- * Uppercase first char of string `_string`.
- *
- * @param {string} _str
- * @return {string}
- */
-export function uppercaseFirstChar(_str) {
-    if (_str && typeof _str === 'string') {
-        return _str.charAt(0).toUpperCase() + _str.slice(1);
-    }
-    return '';
-}
-
-/**
- * Lowercase first char of string `_string`.
- *
- * @param {string} _str
- * @return {string}
- */
-export function lowercaseFirstChar(_str) {
-    if (_str && typeof _str === 'string') {
-        return _str.charAt(0).toLowerCase() + _str.slice(1);
-    }
-    return '';
-}
-
-/**
- * @param {string} _str
- * @return {string}
- */
-export function toCamelCase(_str) {
-    let spl;
-
-    if (_str && typeof _str === 'string') {
-        spl = _str.split(camelSplitRE);
-
-        if (spl.length > 1) {
-            spl = spl.filter(_val => _val !== '');
-
-            spl[0] = lowercaseFirstChar(spl[0]);
-
-            for (let i = 1, len1 = spl.length; i < len1; i += 1) {
-                spl[i] = uppercaseFirstChar(spl[i]);
-            }
-        }
-
-        return spl.join('');
-    }
-    return '';
-}
-
-/**
- * @param {string} _str
- * @return {string}
- */
-export function toKebabCase(_str) {
-    let spl_;
-    const spl = [];
-
-    if (_str && typeof _str === 'string') {
-        spl_ = _str.split(kebabSplitRE);
-
-        if (spl_.length > 1) {
-            spl_ = spl_.filter(_val => !camelSplitRE.test(_val));
-
-            for (let i = 0, len1 = spl_.length; i < len1; i += 1) {
-                if (i < len1 - 1 && uppercaseCharsRE.test(spl_[i])) {
-                    spl.push(lowercaseFirstChar(spl_[i]) + spl_[i + 1]);
-                    i += 1;
-                } else if (spl_[i]) {
-                    spl.push(lowercaseFirstChar(spl_[i]));
-                }
-            }
-        } else {
-            return _str;
-        }
-
-        return spl.join('-');
-    }
-    return '';
-}
-
-/**
- * @param {string} _str
- */
-export function toPascalCase(_str) {
-    return uppercaseFirstChar(toCamelCase(_str));
-}
-
 export function stripHTMLTags(_str) {
     return _str && typeof _str === 'string' ? _str.replace(stripHTMLRE, '') : '';
 }
@@ -310,91 +219,6 @@ export function defer(_callback, _timeout = 0) {
         requestAnimationFrame(_callback);
     }
     // return new Promise(_resolve => setTimeout(() => {_func(); _resolve();}, _timeout || 0));
-}
-
-/**
- *
- * @param {Function} _callback
- * @param {int} _wait
- * @param {object} _options
- * @return {Function}
- */
-export function debounce(_callback, _wait = 250, _options) {
-    let timeoutId = -1;
-    let leading = false;
-    let trailing = true;
-    let wait = 0;
-    let maxWait = 0;
-    let lastCallTime = 0;
-    let callTime = 0;
-
-    if (typeof _options === 'object') {
-        if ('maxWait' in _options) {
-            // eslint-disable-next-line radix
-            maxWait = parseInt(_options.maxWait) || 0;
-        }
-        if ('leading' in _options) {
-            leading = !!_options.leading;
-        }
-        if ('trailing' in _options) {
-            trailing = !!_options.trailing;
-        }
-    }
-
-    if (maxWait > 0) {
-        trailing = true;
-    }
-
-    return (..._args) => {
-        callTime = Date.now();
-
-        if (maxWait > 0) {
-            wait = _wait;
-            if (callTime - lastCallTime < maxWait) {
-                wait = Math.min(lastCallTime + maxWait - callTime, _wait);
-            } else {
-                lastCallTime = callTime;
-
-                if (timeoutId > -1) {
-                    _callback(..._args);
-                }
-            }
-        } else {
-            wait = _wait;
-        }
-
-        if (timeoutId > -1) {
-            clearTimeout(timeoutId);
-            timeoutId = -1;
-        } else if (leading && (maxWait === 0 || lastCallTime === callTime)) {
-            lastCallTime = Date.now();
-            _callback(..._args);
-        }
-
-        if (timeoutId === -1) {
-            timeoutId = setTimeout(() => {
-                timeoutId = -1;
-                if (trailing) {
-                    lastCallTime = Date.now();
-                    _callback(..._args);
-                }
-            }, wait); // (maxWait > 0 ? () : _wait));
-        }
-    };
-}
-
-/**
- * @param {Function} _callback
- * @param {int} _interval
- * @param {boolean} [_leading]
- * @return {Function}
- */
-export function throttle(_callback, _interval, _leading) {
-    return debounce(_callback, _interval, {
-        maxWait: _interval,
-        leading: _leading || false,
-        trailing: true,
-    });
 }
 
 /**
