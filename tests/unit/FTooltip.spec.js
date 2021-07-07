@@ -3,6 +3,7 @@ import FTooltip from '@/components/FTooltip/FTooltip.vue';
 import FPopover from '@/components/FPopover/FPopover.vue';
 import FWindow from '@/components/FWindow/FWindow.vue';
 import FButton from '@/components/FButton/FButton.vue';
+import { dispatchMouseEvent } from '@/utils/dom-events.js';
 
 let wrapper = null;
 let wrapperP = null;
@@ -67,6 +68,7 @@ describe('FTooltip', () => {
             const elem1 = wrapperP.find('#elem1');
             const fWindow = wrapper.findComponent(FWindow);
 
+            dispatchMouseEvent(document.body, 'mouseenter');
             await elem1.trigger('mouseover');
 
             expect(fWindow.vm.isVisible).toBe(true);
@@ -78,6 +80,7 @@ describe('FTooltip', () => {
             const notTargetElem = wrapperP.find('#notTarget');
             const fWindow = wrapper.findComponent(FWindow);
 
+            dispatchMouseEvent(document.body, 'mouseenter');
             await elem1.trigger('mouseover');
             await notTargetElem.trigger('mouseover');
 
@@ -89,6 +92,7 @@ describe('FTooltip', () => {
             const btn1 = wrapperP.find('#btn1');
             const fWindow = wrapper.findComponent(FWindow);
 
+            dispatchMouseEvent(document.body, 'mouseenter');
             await elem1.trigger('mouseover');
             await btn1.trigger('mouseover');
 
@@ -100,6 +104,7 @@ describe('FTooltip', () => {
             const noTooltipData = wrapperP.find('#noTooltipData');
             const fWindow = wrapper.findComponent(FWindow);
 
+            dispatchMouseEvent(document.body, 'mouseenter');
             await noTooltipData.trigger('mouseover');
 
             expect(fWindow.vm.isVisible).toBe(false);
@@ -142,8 +147,8 @@ describe('FTooltip', () => {
             const fbtn2 = wrapperP.find('#fbtn2');
             const fWindow = wrapper.findComponent(FWindow);
 
-            await btn1.trigger('mouseover');
-            await fbtn2.trigger('mouseover');
+            await btn1.trigger('focusin');
+            await fbtn2.trigger('focusin');
 
             expect(fWindow.vm.isVisible).toBe(true);
             expect(wrapper.text()).toBe('Button tooltip text 2');
