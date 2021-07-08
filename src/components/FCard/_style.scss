@@ -1,0 +1,12 @@
+@use "custom-properties";
+
+.fcard {
+    padding: var(--fcard-padding);
+    background: var(--fcard-background);
+    border-radius: var(--fcard-border-radius);
+    box-shadow: var(--fcard-box-shadow);
+
+    > h1, > .h1, > h2, > .h2, > h3, > .h3 {
+        margin-top: 0;
+    }
+}
