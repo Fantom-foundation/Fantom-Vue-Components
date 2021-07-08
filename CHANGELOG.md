@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.7.0...v0.8.0) (2021-07-08)
+
+
+### Features
+
+* **dom-events:** create mixin ([bf32946](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/bf32946f3a784e36f40b21e5398d3f30474fe981))
+* **f-combo-box:** add different "hide" animation on item pick ([bee8c91](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/bee8c91a2c74df18596554fb5b2f97807c2ae00a))
+* **f-combo-box:** add error/info text components ([73941c1](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/73941c1663c02fbb491c1fbd3a5a6b8a8333a0f4))
+* **f-input:** create auto resizable textarea ([151eb2a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/151eb2ab1c5a768a32b196dcf3c63ef7f8066963))
+* **f-popover:** create `f-popover` wrapper component ([1c8b69c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1c8b69c614b78332001013fedfdbd500114c072d))
+* **f-tooltip:** add `throttleInterval` option ([1473977](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1473977bbf4ae5506c4bf8890052182f20f7a573))
+* **f-tooltip:** create component ([c547c7e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c547c7e4220a07524a238a87236fad7c84810850))
+* **f-window:** add directive ([3d5a6c6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3d5a6c6c9636ce3a748085832371333871ce291a))
+* **f-window:** add horizontal support for the `stayInVieport` option ([6365cbb](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6365cbbcc0cbf34e661721767725b47ea7a7a410))
+* **f-window:** add support for displaying arrow in popover ([3821993](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3821993ffab03d116c90239133bd29faab2d829a))
+* **f-window:** show window even if 'hide' animation is in progress ([17bcf93](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/17bcf9329ed37582f04b96b9cf52becfcdc5a1ae))
+* **mouseovercontroller:** add `throttleInterval` and DOMEvents mixin ([959e7ac](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/959e7ace603410f72984278b6cb836c831da3051))
+* **utils:** add function, number, string and test utils ([d13f142](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d13f14273d1fa1c0ea12a785962cb0aa9f4f8db7))
+* **utils:** create `MouseoverController` ([c8cd05b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c8cd05bc78da7096cda823d8ab278fc9cf447c65))
+* **validators:** adjust `requiredValidator` to accept `null` as a value ([33a998c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/33a998ce82413a43eae5a1204dd2030bbda22934))
+* **vue-helpers:** add new functions - findParentByName, copyMethods and copyProps ([4ccb38e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4ccb38e470d235f5ddf615452a4f917b1fd0615d))
+* add `required` prop and validator to form input components ([437f0b0](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/437f0b05a3919faa4bc8fcf4f63d8a34e2cfa43f))
+* create error/info text components ([d449a0d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d449a0d8d5925ec40d4f9520321a503cb3c30fe3))
+* update utils ([cfcb322](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/cfcb32259ebd05b3d004d95b76dcdeb8caaa18a5))
+
+
+### Bug Fixes
+
+* **f-window:** fix attachMargin update ([e3eba58](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e3eba58fdcc67d028a784c1905cf14e103b4c79e))
+* **f-window:** fix icon path ([57dcf8c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/57dcf8c35501ea57c3dc7cf20eb63a1525ff298a))
+
 ## [0.7.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.6.0...v0.7.0) (2021-05-31)
 
 
