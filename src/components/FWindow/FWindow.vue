@@ -277,6 +277,7 @@ export default {
             dAnimationOut: this.animationOut,
             dZIndex: this.zIndex,
             dWithOverlay: this.popover ? false : this.withOverlay,
+            dAttachMargin: [...this.attachMargin],
             style: {
                 zIndex: this.zIndex,
             },
@@ -303,6 +304,12 @@ export default {
     watch: {
         visible(_value) {
             this.isVisible = _value;
+        },
+        withArrow(_value) {
+            if (!_value) {
+                this.dAttachMargin = [...this.attachMargin];
+                this._arrowSizeAdded = false;
+            }
         },
     },
 
@@ -606,7 +613,7 @@ export default {
                 this._updateStyle(css);
             } else if (this.dPosition === 'absolute') {
                 if (this.attachTo || this.attachToPoint) {
-                    const attachMargin = this.attachMargin;
+                    const attachMargin = this.dAttachMargin;
                     const elem = !this.attachToPoint ? document.querySelector(this.attachTo) : null;
 
                     if (elem && this.widthAsAttach) {
@@ -785,12 +792,14 @@ export default {
 
         _setAttachMargin() {
             if (this.withArrow && !this._arrowSizeAdded) {
+                const { dAttachMargin } = this;
+
                 getComputedStyle(this.$refs.arrow, this._arrowSize, true);
 
-                this.attachMargin[0] += this._arrowSize.height;
-                this.attachMargin[1] += this._arrowSize.width;
-                this.attachMargin[2] += this._arrowSize.height;
-                this.attachMargin[3] += this._arrowSize.width;
+                dAttachMargin[0] += this._arrowSize.height;
+                dAttachMargin[1] += this._arrowSize.width;
+                dAttachMargin[2] += this._arrowSize.height;
+                dAttachMargin[3] += this._arrowSize.width;
 
                 this._arrowSizeAdded = true;
             }

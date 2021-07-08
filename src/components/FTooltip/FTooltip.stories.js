@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = () => ({
-    components: { FTooltip },
+    components: { FTooltip, FButton },
     template: `
         <div class="pat-1">
             <div class="gridauto">
@@ -41,6 +41,51 @@ export const WithArrow = () => ({
             <f-button data-tooltip="Button tooltip text 1" label="Tooltip 2" />
             <f-button data-tooltip="" label="No tooltip text" />
             <f-tooltip with-arrow />
+        </div>
+    `,
+});
+
+export const ThrottleInterval = () => ({
+    components: { FTooltip, FButton },
+    template: `
+        <div class="pat-1">
+            <p><code>data-tooltip</code> is a JSON string</p>
+
+            <h3>Default (<code>200ms</code>)</h3>
+            <f-button data-tooltip="Button tooltip text 1" label="Button" />
+            <f-button data-tooltip="Button tooltip text 2" label="Button" />
+
+            <f-tooltip />
+
+            <h3><code>500ms</code></h3>
+            <f-button data-tooltip2="Button tooltip text 1" label="Button" />
+            <f-button data-tooltip2="Button tooltip text 2" label="Button" />
+
+            <f-tooltip target-attr="data-tooltip2" :throttle-interval="500" />
+        </div>
+    `,
+});
+
+export const Options = () => ({
+    components: { FTooltip, FButton },
+    template: `
+        <div class="pat-1">
+            <p><code>data-tooltip</code> is a JSON string</p>
+
+            <f-button
+                data-tooltip='{ "text": "Button tooltip text 1" }'
+                label='{ "text": "Button tooltip text 1" }'
+            /> <br>
+            <f-button
+                data-tooltip='{ "text": "Button tooltip text 2", "preferredAttachPosition": "right" }'
+                label='{ "text": "Button tooltip text 2", "preferredAttachPosition": "right" }'
+            /> <br>
+            <f-button
+                data-tooltip='{ "text": "Button tooltip text 3", "withArrow": true, "preferredAttachPosition": "right" }'
+                label='{ "text": "Button tooltip text 3", "withArrow": true, "preferredAttachPosition": "right" }'
+            />
+
+            <f-tooltip />
         </div>
     `,
 });

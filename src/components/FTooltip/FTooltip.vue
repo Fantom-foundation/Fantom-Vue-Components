@@ -1,5 +1,5 @@
 <template>
-    <f-popover ref="popover" :attach-to="attach" class="ftooltip" v-bind="{ ...$attrs, ...$props }">
+    <f-popover ref="popover" :attach-to="attach" class="ftooltip" v-bind="{ ...$attrs, ...$props, ...dProps }">
         {{ text }}
     </f-popover>
 </template>
@@ -8,9 +8,10 @@
 import FPopover from '../FPopover/FPopover.vue';
 import { MouseoverController } from '../../utils/MouseoverController.js';
 
-const elemIdAttr = 'data-ftooltip-id';
+export const fTooltipElemIdAttr = 'data-ftooltip-id';
 
 /**
+ * Tooltip shown when mouse hover target element or when target element has focus.
  * Has the same props as `FPopover` component
  */
 export default {
@@ -19,9 +20,15 @@ export default {
     components: { FPopover },
 
     props: {
+        /** Attribute with tooltip text. HTML elements with this attribute becomes target elements (tooltip will be shown) */
         targetAttr: {
             type: String,
             default: 'data-tooltip',
+        },
+        /** Mouseover event listener throttling. In milliseconds */
+        throttleInterval: {
+            type: Number,
+            default: 200,
         },
     },
 
@@ -29,6 +36,7 @@ export default {
         return {
             text: '',
             attach: '',
+            dProps: {},
         };
     },
 
@@ -52,6 +60,7 @@ export default {
             this._moc = new MouseoverController({
                 container: document.body,
                 elemSelector: `[${this.targetAttr}]`,
+                throttleInterval: this.throttleInterval,
                 onElemEnter: (elem, event) => {
                     this.onTargetEnter(elem, event);
                 },
@@ -86,11 +95,13 @@ export default {
          * @param {HTMLElement} elem
          */
         onTargetEnter(elem) {
-            this.text = elem.getAttribute(this.targetAttr) || '';
+            this.dProps = {};
+
+            this.text = this._processTargetAttr(elem);
 
             if (this.text) {
-                elem.setAttribute(elemIdAttr, '');
-                this.attach = `[${elemIdAttr}]`;
+                elem.setAttribute(fTooltipElemIdAttr, '');
+                this.attach = `[${fTooltipElemIdAttr}]`;
                 this.$refs.popover.show();
             }
         },
@@ -100,7 +111,7 @@ export default {
          */
         onTargetLeave(elem) {
             if (this.text) {
-                elem.removeAttribute(elemIdAttr);
+                elem.removeAttribute(fTooltipElemIdAttr);
                 this.attach = '';
                 this.$refs.popover.hide();
             }
@@ -119,6 +130,33 @@ export default {
         onFocusout(event) {
             this._moc._elemLeaved(event);
         },
+
+        /**
+         * @param {HTMLElement} elem
+         */
+        _processTargetAttr(elem) {
+            const attr = elem.getAttribute(this.targetAttr) || '';
+            let text = '';
+
+            if (attr) {
+                try {
+                    const options = JSON.parse(attr);
+
+                    text = options.text;
+
+                    delete options.text;
+                    this.dProps = options;
+                } catch (error) {
+                    text = attr;
+                }
+            }
+
+            return text;
+        },
     },
 };
 </script>
+
+<style lang="scss">
+@use "style";
+</style>

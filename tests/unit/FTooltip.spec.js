@@ -4,10 +4,11 @@ import FPopover from '@/components/FPopover/FPopover.vue';
 import FWindow from '@/components/FWindow/FWindow.vue';
 import FButton from '@/components/FButton/FButton.vue';
 import { dispatchMouseEvent } from '@/utils/dom-events.js';
+import { delay } from '@/utils/function.js';
+import { fTooltipElemIdAttr } from '@/components/FTooltip/FTooltip.vue';
 
 let wrapper = null;
 let wrapperP = null;
-const propsData = {};
 
 const Playground = {
     components: { FButton },
@@ -16,6 +17,7 @@ const Playground = {
             <span id="elem1" data-tooltip="Tooltip text">Elem 1</span>
             <span id="notTarget">Elem 2</span>
             <span id="noTooltipData" data-tooltip="">Elem 3</span>
+            <span id="tooltipOptions" data-tooltip='{ "text": "Tooltip text", "withArrow": true }'>Elem 3</span>
             <button id="btn1" data-tooltip="Button tooltip text 1">Button 1</button>
             <f-button id="fbtn2" data-tooltip="Button tooltip text 2">Button 2</f-button>
             <f-button id="noTooltipDataBtn" data-tooltip="">Button 3</f-button>
@@ -23,15 +25,23 @@ const Playground = {
     `,
 };
 
+function createWrapper(props = { throttleInterval: 0 }) {
+    if (wrapper) {
+        wrapper.destroy();
+    }
+
+    wrapper = mount(FTooltip, {
+        propsData: props,
+        parentComponent: wrapperP,
+    });
+}
+
 describe('FTooltip', () => {
     beforeEach(async () => {
         wrapperP = mount(Playground, {
             attachTo: document.body,
         });
-        wrapper = mount(FTooltip, {
-            propsData,
-            parentComponent: wrapperP,
-        });
+        createWrapper();
     });
 
     afterEach(() => {
@@ -50,12 +60,14 @@ describe('FTooltip', () => {
             expect(wrapper.props().targetAttr).toBe('data-tooltip');
         });
 
-        it('should pass attributes and props to the FPopover', () => {
-            wrapper.destroy();
+        it('should have `throttleInterval` prop default to `200`', () => {
+            createWrapper({});
 
-            wrapper = mount(FTooltip, {
-                propsData: { size: 'big' },
-            });
+            expect(wrapper.props().throttleInterval).toBe(200);
+        });
+
+        it('should pass attributes and props to the FPopover', () => {
+            createWrapper({ size: 'big' });
 
             const fPopover = wrapper.findComponent(FPopover);
 
@@ -73,6 +85,27 @@ describe('FTooltip', () => {
 
             expect(fWindow.vm.isVisible).toBe(true);
             expect(wrapper.text()).toBe('Tooltip text');
+        });
+
+        it('should show tooltip with text from the `targetAttr` if mouse is hovering target element and `targetAttr` is a JSON string with attribute `text`', async () => {
+            const tooltipOptions = wrapperP.find('#tooltipOptions');
+            const fWindow = wrapper.findComponent(FWindow);
+
+            dispatchMouseEvent(document.body, 'mouseenter');
+            await tooltipOptions.trigger('mouseover');
+
+            expect(fWindow.vm.isVisible).toBe(true);
+            expect(wrapper.text()).toBe('Tooltip text');
+        });
+
+        it('should show tooltip and set popover props if mouse is hovering target element and `targetAttr` is a JSON string representing popover props', async () => {
+            const tooltipOptions = wrapperP.find('#tooltipOptions');
+            const fWindow = wrapper.findComponent(FWindow);
+
+            dispatchMouseEvent(document.body, 'mouseenter');
+            await tooltipOptions.trigger('mouseover');
+
+            expect(fWindow.vm.withArrow).toBe(true);
         });
 
         it('should hide tooltip if mouse is leaving target element', async () => {
@@ -108,6 +141,31 @@ describe('FTooltip', () => {
             await noTooltipData.trigger('mouseover');
 
             expect(fWindow.vm.isVisible).toBe(false);
+        });
+
+        it('should throttle mouseover event listener if `throttleInterval` is greater than `0`', async () => {
+            const throttleInterval = 50;
+
+            createWrapper({ throttleInterval });
+
+            const elem1 = wrapperP.find('#elem1');
+            const btn1 = wrapperP.find('#btn1');
+            const fWindow = wrapper.findComponent(FWindow);
+
+            dispatchMouseEvent(document.body, 'mouseenter');
+
+            await elem1.trigger('mouseover');
+            expect(elem1.element.hasAttribute(fTooltipElemIdAttr)).toBe(true);
+            expect(fWindow.vm.isVisible).toBe(true);
+
+            await btn1.trigger('mouseover');
+            expect(btn1.element.hasAttribute(fTooltipElemIdAttr)).toBe(false);
+            expect(fWindow.vm.isVisible).toBe(true);
+
+            await delay(throttleInterval + 5);
+
+            expect(btn1.element.hasAttribute(fTooltipElemIdAttr)).toBe(true);
+            expect(fWindow.vm.isVisible).toBe(true);
         });
     });
 
