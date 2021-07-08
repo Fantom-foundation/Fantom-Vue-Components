@@ -9,12 +9,13 @@ function destroyWrapper() {
     }
 }
 
-function createWrapper({ propsData = {}, slots = {} } = {}) {
+function createWrapper({ propsData = {}, slots = {}, parentComponent = null } = {}) {
     destroyWrapper();
 
     wrapper = mount(FCard, {
-        slots,
         propsData,
+        slots,
+        parentComponent,
     });
 }
 

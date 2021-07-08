@@ -25,14 +25,16 @@ const Playground = {
     `,
 };
 
-function createWrapper(props = { throttleInterval: 0 }) {
+// function createWrapper(props = { throttleInterval: 0 }) {
+function createWrapper({ propsData = { throttleInterval: 0 }, slots = {}, parentComponent = wrapperP } = {}) {
     if (wrapper) {
         wrapper.destroy();
     }
 
     wrapper = mount(FTooltip, {
-        propsData: props,
-        parentComponent: wrapperP,
+        propsData,
+        slots,
+        parentComponent,
     });
 }
 
@@ -61,13 +63,13 @@ describe('FTooltip', () => {
         });
 
         it('should have `throttleInterval` prop default to `200`', () => {
-            createWrapper({});
+            createWrapper({ propsData: {} });
 
             expect(wrapper.props().throttleInterval).toBe(200);
         });
 
         it('should pass attributes and props to the FPopover', () => {
-            createWrapper({ size: 'big' });
+            createWrapper({ propsData: { size: 'big' } });
 
             const fPopover = wrapper.findComponent(FPopover);
 
@@ -146,7 +148,7 @@ describe('FTooltip', () => {
         it('should throttle mouseover event listener if `throttleInterval` is greater than `0`', async () => {
             const throttleInterval = 50;
 
-            createWrapper({ throttleInterval });
+            createWrapper({ propsData: { throttleInterval } });
 
             const elem1 = wrapperP.find('#elem1');
             const btn1 = wrapperP.find('#btn1');
