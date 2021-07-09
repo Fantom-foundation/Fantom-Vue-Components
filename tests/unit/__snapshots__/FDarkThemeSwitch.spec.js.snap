@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FDarkThemeSwitch should render correctly 1`] = `
+<span
+  class="fdarkthemeswitch"
+>
+  <label
+    class="ftogglebutton togglebtn togglebtn-v1"
+  >
+    <input
+      class="togglebtn_input"
+      id="foo"
+      name=""
+      type="checkbox"
+      value=""
+    />
+     
+    <span
+      class="togglebtn_btn"
+    />
+     
+    <span
+      class="togglebtn_label"
+    >
+      
+    </span>
+  </label>
+</span>
+`;
