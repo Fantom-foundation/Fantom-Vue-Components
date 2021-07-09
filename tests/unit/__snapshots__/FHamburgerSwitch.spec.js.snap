@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FHamburgerSwitch should render correctly 1`] = `
+<div
+  class="fhamburgerswitch fhamburgerswitch-thickness1"
+  role="switch"
+>
+  <div
+    class="cont"
+  >
+    <div
+      class="l1"
+    />
+     
+    <div
+      class="l2"
+    />
+     
+    <div
+      class="l3"
+    />
+  </div>
+</div>
+`;

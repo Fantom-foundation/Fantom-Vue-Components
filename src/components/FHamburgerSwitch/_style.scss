@@ -1,0 +1,124 @@
+@use "custom-properties";
+
+.fhamburgerswitch {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    /*transform: scale(1.1);*/
+
+    .cont {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        /*border: 1px solid transparent;*/
+    }
+
+    .l1,
+    .l2,
+    .l3 {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: var(--fhamburgerswitch-color);
+        border-radius: 3px;
+        transition: all var(--fhamburgerswitch-transition-length) var(--fhamburgerswitch-transition-func);
+    }
+
+    .l1 {
+        top: 0;
+    }
+
+    .l2 {
+        top: 50%;
+    }
+
+    .l3 {
+        bottom: 0;
+    }
+
+    &-thickness1 {
+        .l1 {
+            top: 10%;
+        }
+
+        .l2 {
+            margin-top: -1px;
+        }
+
+        .l3 {
+            bottom: 10%;
+        }
+    }
+
+    &-thickness2 {
+        .l1,
+        .l2,
+        .l3 {
+            height: 4px;
+        }
+
+        .l1 {
+            top: 5%;
+        }
+
+        .l2 {
+            margin-top: -2px;
+        }
+
+        .l3 {
+            bottom: 5%;
+        }
+    }
+
+    &-thickness3 {
+        .l1,
+        .l2,
+        .l3 {
+            height: 6px;
+        }
+
+        .l2 {
+            margin-top: -3px;
+        }
+    }
+
+    &-on {
+        .l1 {
+            /*opacity: 1;*/
+            /*transform: translate(0, 10px) rotate(45deg);*/
+            top: 0;
+            transform: translate(0, 11px) rotate(45deg);
+        }
+
+        .l2 {
+            opacity: 0;
+        }
+
+        .l3 {
+            /*opacity: 1;*/
+            bottom: 0;
+            transform: translate(0, -11px) rotate(-45deg);
+        }
+
+        &.fhamburgerswitch-thickness2 {
+            .l1 {
+                transform: translate(0, 10px) rotate(45deg);
+            }
+
+            .l3 {
+                transform: translate(0, -10px) rotate(-45deg);
+            }
+        }
+
+        &.fhamburgerswitch-thickness3 {
+            .l1 {
+                transform: translate(0, 9px) rotate(45deg);
+            }
+
+            .l3 {
+                transform: translate(0, -9px) rotate(-45deg);
+            }
+        }
+    }
+}
