@@ -1,0 +1,9 @@
+.fnetworkstatus_window {
+    position: fixed;
+    width: 340px;
+    top: 16px;
+    left: calc(50% - 170px);
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--f-color-red-5, #ca1616);
+}
