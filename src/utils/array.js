@@ -1,9 +1,18 @@
 /**
- * Shuffles an array.
- *
- * @param {Array} _array
+ * @param {[]} array
+ * @return {boolean}
  */
-import { isArray } from './index.js';
+export function isArray(array) {
+    return Array.isArray(array);
+}
+
+/**
+ * @param {[]} array
+ * @return {boolean}
+ */
+export function isNonEmptyArray(array) {
+    return Array.isArray(array) && array.length > 0;
+}
 
 export function shuffle(_array) {
     for (let i = _array.length - 1; i > 0; i--) {
