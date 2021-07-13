@@ -1,0 +1,6 @@
+.fheighttransition {
+    &-enter-active, &-leave-active {
+        --fheighttransition-transition-length: var(--f-transition-length, 250ms);
+        --fheighttransition-transition-func: var(--f-transition-func, ease);
+    }
+}

@@ -1,0 +1,12 @@
+@use "custom-elements";
+
+.fheighttransition {
+    &-enter-active, &-leave-active {
+        transition: height var(--fheighttransition-transition-length) var(--fheighttransition-transition-func);
+        overflow: hidden;
+    }
+
+    &-willchange {
+        will-change: height;
+    }
+}
