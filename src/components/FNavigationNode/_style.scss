@@ -1,0 +1,49 @@
+@use "custom-properties";
+
+.fnavigationnode {
+    &_item {
+        color: var(--fnavigationnode-item-color);
+        font-family: inherit;
+        font-size: inherit;
+        //padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        padding: var(--f-spacer-2, 6px) var(--f-spacer-3, 12px);
+        //display: flex;
+        //align-items: center;
+
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
+    }
+
+    &-active {
+        > .fnavigationnode_item,
+        > a.fnavigationnode_item:not(.btn) {
+            color: var(--fnavigationnode-active-item-color);
+            font-weight: var(--fnavigationnode-active-item-font-weight);
+        }
+    }
+
+    [aria-expanded='true'] {
+        .fnavigationnode_item_parenticon {
+            transform: rotate(90deg);
+        }
+    }
+
+    &-animate {
+        .fnavigationnode_item_parenticon {
+            //transform: rotate(-45deg);
+            transition: transform var(--fnavigationnode-transition-length) var(--fnavigationnode-transition-func);
+            margin-inline-end: var(--f-spacer-2, 6px);
+        }
+    }
+}
+
+a.fnavigationnode_item:not(.btn) {
+    color: var(--fnavigationnode-item-color);
+}

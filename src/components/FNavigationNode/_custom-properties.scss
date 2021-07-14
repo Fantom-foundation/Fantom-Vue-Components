@@ -1,0 +1,7 @@
+.fnavigationnode {
+    --fnavigationnode-item-color: inherit;
+    --fnavigationnode-active-item-color: inherit;
+    --fnavigationnode-active-item-font-weight: bold;
+    --fnavigationnode-transition-length: var(--f-transition-length, 250ms);
+    --fnavigationnode-transition-func: var(--f-transition-func, ease);
+}
