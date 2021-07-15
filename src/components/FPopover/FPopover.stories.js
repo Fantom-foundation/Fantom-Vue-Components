@@ -1,7 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FPopover from './FPopover.vue';
 import FButton from '../FButton/FButton.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
@@ -9,7 +7,6 @@ import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 export default {
     title: 'FPopover',
     component: FPopover,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

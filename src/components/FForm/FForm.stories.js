@@ -1,7 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FForm from './FForm.vue';
 import FFormInput from '../FFormInput/FFormInput.vue';
 import FButton from '../FButton/FButton.vue';
@@ -10,7 +8,6 @@ import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 export default {
     title: 'FForm',
     component: FForm,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

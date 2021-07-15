@@ -1,7 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FButton from './FButton.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
@@ -9,7 +7,6 @@ import IconTimes from '../icons/IconTimes.vue';
 export default {
     title: 'FButton',
     component: FButton,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

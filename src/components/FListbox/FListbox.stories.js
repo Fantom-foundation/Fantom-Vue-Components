@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FListbox from './FListbox.vue';
 import FButton from '../FButton/FButton.vue';
 import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
@@ -25,7 +23,6 @@ for (let i = 1; i < 200; i++) {
 export default {
     title: 'FListbox',
     component: FListbox,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

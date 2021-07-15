@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FSvgIcon from './FSvgIcon.vue';
 import IconFantom from '../icons/IconFantom.vue';
 import IconTimes from '../icons/IconTimes.vue';
@@ -8,7 +6,6 @@ import IconPresent from '../icons/IconPresent.vue';
 export default {
     title: 'FSvgIcon',
     component: FSvgIcon,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

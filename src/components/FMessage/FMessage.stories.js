@@ -1,13 +1,11 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
 
 import FMessage from './FMessage.vue';
 
 export default {
     title: 'FMessage',
     component: FMessage,
-    decorators: [withA11y],
 };
 
 function validator(_value) {

@@ -1,6 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
 
 import FInput from './FInput.vue';
 import FButton from '../FButton/FButton.vue';
@@ -9,7 +8,6 @@ import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
 export default {
     title: 'FInput',
     component: FInput,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

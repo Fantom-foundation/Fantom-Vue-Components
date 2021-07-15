@@ -1,14 +1,11 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FTabs from './FTabs.vue';
 import FTab from './FTab.vue';
 
 export default {
     title: 'FTabs',
     component: FTabs,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

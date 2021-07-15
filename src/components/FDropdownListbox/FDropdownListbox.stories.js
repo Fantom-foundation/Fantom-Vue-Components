@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FDropdownListbox from './FDropdownListbox.vue';
 import FButton from '../FButton/FButton.vue';
 import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
@@ -31,7 +29,6 @@ const data3 = [
 export default {
     title: 'FDropdownListbox',
     component: FDropdownListbox,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

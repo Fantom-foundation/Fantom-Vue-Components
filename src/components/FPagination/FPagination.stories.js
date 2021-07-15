@@ -1,12 +1,9 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FPagination from './FPagination.vue';
 import FButton from '@/components/FButton/FButton.vue';
 
 export default {
     title: 'FPagination',
     component: FPagination,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

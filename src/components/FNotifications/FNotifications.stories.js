@@ -1,6 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
 
 import FNotifications from './FNotifications.vue';
 import FButton from '@/components/FButton/FButton.vue';
@@ -13,7 +12,6 @@ Vue.use(Notifications);
 export default {
     title: 'FNotifications',
     component: FNotifications,
-    decorators: [withA11y],
 };
 
 function notificationText(_type) {

@@ -1,7 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FWindow from './FWindow.vue';
 import FInput from '../FInput/FInput.vue';
 import FButton from '../FButton/FButton.vue';
@@ -9,7 +7,6 @@ import FButton from '../FButton/FButton.vue';
 export default {
     title: 'FWindow',
     component: FWindow,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

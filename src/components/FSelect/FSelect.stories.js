@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FSelect from './FSelect.vue';
 // import FMessage from '../FMessage/FMessage.vue';
 import FButton from '../FButton/FButton.vue';
@@ -33,7 +31,6 @@ const data3 = [
 export default {
     title: 'FSelect',
     component: FSelect,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

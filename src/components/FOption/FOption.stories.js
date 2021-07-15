@@ -1,14 +1,11 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FOption from './FOption.vue';
 import FButton from '../FButton/FButton.vue';
 
 export default {
     title: 'FOption',
     component: FOption,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

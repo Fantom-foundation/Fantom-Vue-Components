@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FSearchField from './FSearchField.vue';
 import FButton from '../FButton/FButton.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
@@ -8,7 +6,6 @@ import IconAngleLeft from '../icons/IconAngleLeft.vue';
 export default {
     title: 'FSearchField',
     component: FSearchField,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

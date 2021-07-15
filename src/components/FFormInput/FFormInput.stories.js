@@ -1,14 +1,11 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
-
 import FFormInput from './FFormInput.vue';
 import FForm from '../FForm/FForm.vue';
 
 export default {
     title: 'FFormInput',
     component: FFormInput,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

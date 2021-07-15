@@ -1,10 +1,8 @@
-import { withA11y } from '@storybook/addon-a11y';
 import FDotsLoader from '@/components/FDotsLoader/FDotsLoader.vue';
 
 export default {
     title: 'FDotsLoader',
     component: FDotsLoader,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

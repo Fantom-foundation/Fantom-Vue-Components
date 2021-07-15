@@ -1,12 +1,9 @@
-import { withA11y } from '@storybook/addon-a11y';
-
 import FSlider from './FSlider.vue';
 import FButton from '@/components/FButton/FButton.vue';
 
 export default {
     title: 'FSlider',
     component: FSlider,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({

@@ -1,6 +1,5 @@
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
-import { withA11y } from '@storybook/addon-a11y';
 
 import FAriaAlert from './FAriaAlert.vue';
 import FButton from '../FButton/FButton.vue';
@@ -9,7 +8,6 @@ import { eventBusMixin } from '../../mixins/event-bus.js';
 export default {
     title: 'FAriaAlert',
     component: FAriaAlert,
-    decorators: [withA11y],
 };
 
 export const Default = () => ({
