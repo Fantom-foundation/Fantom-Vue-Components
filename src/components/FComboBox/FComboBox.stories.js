@@ -170,7 +170,7 @@ export const Default = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box :data="data" @change="value = $event" />
+            <f-combo-box :data="data" @change="value = $event" label="label" />
             value: {{ value }}
         </div>
     `,
@@ -186,7 +186,7 @@ export const TextIsValue = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box text-is-value :data="data" @change="value = $event" />
+            <f-combo-box text-is-value :data="data" @change="value = $event" label="label" />
             value: {{ value }}
         </div>
     `,
@@ -202,10 +202,10 @@ export const SelectMode = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box select-mode :data="data" @change="value = $event" />
+            <f-combo-box select-mode :data="data" @change="value = $event" label="label" />
             value: {{ value }}
             <h4>readonly</h4>
-            <f-combo-box select-mode readonly :data="data" @change="value2 = $event" />
+            <f-combo-box select-mode readonly :data="data" @change="value2 = $event" label="label" />
             value: {{ value2 }}
         </div>
     `,
@@ -222,7 +222,7 @@ export const RemoteData = () => ({
     components: { CustomComboBox },
     template: `
         <div>
-            <custom-combo-box @change="value = $event" />
+            <custom-combo-box @change="value = $event" label="label" />
             value: {{ value }}
             <p class="mat-3 co-grey-5">See source code for FComboBox stories to see an example of FComboBox wrapper (CustomComboBox).</p>
         </div>
@@ -240,13 +240,13 @@ export const NoInlineAutocomplete = () => ({
         <div>
             <p>Selection is performed only by pressing 'Enter' key</p>
 
-            <f-combo-box :inline-autocomplete="false" select-mode :data="data" @change="value = $event" />
+            <f-combo-box :inline-autocomplete="false" select-mode :data="data" @change="value = $event" label="label" />
             value: {{ value }}
             <h4>readonly</h4>
-            <f-combo-box :inline-autocomplete="false" select-mode readonly :data="data" @change="value2 = $event" />
+            <f-combo-box :inline-autocomplete="false" select-mode readonly :data="data" @change="value2 = $event" label="label" />
             value: {{ value2 }}
             <h4>remote (CustomComboBox)</h4>
-            <custom-combo-box :inline-autocomplete="false" @change="value3 = $event" />
+            <custom-combo-box :inline-autocomplete="false" @change="value3 = $event" label="label" />
             value: {{ value3 }}
         </div>
     `,
@@ -264,7 +264,7 @@ export const Model = () => ({
     components: { FComboBox, FButton },
     template: `
         <div>
-            <f-combo-box v-model="value" select-mode :data="data" />
+            <f-combo-box v-model="value" select-mode :data="data" label="label" />
             <f-button secondary size="small" @click.native="onButtonClick">Set value to 19</f-button>
             <br />
             selected: {{ value }}
@@ -287,9 +287,9 @@ export const FieldSize = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box field-size="large" :data="data" />
-            <f-combo-box :data="data" />
-            <f-combo-box field-size="small" :data="data" />
+            <f-combo-box field-size="large" :data="data" label="label" />
+            <f-combo-box :data="data" label="label" />
+            <f-combo-box field-size="small" :data="data" label="label" />
         </div>
     `,
     data() {
@@ -303,9 +303,9 @@ export const Disabled = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box disabled field-size="large" :data="data" />
-            <f-combo-box disabled select-mode :data="data" />
-            <f-combo-box disabled field-size="small" :data="data" />
+            <f-combo-box disabled field-size="large" :data="data" label="label" />
+            <f-combo-box disabled select-mode :data="data" label="label" />
+            <f-combo-box disabled field-size="small" :data="data" label="label" />
         </div>
     `,
     data() {
@@ -319,9 +319,9 @@ export const Invalid = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box invalid field-size="large" :data="data" />
-            <f-combo-box invalid :data="data" />
-            <f-combo-box invalid field-size="small" :data="data" />
+            <f-combo-box invalid field-size="large" :data="data" label="label" />
+            <f-combo-box invalid :data="data" label="label" />
+            <f-combo-box invalid field-size="small" :data="data" label="label" />
         </div>
     `,
     data() {
@@ -361,7 +361,7 @@ export const Validation = () => ({
     template: `
         <div>
             <form action="" @submit="onSubmit">
-                <f-combo-box ref="combobox" :validator="validator" validate-on-change select-mode :data="data" />
+                <f-combo-box ref="combobox" :validator="validator" validate-on-change select-mode :data="data" label="label" />
                 <br /><br />
                 <f-button type="submit" size="small">Submit</f-button>
             </form>
@@ -392,7 +392,7 @@ export const Slot = () => ({
     components: { FComboBox },
     template: `
         <div>
-            <f-combo-box select-mode :data="data">
+            <f-combo-box select-mode :data="data" label="label">
                 <template v-slot:item="{ item }">
                     <div class="flex juc-space-between">
                         {{ item.label }} <i>{{ item.value }}</i>

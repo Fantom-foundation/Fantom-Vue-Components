@@ -82,14 +82,14 @@ export const Model = () => ({
     components: { FToggleButton, FButton },
     template: `
         <div>
-            <f-toggle-button v-model="tglValue" name="tgl_m" />
+            <f-toggle-button v-model="tglValue" name="tgl_m" aria-label="label" />
             <f-button secondary size="small" @click.native="tglValue = !tglValue">Toggle</f-button>
             <br />
             Value: {{ tglValue }}
             <h3>Multiselect</h3>
-            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="10" />
-            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="20" />
-            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="30" />
+            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="10" aria-label="label" />
+            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="20" aria-label="label" />
+            <f-toggle-button v-model="tglValue2" name="tgl_m2" value="30" aria-label="label" />
             <f-button secondary size="small" @click.native="tglValue2 = ['30']">Set value to 30</f-button>
             <br />
             Value: {{ tglValue2 }}

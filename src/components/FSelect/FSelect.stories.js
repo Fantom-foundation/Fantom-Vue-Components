@@ -94,7 +94,7 @@ export const SelectedItem = () => ({
     components: { FSelect },
     template: `
         <div>
-            <f-select :data="data" />
+            <f-select :data="data" label="Select" />
         </div>
     `,
     data() {
@@ -108,7 +108,7 @@ export const Value = () => ({
     components: { FSelect },
     template: `
         <div>
-            <f-select value="3" :data="data" />
+            <f-select value="3" :data="data" label="Select" />
         </div>
     `,
     data() {
@@ -211,6 +211,7 @@ export const Model = () => ({
                 name="bla"
                 v-model="sel"
                 :data="data"
+                aria-label="Select"
             />
             Selected: {{ sel }}
             <f-button secondary size="small" @click.native="sel = '1'">Set value to '1'</f-button>
@@ -228,7 +229,7 @@ export const Slots = () => ({
     components: { FSelect },
     template: `
         <div>
-            <f-select value="3" :data="data">
+            <f-select value="3" :data="data" aria-label="Select">
                 <template #top>Top</template>
                 <template #bottom>Bottom</template>
             </f-select>

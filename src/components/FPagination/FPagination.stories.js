@@ -89,7 +89,7 @@ export const Model = () => ({
     template: `
         <div>
             <p><f-pagination :total-items="100" v-model="currPage" /></p>
-            <p>Current page: {{ currPage }} <input type="number" @input="onInput" value="1"></p>
+            <p>Current page: {{ currPage }} <input type="number" @input="onInput" value="1"  aria-label="current page"></p>
         </div>
     `,
     data() {

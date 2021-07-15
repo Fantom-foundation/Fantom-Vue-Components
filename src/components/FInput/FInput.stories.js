@@ -243,88 +243,88 @@ export const Slots = () => ({
     template: `
         <div>
             <h3>Input</h3>
-            <f-input label="Large" field-size="large">
+            <f-input aria-label="Large" field-size="large">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input label="Default">
+            <f-input aria-label="Default">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input label="Small" field-size="small">
+            <f-input aria-label="Small" field-size="small">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input label="Mini" field-size="mini">
+            <f-input aria-label="Mini" field-size="mini">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <h3>Textarea</h3>
-            <f-input is-textarea label="Large" field-size="large">
+            <f-input is-textarea aria-label="Large" field-size="large">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input is-textarea label="Default">
+            <f-input is-textarea aria-label="Default">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input is-textarea label="Small" field-size="small">
+            <f-input is-textarea aria-label="Small" field-size="small">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
-            <f-input is-textarea label="Mini" field-size="mini">
+            <f-input is-textarea aria-label="Mini" field-size="mini">
                 <template #top><span>top</span></template>
                 <template #bottom><span>bottom</span></template>
                 <template #prefix><span>prefix</span></template>
                 <template #suffix><span>suffix</span></template>
             </f-input>
             <h3>Variations</h3>
-            <f-input label="Large" field-size="large">
+            <f-input aria-label="Large" field-size="large">
                 <template #prefix><span style="text-align: center">&#9742;</span></template>
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Large" field-size="large">
+            <f-input aria-label="Large" field-size="large">
                 <template #prefix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Large" field-size="large">
+            <f-input aria-label="Large" field-size="large">
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
             <br />
-            <f-input label="Large" field-size="large" />
+            <f-input aria-label="Large" field-size="large" />
             <br /><br />
-            <f-input label="Default">
+            <f-input aria-label="Default">
                 <template #prefix><span style="text-align: center">&#9742;</span></template>
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Default">
+            <f-input aria-label="Default">
                 <template #prefix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Default">
+            <f-input aria-label="Default">
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
             <br /><br />
-            <f-input label="Small" field-size="small">
+            <f-input aria-label="Small" field-size="small">
                 <template #prefix><span style="text-align: center">&#9742;</span></template>
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Small" field-size="small">
+            <f-input aria-label="Small" field-size="small">
                 <template #prefix><span>&#9742;</span></template>
             </f-input>
-            <f-input label="Small" field-size="small">
+            <f-input aria-label="Small" field-size="small">
                 <template #suffix><span>&#9742;</span></template>
             </f-input>
         </div>

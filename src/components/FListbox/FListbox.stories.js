@@ -274,6 +274,7 @@ export const Required = () => ({
                     @validation-state="_state => submitDisabled = _state.invalid "
                     ref="listbox"
                     :data="data"
+                    aria-label="label"
                 />
                 <br /><br />
                 <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
@@ -308,6 +309,7 @@ export const Validation = () => ({
                     @validation-state="_state => submitDisabled = _state.invalid "
                     ref="listbox"
                     :data="data"
+                    aria-label="label"
                 />
                 <br /><br />
                 <f-button type="submit" size="small" :disabled="submitDisabled">Submit</f-button>
@@ -371,7 +373,7 @@ export const Slots = () => ({
     components: { FListbox },
     template: `
         <div>
-            <f-listbox :data="data" :focus-item-on-focus="true">
+            <f-listbox :data="data" :focus-item-on-focus="true" aria-label="label">
                 <template #top>Top</template>
                 <template #bottom>Bottom</template>
             </f-listbox>

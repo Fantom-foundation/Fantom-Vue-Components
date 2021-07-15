@@ -25,21 +25,21 @@ export const Default = () => ({
                 <span class="par-4">
                     Large <br />
                     <f-option type="radio" label="123" option-size="large" name="radio1_lg" value="10" />
-                    <f-option type="radio" option-size="large" name="radio1_lg" value="20" /></span>
+                    <f-option type="radio" option-size="large" name="radio1_lg" value="20" aria-label="label" /></span>
                 <span class="par-4">
                     Default <br />
-                    <f-option type="radio" name="radio1" value="10" />
-                    <f-option type="radio" name="radio1" value="20" />
+                    <f-option type="radio" name="radio1" value="10" aria-label="label" />
+                    <f-option type="radio" name="radio1" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Small <br />
-                    <f-option type="radio" option-size="small" name="radio1_sm" value="10" />
-                    <f-option type="radio" option-size="small" name="radio1_sm" value="20" />
+                    <f-option type="radio" option-size="small" name="radio1_sm" value="10" aria-label="label" />
+                    <f-option type="radio" option-size="small" name="radio1_sm" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Mini <br />
-                    <f-option type="radio" option-size="mini" name="radio1_xs" value="10" />
-                    <f-option type="radio" option-size="mini" name="radio1_xs" value="20" />
+                    <f-option type="radio" option-size="mini" name="radio1_xs" value="10" aria-label="label" />
+                    <f-option type="radio" option-size="mini" name="radio1_xs" value="20" aria-label="label" />
                 </span>
           </div>
         </div>
@@ -60,22 +60,22 @@ export const Checked = () => ({
                 <span class="par-4">
                     Large <br />
                     <f-option checked type="radio" label="123" option-size="large" name="radio1_lg" value="10" />
-                    <f-option type="radio" option-size="large" name="radio1_lg" value="20" />
+                    <f-option type="radio" option-size="large" name="radio1_lg" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Default <br />
-                    <f-option type="radio" name="radio1" value="10" />
-                    <f-option checked type="radio" name="radio1" value="20" />
+                    <f-option type="radio" name="radio1" value="10" aria-label="label" />
+                    <f-option checked type="radio" name="radio1" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Small <br />
-                    <f-option checked type="radio" option-size="small" name="radio1_sm" value="10" />
-                    <f-option type="radio" option-size="small" name="radio1_sm" value="20" />
+                    <f-option checked type="radio" option-size="small" name="radio1_sm" value="10" aria-label="label" />
+                    <f-option type="radio" option-size="small" name="radio1_sm" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Mini <br />
-                    <f-option type="radio" option-size="mini" name="radio1_xs" value="10" />
-                    <f-option checked type="radio" option-size="mini" name="radio1_xs" value="20" />
+                    <f-option type="radio" option-size="mini" name="radio1_xs" value="10" aria-label="label" />
+                    <f-option checked type="radio" option-size="mini" name="radio1_xs" value="20" aria-label="label" />
                 </span>
           </div>
         </div>
@@ -101,22 +101,22 @@ export const Disabled = () => ({
                 <span class="par-4">
                     Large <br />
                     <f-option disabled type="radio" label="123" option-size="large" name="radio1_lg" value="10" />
-                    <f-option disabled type="radio" option-size="large" name="radio1_lg" value="20" />
+                    <f-option disabled type="radio" option-size="large" name="radio1_lg" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Default <br />
-                    <f-option disabled type="radio" name="radio1" value="10" />
-                    <f-option disabled type="radio" name="radio1" value="20" />
+                    <f-option disabled type="radio" name="radio1" value="10" aria-label="label" />
+                    <f-option disabled type="radio" name="radio1" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Small <br />
-                    <f-option disabled type="radio" option-size="small" name="radio1_sm" value="10" />
-                    <f-option disabled type="radio" option-size="small" name="radio1_sm" value="20" />
+                    <f-option disabled type="radio" option-size="small" name="radio1_sm" value="10" aria-label="label" />
+                    <f-option disabled type="radio" option-size="small" name="radio1_sm" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Mini <br />
-                    <f-option disabled type="radio" option-size="mini" name="radio1_xs" value="10" />
-                    <f-option disabled type="radio" option-size="mini" name="radio1_xs" value="20" />
+                    <f-option disabled type="radio" option-size="mini" name="radio1_xs" value="10" aria-label="label" />
+                    <f-option disabled type="radio" option-size="mini" name="radio1_xs" value="20" aria-label="label" />
                 </span>
           </div>
             <h3>Radio button - checked</h3>
@@ -124,22 +124,22 @@ export const Disabled = () => ({
                 <span class="par-4">
                     Large <br />
                     <f-option disabled checked type="radio" label="123" option-size="large" name="radio2_lg" value="10" />
-                    <f-option disabled type="radio" option-size="large" name="radio2_lg" value="20" />
+                    <f-option disabled type="radio" option-size="large" name="radio2_lg" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Default <br />
-                    <f-option disabled type="radio" name="radio2" value="10" />
-                    <f-option disabled checked type="radio" name="radio2" value="20" />
+                    <f-option disabled type="radio" name="radio2" value="10" aria-label="label" />
+                    <f-option disabled checked type="radio" name="radio2" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Small <br />
-                    <f-option disabled checked type="radio" option-size="small" name="radio2_sm" value="10" />
-                    <f-option disabled type="radio" option-size="small" name="radio2_sm" value="20" />
+                    <f-option disabled checked type="radio" option-size="small" name="radio2_sm" value="10" aria-label="label" />
+                    <f-option disabled type="radio" option-size="small" name="radio2_sm" value="20" aria-label="label" />
                 </span>
                 <span class="par-4">
                     Mini <br />
-                    <f-option disabled type="radio" option-size="mini" name="radio2_xs" value="10" />
-                    <f-option disabled checked type="radio" option-size="mini" name="radio2_xs" value="20" />
+                    <f-option disabled type="radio" option-size="mini" name="radio2_xs" value="10" aria-label="label" />
+                    <f-option disabled checked type="radio" option-size="mini" name="radio2_xs" value="20" aria-label="label" />
                 </span>
           </div>
         </div>
@@ -191,21 +191,21 @@ export const Model = () => ({
     template: `
         <div>
             <h3>Checkbox</h3>
-            <f-option v-model="checkboxValue" type="checkbox" name="checkbox_m" />
+            <f-option v-model="checkboxValue" type="checkbox" name="checkbox_m" aria-label="label" />
             <f-button secondary size="small" @click.native="checkboxValue = !checkboxValue">Toggle</f-button>
             <br />
             Value: {{ checkboxValue }}
             <h3>Checkbox - multiselect</h3>
-            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="10" />
-            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="20" />
-            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="30" />
+            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="10" aria-label="label" />
+            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="20" aria-label="label" />
+            <f-option v-model="checkboxValue2" type="checkbox" name="checkbox_m2" value="30" aria-label="label" />
             <f-button secondary size="small" @click.native="checkboxValue2 = ['30']">Set value to 30</f-button>
             <br />
             Value: {{ checkboxValue2 }}
             <h3>Radio button</h3>
-            <f-option v-model="radioValue" type="radio" name="radio_m" value="10" />
-            <f-option v-model="radioValue" type="radio" name="radio_m" value="20" />
-            <f-option v-model="radioValue" type="radio" name="radio_m" value="30" />
+            <f-option v-model="radioValue" type="radio" name="radio_m" value="10" aria-label="label" />
+            <f-option v-model="radioValue" type="radio" name="radio_m" value="20" aria-label="label" />
+            <f-option v-model="radioValue" type="radio" name="radio_m" value="30" aria-label="label" />
             <f-button secondary size="small" @click.native="radioValue = '30'">Set value to 30</f-button>
             <br />
             Value: {{ radioValue }}

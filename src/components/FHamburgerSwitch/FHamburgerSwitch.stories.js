@@ -9,7 +9,7 @@ export const Default = () => ({
     components: { FHamburgerSwitch },
     template: `
         <div>
-            <f-hamburger-switch />
+            <f-hamburger-switch aria-label="menu switch" />
         </div>
     `,
 });
@@ -18,9 +18,9 @@ export const Thickness = () => ({
     components: { FHamburgerSwitch },
     template: `
         <div>
-            <f-hamburger-switch thickness="1" />
-            <f-hamburger-switch thickness="2" />
-            <f-hamburger-switch thickness="3" />
+            <f-hamburger-switch thickness="1" aria-label="menu switch" />
+            <f-hamburger-switch thickness="2" aria-label="menu switch" />
+            <f-hamburger-switch thickness="3" aria-label="menu switch" />
         </div>
     `,
 });
@@ -29,9 +29,9 @@ export const TwoLines = () => ({
     components: { FHamburgerSwitch },
     template: `
         <div>
-            <f-hamburger-switch two-lines thickness="1" />
-            <f-hamburger-switch two-lines thickness="2" />
-            <f-hamburger-switch two-lines thickness="3" />
+            <f-hamburger-switch two-lines thickness="1" aria-label="menu switch" />
+            <f-hamburger-switch two-lines thickness="2" aria-label="menu switch" />
+            <f-hamburger-switch two-lines thickness="3" aria-label="menu switch" />
         </div>
     `,
 });
@@ -41,7 +41,7 @@ export const MobileViewBreakpoint = () => ({
     template: `
         <div>
             <h3>Resize viewport under/above 800px</h3>
-            <f-hamburger-switch mobile-view-breakpoint="800px" :on="on" thickness="2" />
+            <f-hamburger-switch mobile-view-breakpoint="800px" :on="on" thickness="2" aria-label="menu switch" />
         </div>
     `,
     data() {
@@ -64,8 +64,8 @@ export const Size = () => ({
     components: { FHamburgerSwitch },
     template: `
         <div>
-            <f-hamburger-switch :style="bigSize" />
-            <f-hamburger-switch :style="smallSize" />
+            <f-hamburger-switch :style="bigSize" aria-label="menu switch" />
+            <f-hamburger-switch :style="smallSize" aria-label="menu switch" />
         </div>
     `,
     data() {
@@ -84,8 +84,8 @@ export const Colors = () => ({
     components: { FHamburgerSwitch },
     template: `
         <div>
-            <f-hamburger-switch :style="blueStyle" thickness="2" />
-            <f-hamburger-switch :style="purpleStyle" thickness="2" />
+            <f-hamburger-switch :style="blueStyle" thickness="2" aria-label="menu switch" />
+            <f-hamburger-switch :style="purpleStyle" thickness="2" aria-label="menu switch" />
         </div>
     `,
     data() {

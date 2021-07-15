@@ -3,6 +3,7 @@
         class="fhamburgerswitch"
         role="switch"
         :class="[classes, `fhamburgerswitch-thickness${thickness}`]"
+        :aria-checked="isOn ? 'true' : 'false'"
         @click="toggle"
     >
         <div class="cont">

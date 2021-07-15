@@ -9,8 +9,8 @@ export const Default = () => ({
     components: { FDarkThemeSwitch },
     template: `
         <div>
-            <f-dark-theme-switch />
-            <f-dark-theme-switch label="with label" />
+            <f-dark-theme-switch aria-label="label" />
+            <f-dark-theme-switch label="label" />
         </div>
     `,
 });
@@ -19,10 +19,10 @@ export const Size = () => ({
     components: { FDarkThemeSwitch },
     template: `
         <div>
-            <f-dark-theme-switch option-size="large" />
-            <f-dark-theme-switch />
-            <f-dark-theme-switch option-size="small" />
-            <f-dark-theme-switch option-size="mini" />
+            <f-dark-theme-switch option-size="large" aria-label="label" />
+            <f-dark-theme-switch aria-label="label" />
+            <f-dark-theme-switch option-size="small" aria-label="label" />
+            <f-dark-theme-switch option-size="mini" aria-label="label" />
         </div>
     `,
 });
@@ -31,8 +31,8 @@ export const Colors = () => ({
     components: { FDarkThemeSwitch },
     template: `
         <div>
-            <f-dark-theme-switch :style="blueStyle" />
-            <f-dark-theme-switch :style="purpleStyle" />
+            <f-dark-theme-switch :style="blueStyle" aria-label="label" />
+            <f-dark-theme-switch :style="purpleStyle" aria-label="label" />
         </div>
     `,
     data() {

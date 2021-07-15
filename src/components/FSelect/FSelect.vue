@@ -12,6 +12,7 @@
                 class="inp"
                 :aria-invalid="validationState.invalid"
                 :aria-describedby="ariaDescribedByIds"
+                :aria-label="ariaLabel"
                 :class="inpClasses"
                 @change="onChange"
             >

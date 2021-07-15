@@ -84,6 +84,10 @@ export const formInputMixin = {
             type: String,
             default: '',
         },
+        ariaLabel: {
+            type: String,
+            default: '',
+        },
         /**
          * Component to be used for displaying error messages.
          * String (component name) or object {name: string, props: object}.
@@ -160,6 +164,10 @@ export const formInputMixin = {
 
             if (this.label) {
                 ids.push(this.labeledById);
+            }
+
+            if (this.labeledBy) {
+                ids.push(this.labeledBy);
             }
 
             return ids.length > 0 ? ids.join(' ') : null;

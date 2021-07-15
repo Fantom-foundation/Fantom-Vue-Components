@@ -16,7 +16,7 @@
             autocomplete="off"
             aria-autocomplete="list"
             :input-cont-id="dInputContId"
-            :controls-id="listboxId"
+            :controls-id="popoverVisible ? listboxId : ''"
             :aria-activedescendant="activeDescendant"
             :readonly="readonly"
             :validator="null"

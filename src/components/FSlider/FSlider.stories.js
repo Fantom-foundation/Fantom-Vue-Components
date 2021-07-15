@@ -101,7 +101,7 @@ export const Model = () => ({
     components: { FSlider },
     template: `
         <p>
-            <input v-model="val" type="number" min="-30" max="30" step="2" />
+            <input v-model="val" type="number" min="-30" max="30" step="2" aria-label="label" />
             <f-slider label="v-model" min="-30" max="30" step="2" use-lower-fill-bar v-model="val" />
             <br /><br />
             value: {{ val }}

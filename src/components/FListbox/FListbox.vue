@@ -14,6 +14,7 @@
             :aria-describedby="ariaDescribedByIds"
             :aria-disabled="disabled"
             :aria-invalid="validationState.invalid"
+            :aria-label="ariaLabel"
             @click="onClick"
             @mousedown.prevent
             @keydown="onKeydown"
