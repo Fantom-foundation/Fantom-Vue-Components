@@ -6,6 +6,7 @@ module.exports = {
     addons: [
         '@storybook/addon-actions',
         '@storybook/addon-links',
+        'storybook-rtl-addon',
         // '@storybook/addon-docs',
         {
             name: '@storybook/addon-docs',
@@ -19,7 +20,7 @@ module.exports = {
             },
             */
         },
-        '@storybook/addon-a11y/register',
+        '@storybook/addon-a11y',
     ],
     webpackFinal: async (config, { configType }) => {
         // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
