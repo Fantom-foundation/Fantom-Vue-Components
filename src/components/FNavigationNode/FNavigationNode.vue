@@ -39,7 +39,7 @@
                         v-if="slotProps.parent"
                         size="16px"
                         rotate="180deg"
-                        class="fnavigationnode_item_parenticon rtl-mirror"
+                        class="fnavigationnode_item_parenticon fsvgicon-rtl-mirror"
                     >
                         <icon-angle-left />
                     </f-svg-icon>

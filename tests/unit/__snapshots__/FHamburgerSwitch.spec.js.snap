@@ -2,6 +2,7 @@
 
 exports[`FHamburgerSwitch should render correctly 1`] = `
 <div
+  aria-checked="false"
   class="fhamburgerswitch fhamburgerswitch-thickness1"
   role="switch"
 >

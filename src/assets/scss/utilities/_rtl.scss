@@ -1,4 +1,4 @@
-html[dir=rtl] {
+html[dir=rtl], body[dir=rtl] {
     .rtl-mirror {
         transform: scale(-1);
     }

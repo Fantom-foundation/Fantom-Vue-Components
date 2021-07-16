@@ -69,7 +69,7 @@
     }
 }
 
-html[dir="rtl"] {
+html[dir="rtl"], body[dir="rtl"] {
     @include tools.select {
         /* chevron icon */
         &::after {

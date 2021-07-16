@@ -24,3 +24,9 @@
         }
     }
 }
+
+html[dir=rtl], body[dir=rtl] {
+    .fsvgicon-rtl-mirror {
+        transform: scale(-1);
+    }
+}
