@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FEllipsis should render correctly 1`] = `
+<span
+  class="f-ellipsis overflow-middle fixed-char-pos-start"
+>
+  <span />
+   
+  <span
+    class="left-chars"
+  >
+    12345 
+  </span>
+   
+  <span
+    class="right-chars"
+  >
+    6789 
+  </span>
+   
+  <span />
+</span>
+`;
