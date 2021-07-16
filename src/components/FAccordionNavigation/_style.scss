@@ -1,0 +1,62 @@
+.faccordionnavigation {
+    &.fnavigation {
+        --fnavigation-item-padding-inline-start: var(--f-spacer-6, 30px);
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        > ul {
+            padding: 0;
+
+            > li > .fnavigationnode_item {
+                padding-inline-start: var(--f-spacer-5, 24px) !important;
+            }
+        }
+
+        a:not(.btn) {
+            text-decoration: none;
+        }
+    }
+
+    .fnavigationnode {
+        &_item {
+            width: 100%;
+            align-items: center;
+            padding: var(--f-spacer-3, 12px) var(--f-spacer-4, 18px);
+            line-height: calc(0.8 * var(--f-doc-line-height, 24px));
+            text-align: start;
+            opacity: 0.65;
+            font-weight: 600;
+            transition: opacity var(--f-transition-length, 220ms) var(--f-transition-func, ease);
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &_icon {
+                margin-inline-end: var(--f-spacer-3, 12px);
+            }
+
+            &_parenticon {
+                opacity: 0.5;
+                margin-inline-end: 0;
+                margin-inline-start: auto;
+            }
+        }
+
+        &-level1 {
+            margin-bottom: var(--f-spacer-1, 3px);
+        }
+
+        &-active {
+            > .fnavigationnode_item, > a.fnavigationnode_item:not(.btn) {
+                opacity: 1;
+            }
+            /*> .fnavigationnode_item:not(:hover), > a.fnavigationnode_item:not(.btn):not(:hover) {
+                // background-color: hsla(var(--f-color-grey-h), var(--f-color-grey-s), 30%, 0.7);
+            }*/
+        }
+    }
+}
