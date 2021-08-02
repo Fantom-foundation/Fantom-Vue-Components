@@ -80,7 +80,7 @@ import './FListbox.types.js';
 import { helpersMixin } from '../../mixins/helpers.js';
 import { formInputMixin } from '../../mixins/form-input.js';
 import { translationsMixin } from '../../mixins/translations.js';
-import { cloneObject, defer, isPromise } from '../../utils';
+import { cloneObject, defer, isObject, isPromise, objectEquals } from '../../utils';
 import { isKey, keyboardNavigation } from '../../utils/aria.js';
 import { selectMixin } from '../../mixins/select.js';
 import FLabel from '../FLabel/FLabel.vue';
@@ -93,7 +93,7 @@ import FInfoText from '../FInfoText/FInfoText.vue';
 /**
  * FListbox item.
  * @typedef {Object} FListboxItem
- * @property {string} [value] Specifies the value of listbox item
+ * @property {string|Object} [value] Specifies the value of listbox item
  * @property {string} [label] Specifies a label for an item
  * @property {boolean} [disabled] Specifies that an item should be disabled
  * @property {boolean} [selected] Specifies that an item should be pre-selected
@@ -246,7 +246,7 @@ export default {
         value(_val) {
             this.inputValue = _val;
 
-            if (this.focusedItem.value !== _val) {
+            if (!this.valuesAreEqual(this.focusedItem.value, _val)) {
                 this.focusItem(_val, false, 'value');
             }
         },
@@ -357,7 +357,9 @@ export default {
 
                                 // preserve focused item
                                 if (focusedItemValue) {
-                                    const idx = this.items.findIndex(_item => _item.value === focusedItemValue);
+                                    const idx = this.items.findIndex(_item =>
+                                        this.valuesAreEqual(_item.value, focusedItemValue)
+                                    );
 
                                     // if currently focused item is near the bottom edge (trying to guess keyboard movement)
                                     if (this.items.length - pagination.perPage - 2 < idx) {
@@ -432,7 +434,7 @@ export default {
             let item;
 
             if (_value !== undefined && !this.disabled) {
-                item = this.items.find(_item => _item[_key] === _value);
+                item = this.items.find(_item => this.valuesAreEqual(_item[_key], _value));
 
                 // if (item && item.id !== this.focusedItem.id) {
                 if (item && !item.disabled) {
@@ -467,7 +469,7 @@ export default {
             let selectedItem = this.items.find(_item => !!_item.selected);
 
             if (!selectedItem && value) {
-                selectedItem = this.items.find(_item => _item.value === value);
+                selectedItem = this.items.find(_item => this.valuesAreEqual(_item.value, value));
             }
 
             this.focusedItem = {};
@@ -533,6 +535,14 @@ export default {
 
             if (item) {
                 this.focusedItem = item;
+            }
+        },
+
+        valuesAreEqual(val1, val2) {
+            if (isObject(val1) || isObject(val2)) {
+                return objectEquals(val1, val2);
+            } else {
+                return val1 === val2;
             }
         },
 
