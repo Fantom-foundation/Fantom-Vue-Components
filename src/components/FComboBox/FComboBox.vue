@@ -258,9 +258,9 @@ export default {
             this.validate();
 
             if (!isPromise(this.data)) {
-                const selectedItem = this.data.find(_item => _item.value === _value);
+                const selectedItem = this.data.find(_item => this.valuesAreEqual(_item.value, _value));
 
-                if (selectedItem && selectedItem.value !== this.selectedItem.value) {
+                if (selectedItem && !this.valuesAreEqual(selectedItem.value, this.selectedItem.value)) {
                     this.selectedItem = selectedItem;
                     this.iValue = this.selectedItem.label;
                 }
@@ -329,7 +329,7 @@ export default {
             let selectedItem = data.find(_item => !!_item.selected);
 
             if (!selectedItem && value !== '') {
-                selectedItem = data.find(_item => _item.value === value);
+                selectedItem = data.find(_item => this.valuesAreEqual(_item.value, value));
             }
 
             if (!selectedItem) {
@@ -384,6 +384,10 @@ export default {
             if (popover && this.popoverVisible) {
                 popover.hide(animation);
             }
+        },
+
+        valuesAreEqual(val1, val2) {
+            return FListbox.methods.valuesAreEqual(val1, val2);
         },
 
         onPopoverHide(_event) {
@@ -477,7 +481,7 @@ export default {
         },
 
         onButtonClick() {
-            const { input } = this.$refs;
+            // const { input } = this.$refs;
 
             if (this.disabled) {
                 return;
@@ -488,9 +492,9 @@ export default {
 
             this.showPopover();
 
-            if (input && !this.readonly) {
+            /* if (input && !this.readonly) {
                 input.select();
-            }
+            } */
         },
 
         onInputFocus() {

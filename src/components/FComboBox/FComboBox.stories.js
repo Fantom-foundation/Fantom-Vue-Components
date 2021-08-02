@@ -80,6 +80,49 @@ const comboboxData2 = [
     { value: 30, label: 'Tommy' },
 ];
 
+const comboboxData3 = [
+    {
+        value: { id: 2 },
+        label: 'Tani',
+    },
+    {
+        value: { id: 11 },
+        label: 'Fonsie',
+    },
+    {
+        value: { id: 5 },
+        label: 'Slade',
+    },
+    {
+        value: { id: 19 },
+        label: 'Elladine',
+    },
+    {
+        value: { id: 13 },
+        label: 'Shandie',
+    },
+    {
+        value: { id: 14 },
+        label: 'Noach',
+    },
+    {
+        value: { id: 9 },
+        label: 'Shela',
+    },
+    {
+        value: { id: 6 },
+        label: 'Lura',
+    },
+    {
+        value: { id: 12 },
+        label: 'Lia',
+    },
+    {
+        value: { id: 15 },
+        label: 'Frayda',
+    },
+];
+
 function fetchPagedComboBoxData(_timeout = 1000, _pagination) {
     return new Promise(_resolve =>
         setTimeout(() => {
@@ -195,6 +238,29 @@ export const TextIsValue = () => ({
             data: clone(comboboxData),
             value: 0,
         };
+    },
+});
+
+export const ObjectIsValue = () => ({
+    components: { FComboBox, FButton },
+    template: `
+        <div>
+            <f-combo-box v-model="value" select-mode :data="data" label="label" />
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to 19</f-button>
+            <br />
+            selected: {{ value }}
+        </div>
+    `,
+    data() {
+        return {
+            data: clone(comboboxData3),
+            value: { id: 9 },
+        };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = { id: 19 };
+        },
     },
 });
 
