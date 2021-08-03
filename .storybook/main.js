@@ -6,6 +6,7 @@ module.exports = {
     addons: [
         '@storybook/addon-actions',
         '@storybook/addon-links',
+        '@storybook/addon-viewport',
         'storybook-rtl-addon',
         // '@storybook/addon-docs',
         {
