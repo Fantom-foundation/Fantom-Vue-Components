@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FFilters should render correctly 1`] = `
+<form
+  __submit-if-changed=""
+  class="fform ffilters fform-elemsautowidth"
+  method="post"
+  novalidate="novalidate"
+/>
+`;

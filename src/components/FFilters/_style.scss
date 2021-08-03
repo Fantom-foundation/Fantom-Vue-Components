@@ -1,0 +1,7 @@
+.ffilters {
+    width: auto;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--f-spacer-1, 3px);
+}
