@@ -1,3 +1,9 @@
 .fforminput {
     display: inline-block;
+
+    .flabel {
+        display: block;
+        font-size: var(--f-font-size-4);
+        color: var(--f-color-grey-6);
+    }
 }

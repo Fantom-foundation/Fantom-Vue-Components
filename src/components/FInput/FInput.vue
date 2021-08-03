@@ -258,7 +258,7 @@ export default {
 
         activate() {
             // this.focus();
-            this.select();
+            // this.select();
         },
 
         /**
