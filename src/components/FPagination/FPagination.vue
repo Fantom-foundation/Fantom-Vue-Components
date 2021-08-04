@@ -53,7 +53,7 @@
                 -->
                 <slot name="pages" v-bind="{ ...state }">
                     <span v-if="disablePrevBtns && disableNextBtns">-</span>
-                    <span v-else-if="type === 'xofy'" :title="getRangeLabel()">
+                    <span v-else-if="type === 'xofy'" :title="getRangeLabel()" class="fpagination_xofy">
                         <span class="fpagination_pages_curr">{{ dCurrPage }}</span>
                         {{ _('fpagination.of') }} {{ numPages }}
                     </span>

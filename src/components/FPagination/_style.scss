@@ -30,6 +30,10 @@
         }
     }
 
+    &_xofy {
+        unicode-bidi: bidi-override;
+    }
+
     &-disabled {
         .fpagination {
             &_pages {
