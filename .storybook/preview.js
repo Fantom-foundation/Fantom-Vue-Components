@@ -3,10 +3,12 @@ import '../src/assets/scss/demo.scss';
 // import 'focus-visible';
 import Vue from 'vue';
 import FErrorMessagesPopover from '@/components/FErrorMessagesPopover/FErrorMessagesPopover.vue';
+import FSearchField from '@/components/FSearchField/FSearchField.vue';
 import { addDecorator, addParameters } from '@storybook/vue';
 import { withDirection } from 'storybook-rtl-addon';
 
 Vue.component('FErrorMessagesPopover', FErrorMessagesPopover);
+Vue.component('FSearchField', FSearchField);
 
 addParameters({
     a11y: {

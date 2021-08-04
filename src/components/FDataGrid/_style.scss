@@ -1,0 +1,334 @@
+@use "custom-properties";
+
+.fdatagrid {
+    position: relative;
+
+    *[hidden] {
+        display: none;
+    }
+
+    *[tabindex]:focus:not(:focus-visible) {
+        outline: none;
+        box-shadow: none;
+    }
+
+    table {
+        width: 100%;
+        //border-collapse: initial;
+        border-collapse: collapse;
+        /*border-spacing: 0;*/
+        border-spacing: var(--fdatagrid-border-spacing);
+        table-layout: fixed;
+    }
+
+    td,
+    th {
+        padding: var(--fdatagrid-cell-padding);
+        word-break: break-word;
+        background-color: var(--fdatagrid-cell-background-color);
+        //line-height: 1.2;
+        border: var(--fdatagrid-cell-border);
+    }
+
+    th {
+        font-weight: bold;
+        border: var(--fdatagrid-header-cell-border);
+    }
+
+    td {
+        vertical-align: middle;
+    }
+
+    tr {
+        //height: 48px;
+        &:hover td {
+            background-color: var(--fdatagrid-cell-hover-background-color);
+        }
+    }
+
+    &_header {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--f-spacer-3, 12px));
+        padding-top: var(--f-spacer-3, 12px);
+        padding-bottom: var(--f-spacer-3, 12px);
+
+        .fpagination {
+            margin-inline-start: auto;
+        }
+    }
+
+    &_thead {
+        &_sortablecol {
+            cursor: pointer;
+
+            .fdatagrid_thead_cellin {
+                position: relative;
+                padding-inline-end: 20px;
+
+                &::after {
+                    position: absolute;
+                    top: var(--f-spacer-1, 3px);
+                    right: 0;
+                    width: 16px;
+                    height: 16px;
+                    //opacity: 0.15;
+                    background-image: var(--fdatagrid-sortcolumn-background-image);
+                    background-repeat: no-repeat;
+                    background-position: 100% 0;
+                    content: '';
+                }
+            }
+
+            &.asc {
+                > .fdatagrid_thead_cellin::after {
+                    opacity: 1;
+                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill="%231969ff"><path d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"/></svg>');
+                }
+            }
+
+            &.desc {
+                > .fdatagrid_thead_cellin::after {
+                    opacity: 1;
+                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill="%231969ff"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"/></svg>');
+                }
+            }
+        }
+    }
+
+    &_loader {
+        position: sticky;
+        top: 40px;
+
+        /*
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        */
+        background-color: #fff;
+        padding: var(--f-spacer-3) var(--f-spacer-4);
+        box-shadow: var(--f-box-shadow-4);
+        border-radius: var(--f-border-radius-2);
+
+        /*&::before {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: '';
+            background-color: #ff0;
+        }*/
+
+        text-align: center;
+        //font-weight: bold;
+
+        &_wrap {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: var(--f-zindex-sticky);
+            //width: 100%;
+            //height: 100%;
+            height: calc(100% - 100px);
+            //background-color: #333333;
+        }
+    }
+
+    &_row {
+        &-active {
+            position: relative;
+            z-index: calc(var(--f-zindex-below) + var(--f-zindex-sticky));
+            box-shadow: var(--fdatagrid-row-active-box-shadow);
+
+            td {
+                background-color: var(--fdatagrid-row-active-background) !important;
+            }
+        }
+    }
+
+    &_cell {
+        &-editable {
+            cursor: pointer;
+
+            .finput {
+                --finput-autoresizetextarea-min-width: 100%;
+                --finput-autoresizetextarea-min-height: var(--f-input-height, 24px);
+
+                width: 100%;
+
+                &_inputcont {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &_noitems {
+        text-align: center;
+    }
+
+    &-mobileview {
+        table {
+            display: block;
+
+            thead {
+                display: none;
+            }
+
+            tbody, tfoot {
+                display: block;
+            }
+
+            tr {
+                display: block;
+                padding: 8px 0;
+                border-bottom: var(--fdatagrid-mw-row-border-bottom);
+
+                td {
+                    display: flex;
+                    align-items: center;
+                    width: auto !important;
+                    //justify-content: space-between;
+
+                    &::before {
+                        //flex: 1;
+                        min-width: 35%;
+                        content: attr(data-label);
+                        font-size: var(--fdatagrid-mw-row-label-font-size);
+                        font-weight: var(--fdatagrid-mw-row-label-font-weight);
+                        font-style: var(--fdatagrid-mw-row-label-font-style);
+                        color: var(--fdatagrid-mw-row-label-color);
+                        text-align: left;
+                    }
+
+                    .fdatagrid_cellin {
+                        flex: auto;
+                        text-align: left;
+                        white-space: unset !important;
+                    }
+                }
+            }
+        }
+
+        .fdatagrid_header {
+            justify-content: center;
+
+            .fpagination {
+                margin-inline-start: unset;
+            }
+        }
+
+        td,
+        th {
+            padding: var(--fdatagrid-mw-cell-padding);
+        }
+    }
+
+    &-stickyheader {
+        /*position: relative;*/
+        .fdatagrid_loader_wrap {
+            //overflow: hidden;
+        }
+
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            //top: $f-header-height;
+            //top: 128px;
+            //top: var(--fdatagrid-thead-sticky-top);
+            top: calc(var(--curr-sticky-top, 0px) + 60px);
+            //top: 60px;
+            z-index: var(--f-zindex-sticky);
+        }
+
+        &.fdatagrid-heightset {
+            thead th {
+                top: 0;
+                //--fdatagrid-thead-sticky-top: 0;
+            }
+        }
+
+        .fdatagrid_header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: var(--curr-sticky-top, 0px);
+            z-index: var(--f-zindex-sticky);
+            background: var(--fdatagrid-cell-background-color);
+        }
+    }
+
+    &-heightset {
+        .fdatagrid_table {
+            overflow: auto;
+        }
+    }
+
+    &-loading {
+        //overflow: hidden;
+
+        table,
+        .fpagination {
+            filter: blur(4px);
+        }
+    }
+
+    &-rowedit tbody {
+        //--fdatagrid-border-spacing: 0 var(--f-spacer-1);
+        --fdatagrid-cell-hover-background-color: #f7f8fc;
+    }
+
+    td.fdatagrid_firstcell,
+    th.fdatagrid_firstcell {
+        //padding-inline-start: 0;
+        /*border-radius: 8px 0 0 8px;*/
+    }
+
+    td.fdatagrid_lastcell,
+    th.fdatagrid_lastcell {
+        //padding-inline-end: 0;
+        /*border-radius: 0 8px 8px 0;*/
+    }
+}
+
+.fwindow {
+    .fdatagrid {
+        --curr-sticky-top: 0px;
+    }
+}
+
+html[dir='rtl'] {
+    .fdatagrid {
+        &_thead {
+            &_sortablecol {
+                .fdatagrid_thead_cellin {
+                    &::after {
+                        right: unset;
+                        left: 0;
+                    }
+                }
+            }
+        }
+
+        &-mobileview {
+            table {
+                tr {
+                    td {
+                        &::before {
+                            text-align: right;
+                        }
+
+                        .fdatagrid_cellin {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
