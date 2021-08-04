@@ -1,11 +1,11 @@
 <template>
-    <f-window
-        popover
+    <f-popover
         visible
         prevent-focus
         :attach-to="`#${inputContId}`"
         :attach-margin="[4, 4, 4, 4]"
         :with-header="false"
+        preferred-attach-position="bottom"
         style="width: auto; max-width: 360px;"
         class="ferrormessagespopover"
     >
@@ -14,11 +14,11 @@
                 {{ msg }}
             </div>
         </div>
-    </f-window>
+    </f-popover>
 </template>
 
 <script>
-import FWindow from '../FWindow/FWindow.vue';
+import FPopover from '../FPopover/FPopover.vue';
 import { errorMessagesMixin } from '../../mixins/error-messages.js';
 
 /**
@@ -27,7 +27,7 @@ import { errorMessagesMixin } from '../../mixins/error-messages.js';
 export default {
     name: 'FErrorMessagesPopover',
 
-    components: { FWindow },
+    components: { FPopover },
 
     mixins: [errorMessagesMixin],
 };
