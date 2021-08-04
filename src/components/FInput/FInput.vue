@@ -257,7 +257,7 @@ export default {
         },
 
         activate() {
-            // this.focus();
+            this.focus();
             // this.select();
         },
 
