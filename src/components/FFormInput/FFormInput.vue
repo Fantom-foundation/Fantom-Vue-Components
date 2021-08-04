@@ -69,7 +69,7 @@ import FSlider from '../FSlider/FSlider.vue';
 import FToggleButton from '../FToggleButton/FToggleButton.vue';
 import FComboBox from '../FComboBox/FComboBox.vue';
 
-const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'datetime-local', 'time'];
+const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'datetime-local', 'time', 'search'];
 const types = [
     ...fInputTypes,
     'select',
