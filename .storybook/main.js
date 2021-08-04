@@ -4,14 +4,21 @@ const path = require('path');
 module.exports = {
     stories: ['../src/components/**/*.stories.js'],
     addons: [
+        '@storybook/addon-storysource',
+        '@storybook/addon-a11y',
         '@storybook/addon-actions',
         '@storybook/addon-links',
         '@storybook/addon-viewport',
         'storybook-rtl-addon',
-        // '@storybook/addon-docs',
-        {
+        '@storybook/addon-docs',
+        /*{
             name: '@storybook/addon-docs',
-            /*
+            options: {
+                sourceLoaderOptions: {
+                    injectStoryParameters: false,
+                },
+            },
+            /!*
             options: {
                 vueDocgenOptions: {
                     alias: {
@@ -19,9 +26,8 @@ module.exports = {
                     },
                 },
             },
-            */
-        },
-        '@storybook/addon-a11y',
+            *!/
+        },*/
     ],
     webpackFinal: async (config, { configType }) => {
         // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
