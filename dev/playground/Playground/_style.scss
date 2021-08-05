@@ -1,0 +1,231 @@
+.playground {
+    --playground-bg-color: #eee;
+
+    display: grid;
+    //grid-template-columns: minmax(180px, 29%) auto;
+    grid-template-columns: minmax(180px, 320px) minmax(400px, auto);
+
+    .aside {
+        grid-row: 1/2;
+        grid-column: 1/2;
+        //text-align: right;
+        padding: var(--f-spacer-5) var(--f-spacer-4);
+
+        nav {
+            position: sticky;
+            top: var(--f-spacer-1);
+            margin-bottom: var(--f-spacer-5);
+        }
+
+        a:not(.btn) {
+            display: inline-block;
+            color: var(--f-color-grey-8);
+            text-decoration: none;
+            border-radius: var(--f-border-radius-2);
+            padding: var(--f-spacer-2) var(--f-spacer-4);
+            margin-bottom: var(--f-spacer-1);
+
+            &.active {
+                color: var(--f-color-grey-2);
+                background: var(--f-color-grey-7);
+            }
+
+            &:not(.active):hover {
+                background: var(--f-color-grey-3);
+            }
+        }
+    }
+
+    main {
+        grid-row: 1/2;
+        grid-column: 2/2;
+        padding: var(--f-spacer-5) var(--f-spacer-4);
+    }
+
+    .box {
+        height: 192px;
+        font-size: var(--f-font-size-3);
+        padding: var(--f-spacer-4);
+        background: var(--f-color-grey-1);
+    }
+
+    .colorbox {
+        &_color {
+            height: 64px;
+        }
+
+        &_label {
+            font-size: var(--f-font-size-4);
+        }
+    }
+
+    .test-item {
+        background: var(--playground-bg-color);
+    }
+
+    .spacer-row {
+        margin-bottom: var(--f-spacer-5);
+    }
+
+    .v-spacer {
+        background: var(--f-color-blue-7);
+        width: var(--f-spacer-5);
+        display: inline-block;
+        vertical-align: middle;
+        margin-inline-end: var(--f-spacer-5);
+    }
+
+    .br-row {
+        margin-bottom: var(--f-spacer-5);
+    }
+
+    .br {
+        display: inline-block;
+        vertical-align: middle;
+        width: 128px;
+        height: 128px;
+        background-color: darkblue;
+        margin-inline-end: var(--f-spacer-5);
+    }
+
+    .fselecttest {
+        .fselect {
+            margin-inline-end: var(--f-spacer-1);
+        }
+    }
+
+    .gridtest {
+        .grid > * {
+            /*overflow: hidden;*/
+            word-break: break-all;
+            background: var(--playground-bg-color);
+        }
+
+        .grid > .no-bg {
+            background: none;
+        }
+    }
+
+    .gridautotest {
+        .gridauto > * {
+            /*overflow: hidden;*/
+            word-break: break-all;
+            background: var(--playground-bg-color);
+        }
+    }
+
+    .v-spacer-1 {
+        height: var(--f-spacer-1);
+    }
+
+    .v-spacer-2 {
+        height: var(--f-spacer-2);
+    }
+
+    .v-spacer-3 {
+        height: var(--f-spacer-3);
+    }
+
+    .v-spacer-4 {
+        height: var(--f-spacer-4);
+    }
+
+    .v-spacer-5 {
+        height: var(--f-spacer-5);
+    }
+
+    .v-spacer-6 {
+        height: var(--f-spacer-6);
+    }
+
+    .v-spacer-7 {
+        height: var(--f-spacer-7);
+    }
+
+    .v-spacer-8 {
+        height: var(--f-spacer-8);
+    }
+
+    .v-spacer-9 {
+        height: var(--f-spacer-9);
+    }
+
+    .h-spacer {
+        background: var(--f-color-blue-7);
+        height: var(--f-spacer-5);
+        display: inline-block;
+        vertical-align: middle;
+        margin-inline-end: var(--f-spacer-5);
+    }
+
+    .h-spacer-1 {
+        width: var(--f-spacer-1);
+    }
+
+    .h-spacer-2 {
+        width: var(--f-spacer-2);
+    }
+
+    .h-spacer-3 {
+        width: var(--f-spacer-3);
+    }
+
+    .h-spacer-4 {
+        width: var(--f-spacer-4);
+    }
+
+    .h-spacer-5 {
+        width: var(--f-spacer-5);
+    }
+
+    .h-spacer-6 {
+        width: var(--f-spacer-6);
+    }
+
+    .h-spacer-7 {
+        width: var(--f-spacer-7);
+    }
+
+    .h-spacer-8 {
+        width: var(--f-spacer-8);
+    }
+
+    .h-spacer-9 {
+        width: var(--f-spacer-9);
+    }
+}
+
+:root[data-theme="dark"] {
+    .playground {
+        --playground-bg-color: var(--theme-dark-color-6);
+
+        .aside {
+            a:not(.btn) {
+                color: var(--theme-dark-color-4);
+
+                &:hover {
+                    color: var(--f-color-grey-2);
+                }
+
+                &.active {
+                    color: var(--f-color-grey-2);
+                    background: var(--theme-dark-color-6);
+                }
+
+                &:not(.active):hover {
+                    background: var(--darker-color);
+                }
+            }
+        }
+    }
+}
+
+/*
+html[dir="rtl"] {
+    .playground {
+        .aside {
+            text-align: left;
+        }
+    }
+}
+*/

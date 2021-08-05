@@ -2,154 +2,54 @@
     <section>
         <h1 class="h2">Form</h1>
 
-        <f-form v-model="values" @submit="onFormSubmit" @reset="onFormReset" class="grid" v-slot="fprops">
+        <f-form center-form @submit="onFormSubmit" @reset="onFormReset" class="grid">
             <fieldset class="col-8">
-                <legend>Test form</legend>
+                <legend>Test form 2</legend>
                 <div class="fform_fieldset_body">
-                    <h4>elementStates</h4>
-                    <p>{{ fprops.elementStates }}</p>
-                    <h4>lastChangedElement</h4>
-                    <p>{{ fprops.lastChangedElement }}</p>
-
-                    <div class="fform_row">
-                        <f-form-input name="input1" label="input 1" validate-on-input :validator="inputValidator" />
-                        <div>
-                            <f-form-input v-if="c1 === true" key="fff" name="input2" placeholder="12345">
-                                <template #top="props">
-                                    <label :for="props.labeledById"><b>&#9742; Phone</b></label>
-                                </template>
-                                <!--                                <template #label="labelProps">
-                                    <label :for="labelProps.id"><b>&#9742; Phone</b></label>
-                                </template>-->
-                            </f-form-input>
-                        </div>
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input type="textarea" name="textarea1" label="Textarea" />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input type="checkbox" name="checkbox1" label="Checkbox 1" />
-                        <f-form-input type="checkbox" name="checkbox2" label="Checkbox 2" />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input type="checkbox" name="c1" label="c1" v-model="c1" />
-                        <f-form-input type="checkbox" label="c2" v-model="c2" />
-                        <button @click="c2 = true">
-                            bla
-                        </button>
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input type="checkboxgroup" name="checkbox3" label="Multi checkboxes" :data="testos" />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="checkboxgroup"
-                            label="Multi checkboxes"
-                            v-model="c3"
-                            :data="{ '10': 'c3 1', '20': 'c3 2' }"
-                        />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="checkboxgroup"
-                            name="checkbox4"
-                            label="Multi checkboxes 2"
-                            :data="[
-                                { label: 'Checkbox multi 1', value: '10' },
-                                { label: 'Checkbox multi 2', value: '20' },
-                            ]"
-                        />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="radiogroup"
-                            name="radio1"
-                            label="Radio"
-                            column
-                            :data="{ '10': 'Radio 1', '20': 'Radio 2', '30': 'Radio 3' }"
-                        />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="select"
-                            name="select1"
-                            label="Select"
-                            :validator="_value => (!_value.trim() ? 'Required' : '')"
-                            validate-on-change
-                            :data="[
-                                { label: '---', value: '' },
-                                { label: 'Option 1', value: 1 },
-                                { label: 'Option 2', value: 2 },
-                                { label: 'Option 3', value: 3 },
-                            ]"
-                        />
-                    </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="dropdownlistbox"
-                            name="dropdown1"
-                            label="dropdownlistbox"
-                            :data="data.dropdown"
-                        >
-                            <template v-slot:buttonLabel="{ item }">
-                                &#9733; <b>{{ item.label }}</b>
+                    <div class="fform_row fl">
+                        <f-input label="Input 1" v-model="values.input1" validate-on-input :validator="inputValidator">
+                            <template #bottom="sProps">
+                                <f-message v-show="sProps.showErrorMessage" type="error" role="alert">
+                                    Fill input 1
+                                </f-message>
                             </template>
-                            <template v-slot:item="{ item }">
-                                &#9733; <b>{{ item.label }}</b>
+                        </f-input>
+                        <f-input label="Input 2" v-model="values.input2" validate-on-input :validator="inputValidator">
+                            <template #bottom="sProps">
+                                <f-message v-show="sProps.showErrorMessage" type="error" role="alert">
+                                    Fill input 2
+                                </f-message>
                             </template>
-                        </f-form-input>
+                        </f-input>
                     </div>
-
-                    <div class="fform_row">
-                        <f-form-input
-                            type="listbox"
-                            name="listbox1"
-                            label="Listbox"
-                            :data="[
-                                { label: 'item 100', value: '100' },
-                                { label: 'item 200', id: 'myid3', value: '200' },
-                                { label: 'item 300 Lorem ipsum', value: '300' },
-                            ]"
-                        />
+                    <div class="fform_row fl-wrap">
+                        <f-option type="checkbox" label="Checkbox 1" v-model="values.checkbox1" />
+                        <f-option type="checkbox" label="Checkbox 2" v-model="values.checkbox2" />
                     </div>
-
+                    <div class="fform_row fl-wrap">
+                        <f-option type="checkbox" label="Checkbox multi 1" v-model="values.checkboxMulti" value="10" />
+                        <f-option type="checkbox" label="Checkbox multi 2" v-model="values.checkboxMulti" value="20" />
+                        <f-option type="checkbox" label="Checkbox multi 3" v-model="values.checkboxMulti" value="30" />
+                    </div>
+                    <div class="fform_row fl-center">
+                        <f-option type="radio" v-model="values.radio1" label="yes" name="rad1" value="10" />
+                        <f-option type="radio" v-model="values.radio1" label="no" name="rad1" value="20" />
+                        <f-option type="radio" v-model="values.radio1" label="ok" name="rad1" value="30" />
+                    </div>
                     <div class="fform_row">
-                        <div class="fforminput">
-                            <f-option type="checkbox" label="Checkbox 1" v-model="chk" />
-                            {{ chk }}
-                        </div>
+                        <f-dropdown-listbox v-model="values.dropdown1" :data="data.dropdown" />
+                    </div>
+                    <div class="fform_row">
+                        <f-listbox v-model="values.listbox1" :data="data.listbox" value="300" />
+                    </div>
+                    <div class="fform_row">
+                        <f-select v-model="values.select1" label="Default" :data="data.select" />
                     </div>
                 </div>
             </fieldset>
-            <div class="col-4">
-                <pre>
-c1: {{ c1 }}, c2: {{ c2 }}, c3: {{ c3 }} <br />
-{{ values }}
-</pre>
-            </div>
             <div>
-                {{ fprops.errorMessages }}
-            </div>
-            <div>
-                <f-button
-                    type="submit"
-                    label="Submit"
-                    :disabled="fprops.pendingValidation || fprops.errorMessages.length > 0"
-                />
-                <f-button
-                    type="reset"
-                    label="Reset"
-                    :disabled="fprops.pendingValidation || fprops.errorMessages.length > 0"
-                />
+                <f-button type="submit" label="Submit" />
+                <f-button type="reset" label="Reset" />
             </div>
         </f-form>
     </section>
@@ -157,19 +57,23 @@ c1: {{ c1 }}, c2: {{ c2 }}, c3: {{ c3 }} <br />
 
 <script>
 import FForm from '@/components/FForm/FForm.vue';
-import FButton from '@/components/FButton/FButton.vue';
-
-import FFormInput from '@/components/FFormInput/FFormInput.vue';
+import FInput from '@/components/FInput/FInput.vue';
 import FOption from '@/components/FOption/FOption.vue';
+import FSelect from '@/components/FSelect/FSelect.vue';
+import FButton from '@/components/FButton/FButton.vue';
+import FDropdownListbox from '@/components/FDropdownListbox/FDropdownListbox.vue';
+import FListbox from '@/components/FListbox/FListbox.vue';
+import FMessage from '@/components/FMessage/FMessage.vue';
+
+import { ffData, getValues, resetValues } from './data.js';
 
 export default {
     name: 'FFormPlayground',
 
-    components: { FOption, FFormInput, FButton, FForm },
+    components: { FMessage, FListbox, FDropdownListbox, FButton, FSelect, FOption, FInput, FForm },
 
     data() {
         return {
-            testos: { '10': 'Checkbox multi 1', '20': 'Checkbox multi 2' },
             data: {
                 select: [
                     { label: 'Option 1', value: 1 },
@@ -186,24 +90,11 @@ export default {
                 ],
                 listbox: [
                     { label: 'item 100', value: '100' },
-                    { label: 'item 200', id: 'myid2', value: '200' },
+                    { label: 'item 200', id: 'myid', value: '200' },
                     { label: 'item 300 Lorem ipsum', value: '300' },
                 ],
             },
-            values: {
-                input1: 'default',
-                dropdown1: '20',
-                checkbox2: true,
-                checkbox3: ['10'],
-                listbox1: '200',
-                radio1: '10',
-            },
-            c1: false,
-            c2: false,
-            c3: [],
-            chk: false,
-            // values: getValues(ffData()),
-            fff: false,
+            values: getValues(ffData()),
             /*
             values: {
                 input1: 'value',
@@ -222,26 +113,9 @@ export default {
 
     methods: {
         inputValidator(_value) {
-            return new Promise((_resolve, _reject) =>
-                setTimeout(() => {
-                    if (Math.random() < 0.5) {
-                        _reject('error!!');
-                    } else {
-                        _resolve(!_value.trim() ? 'Required' : '');
-                    }
-                }, 2000)
-            );
-            // return !_value.trim() ? 'Required' : '';
+            return !!_value.trim();
         },
 
-        updateTestos() {
-            // this.testos = { '10': 'Checkbox multi 1', '20': 'ssss' };
-            this.testos = { '10': 'BITCH' };
-            // this.$set(this.testos, '20', 'ssssssss');
-            console.log('!@#');
-        },
-
-        /*
         updateData() {
             const { values } = this;
 
@@ -252,18 +126,14 @@ export default {
 
             this.data.listbox[0].label = '123';
         },
-        */
 
-        onFormSubmit(_data) {
-            this.fff = true;
-            console.log(_data.values);
-            console.log(_data.lastChangedElem);
-            // console.log('onFormSubmit2', this.dt);
-            // this.updateData();
+        onFormSubmit() {
+            console.log('onFormSubmit2', this.dt);
+            this.updateData();
         },
 
-        onFormReset(_data) {
-            console.log('onFormReset', _data.values);
+        onFormReset() {
+            resetValues(this.values, ffData());
         },
 
         onFormChange(_data) {
