@@ -16,7 +16,7 @@
 
 <script>
 import FForm from '../FForm/FForm.vue';
-import { copyMethods } from '@/utils/vue-helpers.js';
+import { copyMethods } from '../../utils/vue-helpers.js';
 
 /**
  * FForm with inputs displayed side by side

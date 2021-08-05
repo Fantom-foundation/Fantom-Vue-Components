@@ -80,8 +80,8 @@ import { setIds } from '../../utils/vue-helpers.js';
 import { getUniqueId } from '../../utils/index.js';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconAngleLeft from '../icons/IconAngleLeft.vue';
-import FHeightTransition from '@/components/FHeightTransition/FHeightTransition.vue';
-import { setCustomProperty } from '@/utils/css.js';
+import FHeightTransition from '../FHeightTransition/FHeightTransition.vue';
+import { setCustomProperty } from '../../utils/css.js';
 
 /**
  *

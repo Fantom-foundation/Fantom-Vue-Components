@@ -1,5 +1,5 @@
-import { Breakpoints } from '@/utils/Breakpoints.js';
-import { isNonEmptyArray } from '@/utils/array.js';
+import { Breakpoints } from '../utils/Breakpoints.js';
+import { isNonEmptyArray } from '../utils/array.js';
 
 export const breakpointsMixin = {
     data() {

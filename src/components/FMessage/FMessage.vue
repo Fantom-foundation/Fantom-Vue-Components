@@ -43,8 +43,8 @@ import IconInfoCircle from '../icons/IconInfoCircle.vue';
 import { getUniqueId } from '../../utils/index.js';
 import IconTimes from '../icons/IconTimes.vue';
 import FButton from '../FButton/FButton.vue';
-// import { returnFocus, setReceiveFocusFromAttr } from '@/utils/aria.js';
-// import { getComputedStyle } from '@/utils/css.js';
+// import { returnFocus, setReceiveFocusFromAttr } from '../../utils/aria.js';
+// import { getComputedStyle } from '../../utils/css.js';
 
 /**
  * Component for displaying simple messages.

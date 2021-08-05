@@ -1,7 +1,7 @@
 import { getUniqueId } from './index.js';
 
 export function getComponentName(_component) {
-    return _component?.$options._componentTag;
+    return _component ? _component.$options._componentTag : '';
 }
 
 /**
