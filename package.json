@@ -1,6 +1,6 @@
 {
     "name": "fantom-vue-components",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "description": "Library of various Vue 2 components with focus on accessibility",
     "author": "Fantom Foundation",
     "scripts": {

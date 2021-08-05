@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.8.0...v0.9.0) (2021-08-05)
+
+
+### Features
+
+* **f-accordion-navigation:** create component ([4f30b17](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4f30b179153d8376db4e2c5c8ebfb12c87182760))
+* **f-card:** create component ([145a912](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/145a912847bae040fc6f73cf04c089ee29a95468))
+* **f-combo-box:** accept object as a value ([0421f07](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0421f07e7f5f1ec19beafe2b159b4bd3999084d0))
+* **f-dark-theme-switch:** create component ([e544a66](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e544a668d4511f1119fff5d64a12f6a696154afe))
+* **f-data-grid-row-edit:** create component ([efbfc44](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/efbfc44080ff1f708c47b7ac5fcb13e7e0953fda))
+* **f-data-grid:** create component ([5c7b050](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/5c7b050d05c12243ae50220c3a1b22587ca92faf))
+* **f-ellipsis:** create component ([b0ce4ae](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b0ce4ae205d32ac1ec3a4503454381740e93fb7f))
+* **f-filters:** create component ([40efd8c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/40efd8c4c6961072e1b650f423ed88924102360d))
+* **f-hamburger-switch:** create component ([8d0befb](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8d0befb9278d60193ba7e13fb3dd1ea31f20e06c))
+* **f-height-transition:** create component ([3c50f18](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3c50f18740283448319aa0fadd08eaa003d0f053))
+* **f-iconset:** create component ([8a34729](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8a34729086c4033774da9d298e53925825c8f76b))
+* **f-listbox:** accept object as a value ([99ef17d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/99ef17d3ba99deea1e4b479e3fe9d09edadbb9fa))
+* **f-navigation-node:** create component ([4ece514](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4ece514b8d443065d567af753f801d311560e719))
+* **f-navigation:** create component ([5da2bca](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/5da2bca7029c6e85c3db228f5e0aa707ab8d49eb))
+* **f-network-status:** create component ([fb13795](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fb13795120b64c6aabce71e72e7ea44f8bbf8836))
+
+
+### Bug Fixes
+
+* **f-pagination:** fix direction in rtl mode ([ba18895](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ba18895d58aadb32e620a5948cebce937fd573ab))
+* fix rtl issues ([0ef9518](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0ef951875203e2c7f2de89124181c7f042094189))
+
 ## [0.8.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.7.0...v0.8.0) (2021-07-08)
 
 
