@@ -90,3 +90,37 @@ export const TitleSlot = () => ({
         </div>
     `,
 });
+
+export const ALotOfTabs = () => ({
+    components: { FTabs, FTab },
+    template: `
+        <div>
+            <f-tabs aria-label="Default tabs">
+                <f-tab title="Tab 1">
+                    Tab 1 content
+                </f-tab>
+                <f-tab title="Tab 2">
+                    Tab 2 content
+                </f-tab>
+                <f-tab title="Tab 3">
+                    Tab 3 content
+                </f-tab>
+                <f-tab title="Tab 4">
+                    Tab 4 content
+                </f-tab>
+                <f-tab title="Tab 5">
+                    Tab 5 content
+                </f-tab>
+                <f-tab title="Tab 6">
+                    Tab 6 content
+                </f-tab>
+                <f-tab title="Tab 7">
+                    Tab 7 content
+                </f-tab>
+                <f-tab title="Tab Loooooooooooooooong">
+                    Tab 8 content
+                </f-tab>
+            </f-tabs>
+        </div>
+    `,
+});

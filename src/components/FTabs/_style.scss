@@ -6,13 +6,16 @@
         list-style-type: none;
         border-bottom: var(--ftabs-border-width) solid var(--ftabs-border-color);
         margin: 0;
-        padding: 0;
+        padding: 0 0 var(--ftabs-border-width) 0;
+        overflow: hidden;
+        overflow-x: auto;
 
         li {
             position: relative;
             top: var(--ftabs-border-width);
             padding: var(--f-spacer-3, 12px) var(--f-spacer-4, 18px);
             cursor: pointer;
+            white-space: nowrap;
 
             &:focus:not(:focus-visible) {
                 outline: none;
