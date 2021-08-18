@@ -1,3 +1,4 @@
+@use "../../assets/scss/tools/media";
 @use "custom-properties";
 
 .fhamburgerswitch {
@@ -119,6 +120,17 @@
             .l3 {
                 transform: translate(0, -9px) rotate(-45deg);
             }
+        }
+    }
+}
+
+
+@include media.prefers-reduced-motion() {
+    .fhamburgerswitch {
+        .l1,
+        .l2,
+        .l3 {
+            transition: unset;
         }
     }
 }

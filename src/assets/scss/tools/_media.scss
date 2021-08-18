@@ -16,3 +16,15 @@
         @content;
     }
 }
+
+@mixin prefers-reduced-motion($prefers: true) {
+    @if $prefers {
+        @media (prefers-reduced-motion: reduce) {
+            @content;
+        }
+    } @else {
+        @media screen and (prefers-reduced-motion: no-preference) {
+            @content;
+        }
+    }
+}

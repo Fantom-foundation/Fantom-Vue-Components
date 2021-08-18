@@ -1,3 +1,4 @@
+@use "../../assets/scss/tools/media";
 @use "custom-properties";
 
 @keyframes fdotsloader_anim {
@@ -8,6 +9,15 @@
     45% {
         opacity: 0.5;
         transform: scale(0.2);
+    }
+}
+
+@keyframes fdotsloader_anim_opacity {
+    0%, 80% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 0.1;
     }
 }
 
@@ -33,6 +43,14 @@
         &:last-child {
             margin-right: 0;
             animation-delay: calc(var(--fdotsloader-anim-duration) * 0.4);
+        }
+    }
+}
+
+@include media.prefers-reduced-motion() {
+    .fdotsloader {
+        > span {
+            animation-name: fdotsloader_anim_opacity;
         }
     }
 }

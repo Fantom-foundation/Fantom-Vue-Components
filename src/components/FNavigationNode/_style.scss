@@ -1,3 +1,4 @@
+@use "../../assets/scss/tools/media";
 @use "custom-properties";
 
 .fnavigationnode {
@@ -46,4 +47,14 @@
 
 a.fnavigationnode_item:not(.btn) {
     color: var(--fnavigationnode-item-color);
+}
+
+@include media.prefers-reduced-motion() {
+    .fnavigationnode {
+        &-animate {
+            .fnavigationnode_item_parenticon {
+                transition: unset;
+            }
+        }
+    }
 }

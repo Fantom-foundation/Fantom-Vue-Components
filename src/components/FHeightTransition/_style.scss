@@ -1,12 +1,15 @@
+@use "../../assets/scss/tools/media";
 @use "custom-elements";
 
-.fheighttransition {
-    &-enter-active, &-leave-active {
-        transition: height var(--fheighttransition-transition-length) var(--fheighttransition-transition-func);
-        overflow: hidden;
-    }
+@include media.prefers-reduced-motion(false) {
+    .fheighttransition {
+        &-enter-active, &-leave-active {
+            transition: height var(--fheighttransition-transition-length) var(--fheighttransition-transition-func);
+            overflow: hidden;
+        }
 
-    &-willchange {
-        will-change: height;
+        &-willchange {
+            will-change: height;
+        }
     }
 }
