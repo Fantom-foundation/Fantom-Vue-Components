@@ -3,7 +3,7 @@
  */
 
 import { expect, fixture } from '@open-wc/testing';
-import { getElement } from '../../../src/utils/dom2.js';
+import { clearElement, getElement } from '../../../src/utils/dom2.js';
 
 describe('DOM utilities', () => {
     describe('#getElement', () => {
@@ -33,6 +33,16 @@ describe('DOM utilities', () => {
             const elem = await fixture('<div id="foo"></div>');
 
             expect(getElement(elem)).to.equal(elem);
+        });
+    });
+
+    describe('#clearElement', () => {
+        it('should clear given element', async () => {
+            const elem = await fixture('<div id="foo"><span>Lorem <span>ipsum</span></span> dolor <b>sit</b></div>');
+
+            clearElement(elem);
+
+            expect(elem.childNodes.length).to.equal(0);
         });
     });
 });

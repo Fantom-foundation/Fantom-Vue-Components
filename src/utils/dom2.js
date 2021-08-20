@@ -11,3 +11,12 @@ export function getElement(selector) {
 
     return selector || null;
 }
+
+/**
+ * @param {Element} elem
+ */
+export function clearElement(elem) {
+    while (elem && elem.hasChildNodes()) {
+        elem.removeChild(elem.firstChild);
+    }
+}
