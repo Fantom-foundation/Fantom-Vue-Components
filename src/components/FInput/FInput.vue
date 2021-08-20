@@ -106,6 +106,7 @@ import FLabel from '../FLabel/FLabel.vue';
 import { debounce } from '../../utils/function.js';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
+import { clearElement } from '@/utils/dom2.js';
 
 /**
  * Input field (input or textarea) with slots.
@@ -270,9 +271,15 @@ export default {
             const { ghost } = this.$refs;
 
             if (this.autoResizableTextarea && ghost) {
-                const lastChar = text.charAt(text.length - 1);
+                // const lastChar = text.charAt(text.length - 1);
+                const sText = text.split(/\n|\r|\n\r|\r\n/);
 
-                ghost.innerHTML = text.replace(/(\n|\r|\n\r|\r\n)/g, '<br>') + (lastChar === '\n' ? '<br>' : '');
+                clearElement(ghost);
+
+                sText.forEach(text => {
+                    ghost.appendChild(document.createTextNode(text));
+                    ghost.appendChild(document.createElement('br'));
+                });
             }
         },
 
