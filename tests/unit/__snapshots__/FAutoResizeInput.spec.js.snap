@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FAutoResizeInput should render correctly 1`] = `
+<span
+  class="fautoresizeinput"
+>
+   
+  <span
+    aria-hidden="true"
+    class="fautoresizeinput_hiddentwin"
+  />
+</span>
+`;

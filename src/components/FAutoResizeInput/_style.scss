@@ -1,0 +1,18 @@
+.fautoresizeinput {
+    display: inline-block;
+    //max-width: fit-content;
+
+    /*input {
+        width: 100%;
+    }*/
+
+    &_hiddentwin {
+        position: fixed;
+        top: -1000px;
+        left: -1000px;
+        //visibility: hidden;
+        white-space: pre;
+        box-sizing: border-box;
+        //overflow: scroll;
+    }
+}
