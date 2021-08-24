@@ -185,7 +185,7 @@ export const CustomButtonLabelSlot = () => ({
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             <f-dropdown-listbox :data="data">
-                <template v-slot:buttonLabel="{ item }">
+                <template v-slot:button-label="{ item }">
                     &#9733; <b>{{ item.label }}</b>
                 </template>
             </f-dropdown-listbox>
@@ -225,7 +225,7 @@ export const CustomButtonLabelAndItemSlot = () => ({
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             <f-dropdown-listbox :data="data">
-                <template v-slot:buttonLabel="{ item }">
+                <template v-slot:button-label="{ item }">
                     &#9733; <b>{{ item.label }}</b>
                 </template>
                 <template v-slot:item="{ item }">

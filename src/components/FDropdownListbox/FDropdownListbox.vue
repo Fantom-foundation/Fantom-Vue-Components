@@ -17,11 +17,11 @@
             @[keydownEvent]="onKeydown"
         >
             <span class="fdropdownlistbox_button_label">
-                <slot name="buttonLabel" :item="selectedItem">
+                <slot name="button-label" :item="selectedItem">
                     {{ selectedItem.label || buttonInitLabel }}
                 </slot>
             </span>
-            <slot name="buttonArrow">
+            <slot name="button-arrow">
                 <span class="fdropdownlistbox_button_arrow"></span>
             </slot>
         </button>

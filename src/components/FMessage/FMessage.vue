@@ -24,7 +24,7 @@
             <span class="fmessage_body"><slot></slot></span>
             <slot name="suffix"></slot>
             <template v-if="hideOnCloseButton">
-                <slot name="close_button">
+                <slot name="close-button">
                     <f-button @click.native="hide()" size="small" round class="fmessage_closebtn">
                         <f-svg-icon size="12px"><icon-times /></f-svg-icon>
                     </f-button>
