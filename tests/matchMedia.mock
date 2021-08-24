@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: jest.fn().mockImplementation(query => ({
@@ -11,3 +13,5 @@ Object.defineProperty(window, 'matchMedia', {
         dispatchEvent: jest.fn(),
     })),
 });
+
+/* eslint-enable no-undef */

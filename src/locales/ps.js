@@ -34,6 +34,10 @@ export const psTranslations = {
     flistbox: {
         notFound: 'څه پیدا نه شول',
     },
+    fcopybutton: {
+        copyToClipboard: 'کلیپ بورډ ته کاپي کړئ',
+        copiedToClipboard: 'کلیپ بورډ ته کاپي شوی',
+    },
     componentChangeMessages: {
         'f-form': 'فورمه بدله شوې ده خو خوندي شوې نه ده. ایا ته غواړې چې دوام وساتي؟',
         'f-data-grid': 'یو میز بدل شوی دی مګر خوندي شوی نه دی. ایا ته غواړې چې دوام وساتي؟',
