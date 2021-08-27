@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FPlaceholder should render correctly 1`] = `
+<span
+  class="fplaceholder fplaceholder-on fplaceholder-movingbganim"
+>
+  <span
+    class="fplaceholder_replacementtwin"
+  >
+     
+  </span>
+   
+  <span
+    class="fplaceholder_replacement"
+  >
+     
+  </span>
+</span>
+`;

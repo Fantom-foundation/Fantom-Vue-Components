@@ -1,0 +1,65 @@
+@import 'custom-properties';
+
+@keyframes moving-background-animation {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+@keyframes pulse-background-animation {
+    50% {
+        background: transparent;
+    }
+}
+
+.fplaceholder {
+    &-on {
+        .fplaceholder_replacement {
+            opacity: 0;
+        }
+    }
+
+    &-movingbganim {
+        background: linear-gradient(
+            to right,
+            var(--fplaceholder-bg-color1) 8%,
+            var(--fplaceholder-bg-color2) 18%,
+            var(--fplaceholder-bg-color1) 33%
+        );
+        background-size: var(--fplaceholder-background-size-width) 100%;
+
+        animation-duration: var(--fplaceholder-animation-speed);
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: moving-background-animation;
+        animation-timing-function: linear;
+    }
+
+    &-pulsebganim {
+        background-color: var(--fplaceholder-bg-color2);
+
+        animation-duration: var(--fplaceholder-animation-speed);
+        animation-iteration-count: infinite;
+        animation-name: pulse-background-animation;
+        animation-timing-function: linear;
+    }
+
+    &-isblock {
+        display: block;
+
+        .fplaceholder_replacement {
+            display: block;
+        }
+    }
+
+    &_replacementtwin {
+        position: fixed;
+        top: -1000px;
+        left: -1000px;
+        visibility: hidden;
+        white-space: pre;
+    }
+}
