@@ -164,6 +164,7 @@ export const Default = () => ({
                 textarea: '',
                 combobox: 1,
                 checkbox: false,
+                someobj: { foo: 'bar' },
             };
         },
         numberValidator(value) {

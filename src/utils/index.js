@@ -326,6 +326,22 @@ export function objectEquals(_obj1 = {}, _obj2 = {}) {
 }
 
 /**
+ * @param {Object} obj
+ * @param {function} callback
+ */
+export function walkObject(obj = {}, callback) {
+    if (callback) {
+        callback(obj);
+    }
+
+    Object.keys(obj).forEach(prop => {
+        if (isObject(obj[prop])) {
+            walkObject(obj[prop], callback);
+        }
+    });
+}
+
+/**
  * Check if two objects are equal and return first diff prop.
  *
  * @param {Object} _obj1

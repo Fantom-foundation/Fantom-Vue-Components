@@ -331,6 +331,11 @@ export default {
             type: Boolean,
             default: true,
         },
+        /** Used in 'row-edit' mode. If `false` is set, empty rows after the last filled rows will be removed */
+        removeAllEmptyRows: {
+            type: Boolean,
+            default: true,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -607,7 +612,7 @@ export default {
             for (let i = items.length - 1; i >= 0; i--) {
                 if (this.isEmptyRow(items[i])) {
                     items.splice(i, 1);
-                } else {
+                } else if (!this.removeAllEmptyRows) {
                     break;
                 }
             }
@@ -991,16 +996,7 @@ export default {
         },
 
         isEmptyRow(item) {
-            const emptyRow = this.getEmptyRowValues();
-
-            // console.log(emptyRow);
-            for (let key in emptyRow) {
-                if (item[key] != emptyRow[key]) {
-                    return false;
-                }
-            }
-
-            return true;
+            return objectEquals(item, this.getEmptyRowValues());
         },
 
         /**
