@@ -21,3 +21,17 @@ export function callFunctionNTimes(func, n = 3, interval = 25) {
         }, interval);
     });
 }
+
+/**
+ * Disable console error messages.
+ *
+ * @param {function} func
+ */
+export function disableErrorMessages(func) {
+    const originalConsoleError = console.error;
+    console.error = () => {};
+
+    func();
+
+    console.error = originalConsoleError;
+}
