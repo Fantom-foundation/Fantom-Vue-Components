@@ -1,4 +1,4 @@
-@import 'custom-properties';
+@use 'custom-properties';
 
 .fmessage {
     --f-transition-length: var(--fmessage-transition-length);

@@ -103,5 +103,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '../src/assets/scss/demo';
+@use '../src/assets/scss/demo';
 </style>

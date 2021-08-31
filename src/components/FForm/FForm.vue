@@ -360,5 +360,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'style';
+@use 'style';
 </style>

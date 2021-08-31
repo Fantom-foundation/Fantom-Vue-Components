@@ -145,5 +145,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'fform';
+@use 'fform';
 </style>
