@@ -38,6 +38,9 @@ export const faTranslations = {
         copyToClipboard: 'کپی به کلیپ بورد',
         copiedToClipboard: 'در کلیپ بورد کپی شد',
     },
+    finfo: {
+        moreInfo: 'اطلاعات بیشتر',
+    },
     componentChangeMessages: {
         'f-form': 'فرم تغییر کرد اما ذخیره نشد. می خواهید ادامه دهید؟',
         'f-data-grid': 'جدول تغییر کرده اما ذخیره نشده است. آیا به هر حال می خواهید ادامه دهید؟',

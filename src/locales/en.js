@@ -38,6 +38,9 @@ export const enTranslations = {
         copyToClipboard: 'Copy to clipboard',
         copiedToClipboard: 'Copied to clipboard',
     },
+    finfo: {
+        moreInfo: 'More info',
+    },
     componentChangeMessages: {
         'f-form': 'A form has been changed but not saved. Do you want to continue anyway?',
         'f-data-grid': 'A table has been changed but not saved. Do you want to continue anyway?',
