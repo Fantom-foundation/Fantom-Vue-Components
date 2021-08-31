@@ -1,33 +1,26 @@
 <template>
-    <span class="fcopybutton" @click="onClick">
-        <!-- @slot Default to `f-button` -->
-        <slot>
-            <f-button v-bind="$attrs" :id="buttonId" :title="cButtonTitle">
-                <!-- @slot Default to copy icon -->
-                <slot name="button-content">
-                    <f-svg-icon :size="iconSize"><icon-copy /></f-svg-icon>
-                </slot>
-            </f-button>
-        </slot>
+    <f-info
+        :hide-after="hideAfter"
+        :button-title="cButtonTitle"
+        class="fcopybutton"
+        v-bind="$attrs"
+        @click="onClick"
+        @window-hide="$emit('window-hide', $event)"
+    >
+        <template #button-content>
+            <f-svg-icon :size="iconSize"><icon-copy /></f-svg-icon>
+        </template>
+        <!-- copy slots -->
+        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+            <slot :name="name" v-bind="data"></slot>
+        </template>
 
-        <f-popover
-            v-if="popoverCreated"
-            ref="popover"
-            v-bind="$attrs"
-            :hide-after="hideAfter"
-            :attach-to="`#${buttonId}`"
-            @window-hide="$emit('window-hide', $event)"
-        >
-            <!-- @slot Default to `popoverText` prop -->
-            <slot name="popover-content">{{ cPopoverText }}</slot>
-        </f-popover>
-    </span>
+        {{ cPopoverText }}
+    </f-info>
 </template>
 
 <script>
-import { getUniqueId } from '../../utils';
-import FButton from '../FButton/FButton.vue';
-import FPopover from '../FPopover/FPopover.vue';
+import FInfo from '../FInfo/FInfo.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconCopy from '../icons/IconCopy.vue';
 import { translationsMixin } from '../../mixins/translations.js';
@@ -39,7 +32,7 @@ import { translationsMixin } from '../../mixins/translations.js';
 export default {
     name: 'FCopyButton',
 
-    components: { IconCopy, FSvgIcon, FPopover, FButton },
+    components: { FInfo, IconCopy, FSvgIcon },
 
     mixins: [translationsMixin],
 
@@ -77,17 +70,6 @@ export default {
             type: Boolean,
             default: true,
         },
-        /** Unique id */
-        buttonId: {
-            type: String,
-            default: getUniqueId(),
-        },
-    },
-
-    data() {
-        return {
-            popoverCreated: false,
-        };
     },
 
     computed: {
@@ -101,7 +83,9 @@ export default {
     },
 
     methods: {
-        async onClick() {
+        async onClick(event, payload) {
+            payload.preventDefault = !this.showPopover;
+
             await navigator.clipboard.writeText(this.text);
 
             /**
@@ -110,18 +94,6 @@ export default {
              * @property {string} text Copied text
              */
             this.$emit('text-copied', this.text);
-
-            if (this.showPopover) {
-                if (!this.popoverCreated) {
-                    this.popoverCreated = true;
-
-                    this.$nextTick(() => {
-                        this.$refs.popover.show();
-                    });
-                } else {
-                    this.$refs.popover.show();
-                }
-            }
         },
     },
 };

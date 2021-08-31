@@ -131,34 +131,4 @@ describe('FCopyButton', () => {
 
         expect(fPopover.exists()).toBeFalsy();
     });
-
-    it('should pass attributes to the FButton components', () => {
-        wrapper = createWrapper({
-            propsData: {
-                text: COPY_TEXT,
-                size: 'small',
-            },
-        });
-
-        const fButton = wrapper.findComponent(FButton);
-
-        expect(fButton.exists()).toBeTruthy();
-        expect(fButton.props('size')).toBe('small');
-    });
-
-    it('should pass attributes to the FPopover components', async () => {
-        wrapper = createWrapper({
-            propsData: {
-                text: COPY_TEXT,
-                attachPosition: 'bottom',
-            },
-        });
-
-        await clickButton(wrapper);
-
-        const fPopover = wrapper.findComponent(FPopover);
-
-        expect(fPopover.exists()).toBeTruthy();
-        expect(fPopover.props('attachPosition')).toBe('bottom');
-    });
 });

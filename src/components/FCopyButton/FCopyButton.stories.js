@@ -58,7 +58,18 @@ export const DefaultSlot = () => ({
     template: `
         <div>
             <f-copy-button button-id="fcb1" text="copied!">
-                <button id="fcb1">Copy</button>
+                <b>Popover</b> <i>text</i>
+            </f-copy-button>
+        </div>
+    `,
+});
+
+export const ButtonSlot = () => ({
+    components: { FCopyButton },
+    template: `
+        <div>
+            <f-copy-button button-id="fcb1" text="copied!">
+                <template #button><button id="fcb1">Copy</button></template>
             </f-copy-button>
         </div>
     `,
@@ -68,7 +79,7 @@ export const ButtonContentSlot = () => ({
     components: { FCopyButton },
     template: `
         <div>
-            <f-copy-button text="copied!">
+            <f-copy-button :round="false" text="copied!">
                 <template #button-content>
                     Copy
                 </template>
@@ -77,24 +88,11 @@ export const ButtonContentSlot = () => ({
     `,
 });
 
-export const PopoverContentSlot = () => ({
+export const Variations = () => ({
     components: { FCopyButton },
     template: `
         <div>
-            <f-copy-button text="copied!">
-                <template #popover-content>
-                    🛈 <i>Text was copied to clipboard</i>
-                </template>
-            </f-copy-button>
-        </div>
-    `,
-});
-
-export const OtherOptions = () => ({
-    components: { FCopyButton },
-    template: `
-        <div>
-            <f-copy-button tertiary same-size attach-position="bottom" text="copied!" />
+            <f-copy-button :tertiary="false" :round="false" attach-position="bottom" text="copied!" />
         </div>
     `,
 });

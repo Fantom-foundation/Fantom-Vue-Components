@@ -2,10 +2,11 @@
 
 exports[`FCopyButton should render correctly 1`] = `
 <span
-  class="fcopybutton"
+  class="finfo fcopybutton"
 >
   <button
-    class="fbutton btn"
+    class="fbutton btn btn-tertiary btn-round btn-samesize"
+    hide-after="1600"
     id="buttonid"
     title="Copy to clipboard"
     type="button"
