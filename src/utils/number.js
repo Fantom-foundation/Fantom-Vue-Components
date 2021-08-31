@@ -34,3 +34,21 @@ export function randInt(n = 1) {
 
     return Math.floor(Math.random() * n);
 }
+
+/**
+ * @param {number} n
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+export function clamp(n, min, max) {
+    if (min > max) {
+        throw new Error(`'max' must be greater than 'min'`);
+    }
+
+    if (isNaN(n)) {
+        return min;
+    }
+
+    return Math.min(Math.max(n, min), max);
+}

@@ -3,7 +3,7 @@
  */
 
 import { expect } from '@open-wc/testing';
-import { isNumber, isPositiveInt, randInt } from '../../../src/utils/number.js';
+import { clamp, isNumber, isPositiveInt, randInt } from '../../../src/utils/number.js';
 
 describe('Number utilities', () => {
     describe('#isNumber', () => {
@@ -54,6 +54,22 @@ describe('Number utilities', () => {
         it('should throw an error if given argument is not positive integer', () => {
             expect(() => randInt(-1)).to.throw();
             expect(() => randInt('string')).to.throw();
+        });
+    });
+
+    describe('#clamp', () => {
+        it('should clamp given number', () => {
+            expect(clamp(10, -10, 100)).to.be.within(-10, 100);
+            expect(clamp(-20, -10, 100)).to.be.within(-10, 100);
+            expect(clamp(200, -10, 100)).to.be.within(-10, 100);
+        });
+
+        it('should throw an error if min > max', () => {
+            expect(() => clamp(10, 100, -10)).to.throw();
+        });
+
+        it('should return `min` value if given number is not a number', () => {
+            expect(clamp({}, -10, 100)).to.equal(-10);
         });
     });
 });
