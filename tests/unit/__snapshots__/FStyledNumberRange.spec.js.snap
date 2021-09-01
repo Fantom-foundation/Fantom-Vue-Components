@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FStyledNumberRange should render correctly 1`] = `
+<span
+  class="fstylednumberrange"
+>
+  
+            10
+        
+</span>
+`;
