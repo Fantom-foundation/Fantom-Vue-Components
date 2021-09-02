@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FCircleProgress should render correctly 1`] = `
+<div
+  class="fcircleprogress"
+>
+  <svg
+    viewBox="-50 -50 100 100"
+  >
+    <circle
+      class="fcircleprogress_bgcircle"
+      cx="0"
+      cy="0"
+      fill="none"
+      r="47.5"
+      stroke-width="5"
+    />
+     
+    <circle
+      class="fcircleprogress_circle"
+      cx="0"
+      cy="0"
+      fill="none"
+      pathLength="1"
+      r="47.5"
+      stroke-dasharray="1"
+      stroke-dashoffset="0.9"
+      stroke-width="5"
+      transform="rotate(-90 0 0)"
+    />
+      
+    <text
+      class="fcircleprogress_value"
+      dominant-baseline="central"
+      text-anchor="middle"
+    >
+      <tspan>
+        10
+      </tspan>
+       
+      <!---->
+    </text>
+  </svg>
+</div>
+`;

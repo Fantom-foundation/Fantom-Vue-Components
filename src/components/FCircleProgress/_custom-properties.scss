@@ -1,0 +1,15 @@
+.fcircleprogress {
+    --fcircleprogress-width: 152px;
+    --fcircleprogress-height: 152px;
+    --fcircleprogress-stroke-width: 5;
+    --fcircleprogress-transition-duration: 250ms;
+    --fcircleprogress-transition-func: ease;
+    --fcircleprogress-color: #9299a6;
+    //--fcircleprogress-font-size: 0.4;
+    --fcircleprogress-font-size: 42px;
+    --fcircleprogress-font-weight: bold;
+    --fcircleprogress-percentage-font-size: 0.4em;
+    --fcircleprogress-stroke-linecap: round;
+    --fcircleprogress-circle-color: var(--f-color-primary-5, #1a6aff);
+    --fcircleprogress-bg-circle-color: #e6e6e6;
+}
