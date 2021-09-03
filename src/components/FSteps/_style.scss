@@ -1,0 +1,75 @@
+@use 'custom-properties';
+
+.fsteps {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fsteps-padding);
+    /*background: linear-gradient(#eee, #eee) no-repeat center/100% 1px;*/
+
+    &.labels-on {
+        padding-bottom: 32px;
+    }
+
+    &_cont {
+        display: flex;
+        padding: var(--fsteps-cont-padding);
+        background: var(--fsteps-cont-background);
+    }
+
+    &_step {
+        position: relative;
+        flex: 1;
+        padding: var(--fsteps-step-padding);
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &::before {
+            width: var(--fsteps-step-dot-width);
+            height: var(--fsteps-step-dot-height);
+            background: var(--fsteps-step-dot-background);
+            border: var(--fsteps-step-dot-border);
+            border-radius: var(--fsteps-step-dot-border-radius);
+            content: var(--fsteps-step-dot-content);
+            display: block;
+        }
+
+        &-active {
+            &::before {
+                position: relative;
+                background: var(--fsteps-step-dot-active-background);
+                border: var(--fsteps-step-dot-active-border);
+                z-index: 1;
+            }
+
+            &::after {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                width: 100%;
+                height: var(--fsteps-hor-line-height);
+                background: var(--fsteps-active-hor-line-background);
+                content: '';
+                z-index: 0;
+            }
+        }
+    }
+
+    &_label {
+        position: absolute;
+        color: var(--fsteps-label-color);
+        width: var(--fsteps-label-width);
+        padding: var(--fsteps-label-padding);
+        text-align: center;
+        transform: translateX(calc(-50% + 0.5 * var(--fsteps-step-dot-width)));
+
+        &-active {
+            color: var(--fsteps-label-active-color);
+        }
+    }
+}
