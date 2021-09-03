@@ -72,6 +72,10 @@ export default {
         },
 
         setTwinStyle() {
+            if (!this._eInput) {
+                return;
+            }
+
             const eTwin = this.$refs.twin;
             const eInputStyle = window.getComputedStyle(this._eInput);
             const props = [
