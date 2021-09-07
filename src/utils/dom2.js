@@ -30,9 +30,12 @@ export function nextElemsCount(elem, selector = '') {
 
     if (el && el.nextElementSibling) {
         el = el.nextElementSibling;
-        while (el && (selector && el ? !el.matches(selector) : true)) {
+        while (el) {
+            if (!selector || el.matches(selector)) {
+                count += 1;
+            }
+
             el = el.nextElementSibling;
-            count += 1;
         }
     }
 
@@ -48,9 +51,12 @@ export function prevElemsCount(elem, selector = '') {
 
     if (el && el.previousElementSibling) {
         el = el.previousElementSibling;
-        while (el && (selector && el ? !el.matches(selector) : true)) {
+        while (el) {
+            if (!selector || el.matches(selector)) {
+                count += 1;
+            }
+
             el = el.previousElementSibling;
-            count += 1;
         }
     }
 

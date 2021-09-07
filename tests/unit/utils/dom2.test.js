@@ -47,21 +47,37 @@ describe('DOM utilities', () => {
     });
 
     describe('#nextElemsCount', () => {
-        it('should return count of previous element siblings', async () => {
+        it('should return count of the next element siblings', async () => {
             const elem = await fixture('<div><span>1</span><span>2</span><span>3</span><span>4</span></div>');
 
             expect(nextElemsCount(elem.querySelector('span:first-child'))).to.equal(3);
             expect(nextElemsCount(elem.querySelector('span:nth-child(4)'))).to.equal(0);
             expect(nextElemsCount(elem.querySelector('span:nth-child(40)'))).to.equal(0);
         });
+
+        it('should return count of the next element siblings according to given selector', async () => {
+            const elem = await fixture(
+                `<div><span>1</span><span class="skip">2</span><span>3</span><span>4</span></div>`
+            );
+
+            expect(nextElemsCount(elem.querySelector('span:first-child'), 'span:not(.skip)')).to.equal(2);
+        });
     });
 
     describe('#prevElemsCount', () => {
-        it('should return count of previous element siblings', async () => {
+        it('should return count of the previous element siblings', async () => {
             const elem = await fixture('<div><span>1</span><span>2</span><span>3</span><span>4</span></div>');
 
             expect(prevElemsCount(elem.querySelector('span:nth-child(3)'))).to.equal(2);
             expect(prevElemsCount(elem.querySelector('span:first-child'))).to.equal(0);
+        });
+
+        it('should return count of the previous element siblings according to given selector', async () => {
+            const elem = await fixture(
+                `<div><span>1</span><span class="skip">2</span><span>3</span><span>4</span></div>`
+            );
+
+            expect(prevElemsCount(elem.querySelector('span:nth-child(3)'), 'span:not(.skip)')).to.equal(1);
         });
     });
 });

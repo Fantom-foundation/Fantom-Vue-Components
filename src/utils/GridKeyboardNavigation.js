@@ -125,7 +125,7 @@ export class GridKeyboardNavigation {
                         isFirstRow = true;
                     }
                 } else {
-                    eCell = eRow.querySelector(`${cellSelector}:nth-child(${prevElemsCount(eCell) + 1})`);
+                    eCell = eRow.querySelector(`${cellSelector}:nth-child(${prevElemsCount(eCell, cellSelector) + 1})`);
                 }
             }
 
