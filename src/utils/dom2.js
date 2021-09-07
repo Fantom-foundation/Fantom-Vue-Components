@@ -20,3 +20,39 @@ export function clearElement(elem) {
         elem.removeChild(elem.firstChild);
     }
 }
+
+/**
+ * @param {Element} elem
+ */
+export function nextElemsCount(elem, selector = '') {
+    let count = 0;
+    let el = elem;
+
+    if (el && el.nextElementSibling) {
+        el = el.nextElementSibling;
+        while (el && (selector && el ? !el.matches(selector) : true)) {
+            el = el.nextElementSibling;
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+/**
+ * @param {Element} elem
+ */
+export function prevElemsCount(elem, selector = '') {
+    let count = 0;
+    let el = elem;
+
+    if (el && el.previousElementSibling) {
+        el = el.previousElementSibling;
+        while (el && (selector && el ? !el.matches(selector) : true)) {
+            el = el.previousElementSibling;
+            count += 1;
+        }
+    }
+
+    return count;
+}

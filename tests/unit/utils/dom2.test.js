@@ -3,7 +3,7 @@
  */
 
 import { expect, fixture } from '@open-wc/testing';
-import { clearElement, getElement } from '../../../src/utils/dom2.js';
+import { clearElement, getElement, nextElemsCount, prevElemsCount } from '../../../src/utils/dom2.js';
 
 describe('DOM utilities', () => {
     describe('#getElement', () => {
@@ -43,6 +43,25 @@ describe('DOM utilities', () => {
             clearElement(elem);
 
             expect(elem.childNodes.length).to.equal(0);
+        });
+    });
+
+    describe('#nextElemsCount', () => {
+        it('should return count of previous element siblings', async () => {
+            const elem = await fixture('<div><span>1</span><span>2</span><span>3</span><span>4</span></div>');
+
+            expect(nextElemsCount(elem.querySelector('span:first-child'))).to.equal(3);
+            expect(nextElemsCount(elem.querySelector('span:nth-child(4)'))).to.equal(0);
+            expect(nextElemsCount(elem.querySelector('span:nth-child(40)'))).to.equal(0);
+        });
+    });
+
+    describe('#prevElemsCount', () => {
+        it('should return count of previous element siblings', async () => {
+            const elem = await fixture('<div><span>1</span><span>2</span><span>3</span><span>4</span></div>');
+
+            expect(prevElemsCount(elem.querySelector('span:nth-child(3)'))).to.equal(2);
+            expect(prevElemsCount(elem.querySelector('span:first-child'))).to.equal(0);
         });
     });
 });
