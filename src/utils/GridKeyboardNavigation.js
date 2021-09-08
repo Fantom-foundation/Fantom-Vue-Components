@@ -18,6 +18,7 @@ export class GridKeyboardNavigation {
         focusCell = false,
         focusElemInsideCell = false,
         setTabIndex = false,
+        useHomeEndKeys = true,
         // circular = false,
     } = {}) {
         this.rowSelector = rowSelector;
@@ -27,6 +28,7 @@ export class GridKeyboardNavigation {
         this.focusCell = focusCell;
         this.focusElemInsideCell = focusElemInsideCell;
         this.setTabIndex = setTabIndex;
+        this.useHomeEndKeys = useHomeEndKeys;
 
         if (!rowSelector || !cellSelector) {
             throw new Error('`Selector(s) is not specified');
@@ -67,6 +69,8 @@ export class GridKeyboardNavigation {
             }
 
             if (move === 'next') {
+                // move focus to the next cell
+
                 hElem = eCell;
 
                 eCell = eCell.nextElementSibling;
@@ -84,6 +88,8 @@ export class GridKeyboardNavigation {
                     }
                 }
             } else if (move === 'prev') {
+                // move focus to the previous cell
+
                 hElem = eCell;
 
                 eCell = eCell.previousElementSibling;
@@ -101,6 +107,8 @@ export class GridKeyboardNavigation {
                     }
                 }
             } else if (move === 'down' || move === 'up') {
+                // move focus to the next/previous row
+
                 hElem = eRow;
 
                 if (move === 'down') {
@@ -126,6 +134,42 @@ export class GridKeyboardNavigation {
                     }
                 } else {
                     eCell = eRow.querySelector(`${cellSelector}:nth-child(${prevElemsCount(eCell, cellSelector) + 1})`);
+                }
+            }
+
+            if (this.useHomeEndKeys) {
+                if (isKey('Home', event)) {
+                    // move focus to the first cell in the row
+
+                    if (!eCell.previousElementSibling && !eRow.previousElementSibling) {
+                        isFirstCell = true;
+                    } else {
+                        eCell = eCell.previousElementSibling;
+                        while (eCell && eCell.matches(cellSelector)) {
+                            hElem = eCell;
+                            eCell = eCell.previousElementSibling;
+                        }
+
+                        eCell = hElem;
+                    }
+
+                    event.preventDefault();
+                } else if (isKey('End', event)) {
+                    // activate the last cell in the row
+
+                    if (!eCell.nextElementSibling && !eRow.nextElementSibling) {
+                        isLastCell = true;
+                    } else {
+                        eCell = eCell.nextElementSibling;
+                        while (eCell && eCell.matches(cellSelector)) {
+                            hElem = eCell;
+                            eCell = eCell.nextElementSibling;
+                        }
+
+                        eCell = hElem;
+                    }
+
+                    event.preventDefault();
                 }
             }
 

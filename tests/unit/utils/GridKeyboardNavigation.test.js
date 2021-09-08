@@ -292,13 +292,29 @@ describe('GridKeyboardNavigation', () => {
         });
     });
 
-    it('should return `isFirstCell: true` if the `ArrowLeft` key is pressed and the current cell is the first cell of the grid', async () => {
+    it('should activate the first cell in the row if the `Home` key is pressed and `useHomeEndKeys` is set to `true`', async () => {
         return new Promise(async resolve => {
             eTable = await getTable(function(event) {
                 const info = gkn.navigate(event);
 
-                expect(info.isFirstCell).to.be.true;
                 isActive(eTable.querySelector('#r1c1'), info);
+
+                resolve();
+            });
+
+            gkn = getGKNInstance({ focusCell: true });
+            gkn.activateCellByIndices(1, 3, eTable);
+
+            await sendKeys({ press: 'Home' });
+        });
+    });
+
+    it('should activate the last cell in the row if the `End` key is pressed and `useHomeEndKeys` is set to `true`', async () => {
+        return new Promise(async resolve => {
+            eTable = await getTable(function(event) {
+                const info = gkn.navigate(event);
+
+                isActive(eTable.querySelector('#r1c4'), info);
 
                 resolve();
             });
@@ -306,25 +322,63 @@ describe('GridKeyboardNavigation', () => {
             gkn = getGKNInstance({ focusCell: true });
             gkn.activateCellByIndices(1, 1, eTable);
 
-            await sendKeys({ press: 'ArrowLeft' });
+            await sendKeys({ press: 'End' });
         });
     });
 
-    it('should return `isLastCell: true` if the `ArrowRight` key is pressed and the current cell is the last cell of the grid', async () => {
+    it('should return `isFirstCell: true` if the `ArrowLeft` of `Home` key is pressed and the current cell is the first cell of the grid', async () => {
         return new Promise(async resolve => {
+            let count = 1;
+
+            eTable = await getTable(function(event) {
+                const info = gkn.navigate(event);
+
+                expect(info.isFirstCell).to.be.true;
+                isActive(eTable.querySelector('#r1c1'), info);
+
+                if (count === 2) {
+                    resolve();
+                }
+
+                count += 1;
+            });
+
+            gkn = getGKNInstance({ focusCell: true });
+            gkn.activateCellByIndices(1, 1, eTable);
+
+            await sendKeys({ press: 'ArrowLeft' });
+
+            gkn.activateCellByIndices(1, 1, eTable);
+
+            await sendKeys({ press: 'Home' });
+        });
+    });
+
+    it('should return `isLastCell: true` if the `ArrowRight` of `End` key is pressed and the current cell is the last cell of the grid', async () => {
+        return new Promise(async resolve => {
+            let count = 1;
+
             eTable = await getTable(function(event) {
                 const info = gkn.navigate(event);
 
                 expect(info.isLastCell).to.be.true;
                 isActive(eTable.querySelector('#r2c4'), info);
 
-                resolve();
+                if (count === 2) {
+                    resolve();
+                }
+
+                count += 1;
             });
 
             gkn = getGKNInstance({ focusCell: true });
             gkn.activateCellByIndices(2, 4, eTable);
 
             await sendKeys({ press: 'ArrowRight' });
+
+            gkn.activateCellByIndices(2, 4, eTable);
+
+            await sendKeys({ press: 'End' });
         });
     });
 
