@@ -114,6 +114,32 @@ describe('GridKeyboardNavigation', () => {
         expect(info.row === eCell.parentElement).to.be.true;
     });
 
+    it('should activate cell and row by "first" and "last" keywords', async () => {
+        eTable = await getTable();
+
+        gkn = getGKNInstance();
+
+        let info = gkn.activateCellByIndices('first', 'first', eTable);
+        let eCell = eTable.querySelector('#r1c1');
+        expect(info.cell === eCell).to.be.true;
+        expect(info.row === eCell.parentElement).to.be.true;
+
+        info = gkn.activateCellByIndices('first', 'last', eTable);
+        eCell = eTable.querySelector('#r1c4');
+        expect(info.cell === eCell).to.be.true;
+        expect(info.row === eCell.parentElement).to.be.true;
+
+        info = gkn.activateCellByIndices('last', 'first', eTable);
+        eCell = eTable.querySelector('#r2c1');
+        expect(info.cell === eCell).to.be.true;
+        expect(info.row === eCell.parentElement).to.be.true;
+
+        info = gkn.activateCellByIndices('last', 'last', eTable);
+        eCell = eTable.querySelector('#r2c4');
+        expect(info.cell === eCell).to.be.true;
+        expect(info.row === eCell.parentElement).to.be.true;
+    });
+
     it('should deactivate previously activated cell and row if cell is activated', async () => {
         eTable = await getTable();
 

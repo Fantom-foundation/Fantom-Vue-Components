@@ -204,14 +204,14 @@ export class GridKeyboardNavigation {
     }
 
     /**
-     * @param {integer} rowIdx
-     * @param {integer} cellIdx
+     * @param {integer|'first'|'last'} rowIdx
+     * @param {integer|'first'|'last'} cellIdx
      * @param {Element} eContainer
      * @return {{row, cell: Element|null}}
      */
     activateCellByIndices(rowIdx, cellIdx, eContainer) {
-        let eRow = eContainer.querySelector(`${this.rowSelector}:nth-child(${rowIdx})`);
-        let eCell = eRow ? eRow.querySelector(`${this.cellSelector}:nth-child(${cellIdx})`) : null;
+        let eRow = eContainer.querySelector(`${this.rowSelector}${this._getNthChildSelector(rowIdx)}`);
+        let eCell = eRow ? eRow.querySelector(`${this.cellSelector}${this._getNthChildSelector(cellIdx)}`) : null;
 
         this._activateCellAndRow(eCell, eRow);
 
@@ -291,5 +291,20 @@ export class GridKeyboardNavigation {
                 }
             }
         }
+    }
+
+    /**
+     * @param {integer|'first'|'last'} idx
+     * @return {string}
+     * @private
+     */
+    _getNthChildSelector(idx) {
+        if (idx === 'first') {
+            return ':first-child';
+        } else if (idx === 'last') {
+            return ':last-child';
+        }
+
+        return `:nth-child(${idx})`;
     }
 }
