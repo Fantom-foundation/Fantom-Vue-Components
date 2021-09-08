@@ -288,15 +288,24 @@ export default {
 
     methods: {
         /**
-         * @param {int} _pageNum
+         * @param {int|'first'|'last'|'prev'|'next'} _pageNum
+         * @return {boolean} `true` if page was changed
          */
         goToPage(_pageNum) {
             if (this.disabled) {
-                return;
+                return false;
+            }
+
+            let pageNum = 1;
+
+            if (typeof _pageNum === 'string') {
+                pageNum = this.getPageNumByKeyword(_pageNum);
+            } else {
+                pageNum = _pageNum;
             }
 
             this.prevPage = this.dCurrPage;
-            this.updateCurrPage(_pageNum);
+            this.updateCurrPage(pageNum);
 
             /**
              * Triggers when the page changes
@@ -310,6 +319,8 @@ export default {
              * @property {number} currPage
              */
             this.$emit('change', this.dCurrPage);
+
+            return pageNum === this.dCurrPage;
         },
 
         updateCurrPage(_pageNum) {
@@ -331,20 +342,32 @@ export default {
         },
 
         /**
+         * @param {'first'|'last'|'prev'|'next'} str
+         * @return {number}
+         */
+        getPageNumByKeyword(str) {
+            let pageNum = 1;
+
+            if (str === 'next') {
+                pageNum = this.dCurrPage + 1;
+            } else if (str === 'prev') {
+                pageNum = this.dCurrPage - 1;
+            } else if (str === 'last') {
+                pageNum = this.numPages;
+            } else if (str === 'first') {
+                pageNum = 1;
+            }
+
+            return pageNum;
+        },
+
+        /**
          * @param {Event} _event
          */
         onClick(_event) {
             const itemType = getAttr(_event.target.closest('li'), 'data-item-type');
 
-            if (itemType === 'next') {
-                this.goToPage(this.dCurrPage + 1);
-            } else if (itemType === 'prev') {
-                this.goToPage(this.dCurrPage - 1);
-            } else if (itemType === 'last') {
-                this.goToPage(this.numPages);
-            } else if (itemType === 'first') {
-                this.goToPage(1);
-            }
+            this.goToPage(itemType);
         },
     },
 };
