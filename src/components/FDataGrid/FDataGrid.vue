@@ -21,6 +21,8 @@
                 role="grid"
                 :aria-rowcount="ariaRowCount"
                 :aria-colcount="ariaColCount"
+                :aria-labelledby="labeledBy || undefined"
+                :aria-label="label || undefined"
                 :tabindex="editMode !== '' ? 0 : null"
                 @click="onTableClick"
                 @keydown="onTableKeydown"
@@ -340,6 +342,16 @@ export default {
         removeAllEmptyRows: {
             type: Boolean,
             default: true,
+        },
+        /** Label for table */
+        label: {
+            type: String,
+            default: '',
+        },
+        /** Id (or ids separated by space) of element(s) that represents label for the component */
+        labeledBy: {
+            type: String,
+            default: '',
         },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
