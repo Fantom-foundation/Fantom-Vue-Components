@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.9.0...v0.10.0) (2021-09-09)
+
+
+### Features
+
+* **dom utils:** add `clearElement` function ([1435ee0](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1435ee023bf0acb34f0b67bc71ffd865eace754d))
+* **f-auto-resize-input:** create component ([b5303e9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b5303e98c3934defd1a439be81f17d1ef356e066))
+* **f-circle-progress:** create component ([61d47c6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/61d47c6f785141e94b84cb56fc9a9ad9ba2e03c1))
+* **f-copy-button:** adjust component to use `f-info` component ([2523e13](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/2523e134dea25135a63f94bf903bdffc9db2e5aa))
+* **f-copy-button:** create component ([9ddfb48](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/9ddfb48c15bb3bdb862c5d15a460021bc4903c6d))
+* **f-data-grid:** add `label` and `labeledBy` props ([a062961](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a062961a326faf894f9fc7ebe2bf8ce770003d87))
+* **f-data-grid:** add keyboard movement ([55f1c71](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/55f1c714c944de0af8084ac7baa82a51e41adbbe))
+* **f-data-grid:** adjust data grid to work with objects as a empty row value ([b76bbee](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b76bbeeec175d56fbb08dc36941a601c941ef050))
+* **f-data-grid:** don't render hidden columns ([eb31b9d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/eb31b9df601c4a551163bfd62b20b46a5645593e))
+* **f-info:** create component ([b948446](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b9484467798d6bafe82c6ca5f0513690adba737b))
+* **f-pagination:** adjust `goToPage` method to accept keywords as well ([91098e8](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/91098e8d863c1dae96a0a27ced3443aeeecef29d))
+* **f-placeholder:** create component ([a412643](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a41264365fd4a539f230267e886270f633269607))
+* **f-steps:** create component ([f83810a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f83810a2c56f7f8cd3526b1716f7b460286d478b))
+* **f-styled-number-range:** create component ([58c96c7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/58c96c71a3d6ba02eabff853457c19e3788f3916))
+* **scss:** add prefers-reduced-motion option to css animations ([fcf4044](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fcf4044b7e5c6b97ff24cfeb75fbe70e8fa263d3))
+* **utils:** add `clamp` function ([47f3211](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/47f32118475dc6b2a4109db8c58e573efc560c84))
+* **utils:** add `disableErrorMessages` funtion to test utils ([739c523](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/739c5239a508b6f021e5ff2db8eb4fbea524238a))
+* **utils:** add support for `first` and `last` keywords in `GridKeyboardNavigation` ([df46872](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/df46872db6d4d1a2d90612abafeb2dc2ad8d7942))
+* **utils:** add support for `Home` and `End` keys in `GridKeyboardNavigation` ([64c5245](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/64c5245f577c836aec9d110f283a2bebb418a09f))
+* **utils:** create `GridKeyboardNavigation` class ([ba5ba65](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ba5ba6518ddeceea2c5da21e22405c02689461bc))
+* **utils:** create `nextElemsCount` and `prevElemsCount` functions ([f240d4f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f240d4f7e8a9e7145643895161490ba92c5c2740))
+
+
+### Bug Fixes
+
+* **f-auto-resize-input:** correct the situation when the input does not exist ([40052de](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/40052de92e4410c387e28df5af0b9c3391bb5bcd))
+
 ## [0.9.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.8.0...v0.9.0) (2021-08-05)
 
 
