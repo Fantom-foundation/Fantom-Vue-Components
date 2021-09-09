@@ -47,13 +47,14 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody v-if="!!dItems.length">
+                <tbody v-if="!!dItems.length" ref="tbody">
                     <tr
-                        v-for="item in dItems"
+                        v-for="(item, index) in dItems"
                         :key="item._id"
                         :data-fdg-id="item._id"
                         :style="item.css"
                         :class="item.cssClass"
+                        :aria-rowindex="getAriaRowIndex(index)"
                     >
                         <td
                             v-for="(col, index) in columns"
@@ -61,6 +62,7 @@
                             :hidden="!!col.hidden"
                             :class="getColumnClass(index, col)"
                             :data-label="col.label"
+                            tabindex="-1"
                         >
                             <div class="fdatagrid_cellin">
                                 <div v-if="edModeRowEdit && col.name === '__removerow__'" data-removerow>
@@ -108,6 +110,7 @@
                             :key="col.name"
                             :hidden="!!col.hidden"
                             :class="getColumnClass(index, col, true)"
+                            tabindex="-1"
                         >
                             <div class="fdatagrid_cellin">
                                 <!-- @slot Dynamic slot for cells -->
@@ -160,10 +163,12 @@ import { breakpointsMixin } from '../../mixins/breakpoints.js';
 import FPagination from '../FPagination/FPagination.vue';
 import FHeadStyle from '../FHeadStyle/FHeadStyle.vue';
 import { findFirstFocusableDescendant, findLastFocusableDescendant, isAriaAction, isKey } from '../../utils/aria.js';
-import { getAttr } from '../../utils/DOM.js';
+import { getAttr, setAttr } from '../../utils/DOM.js';
 import FButton from '../FButton/FButton.vue';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTrash from '../icons/IconTrash.vue';
+import { GridKeyboardNavigation } from '../../utils/GridKeyboardNavigation.js';
+import { prevElemsCount } from '../../utils/dom2.js';
 
 const HELPER_PROPS_RE = /^_/;
 
@@ -462,6 +467,14 @@ export default {
         this._initItems = [];
         this._editedItem = null;
         this._editedKey = '';
+        this._keyboardNav = new GridKeyboardNavigation({
+            rowSelector: 'tr',
+            cellSelector: '[tabindex]',
+            focusCell: true,
+            focusElemInsideCell: true,
+            setTabIndex: true,
+        });
+        this._RCIdxs = null;
 
         if (!this.tableId) {
             this.dTableId = getUniqueId();
@@ -597,6 +610,20 @@ export default {
                     this.refreshInitItems();
                 });
             }
+
+            defer(() => {
+                const RCIdxs = this._RCIdxs;
+
+                if (RCIdxs && this._keyboardNav) {
+                    this._keyboardNav.activateCellByIndices(RCIdxs.rowIdx, RCIdxs.cellIdx, this.$refs.tbody);
+                } else if (!this.editMode && !this.$el.querySelector('td[tabindex="0"]')) {
+                    const elem = this.$el.querySelector('td[tabindex="-1"]');
+
+                    if (elem) {
+                        setAttr(elem, 'tabindex', 0);
+                    }
+                }
+            });
         },
 
         /**
@@ -1163,6 +1190,20 @@ export default {
         },
 
         /**
+         * @param {number} rowIndex
+         * @return {number}
+         */
+        getAriaRowIndex(rowIndex) {
+            const { pagination } = this.$refs;
+
+            if (pagination) {
+                return pagination.itemsIndices.from + rowIndex + 1;
+            }
+
+            return rowIndex + 1;
+        },
+
+        /**
          * Highlight or background row by id
          *
          * @param {string} id
@@ -1221,6 +1262,59 @@ export default {
             }
 
             return false;
+        },
+
+        goToPage({ direction = 'next', column = 'keep', navInfo, event }) {
+            const { pagination } = this.$refs;
+            const eTbody = this.$refs.tbody;
+            const keyboardNav = this._keyboardNav;
+            let rowIdx = direction === 'next' ? 'first' : 'last';
+            const cellIdx = column === 'keep' ? prevElemsCount(navInfo.cell) + 1 : column;
+            let activateCell = false;
+
+            // console.log('go to page:', direction, rowIdx, cellIdx, navInfo);
+
+            if (pagination) {
+                if (direction === 'prev') {
+                    if (!pagination.state.isFirstPage) {
+                        pagination.goToPage('prev');
+                        event.preventDefault();
+                    } else {
+                        rowIdx = 'first';
+                        activateCell = true;
+                    }
+                } else {
+                    if (!pagination.state.isLastPage) {
+                        pagination.goToPage('next');
+                        event.preventDefault();
+                    } else {
+                        rowIdx = 'last';
+                        activateCell = true;
+                    }
+                }
+
+                if (
+                    !(
+                        (pagination.state.isFirstPage &&
+                            direction === 'prev' &&
+                            rowIdx === 'first' &&
+                            cellIdx === 'last') ||
+                        (pagination.state.isLastPage &&
+                            direction === 'next' &&
+                            rowIdx === 'last' &&
+                            cellIdx === 'first')
+                    )
+                ) {
+                    if (this.strategy === 'local' || activateCell) {
+                        defer(() => {
+                            keyboardNav.activateCellByIndices(rowIdx, cellIdx, eTbody);
+                        });
+                    } else {
+                        // save indices for later
+                        this._RCIdxs = { rowIdx, cellIdx };
+                    }
+                }
+            }
         },
 
         /**
@@ -1322,6 +1416,40 @@ export default {
                     }
                 } else if (isKey('Escape', event)) {
                     this.stopEditing(true);
+                }
+            } else {
+                const info = this._keyboardNav.navigate(event);
+
+                if (info.cell) {
+                    if (info.isFirstRow || info.isFirstCell) {
+                        this.goToPage({
+                            direction: 'prev',
+                            column: info.isFirstCell ? 'last' : 'keep',
+                            navInfo: info,
+                            event,
+                        });
+                    } else if (info.isLastRow || info.isLastCell) {
+                        this.goToPage({
+                            direction: 'next',
+                            column: info.isLastCell ? 'first' : 'keep',
+                            navInfo: info,
+                            event,
+                        });
+                    } else if (isKey('PageDown', event)) {
+                        this.goToPage({
+                            direction: 'next',
+                            column: 'keep',
+                            navInfo: info,
+                            event,
+                        });
+                    } else if (isKey('PageUp', event)) {
+                        this.goToPage({
+                            direction: 'prev',
+                            column: 'keep',
+                            navInfo: info,
+                            event,
+                        });
+                    }
                 }
             }
         },
