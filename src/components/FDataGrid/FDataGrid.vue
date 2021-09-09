@@ -30,7 +30,7 @@
                 <thead class="fdatagrid_thead">
                     <tr @click="onHeaderClick" @keyup="onHeaderKeyup">
                         <th
-                            v-for="(col, index) in columns"
+                            v-for="(col, index) in cColumns"
                             :hidden="!!col.hidden"
                             :key="col.name"
                             :class="getColumnClass(index, col, true) + ' ' + getHeadingColumnClass(col)"
@@ -57,7 +57,7 @@
                         :aria-rowindex="getAriaRowIndex(index)"
                     >
                         <td
-                            v-for="(col, index) in columns"
+                            v-for="(col, index) in cColumns"
                             :key="col.name"
                             :hidden="!!col.hidden"
                             :class="getColumnClass(index, col)"
@@ -106,7 +106,7 @@
                 <tfoot v-if="footerItems.length > 0">
                     <tr v-for="(item, index) in footerItems" :key="`${dTableId}_ft_${index}`" :style="item.css">
                         <td
-                            v-for="(col, index) in columns"
+                            v-for="(col, index) in cColumns"
                             :key="col.name"
                             :hidden="!!col.hidden"
                             :class="getColumnClass(index, col, true)"
@@ -381,6 +381,10 @@ export default {
             return `max-height: ${this.maxHeight}`;
         },
 
+        cColumns() {
+            return this.columns.filter(column => !column.hidden);
+        },
+
         cLoading() {
             return this.dLoading || this.loading;
         },
@@ -399,7 +403,7 @@ export default {
         },
 
         ariaColCount() {
-            const columnsLen = this.columns.length;
+            const columnsLen = this.cColumns.length;
 
             return this.visibleColumnsNum < columnsLen ? columnsLen : undefined;
         },
@@ -659,7 +663,8 @@ export default {
          * Set columns css, ...
          */
         prepareColumns() {
-            const { columns } = this;
+            // const { columns } = this;
+            const columns = this.cColumns;
             const firstCellClass = 'fdatagrid_firstcell';
             const lastCellClass = 'fdatagrid_lastcell';
             let cssStr = '';
@@ -831,7 +836,7 @@ export default {
             let column = null;
 
             if (match && match.length === 2) {
-                column = this.columns[parseInt(match[1])] || null;
+                column = this.cColumns[parseInt(match[1])] || null;
             }
 
             return column;
@@ -883,9 +888,9 @@ export default {
         },
 
         prepareEmptyRow() {
-            const { columns } = this;
+            const { cColumns } = this;
 
-            columns.forEach(column => {
+            cColumns.forEach(column => {
                 if (column.name !== '__removerow__') {
                     this._emptyRow[column.name] = '';
                 }
@@ -903,7 +908,7 @@ export default {
                 if (this.strategy === 'local') {
                     setTimeout(() => {
                         if (this.sortByCol._index > -1) {
-                            const column = this.columns[this.sortByCol._index];
+                            const column = this.cColumns[this.sortByCol._index];
                             this.sortByColumn(column, column.sortDir);
                         }
                     }, 10);
@@ -925,7 +930,7 @@ export default {
                 const sortByCol = this.sortByCol;
 
                 if (sortByCol._index > -1 && sortByCol._index !== _column._index) {
-                    this.columns[sortByCol._index].sortDir = '';
+                    this.cColumns[sortByCol._index].sortDir = '';
                 }
 
                 if (_sortDir) {
@@ -968,7 +973,7 @@ export default {
          * @param {number} _columnIndex
          */
         sortByColumnIndex(_columnIndex) {
-            const column = this.columns[_columnIndex];
+            const column = this.cColumns[_columnIndex];
 
             if (column) {
                 this.sortByColumn(column, column.sortDir);
@@ -1124,7 +1129,7 @@ export default {
 
                 if (activateFirstCell) {
                     this.$nextTick(() => {
-                        this.activateCell(this.columns.find(column => column.editable));
+                        this.activateCell(this.cColumns.find(column => column.editable));
                     });
                 }
             }
