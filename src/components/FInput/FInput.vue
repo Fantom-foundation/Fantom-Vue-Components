@@ -106,7 +106,7 @@ import FLabel from '../FLabel/FLabel.vue';
 import { debounce } from '../../utils/function.js';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
-import { clearElement } from '@/utils/dom2.js';
+import { clearElement } from '../../utils/dom2.js';
 
 /**
  * Input field (input or textarea) with slots.

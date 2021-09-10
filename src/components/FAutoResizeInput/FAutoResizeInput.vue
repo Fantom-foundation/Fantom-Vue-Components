@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { clearElement } from '@/utils/dom2.js';
+import { clearElement } from '../../utils/dom2.js';
 
 export default {
     name: 'FAutoResizeInput',
