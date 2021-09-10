@@ -487,7 +487,7 @@ export default {
             rowSelector: 'tr',
             cellSelector: '[tabindex]',
             focusCell: true,
-            focusElemInsideCell: true,
+            // focusElemInsideCell: true,
             setTabIndex: true,
         });
         this._RCIdxs = null;

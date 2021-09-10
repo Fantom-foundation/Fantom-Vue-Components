@@ -139,6 +139,12 @@ export class GridKeyboardNavigation {
 
             if (this.useHomeEndKeys) {
                 if (isKey('Home', event)) {
+                    move = 'home';
+                } else if (isKey('End', event)) {
+                    move = 'end';
+                }
+
+                if (move === 'home') {
                     // move focus to the first cell in the row
 
                     if (!eCell.previousElementSibling && !eRow.previousElementSibling) {
@@ -154,7 +160,7 @@ export class GridKeyboardNavigation {
                     }
 
                     event.preventDefault();
-                } else if (isKey('End', event)) {
+                } else if (move === 'end') {
                     // activate the last cell in the row
 
                     if (!eCell.nextElementSibling && !eRow.nextElementSibling) {
@@ -173,7 +179,9 @@ export class GridKeyboardNavigation {
                 }
             }
 
-            this._activateCellAndRow(eCell, eRow);
+            if (move) {
+                this._activateCellAndRow(eCell, eRow);
+            }
         }
 
         return {
