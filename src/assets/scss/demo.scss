@@ -24,7 +24,6 @@
 //@forward "components/textarea";
 @forward "components/list";
 
-
 @use "utilities";
 @use "external";
 
@@ -36,10 +35,14 @@
 }
 */
 
-
 //@use "utilities/text-colors";
 //@use "utilities/font-sizes";
 //@use "utilities/js-focus-visible";
+
+#test[data-theme='theme-dark'] {
+    background: #333;
+    color: #f2f2f2;
+}
 
 .vertical-align-top {
     > * {
