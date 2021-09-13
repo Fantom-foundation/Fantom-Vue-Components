@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.10.0...v0.11.0) (2021-09-13)
+
+
+### Features
+
+* **f-app-theme:** create component ([3871452](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3871452f20cd056197aad8c098dd8c8a8dce4783))
+* **f-data-grid:** adjust keyboard movement ([ece1dfc](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ece1dfc21967f5cbf9e335edcbd558d18565b9f9))
+
 ## [0.10.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.9.0...v0.10.0) (2021-09-09)
 
 
