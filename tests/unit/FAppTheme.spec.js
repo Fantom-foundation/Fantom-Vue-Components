@@ -26,7 +26,7 @@ afterEach(() => {
 });
 
 describe('FAppTheme', () => {
-    it('should add `theme-themeprop` css class to the default container element when `theme` prop is given', async () => {
+    it('should add `theme` css class to the default container element when `theme` prop is given', async () => {
         wrapper = createWrapper({
             propsData: {
                 themes: THEMES,
@@ -39,7 +39,7 @@ describe('FAppTheme', () => {
         expect(wrapper.vm.eContainer.classList.contains('theme-dark')).toBeTruthy();
     });
 
-    it('should add `theme-themeprop` css class to the element specified by `container` selector when `theme` prop is given', async () => {
+    it('should add `theme` css class to the element specified by `container` selector when `theme` prop is given', async () => {
         const elem = document.createElement('div');
         elem.id = 'theme-container';
         document.body.appendChild(elem);
@@ -57,7 +57,7 @@ describe('FAppTheme', () => {
         elem.remove();
     });
 
-    it('should add `theme-themeprop` css class to the container when `theme` prop is changed', async () => {
+    it('should add `theme` css class to the container when `theme` prop is changed', async () => {
         wrapper = createWrapper();
 
         await wrapper.vm.$nextTick();
