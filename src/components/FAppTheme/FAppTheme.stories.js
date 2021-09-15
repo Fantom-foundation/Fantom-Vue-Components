@@ -43,7 +43,7 @@ export const Animate = () => ({
         <div>
             <p id="test" class="pa-5"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam error explicabo fugit libero quaerat sapiente sed sunt ut velit! Architecto officia quam similique suscipit! Dolorem dolorum exercitationem fugiat pariatur tempore!</span><span>Ad commodi consequatur consequuntur delectus deserunt dolor doloribus, fugit ipsam laboriosam magni maiores maxime nemo numquam odit quam ratione sint suscipit velit vero voluptatibus? Accusamus autem delectus nobis numquam voluptas.</span></p>
 
-            <f-button label="default" @click.native="setTheme('default')" />
+            <f-button label="theme-default" @click.native="setTheme('theme-default')" />
             <f-button label="theme-dark" @click.native="setTheme('theme-dark')" />
 
             <f-app-theme animate container="#test" />
@@ -64,16 +64,16 @@ export const Themes = () => ({
 
             <p>theme: {{ theme }}</p>
 
-            <f-button label="default" @click.native="setTheme('default')" />
+            <f-button label="theme-default" @click.native="setTheme('theme-default')" />
             <f-button label="theme-dark" @click.native="setTheme('theme-dark')" />
-            <f-button label="theme2" @click.native="setTheme('theme2')" />
+            <f-button label="theme-foo" @click.native="setTheme('theme-foo')" />
 
-            <f-app-theme :themes="['default', 'theme-dark', 'theme2']" @theme-set="onThemeSet" animate container="#test" />
+            <f-app-theme :themes="['theme-default', 'theme-dark', 'theme-foo']" @theme-set="onThemeSet" animate container="#test" />
         </div>
     `,
     data() {
         return {
-            theme: 'default',
+            theme: 'theme-default',
         };
     },
     methods: {

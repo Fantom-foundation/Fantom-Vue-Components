@@ -14,23 +14,23 @@ const appThemeState = new Vue({
 });
 
 /**
- * Sets application theme
+ * Sets theme css class to the given container
  */
 export default {
     name: 'FAppTheme',
 
     props: {
-        /** Set of possible themes */
+        /** Set of possible theme classes */
         themes: {
             type: Array,
             default() {
-                return ['default', 'theme-dark'];
+                return ['theme-default', 'theme-dark'];
             },
         },
         /** Current theme */
         theme: {
             type: String,
-            default: 'default',
+            default: 'theme-default',
         },
         /** Selector for element where theme attribute will be applied to */
         container: {
@@ -93,10 +93,10 @@ export default {
             }
 
             if (this.animate) {
-                eContainer.classList.add('theme-transition');
+                eContainer.classList.add('fapptheme-transition');
             }
 
-            eContainer.setAttribute('data-theme', theme);
+            this._addThemeClass(theme);
 
             if (emitEvent) {
                 /**
@@ -112,12 +112,25 @@ export default {
             }
         },
 
+        _addThemeClass(theme) {
+            const { eContainer } = this;
+
+            if (eContainer) {
+                // remove previous theme classes
+                this.themes.forEach(theme => {
+                    eContainer.classList.remove(theme);
+                });
+
+                eContainer.classList.add(theme);
+            }
+        },
+
         /**
          * @param {number} wait Milliseconds
          */
         _removeTransitionClass(wait) {
             setTimeout(() => {
-                this.eContainer.classList.remove('theme-transition');
+                this.eContainer.classList.remove('fapptheme-transition');
             }, wait);
         },
 

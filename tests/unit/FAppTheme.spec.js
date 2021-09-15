@@ -3,7 +3,7 @@ import FAppTheme from '@/components/FAppTheme/FAppTheme.vue';
 import { disableErrorMessages } from '@/utils/test.js';
 import { delay } from '../../src/utils/function.js';
 
-const THEMES = ['default', 'theme-dark'];
+const THEMES = ['theme-default', 'theme-dark'];
 let wrapper = null;
 
 function destroyWrapper(wrapper) {
@@ -26,7 +26,7 @@ afterEach(() => {
 });
 
 describe('FAppTheme', () => {
-    it('should add `data-theme` attribute with `theme` value to the default container element when `theme` prop is given', async () => {
+    it('should add `theme-themeprop` css class to the default container element when `theme` prop is given', async () => {
         wrapper = createWrapper({
             propsData: {
                 themes: THEMES,
@@ -36,10 +36,10 @@ describe('FAppTheme', () => {
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.eContainer.getAttribute('data-theme')).toBe('theme-dark');
+        expect(wrapper.vm.eContainer.classList.contains('theme-dark')).toBeTruthy();
     });
 
-    it('should add `data-theme` attribute with `theme` value to the element specified by `container` selector when `theme` prop is given', async () => {
+    it('should add `theme-themeprop` css class to the element specified by `container` selector when `theme` prop is given', async () => {
         const elem = document.createElement('div');
         elem.id = 'theme-container';
         document.body.appendChild(elem);
@@ -52,23 +52,23 @@ describe('FAppTheme', () => {
             },
         });
 
-        expect(wrapper.vm.eContainer.getAttribute('data-theme')).toBe('theme-dark');
+        expect(wrapper.vm.eContainer.classList.contains('theme-dark')).toBeTruthy();
 
         elem.remove();
     });
 
-    it('should add `data-theme` attribute to the container with `theme` value when `theme` prop is changed', async () => {
+    it('should add `theme-themeprop` css class to the container when `theme` prop is changed', async () => {
         wrapper = createWrapper();
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.eContainer.getAttribute('data-theme')).toBe('default');
+        expect(wrapper.vm.eContainer.classList.contains('theme-default')).toBeTruthy();
 
         wrapper.setProps({ theme: 'theme-dark' });
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.eContainer.getAttribute('data-theme')).toBe('theme-dark');
+        expect(wrapper.vm.eContainer.classList.contains('theme-dark')).toBeTruthy();
     });
 
     it('should set theme by calling static method `FAppTheme.setTheme`', async () => {
@@ -80,7 +80,7 @@ describe('FAppTheme', () => {
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.eContainer.getAttribute('data-theme')).toBe('theme-dark');
+        expect(wrapper.vm.eContainer.classList.contains('theme-dark')).toBeTruthy();
     });
 
     it('should throw an error when the given theme is not in the `themes` array', async () => {
@@ -97,7 +97,7 @@ describe('FAppTheme', () => {
         await wrapper.vm.$nextTick();
     });
 
-    it('should add `theme-transition` css class to the container when `animate` prop is given', async () => {
+    it('should add `fapptheme-transition` css class to the container when `animate` prop is given', async () => {
         wrapper = createWrapper({
             propsData: {
                 themes: THEMES,
@@ -107,10 +107,10 @@ describe('FAppTheme', () => {
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.eContainer.classList.contains('theme-transition')).toBeTruthy();
+        expect(wrapper.vm.eContainer.classList.contains('fapptheme-transition')).toBeTruthy();
     });
 
-    it('should remove `theme-transition` css class after animation is done from the container when `animate` prop is given', async () => {
+    it('should remove `fappfapptheme-transition` css class after animation is done from the container when `animate` prop is given', async () => {
         wrapper = createWrapper({
             propsData: {
                 themes: THEMES,
@@ -124,7 +124,7 @@ describe('FAppTheme', () => {
 
         await delay(50);
 
-        expect(wrapper.vm.eContainer.classList.contains('theme-transition')).toBeFalsy();
+        expect(wrapper.vm.eContainer.classList.contains('fapptheme-transition')).toBeFalsy();
     });
 
     /*
