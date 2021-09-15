@@ -3,6 +3,7 @@
     "version": "0.11.0",
     "description": "Library of various Vue 2 components with focus on accessibility",
     "author": "Fantom Foundation",
+    "repository": "git://github.com/Fantom-foundation/Fantom-Vue-Components.git",
     "scripts": {
         "serve": "vue-cli-service serve dev/serve.js",
         "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
