@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.11.0...v0.12.0) (2021-09-16)
+
+
+### Features
+
+* **f-app-theme:** use css classes instead of attribute `data-theme` ([7401126](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/74011261751fc10ef39d0cb96a9239b243e08148))
+
 ## [0.11.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.10.0...v0.11.0) (2021-09-13)
 
 
