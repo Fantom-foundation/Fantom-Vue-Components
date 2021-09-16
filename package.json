@@ -1,6 +1,6 @@
 {
     "name": "@fantom-foundation/fantom-vue-components",
-    "version": "0.12.0",
+    "version": "0.12.1",
     "description": "Library of various Vue 2 components with focus on accessibility",
     "author": "Fantom Foundation",
     "repository": "git://github.com/Fantom-foundation/Fantom-Vue-Components.git",
