@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.15.0...v0.15.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* **f-image:** fix `FPlaceholder` path ([baf1585](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/baf15850ca98249ad2f370b4b0440806f433aa00))
+
 ## [0.15.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.14.0...v0.15.0) (2021-09-21)
 
 
