@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.15.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.14.0...v0.15.0) (2021-09-21)
+
+
+### Features
+
+* **f-image:** create component ([5767d6f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/5767d6f3ce91ccb208bb7e009b543f912e9281f9))
+
 ## [0.14.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.13.0...v0.14.0) (2021-09-16)
 
 ## [0.13.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.12.1...v0.13.0) (2021-09-16)
