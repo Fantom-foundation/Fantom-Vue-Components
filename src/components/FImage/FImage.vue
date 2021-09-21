@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FPlaceholder from '@/components/FPlaceholder/FPlaceholder.vue';
+import FPlaceholder from '../FPlaceholder/FPlaceholder.vue';
 
 /**
  * Component for displaying image and a placeholder, while image is loading
