@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.15.1...v0.16.0) (2021-09-23)
+
+
+### Features
+
+* **f-window:** add predefined widths ([7f9d6f5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7f9d6f5127a0f0b153ade522b325f62960808626))
+* **f-window:** create `close-button-content` slot ([1e861e7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1e861e7453e33ac0ef9ebec41ff35e0fb6d8d844))
+
 ### [0.15.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.15.0...v0.15.1) (2021-09-21)
 
 
