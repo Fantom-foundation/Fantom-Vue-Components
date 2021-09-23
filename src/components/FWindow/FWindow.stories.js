@@ -446,3 +446,19 @@ export const PredefinedSizes = () => ({
         </div>
     `,
 });
+
+export const CloseButtonIconSlot = () => ({
+    components: { FWindow, FButton },
+    template: `
+        <div>
+            <f-window modal ref="win" class="fwindow-width-3">
+                <template #close-button-content>X</template>
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+
+            <div>
+                <f-button @click.native="$refs.win.show()">Show</f-button>
+            </div>
+        </div>
+    `,
+});

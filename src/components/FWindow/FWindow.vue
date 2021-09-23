@@ -33,9 +33,11 @@
                                 class="close-btn btn btn-samesize btn-round btn-tertiary"
                                 :title="_('fwindow.closeWindow')"
                             >
-                                <f-svg-icon size="20px">
-                                    <icon-times />
-                                </f-svg-icon>
+                                <slot name="close-button-content">
+                                    <f-svg-icon size="20px">
+                                        <icon-times />
+                                    </f-svg-icon>
+                                </slot>
                             </button>
                         </slot>
                     </div>
