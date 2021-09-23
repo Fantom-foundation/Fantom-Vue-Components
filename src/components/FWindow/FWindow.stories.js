@@ -399,3 +399,50 @@ export const Directives = () => ({
         </div>
     `,
 });
+
+export const PredefinedSizes = () => ({
+    components: { FWindow, FButton },
+    template: `
+        <div>
+            <f-window class="fwindow-width-1" modal ref="win1">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-2" modal ref="win2">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-3" modal ref="win3">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-4" modal ref="win4">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-5" modal ref="win5">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-6" modal ref="win6">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-7" modal ref="win7">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-8" modal ref="win8">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+            <f-window class="fwindow-width-9" modal ref="win9">
+                <div>Lorem ipsum dolor sit amet, consectetur 1234 adipisicing elit. Adipisci animi aut cupiditate ducimus et</div>
+            </f-window>
+
+            <div class="gridauto">
+                <f-button @click.native="$refs.win1.show()"><code>fwindow-width-1</code></f-button>
+                <f-button @click.native="$refs.win2.show()"><code>fwindow-width-2</code></f-button>
+                <f-button @click.native="$refs.win3.show()"><code>fwindow-width-3</code></f-button>
+                <f-button @click.native="$refs.win4.show()"><code>fwindow-width-4</code></f-button>
+                <f-button @click.native="$refs.win5.show()"><code>fwindow-width-5</code></f-button>
+                <f-button @click.native="$refs.win6.show()"><code>fwindow-width-6</code></f-button>
+                <f-button @click.native="$refs.win7.show()"><code>fwindow-width-7</code></f-button>
+                <f-button @click.native="$refs.win8.show()"><code>fwindow-width-8</code></f-button>
+                <f-button @click.native="$refs.win9.show()"><code>fwindow-width-9</code></f-button>
+            </div>
+        </div>
+    `,
+});
