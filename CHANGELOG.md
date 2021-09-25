@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.17.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.16.0...v0.17.0) (2021-09-25)
+
+
+### Features
+
+* **f-combo-box:** add `inputComponent` property ([6495ec9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6495ec955cf223f5d725d9a6292f5d1d866c8b98))
+* **f-details:** add `animate` property ([704613c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/704613c113a8d4087095491138ec78f0da08160f))
+* **f-details:** create component ([58e2ad5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/58e2ad5208793c8363e9cc99fd9a0a7ee8eedef8))
+* **f-height-transition:** emit `transition-end` event ([3bc7432](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3bc743243bb8ebf792e243b569c73d3d91db8920))
+* **f-search-field:** add `magnifier` slot ([83f5f3d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/83f5f3ddbc65460eb202368904af9fdbcbd95372))
+
 ## [0.16.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.15.1...v0.16.0) (2021-09-23)
 
 
