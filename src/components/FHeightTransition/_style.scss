@@ -1,5 +1,5 @@
 @use "../../assets/scss/tools/media";
-@use "custom-elements";
+@use "custom-properties";
 
 @include media.prefers-reduced-motion(false) {
     .fheighttransition {

@@ -13,7 +13,7 @@ export const Default = () => ({
             <f-button :label="!expand ? 'Expand' : 'Collapse'" @click.native="expand = !expand" class="mab-3" />
 
             <f-height-transition>
-                <div v-if="expand" id="elem">
+                <div v-show="expand" id="elem">
                     <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda delectus deserunt dignissimos dolores facere, fuga id in incidunt laudantium nisi numquam officia quam soluta totam unde voluptate. Asperiores, vero!</div>
                     <div>Eligendi facere in possimus quae sunt tempora veritatis! Accusantium architecto commodi consectetur culpa, hic ipsam libero magni maxime nulla, numquam odio omnis quas quos sed sint tempora voluptate? Debitis, molestiae?</div>
                 </div>
