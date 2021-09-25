@@ -17,7 +17,7 @@
             </span>
         </summary>
 
-        <f-height-transition @transition-end="onTransitionEnd">
+        <f-height-transition @transition-end="onTransitionEnd" :disabled="!animate">
             <div v-show="opened" class="fdetails_content_wrap">
                 <div class="fdetails_content">
                     <slot></slot>
@@ -51,6 +51,11 @@ export default {
             type: String,
             default: '',
         },
+        /** Use content and icon animation */
+        animate: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -64,6 +69,7 @@ export default {
         classes() {
             return {
                 'fdetails-open': this.opened,
+                'fdetails-animate': this.animate,
             };
         },
     },

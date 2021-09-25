@@ -31,7 +31,12 @@
 
     &_icon {
         opacity: 0.5;
-        transition: transform var(--fdetails-transitions-length) var(--fdetails-transitions-func);
+    }
+
+    &-animate {
+        .fdetails_icon {
+            transition: transform var(--fdetails-transitions-length) var(--fdetails-transitions-func);
+        }
     }
 
     &-open {
