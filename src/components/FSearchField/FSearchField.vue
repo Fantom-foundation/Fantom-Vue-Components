@@ -17,7 +17,9 @@
             </template>
 
             <template #prefix>
-                <f-svg-icon width="2.3em" height="1em" class="fsearchfield_searchicon"><icon-search /></f-svg-icon>
+                <slot name="magnifier">
+                    <f-svg-icon width="2.3em" height="1em" class="fsearchfield_searchicon"><icon-search /></f-svg-icon>
+                </slot>
             </template>
 
             <template #suffix="sProps">

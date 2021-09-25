@@ -88,6 +88,11 @@ export const Slots = () => ({
                     <f-svg-icon size="1.2em" rotate="180deg"><icon-angle-left /></f-svg-icon>
                 </template>
             </f-search-field>
+            <f-search-field label="Slot 'magnifier'" name="pwd1">
+                <template #magnifier>
+                    <f-svg-icon size="1.2em" rotate="180deg"><icon-angle-left /></f-svg-icon>
+                </template>
+            </f-search-field>
         </div>
     `,
 });
