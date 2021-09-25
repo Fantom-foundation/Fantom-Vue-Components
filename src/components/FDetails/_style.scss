@@ -1,0 +1,52 @@
+@use "custom-properties";
+
+.fdetails {
+    border: var(--fdetails-border);
+    border-radius: var(--f-border-radius-3);
+
+    summary {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--f-spacer-4) var(--f-spacer-5);
+        cursor: pointer;
+
+        &::marker {
+            display: none;
+            content: '';
+        }
+    }
+
+    &[open] {
+        summary {
+            border-bottom: var(--fdetails-border);
+        }
+    }
+
+    &_content {
+        padding: var(--f-spacer-4) var(--f-spacer-5);
+    }
+
+    &_label {
+    }
+
+    &_icon {
+        opacity: 0.5;
+        transition: transform var(--fdetails-transitions-length) var(--fdetails-transitions-func);
+    }
+
+    &-open {
+        .fdetails {
+            &_icon {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    .fheighttransition {
+        &-enter-active,
+        &-leave-active {
+            --fheighttransition-transition-length: var(--fdetails-transitions-length);
+            --fheighttransition-transition-func: var(--fdetails-transitions-func);
+        }
+    }
+}
