@@ -473,3 +473,19 @@ export const Slot = () => ({
         };
     },
 });
+
+export const InputComponent = () => ({
+    components: { FComboBox },
+    template: `
+        <div>
+            <f-combo-box input-component="f-search-field" text-is-value :inline-autocomplete="false" :data="data" @change="value = $event" label="label" />
+            value: {{ value }}
+        </div>
+    `,
+    data() {
+        return {
+            data: clone(comboboxData),
+            value: 0,
+        };
+    },
+});

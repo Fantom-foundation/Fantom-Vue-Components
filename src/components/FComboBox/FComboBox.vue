@@ -9,7 +9,8 @@
         :aria-expanded="popoverVisible ? 'true' : 'false'"
         :aria-invalid="validationState.invalid"
     >
-        <f-input
+        <component
+            :is="inputComponent"
             v-model="iValue"
             ref="input"
             v-bind="$props"
@@ -53,7 +54,7 @@
                     </slot>
                 </span>
             </template>
-        </f-input>
+        </component>
 
         <f-popover
             v-if="popoverVisible"
@@ -202,6 +203,11 @@ export default {
                 return ['local', 'remote'].indexOf(_value) !== -1;
             },
         },
+        /** Specifies component for input */
+        inputComponent: {
+            type: String,
+            default: 'f-input',
+        },
         readonly: {
             type: Boolean,
             default: false,
@@ -305,6 +311,8 @@ export default {
                         this.listboxFilterText = _value;
                     });
                 }
+            } else if (this.textIsValue) {
+                this.$emit('change', _value);
             }
         },
     },
