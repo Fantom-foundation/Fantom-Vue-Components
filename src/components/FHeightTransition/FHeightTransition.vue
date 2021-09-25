@@ -69,6 +69,13 @@ export default {
         onAfterEnter(elem) {
             elem.style.height = 'auto';
             elem.classList.remove('willchange');
+
+            /**
+             * Triggers when height transition ends
+             *
+             * @property {('enter'|'leave')}
+             */
+            this.$emit('transition-end', 'enter');
         },
 
         onBeforeLeave(elem) {
@@ -86,6 +93,13 @@ export default {
         onAfterLeave(elem) {
             elem.style.height = 'auto';
             elem.classList.remove('fheighttransition-willchange');
+
+            /**
+             * Triggers when height transition ends
+             *
+             * @property {('enter'|'leave')}
+             */
+            this.$emit('transition-end', 'leave');
         },
     },
 };
