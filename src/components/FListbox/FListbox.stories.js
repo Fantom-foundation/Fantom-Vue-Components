@@ -206,8 +206,8 @@ export const CustomSlot = () => ({
         <div>
             <span id="fllbl3" class="not-visible">Listbox example</span>
             <f-listbox :data="data" labeled-by="fllbl3" @component-change="onListboxItemSelected">
-                <template v-slot="{ item }">
-                    &#9733; <b>{{ item.label }}</b>
+                <template v-slot="{ item, selected, focused }">
+                    &#9733; <b>{{ item.label }}</b> selected: <b>{{ selected }}</b>, focused: <b>{{ focused }}</b>
                 </template>
             </f-listbox>
             <br />

@@ -28,14 +28,14 @@
                 :id="item.id"
                 :key="item.id"
                 role="option"
-                :aria-selected="
-                    !multiselect ? item.id === selectedItem.id : !!selectedItems.find(fi => item.id === fi.id)
-                "
+                :aria-selected="isItemSelected(item)"
                 :aria-disabled="!!item.disabled"
                 class="flistbox_list_item"
                 :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
             >
-                <slot :item="item" :focused="item.id === focusedItem.id"> {{ item.label }} </slot>
+                <slot :item="item" :selected="isItemSelected(item)" :focused="item.id === focusedItem.id">
+                    {{ item.label }}
+                </slot>
             </li>
         </ul>
         <f-intersection-observer
@@ -635,6 +635,16 @@ export default {
             if (item) {
                 this.focusItem({ item, dontSelectItem: this._prevFilterText !== '' && this.filterText !== '' });
             }
+        },
+
+        /**
+         * @param {Object} item
+         * @return {boolean}
+         */
+        isItemSelected(item) {
+            return !this.multiselect
+                ? item.id === this.selectedItem.id
+                : !!this.selectedItems.find(fi => item.id === fi.id);
         },
 
         valuesAreEqual(val1, val2) {
