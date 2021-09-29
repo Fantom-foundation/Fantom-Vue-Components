@@ -9,6 +9,9 @@
     --flistbox-item-selected-color: #fff;
     --flistbox-item-selected-background-color: var(--f-color-primary-5, #1a6aff);
     --flistbox-item-disabled-opacity: 0.3;
+    --flistbox-item-selected-hover-color: var(--flistbox-item-selected-color);
+    --flistbox-item-selected-hover-background-color: var(--flistbox-item-selected-background-color);
+    --flistbox-item-selected-font-weight: bold;
     --flistbox-item-gap: 0;
 
     &-horizontal {

@@ -42,9 +42,19 @@
                 &:not([aria-disabled="true"]) {
                     cursor: pointer;
 
-                    &:not([aria-selected="true"]):hover {
-                        color: var(--flistbox-item-hover-color);
-                        background-color: var(--flistbox-item-hover-background-color);
+                    &:not([aria-selected="true"]) {
+                        &:hover, &.flistbox_list_item-focus {
+                            color: var(--flistbox-item-hover-color);
+                            background-color: var(--flistbox-item-hover-background-color);
+                        }
+                    }
+
+                    &[aria-selected="true"] {
+                        &:hover, &.flistbox_list_item-focus {
+                            color: var(--flistbox-item-selected-hover-color);
+                            background-color: var(--flistbox-item-selected-hover-background-color);
+                            font-weight: var(--flistbox-item-selected-font-weight);
+                        }
                     }
                 }
             }

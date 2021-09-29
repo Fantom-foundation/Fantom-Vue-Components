@@ -3,6 +3,7 @@
         <slot name="top" v-bind="slotProps">
             <f-label v-if="label" :id="labeledById" :label="label" :required="required" />
         </slot>
+
         <ul
             ref="listbox"
             :id="listboxId || null"
@@ -14,7 +15,8 @@
             :aria-describedby="ariaDescribedByIds"
             :aria-disabled="disabled"
             :aria-invalid="validationState.invalid"
-            :aria-label="ariaLabel"
+            :aria-label="ariaLabel || null"
+            :aria-multiselectable="multiselect"
             @click="onClick"
             @mousedown.prevent
             @keydown="onKeydown"
@@ -26,11 +28,14 @@
                 :id="item.id"
                 :key="item.id"
                 role="option"
-                :aria-selected="item.id === focusedItem.id"
+                :aria-selected="
+                    !multiselect ? item.id === selectedItem.id : !!selectedItems.find(fi => item.id === fi.id)
+                "
                 :aria-disabled="!!item.disabled"
                 class="flistbox_list_item"
+                :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
             >
-                <slot :item="item"> {{ item.label }} </slot>
+                <slot :item="item" :focused="item.id === focusedItem.id"> {{ item.label }} </slot>
             </li>
         </ul>
         <f-intersection-observer
@@ -89,6 +94,7 @@ import FIntersectionObserver from '../FIntersectionObserver/FIntersectionObserve
 import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
+import { isArray } from '../../utils/array.js';
 
 /**
  * FListbox item.
@@ -207,6 +213,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** If `true`, multiple values can be selected */
+        multiselect: {
+            type: Boolean,
+            default: false,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -219,7 +230,9 @@ export default {
         return {
             items: [],
             dTotalItems: this.totalItems,
+            selectedItem: {},
             focusedItem: {},
+            selectedItems: [],
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
             loading: false,
             lastPage: false,
@@ -246,8 +259,22 @@ export default {
         value(_val) {
             this.inputValue = _val;
 
-            if (!this.valuesAreEqual(this.focusedItem.value, _val)) {
-                this.focusItem(_val, false, 'value');
+            if (!this.multiselect) {
+                if (!this.valuesAreEqual(this.selectedItem.value, _val)) {
+                    this.selectItem({ value: _val, key: 'value', focusItem: true });
+                }
+            } else if (isArray(_val) && !this._itemSelected) {
+                const selectedItems = [];
+
+                _val.forEach(val => {
+                    const item = this.items.find(_item => this.valuesAreEqual(_item.value, val));
+
+                    if (item) {
+                        selectedItems.push(item);
+                    }
+                });
+
+                this.selectedItems = selectedItems;
             }
         },
 
@@ -285,7 +312,9 @@ export default {
     created() {
         this._firstKeyup = true;
         this._firstPageChange = true;
-        this._prevFilterText = this.filterText;
+        // this._prevFilterText = this.filterText;
+        this._prevFilterText = '';
+        this._itemSelected = false;
 
         if (this.filterText || this.strategy === 'remote') {
             this.filterItems(this.filterText);
@@ -296,9 +325,9 @@ export default {
         // console.log('flistbox', this._uid);
     },
 
-    mounted() {
+    /*mounted() {
         this._prevFilterText = this.filterText;
-    },
+    },*/
 
     beforeDestroy() {
         this.$emit('loading', false);
@@ -314,7 +343,7 @@ export default {
 
                 try {
                     let data = await _items;
-                    let focusedItemValue;
+                    let selectedItemValue;
 
                     if (this.data === _items) {
                         data = this.transformDataFunc(data);
@@ -329,7 +358,7 @@ export default {
                             this.items = this.getItems(cloneObject(data.data));
                         } else {
                             this.items = this.items.concat(this.getItems(cloneObject(data.data)));
-                            focusedItemValue = this.focusedItem.value;
+                            selectedItemValue = this.selectedItem.value;
                         }
 
                         this.loading = false;
@@ -356,14 +385,14 @@ export default {
                                 }
 
                                 // preserve focused item
-                                if (focusedItemValue) {
+                                if (selectedItemValue) {
                                     const idx = this.items.findIndex(_item =>
-                                        this.valuesAreEqual(_item.value, focusedItemValue)
+                                        this.valuesAreEqual(_item.value, selectedItemValue)
                                     );
 
                                     // if currently focused item is near the bottom edge (trying to guess keyboard movement)
                                     if (this.items.length - pagination.perPage - 2 < idx) {
-                                        this.focusItem(focusedItemValue, false, 'value');
+                                        this.focusItem({ value: selectedItemValue, key: 'value' });
                                     }
                                 }
                             });
@@ -423,33 +452,75 @@ export default {
             return {};
         },
 
+        findItemByValue(value, key = 'id') {
+            if (value === undefined || this.disabled) {
+                return null;
+            }
+
+            const item = this.items.find(_item => this.valuesAreEqual(_item[key], value));
+
+            return item && !item.disabled ? item : null;
+        },
+
+        selectItem({ item = null, emitEvent = '', value, key = 'id', focusItem = false }) {
+            const { selectedItems } = this;
+            const itm = item || this.findItemByValue(value, key);
+            let removeSelectedItem = false;
+
+            if (itm) {
+                if (this.multiselect) {
+                    const idx = selectedItems.findIndex(_item => _item.id === itm.id);
+                    if (idx > -1) {
+                        selectedItems.splice(idx, 1);
+                        removeSelectedItem = true;
+                    } else {
+                        selectedItems.push(itm);
+                    }
+
+                    this._itemSelected = true;
+                }
+
+                if (emitEvent) {
+                    this.emitChangeEvent(cloneObject(itm), emitEvent);
+                }
+
+                this.selectedItem = removeSelectedItem ? {} : itm;
+
+                if (focusItem && this.focusedItem.id !== this.selectedItem.id) {
+                    this.focusItem({ item: itm });
+                }
+
+                this.$nextTick(() => {
+                    this._itemSelected = false;
+                });
+            }
+        },
+
         /**
          * Select item by `_key`.
          *
          * @param {*} _value Item value.
-         * @param {boolean} [_selectItem]
          * @param {string} [_key] Name of item key.
          */
-        focusItem(_value, _selectItem, _key = 'id') {
-            let item;
+        focusItem({ item = null, value, key = 'id', dontSelectItem = false }) {
+            const itm = item || this.findItemByValue(value, key);
 
-            if (_value !== undefined && !this.disabled) {
-                item = this.items.find(_item => this.valuesAreEqual(_item[_key], _value));
-
-                // if (item && item.id !== this.focusedItem.id) {
-                if (item && !item.disabled) {
-                    if ((this.selectImmediately && this._prevFilterText === this.filterText) || _selectItem) {
-                        this.emitChangeEvent(cloneObject(item), _selectItem ? 'click' : 'focus');
-                    }
-
-                    if (this.selectImmediately) {
-                        this._prevFilterText = this.filterText;
-                    }
-
-                    this.focusedItem = item;
-
-                    this.scrollToFocusedItem();
+            if (itm) {
+                if (this.selectImmediately && !this.multiselect && !dontSelectItem) {
+                    this.selectItem({
+                        item: itm,
+                        // emitEvent: this._prevFilterText === this.filterText && this.filterText !== '' ? 'focus' : '',
+                        emitEvent: this._prevFilterText === this.filterText ? 'focus' : '',
+                    });
                 }
+
+                if (this.selectImmediately && !this.multiselect) {
+                    this._prevFilterText = this.filterText;
+                }
+
+                this.focusedItem = itm;
+
+                this.scrollToFocusedItem();
             }
         },
 
@@ -466,18 +537,40 @@ export default {
          */
         setSelected() {
             const { value } = this;
-            let selectedItem = this.items.find(_item => !!_item.selected);
+            const { items } = this;
+            let selectedItem = !this.multiselect
+                ? items.find(_item => !!_item.selected)
+                : items.filter(_item => !!_item.selected);
 
-            if (!selectedItem && value) {
-                selectedItem = this.items.find(_item => this.valuesAreEqual(_item.value, value));
+            if (!this.multiselect) {
+                if (!selectedItem && value) {
+                    selectedItem = items.find(_item => this.valuesAreEqual(_item.value, value));
+                }
+            } else if (selectedItem.length === 0 && isArray(value)) {
+                value.forEach(val => {
+                    const item = items.find(_item => this.valuesAreEqual(_item.value, val));
+
+                    if (item) {
+                        if (!selectedItem) {
+                            selectedItem = [];
+                        }
+
+                        selectedItem.push(item);
+                    }
+                });
             }
 
-            this.focusedItem = {};
+            this.selectedItem = {};
 
             if (selectedItem && this.strategy !== 'remote') {
                 this.$nextTick(() => {
-                    this.focusItem(selectedItem.id);
-                    // this.focusItem(selectedItem.id, true);
+                    if (!isArray(selectedItem)) {
+                        this.selectItem({ value: selectedItem.id, focusItem: true });
+                    } else {
+                        selectedItem.forEach(item => {
+                            this.selectItem({ value: item.id });
+                        });
+                    }
                 });
             }
         },
@@ -509,13 +602,19 @@ export default {
          * @param {string} [_selectionAction]
          */
         emitChangeEvent(_item, _selectionAction = 'focus') {
+            const { multiselect } = this;
+
             if (this.disabled) {
                 return;
             }
 
-            this.inputValue = _item.value || '';
+            if (!multiselect) {
+                this.inputValue = _item.value || '';
+            } else {
+                this.inputValue = this.selectedItems.map(item => item.value);
+            }
 
-            this.$emit('component-change', _item, _selectionAction);
+            this.$emit('component-change', !multiselect ? _item : cloneObject(this.selectedItems), _selectionAction);
             this.$emit('change', this.inputValue);
 
             if (this.validateOnChange) {
@@ -534,7 +633,7 @@ export default {
             const item = this.items.find(_item => !_item.disabled);
 
             if (item) {
-                this.focusedItem = item;
+                this.focusItem({ item, dontSelectItem: this._prevFilterText !== '' && this.filterText !== '' });
             }
         },
 
@@ -557,14 +656,18 @@ export default {
             const eItem = _event.target.closest(this.selectableItemSelector);
 
             if (eItem) {
-                this.focusItem(eItem.id, true);
+                this.selectItem({ value: eItem.id, emitEvent: 'click', focusItem: true });
+                // this.focusItem(eItem.id, true);
             }
         },
 
         /**
          * @param {KeyboardEvent} _event
+         * @param {boolean} [_useHomeAndEnd]
          */
         onKeydown(_event, _useHomeAndEnd = true) {
+            const { focusedItem } = this;
+
             if (this.disabled) {
                 return;
             }
@@ -574,19 +677,19 @@ export default {
                 _selector: this.selectableItemSelector,
                 _direction: 'both',
                 _circular: this.circularNavigation,
-                _target: document.getElementById(this.focusedItem.id),
+                _target: document.getElementById(focusedItem.id),
                 _focusElem: false,
                 _useHomeAndEnd,
             });
 
-            if (!eItem && !this.focusedItem.id && (isKey('ArrowDown', _event) || isKey('ArrowUp', _event))) {
+            if (!eItem && !focusedItem.id && (isKey('ArrowDown', _event) || isKey('ArrowUp', _event))) {
                 this.focusFirstItem();
-                eItem = document.getElementById(this.focusedItem.id);
+                eItem = document.getElementById(focusedItem.id);
             }
 
             if (eItem) {
                 _event.preventDefault();
-                this.focusItem(eItem.id);
+                this.focusItem({ value: eItem.id });
             }
         },
 
@@ -598,9 +701,10 @@ export default {
                 return;
             }
 
-            // if (!this.selectImmediately && this.focusedItem.id && isKey('Enter', _event) && !this._firstKeyup) {
+            // if (!this.selectImmediately && this.selectedItem.id && isKey('Enter', _event) && !this._firstKeyup) {
             if (this.focusedItem.id && isKey('Enter', _event) && !this._firstKeyup) {
-                this.emitChangeEvent(cloneObject(this.focusedItem), 'enterKey');
+                this.selectItem({ value: this.focusedItem.id, emitEvent: 'enterKey' });
+                // this.emitChangeEvent(cloneObject(this.selectedItem), 'enterKey');
             }
 
             this._firstKeyup = false;
@@ -614,10 +718,10 @@ export default {
             this._firstKeyup = true;
 
             if (this.focusItemOnFocus && !this.focusedItem.id) {
-                if (this.value) {
-                    this.focusItem(this.value, false, 'value');
-                } else {
+                if (!this.value || (this.multiselect && this.value.length === 0)) {
                     this.focusFirstItem();
+                } else {
+                    this.focusItem({ value: this.value, key: 'value' });
                 }
             }
         },

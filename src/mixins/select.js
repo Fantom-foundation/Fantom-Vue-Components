@@ -1,7 +1,14 @@
 import { inputCommonMixin } from './input-common.js';
 
 const selectM = {
-    props: { ...inputCommonMixin.props },
+    props: {
+        ...inputCommonMixin.props,
+
+        value: {
+            type: [String, Number, Boolean, Object, Date, Array],
+            default: '',
+        },
+    },
 
     computed: {
         ...inputCommonMixin.computed,
