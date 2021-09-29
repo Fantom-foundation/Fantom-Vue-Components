@@ -33,6 +33,7 @@
             :attach-margin="[0, 0, 0, 0]"
             :animation-in="animationIn"
             :animation-out="animationOut"
+            width-as-attach
             hide-on-document-mousedown
             class="fdropdownlistbox_fwindow"
             @window-hide="$emit('window-hide', $event)"
