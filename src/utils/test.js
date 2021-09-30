@@ -2,6 +2,8 @@
  * Utility functions for testing
  */
 
+import { toKebabCase } from '@/utils/string.js';
+
 /**
  * @param {function} func Function to be called
  * @param {int} [n] Number of calls
@@ -34,4 +36,32 @@ export function disableErrorMessages(func) {
     func();
 
     console.error = originalConsoleError;
+}
+
+/**
+ * Playground for testing v-model of a Vue component.
+ *
+ * @param {Vue} component
+ * @param {Object} data
+ * @return {{dValue}|{template: `<${string} v-model="dValue" ${string} />`, components: {}, data(): {dValue: *}, props: string[]}}
+ */
+export function getVModelComponent(component, data = {}) {
+    const componentName = component.name;
+    let attributes = [];
+
+    Object.keys(data).forEach(key => {
+        attributes.push(`:${key}="${key}"`);
+    });
+
+    return {
+        components: { [componentName]: component },
+        template: `<${toKebabCase(componentName)} v-model="dValue" ${attributes.join(' ')} />`,
+        props: ['value'],
+        data() {
+            return {
+                dValue: this.value,
+                ...data,
+            };
+        },
+    };
 }
