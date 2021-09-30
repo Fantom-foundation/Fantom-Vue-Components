@@ -55,3 +55,15 @@
         }
     }
 }
+
+html[dir="rtl"], body[dir="rtl"] {
+    .fdetails {
+        &-open {
+            .fdetails {
+                &_icon {
+                    transform: rotate(-90deg);
+                }
+            }
+        }
+    }
+}
