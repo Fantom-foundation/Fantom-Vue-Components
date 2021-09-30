@@ -2,7 +2,7 @@
  * Utility functions for testing
  */
 
-import { toKebabCase } from '@/utils/string.js';
+import { toKebabCase } from './string.js';
 
 /**
  * @param {function} func Function to be called
