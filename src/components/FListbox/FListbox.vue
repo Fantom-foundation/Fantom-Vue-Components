@@ -24,12 +24,26 @@
             @focus="onFocus"
         >
             <li
+                v-for="item in prependedItems"
+                :id="item.id"
+                :key="`${item.id}_f`"
+                role="option"
+                :aria-selected="isItemSelected(item)"
+                class="flistbox_list_item"
+                :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
+            >
+                <slot :item="item" :selected="isItemSelected(item)" :focused="item.id === focusedItem.id">
+                    {{ item.label }}
+                </slot>
+            </li>
+            <li
                 v-for="item in items"
                 :id="item.id"
                 :key="item.id"
                 role="option"
                 :aria-selected="isItemSelected(item)"
-                :aria-disabled="!!item.disabled"
+                :aria-disabled="!!item.disabled || item.__prepend"
+                :hidden="item.__prepend || null"
                 class="flistbox_list_item"
                 :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
             >
@@ -218,6 +232,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** If `true`, selected item(s) will be displayed before other items */
+        prependSelectedItems: {
+            type: Boolean,
+            default: false,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -233,6 +252,7 @@ export default {
             selectedItem: {},
             focusedItem: {},
             selectedItems: [],
+            prependedItems: [],
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
             loading: false,
             lastPage: false,
@@ -275,6 +295,10 @@ export default {
                 });
 
                 this.selectedItems = selectedItems;
+
+                if (this.prependSelectedItems) {
+                    this.setPrependedItems(selectedItems);
+                }
             }
         },
 
@@ -472,9 +496,14 @@ export default {
                     const idx = selectedItems.findIndex(_item => _item.id === itm.id);
                     if (idx > -1) {
                         selectedItems.splice(idx, 1);
+
                         removeSelectedItem = true;
                     } else {
                         selectedItems.push(itm);
+                    }
+
+                    if (this.prependSelectedItems) {
+                        this.setPrependedItems(selectedItems);
                     }
 
                     this._itemSelected = true;
@@ -486,6 +515,10 @@ export default {
 
                 this.selectedItem = removeSelectedItem ? {} : itm;
 
+                if (this.prependSelectedItems && !this.multiselect) {
+                    this.setPrependedItems([itm]);
+                }
+
                 if (focusItem && this.focusedItem.id !== this.selectedItem.id) {
                     this.focusItem({ item: itm });
                 }
@@ -494,6 +527,21 @@ export default {
                     this._itemSelected = false;
                 });
             }
+        },
+
+        /**
+         * @param {Array} items
+         */
+        setPrependedItems(items) {
+            this.prependedItems.forEach(item => {
+                delete item.__prepend;
+            });
+
+            items.forEach(item => {
+                item.__prepend = true;
+            });
+
+            this.prependedItems = [...items].reverse();
         },
 
         /**

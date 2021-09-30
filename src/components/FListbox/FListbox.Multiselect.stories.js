@@ -35,6 +35,7 @@ export default {
 
 export const Value = () => ({
     components: { FListbox },
+    //language=HTML
     template: `
         <div>
             <span id="fllbl22" class="not-visible">Listbox example</span>
@@ -59,13 +60,38 @@ export const Value = () => ({
 
 export const Model = () => ({
     components: { FListbox, FButton },
+    //language=HTML
     template: `
         <div>
-        <span id="fllbl5" class="not-visible">Listbox example</span>
-        <f-listbox v-model="value" multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
-        <br />
-        Selected: {{ value }}
-        <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>
+            <span id="fllbl5" class="not-visible">Listbox example</span>
+            <f-listbox v-model="value" multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
+            <br />
+            Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            value: [],
+        };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = ['30', '50'];
+        },
+    },
+});
+
+export const PrependSelectedItems = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <span id="fllbl5" class="not-visible">Listbox example</span>
+            <f-listbox v-model="value" prepend-selected-items multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
+            <br />
+            Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>
         </div>
     `,
     data() {

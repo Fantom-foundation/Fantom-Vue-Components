@@ -28,6 +28,10 @@
                 opacity: var(--flistbox-item-disabled-opacity);
             }
 
+            &[hidden] {
+                display: none;
+            }
+
             &_loading {
                 text-align: center;
             }
