@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.18.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.17.2...v0.18.0) (2021-09-30)
+
+
+### Features
+
+* **f-listbox:** add `prependSelectedItems` prop ([29d6f29](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/29d6f297fb827b3a6f511dce45f8cdd31500802a))
+* **f-listbox:** add `selected` and `focused` props to default slot ([02283c2](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/02283c2ead79cb51306f658df2fc7a6c31a7dff7))
+* **f-listbox:** create support for selecting multiple items ([2591e22](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/2591e220ec2127c6ea5d2cd2ee14e7f2128d0c3e))
+* **utils:** create `getVModelComponent` function ([c0eced9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c0eced965f55b9570fe3227d12fec44df51a3814))
+
+
+### Bug Fixes
+
+* **f-detail:** fix icon direction in rtl mode ([f606b35](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f606b351d921b2be44969dab04290dd327e0e5dd))
+
 ### [0.17.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.17.1...v0.17.2) (2021-09-29)
 
 ### [0.17.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.17.0...v0.17.1) (2021-09-29)
