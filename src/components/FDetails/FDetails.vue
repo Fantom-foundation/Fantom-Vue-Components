@@ -74,6 +74,13 @@ export default {
         },
     },
 
+    watch: {
+        open(value) {
+            this.opened = value;
+            this.dOpened = value;
+        },
+    },
+
     methods: {
         onSummaryClick() {
             this.opened = !this.opened;
