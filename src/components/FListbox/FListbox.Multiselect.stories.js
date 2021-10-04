@@ -19,15 +19,6 @@ for (let i = 1; i < 200; i++) {
     });
 }
 
-const data3 = [
-    { label: 'item 1', value: { id: '10' } },
-    { label: 'item 2', id: 'myid', value: { id: '20' } },
-    { label: 'item 3', value: { id: '30' } },
-    { label: 'item 4', value: { id: '40' } },
-    { label: 'item 5', value: { id: '50' } },
-    { label: 'item 6', value: { id: '60' } },
-];
-
 export default {
     title: 'FListbox/Multiselect',
     // component: FListbox,
@@ -113,6 +104,30 @@ export const RemovableItems = () => ({
         <div>
             <span id="fllbl5" class="not-visible">Listbox example</span>
             <f-listbox v-model="value" removable-items multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
+            <br />
+            Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            value: [],
+        };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = ['30', '50'];
+        },
+    },
+});
+
+export const NonSelectable = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <span id="fllbl5" class="not-visible">Listbox example</span>
+            <f-listbox v-model="value" non-selectable multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
             <br />
             Selected: {{ value }}
             <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>

@@ -259,6 +259,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** List items can have focus but can't be selected */
+        nonSelectable: {
+            type: Boolean,
+            default: false,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -299,6 +304,10 @@ export default {
 
     watch: {
         value(_val) {
+            if (this.nonSelectable) {
+                return;
+            }
+
             this.inputValue = _val;
 
             if (!this.multiselect) {
@@ -556,6 +565,10 @@ export default {
         },
 
         selectItem({ item = null, emitEvent = '', value, key = 'id', focusItem = false }) {
+            if (this.nonSelectable) {
+                return;
+            }
+
             const { selectedItems } = this;
             const itm = item || this.findItemByValue(value, key);
             let removeSelectedItem = false;

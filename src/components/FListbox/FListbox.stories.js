@@ -456,6 +456,33 @@ export const RemovableItems = () => ({
     },
 });
 
+export const NonSelectable = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <span id="fllbl5" class="not-visible">Listbox example</span>
+            <f-listbox non-selectable v-model="value" :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" @component-change="onListboxItemSelected" />
+            <br />
+            Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to '30'</f-button>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            value: '',
+        };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = '30';
+        },
+        onListboxItemSelected(_item) {
+            this.selectedItem = _item.label;
+        },
+    },
+});
+
 export const Slots = () => ({
     components: { FListbox },
     template: `
