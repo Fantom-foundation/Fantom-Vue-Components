@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.19.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.18.1...v0.19.0) (2021-10-04)
+
+
+### Features
+
+* **f-chips:** create skeleton ([e52e234](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e52e234c70fcc0feff2c0cd752cd5cd38bc4ff1d))
+* **f-listbox:** add `hideNotFoundMessage` option ([529cfb4](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/529cfb4241e254060fe090bbe380f7168b5cbdbc))
+* **f-listbox:** add `nonSelectable` option ([f60c067](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f60c0672f22ac717bf7cce8a61a73335f784fc37))
+* **f-listbox:** add `removableItems` option ([fd071cd](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fd071cd4f228a10200265870a2a2e10939166eb1))
+* **f-listbox:** remove item by pressing 'Delete' key ([e825b12](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e825b129a2cec3b5d1fcde29c3a1030fad38cc5c))
+* **f-listbox:** style and add title to "remove button" ([e8252d6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e8252d64abc4ef3e8eb4def1be0d1ef5e9d13d53))
+
 ### [0.18.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.18.0...v0.18.1) (2021-10-01)
 
 
