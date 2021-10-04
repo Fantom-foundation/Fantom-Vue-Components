@@ -44,7 +44,13 @@
                     {{ item.label }}
                     <template v-if="isItemRemovable(item)">
                         <slot name="remove-button">
-                            <span class="flistbox_list_item_removebutton" aria-hidden="true">x</span>
+                            <span
+                                class="flistbox_list_item_removebutton"
+                                aria-hidden="true"
+                                :title="_('flistbox.removeItem')"
+                            >
+                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
+                            </span>
                         </slot>
                     </template>
                 </slot>
@@ -72,7 +78,13 @@
                     {{ item.label }}
                     <template v-if="isItemRemovable(item)">
                         <slot name="remove-button">
-                            <span class="flistbox_list_item_removebutton" aria-hidden="true">x</span>
+                            <span
+                                class="flistbox_list_item_removebutton"
+                                aria-hidden="true"
+                                :title="_('flistbox.removeItem')"
+                            >
+                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
+                            </span>
                         </slot>
                     </template>
                 </slot>
@@ -135,6 +147,8 @@ import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
 import { isArray } from '../../utils/array.js';
+import FSvgIcon from '@/components/FSvgIcon/FSvgIcon.vue';
+import IconTimes from '@/components/icons/IconTimes.vue';
 
 /**
  * @param {FListboxItem} _item
@@ -166,7 +180,16 @@ export default {
 
     inheritAttrs: false,
 
-    components: { FDotsLoader, FIntersectionObserver, FPagination, FLabel, FErrorMessages, FInfoText },
+    components: {
+        IconTimes,
+        FSvgIcon,
+        FDotsLoader,
+        FIntersectionObserver,
+        FPagination,
+        FLabel,
+        FErrorMessages,
+        FInfoText,
+    },
 
     mixins: [selectMixin, formInputMixin, helpersMixin, translationsMixin],
 

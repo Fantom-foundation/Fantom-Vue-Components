@@ -33,6 +33,7 @@ export const faTranslations = {
     },
     flistbox: {
         notFound: 'چیزی پیدا نشد',
+        removeItem: 'حذف مورد',
     },
     fcopybutton: {
         copyToClipboard: 'کپی به کلیپ بورد',

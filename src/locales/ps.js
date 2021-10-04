@@ -33,6 +33,7 @@ export const psTranslations = {
     },
     flistbox: {
         notFound: 'څه پیدا نه شول',
+        removeItem: 'توکي لرې کړئ',
     },
     fcopybutton: {
         copyToClipboard: 'کلیپ بورډ ته کاپي کړئ',

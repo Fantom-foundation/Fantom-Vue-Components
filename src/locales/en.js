@@ -33,6 +33,7 @@ export const enTranslations = {
     },
     flistbox: {
         notFound: 'Nothing found',
+        removeItem: 'Remove item',
     },
     fcopybutton: {
         copyToClipboard: 'Copy to clipboard',
