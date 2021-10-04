@@ -39,6 +39,15 @@
             &_notfound {
                 text-align: center;
             }
+
+            &_removebutton {
+
+            }
+
+            &-removable {
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         &:not([aria-disabled="true"]) {

@@ -106,3 +106,27 @@ export const PrependSelectedItems = () => ({
         },
     },
 });
+
+export const RemovableItems = () => ({
+    components: { FListbox, FButton },
+    template: `
+        <div>
+            <span id="fllbl5" class="not-visible">Listbox example</span>
+            <f-listbox v-model="value" removable-items multiselect :focus-item-on-focus="true" :data="data" labeled-by="fllbl5" />
+            <br />
+            Selected: {{ value }}
+            <f-button secondary size="small" @click.native="onButtonClick">Set value to ['30', '50']</f-button>
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            value: [],
+        };
+    },
+    methods: {
+        onButtonClick() {
+            this.value = ['30', '50'];
+        },
+    },
+});

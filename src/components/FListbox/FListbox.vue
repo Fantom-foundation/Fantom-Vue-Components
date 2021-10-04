@@ -30,10 +30,23 @@
                 role="option"
                 :aria-selected="isItemSelected(item)"
                 class="flistbox_list_item"
-                :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
+                :class="{
+                    'flistbox_list_item-focus': item.id === focusedItem.id,
+                    'flistbox_list_item-removable': isItemRemovable(item),
+                }"
             >
-                <slot :item="item" :selected="isItemSelected(item)" :focused="item.id === focusedItem.id">
+                <slot
+                    :item="item"
+                    :selected="isItemSelected(item)"
+                    :focused="item.id === focusedItem.id"
+                    :removable="isItemRemovable(item)"
+                >
                     {{ item.label }}
+                    <template v-if="isItemRemovable(item)">
+                        <slot name="remove-button">
+                            <span class="flistbox_list_item_removebutton" aria-hidden="true">x</span>
+                        </slot>
+                    </template>
                 </slot>
             </li>
             <li
@@ -45,10 +58,23 @@
                 :aria-disabled="!!item.disabled || item.__prepend"
                 :hidden="item.__prepend || null"
                 class="flistbox_list_item"
-                :class="{ 'flistbox_list_item-focus': item.id === focusedItem.id }"
+                :class="{
+                    'flistbox_list_item-focus': item.id === focusedItem.id,
+                    'flistbox_list_item-removable': isItemRemovable(item),
+                }"
             >
-                <slot :item="item" :selected="isItemSelected(item)" :focused="item.id === focusedItem.id">
+                <slot
+                    :item="item"
+                    :selected="isItemSelected(item)"
+                    :focused="item.id === focusedItem.id"
+                    :removable="isItemRemovable(item)"
+                >
                     {{ item.label }}
+                    <template v-if="isItemRemovable(item)">
+                        <slot name="remove-button">
+                            <span class="flistbox_list_item_removebutton" aria-hidden="true">x</span>
+                        </slot>
+                    </template>
                 </slot>
             </li>
         </ul>
@@ -109,15 +135,6 @@ import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
 import { isArray } from '../../utils/array.js';
-
-/**
- * FListbox item.
- * @typedef {Object} FListboxItem
- * @property {string|Object} [value] Specifies the value of listbox item
- * @property {string} [label] Specifies a label for an item
- * @property {boolean} [disabled] Specifies that an item should be disabled
- * @property {boolean} [selected] Specifies that an item should be pre-selected
- */
 
 /**
  * @param {FListboxItem} _item
@@ -234,6 +251,11 @@ export default {
         },
         /** If `true`, selected item(s) will be displayed before other items */
         prependSelectedItems: {
+            type: Boolean,
+            default: false,
+        },
+        /** If `true`, items will be removable from the list */
+        removableItems: {
             type: Boolean,
             default: false,
         },
@@ -486,6 +508,53 @@ export default {
             return item && !item.disabled ? item : null;
         },
 
+        /**
+         * @param {Object|null} item
+         * @param {number} [index] Index into `this.items` array
+         */
+        removeItem(item, index = -1) {
+            if (!item) {
+                return;
+            }
+
+            const { id } = item;
+            const idx = index > -1 ? index : this.items.findIndex(_item => _item.id == id);
+
+            if (idx > -1) {
+                if (this.isItemSelected(item)) {
+                    if (this.multiselect) {
+                        const selectedItems = cloneObject(this.selectedItems);
+
+                        selectedItems.splice(
+                            selectedItems.findIndex(_item => _item.id === id),
+                            1
+                        );
+
+                        this.selectedItems = selectedItems;
+                    } else {
+                        this.selectedItem = {};
+                    }
+                }
+
+                this.items.splice(idx, 1);
+
+                this.emitChangeEvent({ value: this.selectedItem.value });
+
+                this.setSelected();
+
+                this.$emit('item-remove', { item: cloneObject(item), index: idx });
+            }
+        },
+
+        /**
+         * @param {Element} eItem
+         */
+        removeItemByElement(eItem) {
+            const { id } = eItem;
+
+            this.removeItem(this.items.find(item => item.id == id));
+        },
+
         selectItem({ item = null, emitEvent = '', value, key = 'id', focusItem = false }) {
             const { selectedItems } = this;
             const itm = item || this.findItemByValue(value, key);
@@ -695,6 +764,14 @@ export default {
                 : !!this.selectedItems.find(fi => item.id === fi.id);
         },
 
+        /**
+         * @param {Object} item
+         * @return {boolean}
+         */
+        isItemRemovable(item) {
+            return this.removableItems && !item.disabled;
+        },
+
         valuesAreEqual(val1, val2) {
             if (isObject(val1) || isObject(val2)) {
                 return objectEquals(val1, val2);
@@ -714,7 +791,11 @@ export default {
             const eItem = _event.target.closest(this.selectableItemSelector);
 
             if (eItem) {
-                this.selectItem({ value: eItem.id, emitEvent: 'click', focusItem: true });
+                if (this.removableItems && _event.target.closest('.flistbox_list_item_removebutton')) {
+                    this.removeItemByElement(eItem);
+                } else {
+                    this.selectItem({ value: eItem.id, emitEvent: 'click', focusItem: true });
+                }
                 // this.focusItem(eItem.id, true);
             }
         },
