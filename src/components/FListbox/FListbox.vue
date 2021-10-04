@@ -575,6 +575,10 @@ export default {
                 this.setSelected();
 
                 this.$emit('item-remove', { item: cloneObject(item), index: idx });
+
+                if (idx < this.items.length) {
+                    this.focusItem({ item: this.items[idx] });
+                }
             }
         },
 
@@ -874,6 +878,10 @@ export default {
         onKeyup(_event) {
             if (this.disabled) {
                 return;
+            }
+
+            if (this.removableItems && isKey('Delete', _event)) {
+                this.removeItem(this.focusedItem);
             }
 
             // if (!this.selectImmediately && this.selectedItem.id && isKey('Enter', _event) && !this._firstKeyup) {
