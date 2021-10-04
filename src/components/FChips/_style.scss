@@ -1,0 +1,59 @@
+@use "custom-properties";
+
+.fchips {
+    .flistbox {
+        &_list {
+            display: flex;
+            flex-direction: row;
+            gap: var(--f-spacer-1);
+
+            &_item {
+                background: var(--fchips-background-color);
+                border: var(--fchips-border);
+                border-radius: var(--fchips-border-radius);
+
+                .fsvgicon {
+                    --fsvgicon-width: 20px;
+                    --fsvgicon-height: 20px;
+                }
+            }
+        }
+    }
+
+    &-xs {
+        .flistbox_list_item {
+            font-size: var(--fchips-xs-font-size);
+            min-height: var(--fchips-xs-min-height);
+            padding: var(--fchips-xs-padding);
+            border-radius: var(--fchips-xs-border-radius);
+
+            .fsvgicon {
+                --fsvgicon-width: 14px;
+                --fsvgicon-height: 14px;
+            }
+        }
+    }
+
+    &-sm {
+        .flistbox_list_item {
+            font-size: var(--fchips-sm-font-size);
+            min-height: var(--fchips-sm-min-height);
+            padding: var(--fchips-sm-padding);
+            border-radius: var(--fchips-sm-border-radius);
+
+            .fsvgicon {
+                --fsvgicon-width: 16px;
+                --fsvgicon-height: 16px;
+            }
+        }
+    }
+
+    &-lg {
+        .flistbox_list_item {
+            font-size: var(--fchips-lg-font-size);
+            min-height: var(--fchips-lg-min-height);
+            padding: var(--fchips-lg-padding);
+            border-radius: var(--fchips-lg-border-radius);
+        }
+    }
+}

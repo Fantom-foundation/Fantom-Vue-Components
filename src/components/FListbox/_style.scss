@@ -43,6 +43,11 @@
             &_removebutton {
                 opacity: 0.5;
 
+                .fsvgicon {
+                    --fsvgicon-width: 16px;
+                    --fsvgicon-height: 16px;
+                }
+
                 &:hover {
                     opacity: 1;
                 }
@@ -50,6 +55,8 @@
 
             &-removable {
                 display: flex;
+                align-items: center;
+                gap: var(--f-spacer-3);
                 justify-content: space-between;
             }
         }

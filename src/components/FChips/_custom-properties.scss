@@ -1,0 +1,34 @@
+.fchips {
+    --fchips-font-size: var(--f-font-size-5);
+    --fchips-xs-font-size: var(--f-font-size-2, 10px);
+    --fchips-sm-font-size: var(--f-font-size-3, 12px);
+    --fchips-lg-font-size: var(--f-font-size-5, 16px);
+
+    --fchips-min-height: calc(var(--f-doc-line-height, 24px) * 1.5);
+    --fchips-xs-min-height: calc(var(--f-doc-line-height, 24px) * 0.75);
+    --fchips-sm-min-height: var(--f-doc-line-height, 24px);
+    --fchips-lg-min-height: calc(var(--f-doc-line-height, 24px) * 2);
+
+    --fchips-padding: var(--f-spacer-2, 6px) var(--f-spacer-4, 18px);
+    --fchips-xs-padding: 0 var(--f-spacer-2, 6px);
+    --fchips-sm-padding: 0 var(--f-spacer-3, 12px);
+    --fchips-lg-padding: var(--f-spacer-3, 12px) var(--f-spacer-6, 30px);
+
+    --fchips-color-hs: 219, 100%;
+    --fchips-background-color: hsl(var(--fchips-color-hs), 96%);
+    --fchips-color: inherit;
+    --fchips-hover-color: inherit;
+    --fchips-hover-background-color: hsl(var(--fchips-color-hs), 87%);
+
+    --fchips-border-color: hsl(var(--fchips-color-hs), 55%);
+    --fchips-border: 1px solid var(--fchips-border-color);
+    --fchips-border-radius: 100vh;
+    --fchips-xs-border-radius: 100vh;
+    --fchips-sm-border-radius: 100vh;
+    --fchips-lg-border-radius: 100vh;
+
+    --flistbox-item-padding: var(--fchips-padding);
+    --flistbox-item-color: var(--fchips-color);
+    --flistbox-item-hover-color: var(--fchips-hover-color);
+    --flistbox-item-hover-background-color: var(--fchips-hover-background-color);
+}

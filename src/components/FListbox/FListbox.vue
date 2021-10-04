@@ -49,7 +49,7 @@
                                 aria-hidden="true"
                                 :title="_('flistbox.removeItem')"
                             >
-                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
+                                <f-svg-icon><icon-times /></f-svg-icon>
                             </span>
                         </slot>
                     </template>
@@ -83,7 +83,7 @@
                                 aria-hidden="true"
                                 :title="_('flistbox.removeItem')"
                             >
-                                <f-svg-icon size="20px"><icon-times /></f-svg-icon>
+                                <f-svg-icon><icon-times /></f-svg-icon>
                             </span>
                         </slot>
                     </template>
@@ -147,8 +147,8 @@ import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
 import { isArray } from '../../utils/array.js';
-import FSvgIcon from '@/components/FSvgIcon/FSvgIcon.vue';
-import IconTimes from '@/components/icons/IconTimes.vue';
+import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
+import IconTimes from '../icons/IconTimes.vue';
 
 /**
  * @param {FListboxItem} _item
@@ -588,7 +588,9 @@ export default {
                         idx = itemsLen - 1;
                     }
 
-                    this.focusItem({ item: this.items[idx] });
+                    this.$nextTick(() => {
+                        this.focusItem({ item: this.items[idx] });
+                    });
                 }
             }
         },
@@ -872,7 +874,11 @@ export default {
                 _useHomeAndEnd,
             });
 
-            if (!eItem && !focusedItem.id && (isKey('ArrowDown', _event) || isKey('ArrowUp', _event))) {
+            if (
+                !eItem &&
+                !focusedItem.id &&
+                (isKey('ArrowDown', _event) || isKey('ArrowRight', _event) || isKey('ArrowUp', _event))
+            ) {
                 this.focusFirstItem();
                 eItem = document.getElementById(focusedItem.id);
             }

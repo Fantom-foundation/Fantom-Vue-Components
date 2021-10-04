@@ -65,3 +65,13 @@ export function getVModelComponent(component, data = {}) {
         },
     };
 }
+
+/**
+ * @param {Object} wrapper
+ */
+export function destroyWrapper(wrapper) {
+    if (wrapper) {
+        wrapper.destroy();
+        wrapper = null;
+    }
+}
