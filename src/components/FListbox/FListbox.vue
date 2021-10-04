@@ -287,6 +287,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** Don't show "Not found" message */
+        hideNotFoundMessage: {
+            type: Boolean,
+            default: false,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -321,7 +326,7 @@ export default {
         },
 
         showNotFound() {
-            return !this.loading && this.items.length === 0;
+            return !this.hideNotFoundMessage && !this.loading && this.items.length === 0;
         },
     },
 
@@ -550,7 +555,7 @@ export default {
             }
 
             const { id } = item;
-            const idx = index > -1 ? index : this.items.findIndex(_item => _item.id == id);
+            let idx = index > -1 ? index : this.items.findIndex(_item => _item.id == id);
 
             if (idx > -1) {
                 if (this.isItemSelected(item)) {
@@ -576,7 +581,13 @@ export default {
 
                 this.$emit('item-remove', { item: cloneObject(item), index: idx });
 
-                if (idx < this.items.length) {
+                const itemsLen = this.items.length;
+
+                if (itemsLen > 0) {
+                    if (idx >= itemsLen) {
+                        idx = itemsLen - 1;
+                    }
+
                     this.focusItem({ item: this.items[idx] });
                 }
             }
