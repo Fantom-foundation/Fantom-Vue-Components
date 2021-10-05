@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.19.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.19.1...v0.19.2) (2021-10-05)
+
+
+### Bug Fixes
+
+* **f-chips:** watch `data` prop properly ([d73581a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d73581a512dad4dba5d3081fab55e91f529038d3))
+
 ### [0.19.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.19.0...v0.19.1) (2021-10-05)
 
 
