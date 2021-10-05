@@ -60,6 +60,12 @@ export default {
         },
     },
 
+    data() {
+        return {
+            dData: this.data,
+        };
+    },
+
     computed: {
         classes() {
             const { size } = this;
@@ -76,9 +82,8 @@ export default {
         onItemRemove(payload) {
             this.$emit('chip-delete', payload);
 
-            const data = cloneObject(this.data);
-            data.splice(payload.index, 1);
-            this.$emit('change', data);
+            this.dData.splice(payload.index, 1);
+            this.$emit('change', cloneObject(this.dData));
         },
     },
 };
