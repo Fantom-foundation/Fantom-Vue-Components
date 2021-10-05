@@ -78,6 +78,12 @@ export default {
         },
     },
 
+    watch: {
+        data(value) {
+            this.dData = value;
+        },
+    },
+
     methods: {
         onItemRemove(payload) {
             this.$emit('chip-delete', payload);
