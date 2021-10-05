@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.19.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.19.0...v0.19.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* **f-chips:** fix bad payload on 'change' event ([90dcce3](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/90dcce34bfa8fbf39cd4a3161c2ba348a0d8ccf0))
+
 ## [0.19.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.18.1...v0.19.0) (2021-10-04)
 
 
