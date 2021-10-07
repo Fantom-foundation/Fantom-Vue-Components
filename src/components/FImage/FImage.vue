@@ -5,7 +5,7 @@
                 <f-placeholder block :animation="placeholderAnimation"></f-placeholder>
             </slot>
         </div>
-        <img :src="src" :alt="alt" @load="onImgLoad" @error="onImgError" />
+        <img :src="src" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" />
     </div>
 </template>
 
