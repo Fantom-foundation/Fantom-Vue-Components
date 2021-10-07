@@ -8,7 +8,7 @@
             @entry="onTopLoaderEntry"
         >
             <slot name="loader">
-                <div class="finfinitescroll_loader">Top <f-dots-loader /></div>
+                <div class="finfinitescroll_loader"><f-dots-loader /></div>
             </slot>
         </f-intersection-observer>
 
@@ -22,7 +22,7 @@
             @entry="onBottomLoaderEntry"
         >
             <slot name="loader">
-                <div class="finfinitescroll_loader">Bottom <f-dots-loader /></div>
+                <div class="finfinitescroll_loader"><f-dots-loader /></div>
             </slot>
         </f-intersection-observer>
 
