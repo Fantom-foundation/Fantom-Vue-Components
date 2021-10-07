@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.19.2...v0.20.0) (2021-10-07)
+
+
+### Features
+
+* **f-infinite-scroll:** create component ([400b75c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/400b75cb21a6ca2bc8ea96c78baa9fb0e090d59f))
+
+
+### Bug Fixes
+
+* **f-image:** add `loading="lazy"` attribute ([82f51ed](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/82f51ed7006df05e62755c215f871efe2454f0de))
+
 ### [0.19.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.19.1...v0.19.2) (2021-10-05)
 
 
