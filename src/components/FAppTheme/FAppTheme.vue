@@ -150,6 +150,10 @@ export default {
     setTheme(theme) {
         appThemeState.theme = theme;
     },
+
+    getTheme() {
+        return appThemeState.theme;
+    },
 };
 </script>
 
