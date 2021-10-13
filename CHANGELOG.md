@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.20.2...v0.20.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* **f-dropdown-listbox:** correct a situation where no data is available ([a922461](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a922461781f1ce6819436f2ee9d751fc98e3f642))
+
 ### [0.20.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.20.1...v0.20.2) (2021-10-08)
 
 
