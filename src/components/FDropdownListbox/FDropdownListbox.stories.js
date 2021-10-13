@@ -35,6 +35,15 @@ export const Default = () => ({
     components: { FDropdownListbox },
     template: `
         <div>
+            <f-dropdown-listbox />
+        </div>
+    `,
+});
+
+export const Data = () => ({
+    components: { FDropdownListbox },
+    template: `
+        <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             <f-dropdown-listbox :data="data" @component-change="onListboxItemSelected" />
             <br />

@@ -308,7 +308,9 @@ export default {
                 $el.style.width = '';
             }
 
-            this.setSelected(data[maxIdx].value);
+            if (data.length > 0) {
+                this.setSelected(data[maxIdx].value);
+            }
 
             if (!_dataChange) {
                 this._setElWidth();
