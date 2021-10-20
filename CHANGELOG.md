@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.21.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.20.3...v0.21.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* **f-window:** add `closingDisabled` option ([127eaa2](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/127eaa2c9750abacb03a0b1049a12cebbefd04f3))
+
 ### [0.20.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.20.2...v0.20.3) (2021-10-13)
 
 
