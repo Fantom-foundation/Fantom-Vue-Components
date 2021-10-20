@@ -62,7 +62,7 @@
                     ref="overlay"
                     :z-index="dZIndex - 1"
                     class="fwindow_overlay"
-                    :hide-on-click="hideOnEscapeKey"
+                    :hide-on-click="hideOnEscapeKey && !closingDisabled"
                     @overlay-hide="onOverlayHide"
                     @before-overlay-hide="onBeforeOverlayHide"
                 />
@@ -268,6 +268,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /**  */
+        closingDisabled: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -297,6 +302,7 @@ export default {
                 'fwindow-withfooter': this.withFooter,
                 'fwindow-witharrow': this.withArrow,
                 'fwindow-notitle': this.noTitle,
+                'fwindow-closingdisabled': this.closingDisabled,
                 modal: this.modal,
                 'fwindow-popover': this.popover,
             };
@@ -474,7 +480,7 @@ export default {
         },
 
         hide(_animationOut, _byOverlay) {
-            if (this.isVisible || this._showAnimInProgress) {
+            if ((this.isVisible || this._showAnimInProgress) && !this.closingDisabled) {
                 if (
                     this.checkComponentsChange &&
                     !this.dWithOverlay &&

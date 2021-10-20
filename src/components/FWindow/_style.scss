@@ -175,6 +175,12 @@
         }
     }
 
+    &-closingdisabled {
+        .fwindow_header_controls {
+            display: none;
+        }
+    }
+
     &-width-1 {
         max-width: 12em;
     }
