@@ -3,6 +3,7 @@
         <f-intersection-observer
             v-if="!disabled"
             v-show="showTopLoader"
+            :tag="intersectionObserverTag"
             :root="root"
             :root-margin="rootMargin"
             :ignore-first-entry="ignoreFirstEntry"
@@ -18,6 +19,7 @@
         <f-intersection-observer
             v-if="!disabled"
             v-show="showBottomLoader"
+            :tag="intersectionObserverTag"
             :root="root"
             :root-margin="rootMargin"
             :ignore-first-entry="ignoreFirstEntry"
@@ -54,6 +56,11 @@ export default {
     props: {
         /** Tag name of the root element */
         tag: {
+            type: String,
+            default: 'div',
+        },
+        /** Tag name of the FIntersectionObserver's root element */
+        intersectionObserverTag: {
             type: String,
             default: 'div',
         },
