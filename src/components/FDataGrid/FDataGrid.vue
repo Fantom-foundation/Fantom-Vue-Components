@@ -3,7 +3,7 @@
         <div v-if="!noHeader" class="fdatagrid_header">
             <slot name="header"></slot>
             <f-pagination
-                v-if="usePagination && totalItems > 0"
+                v-if="usePagination && !infiniteScroll && totalItems > 0"
                 v-show="totalItems > dItems.length && totalItems > perPage"
                 ref="pagination"
                 :type="paginationType"
@@ -49,7 +49,20 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody v-if="!!dItems.length" ref="tbody">
+                <f-infinite-scroll
+                    v-if="!!dItems.length || infiniteScroll"
+                    ref="tbody"
+                    tag="tbody"
+                    intersection-observer-tag="tr"
+                    :loading="cLoading"
+                    :disabled="!infiniteScroll"
+                    :total-items="totalItems"
+                    :per-page="perPage"
+                    :curr-page="currPage"
+                    @page-change="onPageChange"
+                >
+                    <template #loader><td :colspan="visibleColumnsNum">loading...</td></template>
+
                     <tr
                         v-for="(item, index) in dItems"
                         :key="item._id"
@@ -95,7 +108,8 @@
                             </div>
                         </td>
                     </tr>
-                </tbody>
+                </f-infinite-scroll>
+
                 <tbody v-else-if="!cLoading">
                     <tr>
                         <td :colspan="visibleColumnsNum">
@@ -105,7 +119,7 @@
                         </td>
                     </tr>
                 </tbody>
-                <tfoot v-if="footerItems.length > 0">
+                <tfoot v-if="!infiniteScroll && footerItems.length > 0">
                     <tr v-for="(item, index) in footerItems" :key="`${dTableId}_ft_${index}`" :style="item.css">
                         <td
                             v-for="(col, index) in cColumns"
@@ -131,7 +145,7 @@
             </table>
 
             <slot name="loader" :loading="cLoading">
-                <div v-if="cLoading" class="fdatagrid_loader_wrap">
+                <div v-if="!infiniteScroll && cLoading" class="fdatagrid_loader_wrap">
                     <div class="fdatagrid_loader">
                         Loading...
                     </div>
@@ -171,6 +185,7 @@ import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTrash from '../icons/IconTrash.vue';
 import { GridKeyboardNavigation } from '../../utils/GridKeyboardNavigation.js';
 import { prevElemsCount } from '../../utils/dom2.js';
+import FInfiniteScroll from '@/components/FInfiniteScroll/FInfiniteScroll.vue';
 
 const HELPER_PROPS_RE = /^_/;
 
@@ -180,7 +195,7 @@ const HELPER_PROPS_RE = /^_/;
 export default {
     name: 'FDataGrid',
 
-    components: { IconTrash, FSvgIcon, FButton, FHeadStyle, FPagination },
+    components: { FInfiniteScroll, IconTrash, FSvgIcon, FButton, FHeadStyle, FPagination },
 
     model: {
         prop: 'items',
@@ -343,6 +358,11 @@ export default {
             type: Boolean,
             default: true,
         },
+        /** Use infinite scrolling  */
+        infiniteScroll: {
+            type: Boolean,
+            default: false,
+        },
         /** Label for table */
         label: {
             type: String,
@@ -426,6 +446,7 @@ export default {
                 'fdatagrid-stickyheader': this.stickyHead,
                 'fdatagrid-heightset': this.height !== 'auto' || this.maxHeight !== 'auto',
                 'fdatagrid-loading': this.dLoading,
+                'fdatagrid-infinitescrollon': this.infiniteScroll,
                 'fdatagrid-rowedit': this.editMode === 'row-edit',
             };
         },
@@ -618,7 +639,17 @@ export default {
                     this.dItems = itemsIndices && items ? items.slice(itemsIndices.from, itemsIndices.to + 1) : [];
                 });
             } else if (items) {
-                this.dItems = items;
+                const pState = this.getPaginationState();
+
+                if (this.infiniteScroll && 'currPage' in pState) {
+                    if (pState.currPage < pState.prevPage) {
+                        this.dItems = items.concat(this.dItems);
+                    } else {
+                        this.dItems = this.dItems.concat(items);
+                    }
+                } else {
+                    this.dItems = items;
+                }
             }
 
             if (this.checkChange) {
@@ -1003,6 +1034,9 @@ export default {
         },
 
         getPaginationState() {
+            /*if (this.infiniteScroll) {
+                return this.$refs.tbody.getPaginationState();
+            }*/
             const { pagination } = this.$refs;
 
             return pagination ? pagination.state : this.paginationState;
@@ -1509,7 +1543,7 @@ export default {
                 this.setItems();
             }
 
-            if (!initialChange) {
+            if (!initialChange || this.infiniteScroll) {
                 this.emitChangeEvent('pagination');
 
                 /**

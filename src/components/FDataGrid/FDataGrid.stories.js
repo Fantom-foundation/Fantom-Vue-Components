@@ -1588,6 +1588,106 @@ export const RemoteDataPaginatingSortingFiltering = () => ({
     },
 });
 
+export const InfiniteScroll = () => ({
+    components: { FDataGrid, FFilters, FFormInput },
+    template: `
+        <div>
+            <f-data-grid
+                infinite-scroll
+                strategy="remote"
+                @change="onChange"
+                use-filters
+                :columns="columns"
+                :items="items"
+                :total-items="totalItems"
+                :per-page="perPage"
+                sticky-head
+            >
+                <template #header>
+                    <f-filters>
+                        <f-form-input type="f-search-field" name="search" :throttle-input-interval="200" aria-label="search" />
+                    </f-filters>
+                </template>
+            </f-data-grid>
+        </div>
+    `,
+    data() {
+        return {
+            items: [],
+            perPage: 25,
+            totalItems: 0,
+            searchColumns: ['first_name', 'last_name', 'email', 'ip_address'],
+        };
+    },
+    computed: {
+        columns() {
+            const cols = clone(columns);
+
+            cols[1].sortable = true;
+            cols[2].sortable = true;
+            cols[3].sortable = true;
+
+            return cols;
+        },
+    },
+    created() {
+        this.items = this.fetchItems();
+    },
+    methods: {
+        async fetchItems(event) {
+            const data = await this.fetchPagedRows(event);
+
+            this.totalItems = data.totalItems;
+
+            return data.rows;
+        },
+
+        onChange(event) {
+            this.items = this.fetchItems(event);
+        },
+
+        /**
+         * Faking a request to a server...
+         */
+        fetchPagedRows({
+            currPage = 1,
+            perPage = this.perPage,
+            sortBy = '',
+            sortDir = 'desc',
+            filters,
+            timeout = 1000,
+        } = {}) {
+            return new Promise(resolve =>
+                setTimeout(() => {
+                    let data = clone(rows);
+
+                    if (filters) {
+                        let searchText = (filters.values.search || '').trim();
+                        const { searchColumns } = this;
+
+                        if (searchText) {
+                            searchText = searchText.toLowerCase();
+
+                            data = data.filter(
+                                item => !!searchColumns.find(col => item[col].toLowerCase().indexOf(searchText) > -1)
+                            );
+                        }
+                    }
+
+                    if (sortBy) {
+                        data.sort(compareLocalizedStringProperty(sortBy, sortDir));
+                    }
+
+                    resolve({
+                        totalItems: data.length,
+                        rows: data.slice((currPage - 1) * perPage, currPage * perPage),
+                    });
+                }, timeout)
+            );
+        },
+    },
+});
+
 export const EditModeRow = () => ({
     components: { FDataGrid, FInput, FComboBox, FOption },
     template: `

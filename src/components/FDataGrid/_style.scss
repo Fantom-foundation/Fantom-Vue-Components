@@ -269,7 +269,7 @@
         }
     }
 
-    &-loading {
+    &-loading:not(.fdatagrid-infinitescrollon) {
         //overflow: hidden;
 
         table,
