@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.21.0...v0.22.0) (2021-10-21)
+
+
+### Features
+
+* **f-data-grid:** add support for infinite scrolling ([e0731f6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e0731f619fff3e60ff37b94b613288baef503762))
+* **f-infinite-scroll:** add `disabled` option ([bdc55f8](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/bdc55f8709206cb754d8f532d8fbb70a86f7a09b))
+* **f-infinite-scroll:** add `intersectionObserverTag` option ([c94e349](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c94e349ced2afa8b212d736290a10153aaa0a3cb))
+* **f-infinite-scroll:** add `tag` option ([0bd6334](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0bd6334bbdbc5700b5ff1f773bd6df63a08c7865))
+* **f-intersection-observer:** add `tag` option ([4e5a1d6](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4e5a1d6502a6307dc9f515ea1bef4cf505f50b31))
+
+
+### Bug Fixes
+
+* **f-infinite-scroll:** don't emit `'page-change'` event if component is disabled ([d8f0951](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d8f095161db5b3640ce6f97a1eae53491ef9588c))
+
 ## [0.21.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.20.3...v0.21.0) (2021-10-20)
 
 
