@@ -185,7 +185,7 @@ import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTrash from '../icons/IconTrash.vue';
 import { GridKeyboardNavigation } from '../../utils/GridKeyboardNavigation.js';
 import { prevElemsCount } from '../../utils/dom2.js';
-import FInfiniteScroll from '@/components/FInfiniteScroll/FInfiniteScroll.vue';
+import FInfiniteScroll from '../FInfiniteScroll/FInfiniteScroll.vue';
 
 const HELPER_PROPS_RE = /^_/;
 
