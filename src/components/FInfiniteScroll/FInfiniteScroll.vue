@@ -1,5 +1,5 @@
 <template>
-    <div class="finfinitescroll">
+    <component :is="tag" class="finfinitescroll">
         <f-intersection-observer
             v-if="!disabled"
             v-show="showTopLoader"
@@ -37,7 +37,7 @@
             style="display: none"
             hidden
         />
-    </div>
+    </component>
 </template>
 
 <script>
@@ -52,6 +52,10 @@ export default {
     components: { FPagination, FDotsLoader, FIntersectionObserver },
 
     props: {
+        tag: {
+            type: String,
+            default: 'div',
+        },
         loading: {
             type: Boolean,
             default: false,

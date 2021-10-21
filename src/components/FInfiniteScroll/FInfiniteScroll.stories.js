@@ -63,6 +63,24 @@ export const Default = () => ({
     },
 });
 
+export const Tag = () => ({
+    components: { FInfiniteScroll },
+    template: `
+        <div style="max-width: 400px; margin: 0 auto">
+            <p style="position: fixed; left: 0; top: 0;"><b v-show="loading">Loading...</b></p>
+            <f-infinite-scroll tag="ul" :total-items="20" :per-page="5" :curr-page="1" :loading="loading">
+                <li v-for="item in data" :key="item.id">{{ item.text }}</li>
+            </f-infinite-scroll>
+        </div>
+    `,
+    data() {
+        return {
+            data: getData('i1d', 20),
+            loading: false,
+        };
+    },
+});
+
 export const Disabled = () => ({
     components: { FInfiniteScroll },
     template: `
