@@ -226,6 +226,10 @@ export default {
          * @param {FPaginationState} state
          */
         onPageChange(state) {
+            if (this.disabled) {
+                return;
+            }
+
             const pagination = clone(state);
 
             if (pagination.totalItems <= 0) {
