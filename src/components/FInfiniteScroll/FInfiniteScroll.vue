@@ -52,6 +52,7 @@ export default {
     components: { FPagination, FDotsLoader, FIntersectionObserver },
 
     props: {
+        /** Tag name of the root element */
         tag: {
             type: String,
             default: 'div',

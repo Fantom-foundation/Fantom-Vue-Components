@@ -1,7 +1,7 @@
 <template>
-    <div class="fintersectionobserver">
+    <component :is="tag" class="fintersectionobserver">
         <slot></slot>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -12,6 +12,11 @@ export default {
     name: 'FIntersectionObserver',
 
     props: {
+        /** Tag name of the root element */
+        tag: {
+            type: String,
+            default: 'div',
+        },
         /** Selector for root element. Default is document */
         root: {
             type: String,
