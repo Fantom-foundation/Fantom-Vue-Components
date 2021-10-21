@@ -1,6 +1,7 @@
 <template>
     <div class="finfinitescroll">
         <f-intersection-observer
+            v-if="!disabled"
             v-show="showTopLoader"
             :root="root"
             :root-margin="rootMargin"
@@ -15,6 +16,7 @@
         <slot></slot>
 
         <f-intersection-observer
+            v-if="!disabled"
             v-show="showBottomLoader"
             :root="root"
             :root-margin="rootMargin"
@@ -55,6 +57,10 @@ export default {
             default: false,
         },
         ignoreFirstPageChange: {
+            type: Boolean,
+            default: false,
+        },
+        disabled: {
             type: Boolean,
             default: false,
         },
@@ -101,6 +107,10 @@ export default {
 
     watch: {
         loading(value) {
+            if (this.disabled) {
+                return;
+            }
+
             if (!value) {
                 if (this.topIntersection) {
                     defer(() => {
@@ -116,26 +126,42 @@ export default {
                     });
                 });
             } else {
-                this.prevScrollHeight = this.eRoot.scrollHeight;
+                this.setScrollTop();
             }
         },
 
         totalItems(value) {
             this.dTotalItems = value;
         },
+
+        disabled(value) {
+            if (!value) {
+                this.init();
+            }
+        },
     },
 
     mounted() {
-        this.eRoot = this.root ? document.querySelector(this.root) : document.documentElement;
-
-        if (!this.eRoot) {
-            throw new Error("Can't find root element");
+        if (!this.disabled) {
+            this.init();
         }
+    },
 
-        this.setScrollTop();
+    beforeDestroy() {
+        this.eRoot = null;
     },
 
     methods: {
+        init() {
+            this.eRoot = this.root ? document.querySelector(this.root) : document.documentElement;
+
+            if (!this.eRoot) {
+                throw new Error("Can't find root element");
+            }
+
+            this.setScrollTop();
+        },
+
         /**
          * @param {number|'next'|'prev'} page
          */

@@ -63,6 +63,24 @@ export const Default = () => ({
     },
 });
 
+export const Disabled = () => ({
+    components: { FInfiniteScroll },
+    template: `
+        <div style="max-width: 400px; margin: 0 auto">
+            <p style="position: fixed; left: 0; top: 0;"><b v-show="loading">Loading...</b></p>
+            <f-infinite-scroll disabled :total-items="20" :per-page="5" :curr-page="1" :loading="loading">
+                <p v-for="item in data" :key="item.id">{{ item.text }}</p>
+            </f-infinite-scroll>
+        </div>
+    `,
+    data() {
+        return {
+            data: getData('i1d', 20),
+            loading: false,
+        };
+    },
+});
+
 export const MiddlePage = () => ({
     components: { FInfiniteScroll },
     template: `
