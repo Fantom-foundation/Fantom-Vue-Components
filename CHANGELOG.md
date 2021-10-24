@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.22.0...v0.23.0) (2021-10-24)
+
+
+### Features
+
+* **f-data-grid:** add `infiniteScrollRoot` and `infiniteScrollRootMargin` options ([b72ce6f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b72ce6fd441b37664f7d0579b4894f0c51da206a))
+* **f-data-grid:** use `FDotsLoader` as a default inf. scroll loader ([e2c5225](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e2c522538652c8040f7015e462b0b7e36392f75e))
+
 ## [0.22.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.21.0...v0.22.0) (2021-10-21)
 
 
