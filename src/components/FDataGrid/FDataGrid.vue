@@ -59,6 +59,8 @@
                     :total-items="totalItems"
                     :per-page="perPage"
                     :curr-page="currPage"
+                    :root="infiniteScrollRoot"
+                    :root-margin="infiniteScrollRootMargin"
                     @page-change="onPageChange"
                 >
                     <template #loader>
@@ -369,6 +371,16 @@ export default {
         infiniteScroll: {
             type: Boolean,
             default: false,
+        },
+        /** Selector for root element. Default is document */
+        infiniteScrollRoot: {
+            type: String,
+            default: '',
+        },
+        /** Margin around the root */
+        infiniteScrollRootMargin: {
+            type: String,
+            default: '',
         },
         /** Label for table */
         label: {

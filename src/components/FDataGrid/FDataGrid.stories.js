@@ -1601,6 +1601,7 @@ export const InfiniteScroll = () => ({
                 :items="items"
                 :total-items="totalItems"
                 :per-page="perPage"
+                infinite-scroll-root-margin="200px 0px"
                 sticky-head
             >
                 <template #header>
