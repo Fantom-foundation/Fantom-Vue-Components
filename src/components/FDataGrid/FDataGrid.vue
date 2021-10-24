@@ -61,7 +61,13 @@
                     :curr-page="currPage"
                     @page-change="onPageChange"
                 >
-                    <template #loader><td :colspan="visibleColumnsNum">loading...</td></template>
+                    <template #loader>
+                        <td :colspan="visibleColumnsNum">
+                            <slot name="infs-loader">
+                                <div class="tea-center"><f-dots-loader /></div>
+                            </slot>
+                        </td>
+                    </template>
 
                     <tr
                         v-for="(item, index) in dItems"
@@ -186,6 +192,7 @@ import IconTrash from '../icons/IconTrash.vue';
 import { GridKeyboardNavigation } from '../../utils/GridKeyboardNavigation.js';
 import { prevElemsCount } from '../../utils/dom2.js';
 import FInfiniteScroll from '../FInfiniteScroll/FInfiniteScroll.vue';
+import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 
 const HELPER_PROPS_RE = /^_/;
 
@@ -195,7 +202,7 @@ const HELPER_PROPS_RE = /^_/;
 export default {
     name: 'FDataGrid',
 
-    components: { FInfiniteScroll, IconTrash, FSvgIcon, FButton, FHeadStyle, FPagination },
+    components: { FDotsLoader, FInfiniteScroll, IconTrash, FSvgIcon, FButton, FHeadStyle, FPagination },
 
     model: {
         prop: 'items',
