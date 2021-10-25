@@ -209,6 +209,10 @@ export default {
             return {};
         },
 
+        getPagination() {
+            return this.$refs.pagination;
+        },
+
         /**
          * @param {number} scrollTop
          */
