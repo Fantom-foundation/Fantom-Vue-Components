@@ -986,7 +986,7 @@ export default {
          */
         async sortByColumn(_column, _sortDir) {
             const { strategy } = this;
-            const { pagination } = this.$refs;
+            const pagination = this.getPaginationRef();
 
             if (_column && _column.sortable) {
                 const sortByCol = this.sortByCol;
@@ -1056,7 +1056,7 @@ export default {
             /*if (this.infiniteScroll) {
                 return this.$refs.tbody.getPaginationState();
             }*/
-            const { pagination } = this.$refs;
+            const pagination = this.getPaginationRef();
 
             return pagination ? pagination.state : this.paginationState;
         },
@@ -1264,7 +1264,7 @@ export default {
          * @return {number}
          */
         getAriaRowIndex(rowIndex) {
-            const { pagination } = this.$refs;
+            const pagination = this.getPaginationRef();
 
             if (pagination) {
                 return pagination.itemsIndices.from + rowIndex + 1;
@@ -1334,8 +1334,25 @@ export default {
             return false;
         },
 
+        getPaginationRef() {
+            return this.infiniteScroll ? this.$refs.tbody.getPagination() : this.$refs.pagination;
+        },
+
+        /**
+         * @param {number} pageNum
+         */
+        goToPageNum(pageNum) {
+            const pagination = this.infiniteScroll ? this.$refs.tbody : this.$refs.pagination;
+
+            if (pagination) {
+                this.paginationState = {};
+
+                pagination.goToPage(pageNum);
+            }
+        },
+
         goToPage({ direction = 'next', column = 'keep', navInfo, event }) {
-            const { pagination } = this.$refs;
+            const pagination = this.getPaginationRef();
             const eTbody = this.$refs.tbody;
             const keyboardNav = this._keyboardNav;
             let rowIdx = direction === 'next' ? 'first' : 'last';
@@ -1575,7 +1592,7 @@ export default {
         },
 
         onFiltersChange() {
-            const { pagination } = this.$refs;
+            const pagination = this.getPaginationRef();
 
             if (pagination) {
                 pagination.goToPage(1);
