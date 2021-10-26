@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.24.0...v0.25.0) (2021-10-26)
+
+
+### Features
+
+* **f-details:** create `strategy` option ([7bfd5c1](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7bfd5c13e98de155a62474769079eede316be534))
+
 ## [0.24.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.23.0...v0.24.0) (2021-10-25)
 
 
