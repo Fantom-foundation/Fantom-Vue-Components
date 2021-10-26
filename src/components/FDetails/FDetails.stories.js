@@ -57,6 +57,30 @@ export const Transition = () => ({
     `,
 });
 
+export const Strategy = () => ({
+    components: { FDetails },
+    //language=HTML
+    template: `
+        <div style="max-width: 400px">
+            <h3><code>render</code></h3>
+            <f-details strategy="render" animate label="Label">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci amet animi, at consequatur culpa,
+                ea eius ipsam magni molestias nisi officia, optio porro quam qui ratione reiciendis soluta ut!
+            </f-details>
+            <h3><code>create</code></h3>
+            <f-details strategy="create" animate label="Label">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci amet animi, at consequatur culpa,
+                ea eius ipsam magni molestias nisi officia, optio porro quam qui ratione reiciendis soluta ut!
+            </f-details>
+            <h3><code>create-destroy</code></h3>
+            <f-details strategy="create-destroy" animate label="Label">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci amet animi, at consequatur culpa,
+                ea eius ipsam magni molestias nisi officia, optio porro quam qui ratione reiciendis soluta ut!
+            </f-details>
+        </div>
+    `,
+});
+
 export const Slots = () => ({
     components: { FDetails },
     //language=HTML

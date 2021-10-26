@@ -18,7 +18,7 @@
         </summary>
 
         <f-height-transition @transition-end="onTransitionEnd" :disabled="!animate">
-            <div v-show="opened" class="fdetails_content_wrap">
+            <div v-if="create" v-show="render" class="fdetails_content_wrap" data-test-id="content_wrap">
                 <div class="fdetails_content">
                     <slot></slot>
                 </div>
@@ -56,12 +56,26 @@ export default {
             type: Boolean,
             default: false,
         },
+        /**
+         * 'render' - render content inside component, event if component is in 'closed' state (v-show)
+         * 'create' - if initial state is 'closed', render content when component is opened for the first time (v-if, v-show)
+         * 'create-destroy' - render content when component is opened, destroy content when component is closed (v-if)
+         */
+        strategy: {
+            type: String,
+            default: 'render',
+            validator: function(_value) {
+                return ['render', 'create', 'create-destroy'].indexOf(_value) !== -1;
+            },
+        },
     },
 
     data() {
         return {
             opened: this.open,
             dOpened: this.open,
+            create: this.open || this.strategy === 'render',
+            render: this.open,
         };
     },
 
@@ -85,20 +99,29 @@ export default {
         onSummaryClick() {
             this.opened = !this.opened;
 
-            if (this.opened) {
-                this.dOpened = true;
-                /**
-                 * Triggers when component changes open/close state
-                 *
-                 * @property {boolean} opened
-                 */
-                this.$emit('toggle', true);
-            }
+            this.create = true;
+
+            this.$nextTick(() => {
+                this.render = this.opened;
+
+                if (this.opened) {
+                    this.dOpened = true;
+                    /**
+                     * Triggers when component changes open/close state
+                     *
+                     * @property {boolean} opened
+                     */
+                    this.$emit('toggle', true);
+                }
+            });
         },
 
         onTransitionEnd(type) {
             if (type === 'leave') {
                 this.dOpened = false;
+                if (this.strategy === 'create-destroy') {
+                    this.create = false;
+                }
                 /**
                  * Triggers when component changes open/close state
                  *
