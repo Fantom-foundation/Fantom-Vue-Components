@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.25.0...v0.26.0) (2021-10-26)
+
+
+### Features
+
+* **f-dark-theme-switch:** add v-model ([6039651](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6039651e0cefe676ac6594ce70f5cc881a611bbc))
+
 ## [0.25.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.24.0...v0.25.0) (2021-10-26)
 
 
