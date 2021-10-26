@@ -1,4 +1,5 @@
 import FDarkThemeSwitch from './FDarkThemeSwitch.vue';
+import FButton from "@/components/FButton/FButton.vue";
 
 export default {
     title: 'FDarkThemeSwitch',
@@ -45,6 +46,23 @@ export const Colors = () => ({
                 '--fdarkthemeswitch-color': '#800E99',
                 '--fdarkthemeswitch-color-hsl': '289, 83%, 33%',
             },
+        };
+    },
+});
+
+export const Model = () => ({
+    components: { FDarkThemeSwitch, FButton },
+    template: `
+        <div>
+            <f-dark-theme-switch v-model="tglValue" name="tgl_m" aria-label="label" />
+            <f-button secondary size="small" @click.native="tglValue = !tglValue">Toggle</f-button>
+            <br />
+            Value: {{ tglValue }}
+        </div>
+    `,
+    data() {
+        return {
+            tglValue: true,
         };
     },
 });

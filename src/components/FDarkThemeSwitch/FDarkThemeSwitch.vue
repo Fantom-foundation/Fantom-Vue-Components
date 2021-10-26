@@ -16,6 +16,11 @@ export default {
     components: { FToggleButton },
 
     inheritAttrs: false,
+
+    model: {
+        prop: 'modelValue',
+        event: 'change',
+    },
 };
 </script>
 
