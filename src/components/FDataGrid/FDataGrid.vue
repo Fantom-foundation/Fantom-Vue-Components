@@ -1338,6 +1338,10 @@ export default {
             return this.infiniteScroll ? this.$refs.tbody.getPagination() : this.$refs.pagination;
         },
 
+        clearItems() {
+            this.dItems = [];
+        },
+
         /**
          * @param {number} pageNum
          */
@@ -1346,8 +1350,11 @@ export default {
 
             if (pagination) {
                 this.paginationState = {};
+                this.clearItems();
 
-                pagination.goToPage(pageNum);
+                this.$nextTick(() => {
+                    pagination.goToPage(pageNum);
+                });
             }
         },
 
