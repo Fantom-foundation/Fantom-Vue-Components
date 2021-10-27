@@ -28,6 +28,7 @@
         background-color: var(--fdatagrid-cell-background-color);
         //line-height: 1.2;
         border: var(--fdatagrid-cell-border);
+        box-sizing: border-box;
     }
 
     th {
@@ -181,7 +182,8 @@
                 display: none;
             }
 
-            tbody, tfoot {
+            tbody,
+            tfoot {
                 display: block;
             }
 
