@@ -1335,7 +1335,9 @@ export default {
         },
 
         getPaginationRef() {
-            return this.infiniteScroll ? this.$refs.tbody.getPagination() : this.$refs.pagination;
+            const { $refs } = this;
+
+            return this.infiniteScroll && $refs.tbody ? $refs.tbody.getPagination() : $refs.pagination;
         },
 
         clearItems() {
