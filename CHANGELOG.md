@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.27.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.27.0...v0.27.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **f-data-grid:** fix box-sizing of cells ([b0b9803](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b0b9803ed9b153d9eb5075853be85e7d7b50233c))
+* **f-data-grid:** fix situation when $refs.tbody is not available ([6180393](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/61803931c874c62dca00c3b3fa1c1ab5389ca948))
+
 ## [0.27.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.26.0...v0.27.0) (2021-10-27)
 
 
