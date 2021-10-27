@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.26.0...v0.27.0) (2021-10-27)
+
+
+### Features
+
+* **f-data-grid:** adjust `goToPageNum` method ([76de702](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/76de702128723dbbfba57e27d7e30f17f5eaac72))
+
 ## [0.26.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.25.0...v0.26.0) (2021-10-26)
 
 
