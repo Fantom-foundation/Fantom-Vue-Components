@@ -31,6 +31,9 @@ export const Default = () => ({
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="datetime" label="datetime" name="datetime" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
                             { label: '---', value: '' },
                             { label: 'Option 1', value: '10' },
@@ -142,6 +145,9 @@ export const Values = () => ({
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
                     </div>
                     <div class="mab-5">
+                        <f-form-input type="datetime" label="datetime" name="datetime" />
+                    </div>
+                    <div class="mab-5">
                         <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
                             { label: '---', value: '' },
                             { label: 'Option 1', value: '10' },
@@ -226,6 +232,7 @@ export const Values = () => ({
                 text: 'text',
                 textarea: 'text',
                 passwordfield: 'pwdpwd',
+                datetime: '2021-10-31T14:10',
                 slider: '70',
                 select: '20',
                 combobox: '20',
@@ -258,7 +265,7 @@ export const Model = () => ({
                         <f-form-input type="email" label="email" name="email" />
                         <f-form-input type="number" label="number" name="number" />
                         <f-form-input type="date" label="date" name="date" :in-formatter="inDateFormatter" :out-formatter="outDateFormatter" />
-                        <f-form-input type="datetime-local" label="datetime" name="datetime" :in-formatter="inDatetimeFormatter" :out-formatter="outDatetimeFormatter" />
+                        <f-form-input type="datetime-local" label="datetime-local" name="datetime" :in-formatter="inDatetimeFormatter" :out-formatter="outDatetimeFormatter" />
                         <f-form-input type="time" label="time" name="time" />
                     </div>
                     <div class="mab-5">
@@ -266,6 +273,9 @@ export const Model = () => ({
                     </div>
                     <div class="mab-5">
                         <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input type="datetime" label="datetime" name="datetime2" :in-formatter="inDatetimeFormatter2" :out-formatter="outDatetimeFormatter2"  />
                     </div>
                     <div class="mab-5">
                         <f-form-input type="combobox" select-mode label="combobox" name="combobox" :data="[
@@ -362,8 +372,10 @@ On submit:
                 radiogroup: '30',
                 listbox: '10',
                 date: '2002-09-02T15:00:00Z',
-                datetime: '2002-09-02T15:00:00Z',
                 // date: '2002-10-02',
+                datetime: '2002-09-02T15:00:00Z',
+                // datetime2: '2021-10-31T14:10',
+                datetime2: 1635689093000,
             },
             data: {},
         };
@@ -395,6 +407,37 @@ On submit:
             const date = new Date(_value);
 
             return !isNaN(date) ? `${_value}:00Z` : _value;
+        },
+
+        /**
+         * From timestamp to YYYY-MM-DDTHH:ii
+         *
+         * @param {number} _value Timestamp
+         * @return {string|*}
+         */
+        inDatetimeFormatter2(_value) {
+            const date = new Date(_value);
+
+            if (!isNaN(date)) {
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+
+                return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${
+                    hours < 10 ? `0${hours}` : hours
+                }:${minutes < 10 ? `0${minutes}` : minutes}`;
+            }
+
+            return _value;
+        },
+
+        /**
+         * @param {string} _value Date in format YYYY-MM-DDTHH:ii
+         * @return {number|*} Timestamp
+         */
+        outDatetimeFormatter2(_value) {
+            const date = new Date(_value);
+
+            return !isNaN(date) ? date.getTime() : _value;
         },
     },
 });
@@ -439,6 +482,15 @@ export const Validation = () => ({
                             validate-on-change
                             label="passwordfield"
                             name="passwordfield"
+                        />
+                    </div>
+                    <div class="mab-5">
+                        <f-form-input
+                            :validator="_value => !_value ? 'Datetime is required' : ''"
+                            validate-on-input
+                            type="datetime"
+                            label="datetime"
+                            name="datetime"
                         />
                     </div>
                     <div class="mab-5">

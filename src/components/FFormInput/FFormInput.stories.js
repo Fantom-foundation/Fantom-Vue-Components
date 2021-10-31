@@ -26,6 +26,9 @@ export const Default = () => ({
                 <f-form-input type="passwordfield" label="passwordfield" name="passwordfield" />
             </div>
             <div class="mab-5">
+                <f-form-input type="datetime" label="datetime" name="datetime" />
+            </div>
+            <div class="mab-5">
                 <f-form-input type="slider" label="slider" name="slider" use-lower-fill-bar step="10" />
             </div>
             <div class="mab-5">

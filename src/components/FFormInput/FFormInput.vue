@@ -68,6 +68,7 @@ import FPasswordField from '../FPasswordField/FPasswordField.vue';
 import FSlider from '../FSlider/FSlider.vue';
 import FToggleButton from '../FToggleButton/FToggleButton.vue';
 import FComboBox from '../FComboBox/FComboBox.vue';
+import FDatetimeField from '../FDatetimeField/FDatetimeField.vue';
 
 const fInputTypes = ['text', 'textarea', 'number', 'email', 'date', 'datetime-local', 'time', 'search'];
 const types = [
@@ -83,6 +84,7 @@ const types = [
     'slider',
     'toggle',
     'combobox',
+    'datetime',
 ];
 
 /**
@@ -102,6 +104,7 @@ export default {
         FPasswordField,
         FToggleButton,
         FComboBox,
+        FDatetimeField,
     },
 
     model: {
@@ -254,6 +257,8 @@ export default {
                     return 'f-option-group';
                 case 'passwordfield':
                     return 'f-password-field';
+                case 'datetime':
+                    return 'f-datetime-field';
                 case 'slider':
                     return 'f-slider';
                 case 'toggle':
