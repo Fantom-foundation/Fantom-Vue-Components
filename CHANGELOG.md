@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.27.1...v0.28.0) (2021-10-31)
+
+
+### Features
+
+* **f-datetime-field:** create component ([ab6570a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ab6570ad0ee7e4fe03e3cef66ea834e3aa39fb43))
+
 ### [0.27.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.27.0...v0.27.1) (2021-10-27)
 
 
