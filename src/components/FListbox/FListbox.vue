@@ -713,7 +713,7 @@ export default {
                 : items.filter(_item => !!_item.selected);
 
             if (!this.multiselect) {
-                if (!selectedItem && value) {
+                if (!selectedItem && value !== undefined) {
                     selectedItem = items.find(_item => this.valuesAreEqual(_item.value, value));
                 }
             } else if (selectedItem.length === 0 && isArray(value)) {
