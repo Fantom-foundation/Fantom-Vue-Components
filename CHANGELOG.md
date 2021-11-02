@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.28.0...v0.28.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* **f-listbox:** correct `value` condition in `setSelected` method ([b8094a7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b8094a7971962cc62d5a5badbd5ed0efc5d1ddc1))
+
 ## [0.28.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.27.1...v0.28.0) (2021-10-31)
 
 
