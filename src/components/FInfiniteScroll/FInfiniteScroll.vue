@@ -176,10 +176,16 @@ export default {
 
         /**
          * @param {number|'next'|'prev'} page
+         * @param {boolean} [force]
          */
-        goToPage(page) {
+        goToPage(page, force) {
             const { pagination } = this.$refs;
             let p = 0;
+
+            if (this.totalItems === 0 && !force) {
+                this.goToPage(1, true);
+                return;
+            }
 
             if (typeof page === 'number') {
                 this.lastTopPage = page;
