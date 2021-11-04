@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.28.1...v0.28.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* **f-infinite-scroll:** go to first page if `totalItems` is `0` ([50b1109](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/50b11091b5712c635f6c2d5ef9e6273d44f17725))
+
 ### [0.28.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.28.0...v0.28.1) (2021-11-02)
 
 
