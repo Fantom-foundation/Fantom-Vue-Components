@@ -113,7 +113,13 @@ export default {
                 pagination = this.pagination;
             }
 
-            return !((pagination.isLastPage || this.lastBottomPage >= pagination.numPages) && !this.loading);
+            // console.log(pagination.isLastPage, this.lastBottomPage, pagination.numPages, this.loading);
+
+            return (
+                !isNaN(this.totalItems) &&
+                'totalItems' in pagination &&
+                !((pagination.isLastPage || this.lastBottomPage >= pagination.numPages) && !this.loading)
+            );
         },
     },
 
