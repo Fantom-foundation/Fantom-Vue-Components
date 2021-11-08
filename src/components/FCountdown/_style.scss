@@ -1,0 +1,13 @@
+.fcountdown {
+    display: flex;
+    gap: var(--f-spacer-4, 18px);
+
+    &_amount {
+        font-size: var(--f-font-size-6, 24px);
+    }
+
+    &_label {
+        font-size: var(--f-font-size-4, 14px);
+        color: var(--f-color-grey-5);
+    }
+}

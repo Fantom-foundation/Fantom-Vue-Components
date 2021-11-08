@@ -46,4 +46,10 @@ export const enTranslations = {
         'f-form': 'A form has been changed but not saved. Do you want to continue anyway?',
         'f-data-grid': 'A table has been changed but not saved. Do you want to continue anyway?',
     },
+    fcountdown: {
+        days: 'Days',
+        hours: 'Hours',
+        minutes: 'Minutes',
+        seconds: 'Seconds',
+    },
 };
