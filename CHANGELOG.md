@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.30.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.29.1...v0.30.0) (2021-11-08)
+
+
+### Features
+
+* **f-details:** add `disabled` option ([7b9ded0](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7b9ded0d6187b217aaee065c0a3a5365c3c68da1))
+
 ### [0.29.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.29.0...v0.29.1) (2021-11-08)
 
 
