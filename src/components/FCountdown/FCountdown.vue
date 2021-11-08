@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { translationsMixin } from '@/mixins/translations.js';
+import { translationsMixin } from '../../mixins/translations.js';
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
