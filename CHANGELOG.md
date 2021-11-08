@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.29.0...v0.29.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* **f-countdown:** correct path ([c18d36f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c18d36f3d82ea4e71109e535360f3a98896bf6d3))
+
 ## [0.29.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.28.3...v0.29.0) (2021-11-08)
 
 
