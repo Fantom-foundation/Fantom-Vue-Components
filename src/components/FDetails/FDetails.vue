@@ -51,6 +51,11 @@ export default {
             type: String,
             default: '',
         },
+        /** Disable opening/hiding */
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         /** Use content and icon animation */
         animate: {
             type: Boolean,
@@ -83,6 +88,7 @@ export default {
         classes() {
             return {
                 'fdetails-open': this.opened,
+                'fdetails-disabled': this.disabled,
                 'fdetails-animate': this.animate,
             };
         },
@@ -90,13 +96,19 @@ export default {
 
     watch: {
         open(value) {
-            this.opened = value;
-            this.dOpened = value;
+            if (!this.disabled) {
+                this.opened = value;
+                this.dOpened = value;
+            }
         },
     },
 
     methods: {
         onSummaryClick() {
+            if (this.disabled) {
+                return;
+            }
+
             this.opened = !this.opened;
 
             this.create = true;

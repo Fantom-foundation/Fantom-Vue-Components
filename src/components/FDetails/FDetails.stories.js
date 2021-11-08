@@ -31,6 +31,24 @@ export const Open = () => ({
     `,
 });
 
+export const Disabled = () => ({
+    components: { FDetails },
+    //language=HTML
+    template: `
+        <div style="max-width: 400px">
+            <f-details disabled label="Label">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci amet animi, at consequatur culpa,
+                ea eius ipsam magni molestias nisi officia, optio porro quam qui ratione reiciendis soluta ut!
+            </f-details>
+            <br>
+            <f-details disabled open label="Label">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci amet animi, at consequatur culpa,
+                ea eius ipsam magni molestias nisi officia, optio porro quam qui ratione reiciendis soluta ut!
+            </f-details>
+        </div>
+    `,
+});
+
 export const Animate = () => ({
     components: { FDetails },
     //language=HTML

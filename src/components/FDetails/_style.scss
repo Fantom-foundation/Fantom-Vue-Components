@@ -33,6 +33,16 @@
         opacity: 0.5;
     }
 
+    &-disabled {
+        summary {
+            cursor: default;
+        }
+
+        .fdetails_icon {
+            display: none;
+        }
+    }
+
     &-animate {
         .fdetails_icon {
             transition: transform var(--fdetails-transitions-length) var(--fdetails-transitions-func);
@@ -56,7 +66,8 @@
     }
 }
 
-html[dir="rtl"], body[dir="rtl"] {
+html[dir='rtl'],
+body[dir='rtl'] {
     .fdetails {
         &-open {
             .fdetails {

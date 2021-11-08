@@ -2,7 +2,6 @@
 
 import { mount } from '@vue/test-utils';
 import FDetails from '@/components/FDetails/FDetails.vue';
-import { delay } from '@/utils/function.js';
 
 let wrapper = null;
 
@@ -49,6 +48,28 @@ describe('FDetails', () => {
 
     it('should show content when `open` prop is set to `true`', () => {
         wrapper = createWrapper({ propsData: { open: true } });
+
+        const eContentWrap = getContentWrapElement(wrapper);
+
+        expect(eContentWrap.isVisible()).toBeTruthy();
+    });
+
+    it('should not open the content when `disabled` prop is set', async () => {
+        wrapper = createWrapper({ propsData: { disabled: true } });
+
+        const eSummary = wrapper.find('summary');
+        await eSummary.trigger('click');
+
+        const eContentWrap = getContentWrapElement(wrapper);
+
+        expect(eContentWrap.isVisible()).toBeFalsy();
+    });
+
+    it('should not hide the content when component is in open state and  `disabled` prop is set', async () => {
+        wrapper = createWrapper({ propsData: { disabled: true, open: true } });
+
+        const eSummary = wrapper.find('summary');
+        await eSummary.trigger('click');
 
         const eContentWrap = getContentWrapElement(wrapper);
 
