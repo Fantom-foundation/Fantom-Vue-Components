@@ -1,4 +1,4 @@
-import '../clipboard.mock';
+import '../mocks/clipboard.js';
 import { mount } from '@vue/test-utils';
 import FCopyButton from '@/components/FCopyButton/FCopyButton.vue';
 import FButton from '@/components/FButton/FButton.vue';

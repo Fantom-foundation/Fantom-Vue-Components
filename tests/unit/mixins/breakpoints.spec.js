@@ -1,4 +1,4 @@
-import '../../matchMedia.mock';
+import '../../mocks/matchMedia.js';
 import { mount } from '@vue/test-utils';
 import { Breakpoints } from '@/utils/Breakpoints.js';
 import { breakpointsMixin } from '@/mixins/breakpoints.js';
