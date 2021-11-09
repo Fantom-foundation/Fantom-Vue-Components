@@ -19,12 +19,12 @@
             background-color: var(--flistbox-item-background-color);
             word-break: break-word;
 
-            &[aria-selected="true"] {
+            &[aria-selected='true'] {
                 color: var(--flistbox-item-selected-color);
                 background-color: var(--flistbox-item-selected-background-color);
             }
 
-            &[aria-disabled="true"] {
+            &[aria-disabled='true'] {
                 opacity: var(--flistbox-item-disabled-opacity);
             }
 
@@ -61,20 +61,22 @@
             }
         }
 
-        &:not([aria-disabled="true"]) {
+        &:not([aria-disabled='true']) {
             .flistbox_list_item {
-                &:not([aria-disabled="true"]) {
+                &:not([aria-disabled='true']) {
                     cursor: pointer;
 
-                    &:not([aria-selected="true"]) {
-                        &:hover, &.flistbox_list_item-focus {
+                    &:not([aria-selected='true']) {
+                        &:hover,
+                        &.flistbox_list_item-focus {
                             color: var(--flistbox-item-hover-color);
                             background-color: var(--flistbox-item-hover-background-color);
                         }
                     }
 
-                    &[aria-selected="true"] {
-                        &:hover, &.flistbox_list_item-focus {
+                    &[aria-selected='true'] {
+                        &:hover,
+                        &.flistbox_list_item-focus {
                             color: var(--flistbox-item-selected-hover-color);
                             background-color: var(--flistbox-item-selected-hover-background-color);
                             font-weight: var(--flistbox-item-selected-font-weight);
@@ -84,10 +86,21 @@
             }
         }
 
-        &[aria-disabled="true"] {
+        &[aria-disabled='true'] {
             .flistbox_list_item {
                 opacity: var(--flistbox-item-disabled-opacity);
             }
+        }
+    }
+
+    &_searchfield {
+        box-sizing: border-box;
+        width: 100%;
+        margin-bottom: var(--f-spacer-2);
+
+        .finput,
+        .finput_inputcont {
+            width: 100%;
         }
     }
 

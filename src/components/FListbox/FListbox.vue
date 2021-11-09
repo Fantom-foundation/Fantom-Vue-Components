@@ -4,9 +4,21 @@
             <f-label v-if="label" :id="labeledById" :label="label" :required="required" />
         </slot>
 
+        <component
+            v-if="searchable"
+            :is="inputComponent"
+            v-bind="$attrs"
+            no-label
+            :aria-label="searchFieldLabel"
+            :aria-activedescendant="activeDescendant"
+            :controls-id="id"
+            @input="onSearch"
+            class="flistbox_searchfield"
+        />
+
         <ul
             ref="listbox"
-            :id="listboxId || null"
+            :id="listboxId || id"
             role="listbox"
             class="flistbox_list no-markers"
             :tabindex="disabled ? -1 : 0"
@@ -146,6 +158,7 @@ import FIntersectionObserver from '../FIntersectionObserver/FIntersectionObserve
 import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
+import FSearchField from '../FSearchField/FSearchField.vue';
 import { isArray } from '../../utils/array.js';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
@@ -189,6 +202,7 @@ export default {
         FLabel,
         FErrorMessages,
         FInfoText,
+        FSearchField,
     },
 
     mixins: [selectMixin, formInputMixin, helpersMixin, translationsMixin],
@@ -292,6 +306,21 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** Shows a search field */
+        searchable: {
+            type: Boolean,
+            default: false,
+        },
+        /** Specifies component for search field */
+        inputComponent: {
+            type: String,
+            default: 'f-search-field',
+        },
+        /** */
+        searchFieldLabel: {
+            type: String,
+            default: 'search component',
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -309,6 +338,7 @@ export default {
             selectedItems: [],
             prependedItems: [],
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
+            activeDescendant: '',
             loading: false,
             lastPage: false,
         };
@@ -388,6 +418,8 @@ export default {
         },
 
         focusedItem(_value) {
+            this.activeDescendant = _value.id || '';
+
             this.$emit('item-focus', cloneObject(_value));
         },
     },
@@ -961,6 +993,14 @@ export default {
                 this.goToPage('next');
                 this._loadNextPage = false;
             }
+        },
+
+        onSearch(value) {
+            this.filterItems(value);
+
+            defer(() => {
+                this.focusFirstItem();
+            });
         },
     },
 };

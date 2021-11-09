@@ -152,6 +152,29 @@ export const CircularKeyboardNavigation = () => ({
     },
 });
 
+export const Searchable = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <span id="fllbl23" class="not-visible">Listbox example</span>
+            <f-listbox searchable :throttle-input-interval="500" field-size="large" :data="data" :circular-navigation="true" labeled-by="fllbl23" @component-change="onListboxItemSelected" />
+            <br />
+            Selected: {{ selectedItem }}
+        </div>
+    `,
+    data() {
+        return {
+            data: [...data],
+            selectedItem: '',
+        };
+    },
+    methods: {
+        onListboxItemSelected(_item) {
+            this.selectedItem = _item.label;
+        },
+    },
+});
+
 export const Disabled = () => ({
     components: { FListbox },
     template: `

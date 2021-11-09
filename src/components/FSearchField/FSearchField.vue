@@ -7,7 +7,6 @@
             :field-size="fieldSize"
             :disabled="disabled"
             :value="dValue"
-            v-on="$listeners"
             @input="onInput"
             @validation-state="onValidationState"
             class="inp-withbutton"
