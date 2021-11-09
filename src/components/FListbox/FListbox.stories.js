@@ -1,6 +1,7 @@
 import FListbox from './FListbox.vue';
 import FButton from '../FButton/FButton.vue';
 import FAriaAlert from '../FAriaAlert/FAriaAlert.vue';
+import { clone } from '@/utils';
 
 const data = [
     { label: 'item 1', value: '10' },
@@ -28,6 +29,58 @@ const data3 = [
     { label: 'item 5', value: { id: '50' } },
     { label: 'item 6', value: { id: '60' } },
 ];
+
+const data4 = [
+    { value: 1, label: 'Armstrong' },
+    { value: 2, label: 'Laurene' },
+    { value: 3, label: 'Shelley' },
+    { value: 4, label: 'Sukey' },
+    { value: 5, label: 'Scarlett' },
+    { value: 6, label: 'Phyllida' },
+    { value: 7, label: 'Adara' },
+    { value: 8, label: 'Brandon' },
+    { value: 9, label: 'Hedwiga' },
+    { value: 10, label: 'Misha' },
+    { value: 11, label: 'Maurita' },
+    { value: 12, label: 'Jamill' },
+    { value: 13, label: 'Humfrid' },
+    { value: 14, label: 'Cleo' },
+    { value: 15, label: 'Beverly' },
+    { value: 16, label: 'Concordia' },
+    { value: 17, label: 'Brandi' },
+    { value: 18, label: 'Sebastien' },
+    { value: 19, label: 'Rosabelle' },
+    { value: 20, label: 'Rycca' },
+    { value: 21, label: 'Bevvy' },
+    { value: 22, label: 'Dorena' },
+    { value: 23, label: 'Goran' },
+    { value: 24, label: 'Fiann' },
+    { value: 25, label: 'Eva' },
+    { value: 26, label: 'Dionis' },
+    { value: 27, label: 'Terrence' },
+    { value: 28, label: 'Amalia' },
+    { value: 29, label: 'Ford' },
+    { value: 30, label: 'Tommy' },
+];
+
+function fetchPagedListboxData(_timeout = 1000, _pagination) {
+    return new Promise(_resolve =>
+        setTimeout(() => {
+            let ldata = clone(data4);
+            const filterText = _pagination.filterText.trim().toLowerCase();
+
+            ldata = ldata.filter(_item => _item.label.toLowerCase().indexOf(filterText) > -1);
+
+            _resolve({
+                totalItems: ldata.length,
+                items: ldata.slice(
+                    (_pagination.currPage - 1) * _pagination.perPage,
+                    _pagination.currPage * _pagination.perPage
+                ),
+            });
+        }, _timeout)
+    );
+}
 
 export default {
     title: 'FListbox',
@@ -146,6 +199,58 @@ export const CircularKeyboardNavigation = () => ({
         };
     },
     methods: {
+        onListboxItemSelected(_item) {
+            this.selectedItem = _item.label;
+        },
+    },
+});
+
+export const RemoteData = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+        <span id="fllbl22b" class="not-visible">Listbox example</span>
+        <f-listbox
+            strategy="remote"
+            :per-page="5"
+            :data="data"
+            :transform-data-func="onTransformData"
+            labeled-by="fllbl22b"
+            @component-change="onListboxItemSelected"
+            @page-change="onPageChange"
+            style="max-height: 200px; overflow: auto;"
+        />
+        <br />
+        Selected: {{ selectedItem }}
+        </div>
+    `,
+    data() {
+        return {
+            pagination: {
+                currPage: 1,
+                perPage: 5,
+                filterText: '',
+            },
+            data: [],
+            selectedItem: '',
+        };
+    },
+    created() {
+        // this.data = fetchPagedListboxData(1000, this.pagination);
+    },
+    methods: {
+        onPageChange(event) {
+            this.data = fetchPagedListboxData(1000, event);
+            console.log('?QWEQWE', event);
+        },
+
+        onTransformData(data) {
+            return {
+                totalItems: parseInt(data.totalItems),
+                data: data.items,
+            };
+        },
+
         onListboxItemSelected(_item) {
             this.selectedItem = _item.label;
         },
