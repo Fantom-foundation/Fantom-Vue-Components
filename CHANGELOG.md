@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.31.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.30.0...v0.31.0) (2021-11-10)
+
+
+### Features
+
+* **f-infinite-scroll:** add `reset` method ([7252453](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7252453229547be22fd3426ead0a95169bb00ef5))
+* **f-listbox:** add search field ([8d234e5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8d234e5e9a01dae81155e2016e74b4f2ec75cce4))
+* **f-listbox:** adjust strategy `remote` with `searchable` option on ([aab5e41](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/aab5e41ce1add15f361964956e11202121b6bb60))
+* **f-listbox:** create story for `strategy="remote"` ([d714fbb](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d714fbb2d98e4b40e5504bc52b351bc4935a9007))
+* **f-listbox:** integrate `f-infinite-scroll` ([e545a7e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e545a7e44ba55a3e5ce324c90e2e23590fb64e1d))
+* **f-listbox:** style search field ([a1ca531](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a1ca53160ae1b04d3a4fb02ba7e79eacc7267e2e))
+
 ## [0.30.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.29.1...v0.30.0) (2021-11-08)
 
 
