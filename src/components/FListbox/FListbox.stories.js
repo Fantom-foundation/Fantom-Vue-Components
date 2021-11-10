@@ -219,29 +219,32 @@ export const RemoteData = () => ({
             @component-change="onListboxItemSelected"
             @page-change="onPageChange"
             style="max-height: 200px; overflow: auto;"
-        />
+        >
+            <template v-slot="{ item }">
+                <i class="co-grey-4">{{ item.value }}</i> &nbsp; {{ item.label }}
+            </template>
+        </f-listbox>
         <br />
         Selected: {{ selectedItem }}
         </div>
     `,
     data() {
         return {
-            pagination: {
-                currPage: 1,
-                perPage: 5,
-                filterText: '',
-            },
             data: [],
             selectedItem: '',
         };
     },
-    created() {
-        // this.data = fetchPagedListboxData(1000, this.pagination);
-    },
+    /*mounted() {
+        this.data = fetchPagedListboxData(1000, {
+            currPage: 1,
+            perPage: 5,
+            filterText: '',
+        });
+    },*/
     methods: {
         onPageChange(event) {
-            this.data = fetchPagedListboxData(1000, event);
             console.log('?QWEQWE', event);
+            this.data = fetchPagedListboxData(1000, event);
         },
 
         onTransformData(data) {

@@ -16,113 +16,114 @@
             class="flistbox_searchfield"
         />
 
-        <ul
-            ref="listbox"
-            :id="listboxId || id"
-            role="listbox"
-            class="flistbox_list no-markers"
-            :tabindex="disabled ? -1 : 0"
-            :aria-activedescendant="!noAriaActivedescendant ? focusedItem.id : null"
-            :aria-labelledby="ariaLabeledByIds"
-            :aria-describedby="ariaDescribedByIds"
-            :aria-disabled="disabled"
-            :aria-invalid="validationState.invalid"
-            :aria-label="ariaLabel || null"
-            :aria-multiselectable="multiselect"
-            @click="onClick"
-            @mousedown.prevent
-            @keydown="onKeydown"
-            @keyup="onKeyup"
-            @focus="onFocus"
-        >
-            <li
-                v-for="item in prependedItems"
-                :id="item.id"
-                :key="`${item.id}_f`"
-                role="option"
-                :aria-selected="isItemSelected(item)"
-                class="flistbox_list_item"
-                :class="{
-                    'flistbox_list_item-focus': item.id === focusedItem.id,
-                    'flistbox_list_item-removable': isItemRemovable(item),
-                }"
-            >
-                <slot
-                    :item="item"
-                    :selected="isItemSelected(item)"
-                    :focused="item.id === focusedItem.id"
-                    :removable="isItemRemovable(item)"
-                >
-                    {{ item.label }}
-                    <template v-if="isItemRemovable(item)">
-                        <slot name="remove-button">
-                            <span
-                                class="flistbox_list_item_removebutton"
-                                aria-hidden="true"
-                                :title="_('flistbox.removeItem')"
-                            >
-                                <f-svg-icon><icon-times /></f-svg-icon>
-                            </span>
-                        </slot>
-                    </template>
-                </slot>
-            </li>
-            <li
-                v-for="item in items"
-                :id="item.id"
-                :key="item.id"
-                role="option"
-                :aria-selected="isItemSelected(item)"
-                :aria-disabled="!!item.disabled || item.__prepend"
-                :hidden="item.__prepend || null"
-                class="flistbox_list_item"
-                :class="{
-                    'flistbox_list_item-focus': item.id === focusedItem.id,
-                    'flistbox_list_item-removable': isItemRemovable(item),
-                }"
-            >
-                <slot
-                    :item="item"
-                    :selected="isItemSelected(item)"
-                    :focused="item.id === focusedItem.id"
-                    :removable="isItemRemovable(item)"
-                >
-                    {{ item.label }}
-                    <template v-if="isItemRemovable(item)">
-                        <slot name="remove-button">
-                            <span
-                                class="flistbox_list_item_removebutton"
-                                aria-hidden="true"
-                                :title="_('flistbox.removeItem')"
-                            >
-                                <f-svg-icon><icon-times /></f-svg-icon>
-                            </span>
-                        </slot>
-                    </template>
-                </slot>
-            </li>
-        </ul>
-        <f-intersection-observer
-            v-if="strategy === 'remote'"
-            v-show="showLoader"
-            :root="`#${id}`"
-            @entry="onEntry"
-            class="flistbox_list_item flistbox_list_item_loading"
-        >
-            <f-dots-loader />
-        </f-intersection-observer>
-        <div v-show="showNotFound" class="flistbox_list_item flistbox_list_item_notfound">
-            {{ _('flistbox.notFound') }}
-        </div>
-        <f-pagination
-            ref="pagination"
+        <f-infinite-scroll
+            ref="iScroll"
+            :loading="loading"
+            :disabled="strategy !== 'remote'"
             :total-items="dTotalItems"
             :per-page="perPage"
             :curr-page="currPage"
+            :root="infiniteScrollRoot || `#${id}`"
+            :root-margin="infiniteScrollRootMargin"
+            dont-check-total-items
             @page-change="onPageChange"
-            style="display: none"
-            hidden
-        />
+        >
+            <template #loader>
+                <div class="flistbox_list_item tea-center"><f-dots-loader /></div>
+            </template>
+
+            <ul
+                ref="listbox"
+                :id="listboxId || id"
+                role="listbox"
+                class="flistbox_list no-markers"
+                :tabindex="disabled ? -1 : 0"
+                :aria-activedescendant="!noAriaActivedescendant ? focusedItem.id : null"
+                :aria-labelledby="ariaLabeledByIds"
+                :aria-describedby="ariaDescribedByIds"
+                :aria-disabled="disabled"
+                :aria-invalid="validationState.invalid"
+                :aria-label="ariaLabel || null"
+                :aria-multiselectable="multiselect"
+                @click="onClick"
+                @mousedown.prevent
+                @keydown="onKeydown"
+                @keyup="onKeyup"
+                @focus="onFocus"
+            >
+                <li
+                    v-for="item in prependedItems"
+                    :id="item.id"
+                    :key="`${item.id}_f`"
+                    role="option"
+                    :aria-selected="isItemSelected(item)"
+                    class="flistbox_list_item"
+                    :class="{
+                        'flistbox_list_item-focus': item.id === focusedItem.id,
+                        'flistbox_list_item-removable': isItemRemovable(item),
+                    }"
+                >
+                    <slot
+                        :item="item"
+                        :selected="isItemSelected(item)"
+                        :focused="item.id === focusedItem.id"
+                        :removable="isItemRemovable(item)"
+                    >
+                        {{ item.label }}
+                        <template v-if="isItemRemovable(item)">
+                            <slot name="remove-button">
+                                <span
+                                    class="flistbox_list_item_removebutton"
+                                    aria-hidden="true"
+                                    :title="_('flistbox.removeItem')"
+                                >
+                                    <f-svg-icon><icon-times /></f-svg-icon>
+                                </span>
+                            </slot>
+                        </template>
+                    </slot>
+                </li>
+                <li
+                    v-for="item in items"
+                    :id="item.id"
+                    :key="item.id"
+                    role="option"
+                    :aria-selected="isItemSelected(item)"
+                    :aria-disabled="!!item.disabled || item.__prepend"
+                    :hidden="item.__prepend || null"
+                    class="flistbox_list_item"
+                    :class="{
+                        'flistbox_list_item-focus': item.id === focusedItem.id,
+                        'flistbox_list_item-removable': isItemRemovable(item),
+                    }"
+                >
+                    <slot
+                        :item="item"
+                        :selected="isItemSelected(item)"
+                        :focused="item.id === focusedItem.id"
+                        :removable="isItemRemovable(item)"
+                    >
+                        {{ item.label }}
+                        <template v-if="isItemRemovable(item)">
+                            <slot name="remove-button">
+                                <span
+                                    class="flistbox_list_item_removebutton"
+                                    aria-hidden="true"
+                                    :title="_('flistbox.removeItem')"
+                                >
+                                    <f-svg-icon><icon-times /></f-svg-icon>
+                                </span>
+                            </slot>
+                        </template>
+                    </slot>
+                </li>
+            </ul>
+        </f-infinite-scroll>
+
+        <div v-show="showNotFound" class="flistbox_list_item flistbox_list_item_notfound">
+            {{ _('flistbox.notFound') }}
+        </div>
+
         <slot name="bottom" v-bind="slotProps">
             <div v-if="validationState.errors.length > 0">
                 <component
@@ -154,14 +155,14 @@ import { isKey, keyboardNavigation } from '../../utils/aria.js';
 import { selectMixin } from '../../mixins/select.js';
 import FLabel from '../FLabel/FLabel.vue';
 import FPagination from '../FPagination/FPagination.vue';
-import FIntersectionObserver from '../FIntersectionObserver/FIntersectionObserver.vue';
-import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 import FErrorMessages from '../FErrorMessages/FErrorMessages.vue';
 import FInfoText from '../FInfoText/FInfoText.vue';
 import FSearchField from '../FSearchField/FSearchField.vue';
 import { isArray } from '../../utils/array.js';
 import FSvgIcon from '../FSvgIcon/FSvgIcon.vue';
 import IconTimes from '../icons/IconTimes.vue';
+import FInfiniteScroll from '../FInfiniteScroll/FInfiniteScroll.vue';
+import FDotsLoader from '../FDotsLoader/FDotsLoader.vue';
 
 /**
  * @param {FListboxItem} _item
@@ -194,11 +195,10 @@ export default {
     inheritAttrs: false,
 
     components: {
+        FDotsLoader,
+        FInfiniteScroll,
         IconTimes,
         FSvgIcon,
-        FDotsLoader,
-        FIntersectionObserver,
-        FPagination,
         FLabel,
         FErrorMessages,
         FInfoText,
@@ -321,6 +321,16 @@ export default {
             type: String,
             default: 'search component',
         },
+        /** Selector for root element */
+        infiniteScrollRoot: {
+            type: String,
+            default: '',
+        },
+        /** Margin around the root */
+        infiniteScrollRootMargin: {
+            type: String,
+            default: '120px 0px',
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -340,7 +350,6 @@ export default {
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
             activeDescendant: '',
             loading: false,
-            lastPage: false,
         };
     },
 
@@ -349,10 +358,6 @@ export default {
             return {
                 'flistbox-horizontal': this.horizontal,
             };
-        },
-
-        showLoader() {
-            return this.strategy === 'remote' && !(this.lastPage && !this.loading) && isPromise(this.data);
         },
 
         showNotFound() {
@@ -426,12 +431,12 @@ export default {
 
     created() {
         this._firstKeyup = true;
-        this._firstPageChange = true;
         // this._prevFilterText = this.filterText;
         this._prevFilterText = '';
         this._itemSelected = false;
 
-        if (this.filterText || this.strategy === 'remote') {
+        // if (this.filterText || this.strategy === 'remote') {
+        if (this.filterText) {
             this.filterItems(this.filterText);
         } else {
             this.setItems(this.data, isPromise(this.data));
@@ -469,7 +474,9 @@ export default {
                             this.dTotalItems = Number.MAX_SAFE_INTEGER;
                         }
 
-                        if (this.currentPage() === 1) {
+                        const pagination = this.getPaginationState();
+
+                        if (pagination.currPage === 1) {
                             this.items = this.getItems(cloneObject(data.data));
                         } else {
                             this.items = this.items.concat(this.getItems(cloneObject(data.data)));
@@ -478,27 +485,10 @@ export default {
 
                         this.loading = false;
 
-                        this.lastPage = !!data.isLastPage;
+                        // this.lastPage = !!data.isLastPage;
 
-                        if (!this.lastPage) {
+                        if (!pagination.isLastPage) {
                             this.$nextTick(() => {
-                                const pagination = this.getPaginationState();
-                                this.lastPage = !!pagination.isLastPage;
-
-                                if (this.lastPage) {
-                                    this._loadNextPage = false;
-                                }
-
-                                if (this._loadNextPage) {
-                                    defer(() => {
-                                        if (this._loadNextPage) {
-                                            this.goToPage('next');
-
-                                            this._loadNextPage = false;
-                                        }
-                                    }, 5); // ?
-                                }
-
                                 // preserve focused item
                                 if (selectedItemValue) {
                                     const idx = this.items.findIndex(_item =>
@@ -511,8 +501,6 @@ export default {
                                     }
                                 }
                             });
-                        } else {
-                            this._loadNextPage = false;
                         }
                     }
                 } catch (_error) {
@@ -545,11 +533,10 @@ export default {
         },
 
         goToPage(_page) {
-            const { pagination } = this.$refs;
-            const page = typeof _page === 'number' ? _page : this.currentPage() + 1;
+            const { iScroll } = this.$refs;
 
-            if (pagination) {
-                pagination.goToPage(page);
+            if (iScroll) {
+                iScroll.getPagination().goToPage(_page);
             }
         },
 
@@ -558,11 +545,17 @@ export default {
         },
 
         getPaginationState() {
-            const { pagination } = this.$refs;
+            const { iScroll } = this.$refs;
+
+            if (iScroll) {
+                return iScroll.getPagination().state;
+            }
+
+            /*const { pagination } = this.$refs;
 
             if (pagination) {
                 return pagination.state;
-            }
+            }*/
 
             return {};
         },
@@ -964,11 +957,6 @@ export default {
          * @param {FPaginationState} _state
          */
         onPageChange(_state) {
-            if (this._firstPageChange) {
-                this._firstPageChange = false;
-                return;
-            }
-
             // if ((!this.filterText && !this._prevFilterText) || this.filterText !== this._prevFilterText) {
             this.$emit('page-change', {
                 filterText: this.value && this.filterText === this._prevFilterText ? '' : this.filterText,
@@ -977,22 +965,6 @@ export default {
             // } else {
             //     this.setItems(this.data, isPromise(this.data));
             // }
-        },
-
-        /**
-         * @param {IntersectionObserverEntry} _entry
-         */
-        onEntry(_entry) {
-            if (this.loading) {
-                this._loadNextPage = _entry.isIntersecting;
-            } else {
-                this._loadNextPage = false;
-            }
-
-            if (!this.loading && _entry.isIntersecting) {
-                this.goToPage('next');
-                this._loadNextPage = false;
-            }
         },
 
         onSearch(value) {

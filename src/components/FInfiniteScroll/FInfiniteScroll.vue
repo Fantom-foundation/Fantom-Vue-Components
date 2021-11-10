@@ -68,11 +68,15 @@ export default {
             type: Boolean,
             default: false,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         ignoreFirstPageChange: {
             type: Boolean,
             default: false,
         },
-        disabled: {
+        dontCheckTotalItems: {
             type: Boolean,
             default: false,
         },
@@ -248,7 +252,7 @@ export default {
 
             const pagination = clone(state);
 
-            if (pagination.totalItems <= 0) {
+            if (!this.dontCheckTotalItems && pagination.totalItems <= 0) {
                 return;
             }
 

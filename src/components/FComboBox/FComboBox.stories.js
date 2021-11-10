@@ -48,36 +48,36 @@ const comboboxData = [
 ];
 
 const comboboxData2 = [
-    { value: 1, label: 'Armstrong' },
-    { value: 2, label: 'Laurene' },
-    { value: 3, label: 'Shelley' },
-    { value: 4, label: 'Sukey' },
-    { value: 5, label: 'Scarlett' },
-    { value: 6, label: 'Phyllida' },
-    { value: 7, label: 'Adara' },
-    { value: 8, label: 'Brandon' },
-    { value: 9, label: 'Hedwiga' },
-    { value: 10, label: 'Misha' },
-    { value: 11, label: 'Maurita' },
-    { value: 12, label: 'Jamill' },
-    { value: 13, label: 'Humfrid' },
-    { value: 14, label: 'Cleo' },
-    { value: 15, label: 'Beverly' },
-    { value: 16, label: 'Concordia' },
-    { value: 17, label: 'Brandi' },
-    { value: 18, label: 'Sebastien' },
-    { value: 19, label: 'Rosabelle' },
-    { value: 20, label: 'Rycca' },
-    { value: 21, label: 'Bevvy' },
-    { value: 22, label: 'Dorena' },
-    { value: 23, label: 'Goran' },
-    { value: 24, label: 'Fiann' },
-    { value: 25, label: 'Eva' },
-    { value: 26, label: 'Dionis' },
-    { value: 27, label: 'Terrence' },
-    { value: 28, label: 'Amalia' },
-    { value: 29, label: 'Ford' },
-    { value: 30, label: 'Tommy' },
+    { value: 1, label: '1 Armstrong' },
+    { value: 2, label: '2 Laurene' },
+    { value: 3, label: '3 Shelley' },
+    { value: 4, label: '4 Sukey' },
+    { value: 5, label: '5 Scarlett' },
+    { value: 6, label: '6 Phyllida' },
+    { value: 7, label: '7 Adara' },
+    { value: 8, label: '8 Brandon' },
+    { value: 9, label: '9 Hedwiga' },
+    { value: 10, label: '10 Misha' },
+    { value: 11, label: '11 Maurita' },
+    { value: 12, label: '12 Jamill' },
+    { value: 13, label: '13 Humfrid' },
+    { value: 14, label: '14 Cleo' },
+    { value: 15, label: '15 Beverly' },
+    { value: 16, label: '16 Concordia' },
+    { value: 17, label: '17 Brandi' },
+    { value: 18, label: '18 Sebastien' },
+    { value: 19, label: '19 Rosabelle' },
+    { value: 20, label: '20 Rycca' },
+    { value: 21, label: '21 Bevvy' },
+    { value: 22, label: '22 Dorena' },
+    { value: 23, label: '23 Goran' },
+    { value: 24, label: '24 Fiann' },
+    { value: 25, label: '25 Eva' },
+    { value: 26, label: '26 Dionis' },
+    { value: 27, label: '27 Terrence' },
+    { value: 28, label: '28 Amalia' },
+    { value: 29, label: '29 Ford' },
+    { value: 30, label: '30 Tommy' },
 ];
 
 const comboboxData3 = [
@@ -155,6 +155,7 @@ const CustomComboBox = {
             select-mode
             strategy="remote"
             focus
+            :per-page="5"
             :data="dData"
             :transform-data-func="onTransformData"
             :throttle-input-interval="250"
@@ -189,6 +190,14 @@ const CustomComboBox = {
             this.dData = _value;
         },
     },
+
+    /*mounted() {
+        this.dData = fetchPagedComboBoxData(1000, {
+            currPage: 1,
+            perPage: 5,
+            filterText: '',
+        });
+    },*/
 
     methods: {
         onPageChange(_event) {
