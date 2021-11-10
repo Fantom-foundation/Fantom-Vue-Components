@@ -229,6 +229,16 @@ export default {
             return this.$refs.pagination;
         },
 
+        reset() {
+            this.firstPage = false;
+            this.topIntersection = false;
+            this.bottomIntersection = false;
+            this.prevScrollHeight = 0;
+            this.lastTopPage = this.currPage;
+            this.lastBottomPage = this.currPage;
+            this.dTotalItems = this.totalItems;
+        },
+
         /**
          * @param {number} scrollTop
          */
