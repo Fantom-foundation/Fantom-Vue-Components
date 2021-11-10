@@ -94,9 +94,12 @@
     }
 
     &_searchfield {
+        position: sticky;
+        top: 0;
         box-sizing: border-box;
         width: 100%;
         margin-bottom: var(--f-spacer-2);
+        z-index: var(--f-zindex-sticky);
 
         .finput,
         .finput_inputcont {

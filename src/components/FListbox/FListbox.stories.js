@@ -264,15 +264,28 @@ export const Searchable = () => ({
     components: { FListbox },
     template: `
         <div>
+            <h3>local</h3>
             <span id="fllbl23" class="not-visible">Listbox example</span>
-            <f-listbox searchable :throttle-input-interval="500" field-size="large" :data="data" :circular-navigation="true" labeled-by="fllbl23" @component-change="onListboxItemSelected" />
+            <f-listbox
+                searchable
+                field-size="large"
+                :data="data"
+                :circular-navigation="true"
+                labeled-by="fllbl23"
+                style="max-height: 300px; overflow: auto;"
+                @component-change="onListboxItemSelected"
+            >
+                <template v-slot="{ item }">
+                    <i class="co-grey-4">{{ item.value }}</i> &nbsp; {{ item.label }}
+                </template>
+            </f-listbox>'
             <br />
             Selected: {{ selectedItem }}
         </div>
     `,
     data() {
         return {
-            data: [...data],
+            data: [...data4],
             selectedItem: '',
         };
     },
