@@ -264,7 +264,6 @@ export const Searchable = () => ({
     components: { FListbox },
     template: `
         <div>
-            <h3>local</h3>
             <span id="fllbl23" class="not-visible">Listbox example</span>
             <f-listbox
                 searchable
@@ -272,7 +271,6 @@ export const Searchable = () => ({
                 :data="data"
                 :circular-navigation="true"
                 labeled-by="fllbl23"
-                style="max-height: 300px; overflow: auto;"
                 @component-change="onListboxItemSelected"
             >
                 <template v-slot="{ item }">
@@ -290,6 +288,58 @@ export const Searchable = () => ({
         };
     },
     methods: {
+        onListboxItemSelected(_item) {
+            this.selectedItem = _item.label;
+        },
+    },
+});
+
+export const SearchableRemoteData = () => ({
+    components: { FListbox },
+    template: `
+        <div>
+            <span id="fllbl234" class="not-visible">Listbox example</span>
+            <f-listbox
+                searchable
+                strategy="remote"
+                :per-page="5"
+                :data="data"
+                :transform-data-func="onTransformData"
+                :throttle-input-interval="300"
+                :circular-navigation="true"
+                field-size="large"
+                labeled-by="fllbl234"
+                style="max-height: 300px; overflow: auto;"
+                @page-change="onPageChange"
+                @component-change="onListboxItemSelected"
+            >
+                <template v-slot="{ item }">
+                    <i class="co-grey-4">{{ item.value }}</i> &nbsp; {{ item.label }}
+                </template>
+            </f-listbox>'
+            <br />
+            Selected: {{ selectedItem }}
+        </div>
+    `,
+    data() {
+        return {
+            data: [],
+            selectedItem: '',
+        };
+    },
+    methods: {
+        onPageChange(event) {
+            console.log('?QWEQWE', event);
+            this.data = fetchPagedListboxData(1000, event);
+        },
+
+        onTransformData(data) {
+            return {
+                totalItems: parseInt(data.totalItems),
+                data: data.items,
+            };
+        },
+
         onListboxItemSelected(_item) {
             this.selectedItem = _item.label;
         },

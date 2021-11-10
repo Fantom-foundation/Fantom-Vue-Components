@@ -349,6 +349,7 @@ export default {
             prependedItems: [],
             selectableItemSelector: '.flistbox_list_item:not([aria-disabled="true"])',
             activeDescendant: '',
+            dFilterText: '',
             loading: false,
         };
     },
@@ -427,6 +428,10 @@ export default {
 
             this.$emit('item-focus', cloneObject(_value));
         },
+
+        totalItems(value) {
+            this.dTotalItems = value;
+        },
     },
 
     created() {
@@ -474,39 +479,51 @@ export default {
                             this.dTotalItems = Number.MAX_SAFE_INTEGER;
                         }
 
-                        const pagination = this.getPaginationState();
+                        this.$nextTick(() => {
+                            const pagination = this.getPaginationState();
 
-                        if (pagination.currPage === 1) {
-                            this.items = this.getItems(cloneObject(data.data));
-                        } else {
-                            this.items = this.items.concat(this.getItems(cloneObject(data.data)));
-                            selectedItemValue = this.selectedItem.value;
-                        }
+                            if (pagination.currPage === 1) {
+                                this.items = this.getItems(cloneObject(data.data));
+                            } else {
+                                this.items = this.items.concat(this.getItems(cloneObject(data.data)));
+                                selectedItemValue = this.selectedItem.value;
+                            }
 
-                        this.loading = false;
+                            this.loading = false;
 
-                        // this.lastPage = !!data.isLastPage;
+                            // this.lastPage = !!data.isLastPage;
 
-                        if (!pagination.isLastPage) {
-                            this.$nextTick(() => {
-                                // preserve focused item
-                                if (selectedItemValue) {
-                                    const idx = this.items.findIndex(_item =>
-                                        this.valuesAreEqual(_item.value, selectedItemValue)
-                                    );
+                            if (!pagination.isLastPage) {
+                                this.$nextTick(() => {
+                                    // preserve focused item
+                                    if (selectedItemValue) {
+                                        const idx = this.items.findIndex(_item =>
+                                            this.valuesAreEqual(_item.value, selectedItemValue)
+                                        );
 
-                                    // if currently focused item is near the bottom edge (trying to guess keyboard movement)
-                                    if (this.items.length - pagination.perPage - 2 < idx) {
-                                        this.focusItem({ value: selectedItemValue, key: 'value' });
+                                        // if currently focused item is near the bottom edge (trying to guess keyboard movement)
+                                        if (this.items.length - pagination.perPage - 2 < idx) {
+                                            this.focusItem({ value: selectedItemValue, key: 'value' });
+                                        }
                                     }
-                                }
-                            });
-                        }
+                                });
+                            }
+                        });
                     }
                 } catch (_error) {
                     this.loading = false;
                     throw _error;
                 }
+            } else if (this.strategy === 'remote') {
+                this.$nextTick(() => {
+                    const pagination = this.getPaginationState();
+
+                    if (pagination.isFirstPage) {
+                        this.items = this.getItems(cloneObject(_items));
+                    } else {
+                        this.items = this.items.concat(this.getItems(cloneObject(_items)));
+                    }
+                });
             } else {
                 this.items = this.getItems(cloneObject(_items));
             }
@@ -521,6 +538,8 @@ export default {
         },
 
         filterItems(_text) {
+            this.dFilterText = _text;
+
             if (this.strategy === 'local') {
                 const text = _text ? _text.trim() : '';
 
@@ -536,6 +555,10 @@ export default {
             const { iScroll } = this.$refs;
 
             if (iScroll) {
+                if (_page === 1) {
+                    iScroll.reset();
+                }
+
                 iScroll.getPagination().goToPage(_page);
             }
         },
@@ -958,10 +981,15 @@ export default {
          */
         onPageChange(_state) {
             // if ((!this.filterText && !this._prevFilterText) || this.filterText !== this._prevFilterText) {
-            this.$emit('page-change', {
-                filterText: this.value && this.filterText === this._prevFilterText ? '' : this.filterText,
-                ..._state,
-            });
+            let filterText = '';
+
+            if (this.searchable) {
+                filterText = this.dFilterText;
+            } else {
+                filterText = this.value && this.filterText === this._prevFilterText ? '' : this.filterText;
+            }
+
+            this.$emit('page-change', { filterText, ..._state });
             // } else {
             //     this.setItems(this.data, isPromise(this.data));
             // }
