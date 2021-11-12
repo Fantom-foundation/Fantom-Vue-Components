@@ -26,7 +26,7 @@
 import FMessage from '../FMessage/FMessage.vue';
 import { getUniqueId } from '../../utils/index.js';
 import { eventBusMixin } from '../../mixins/event-bus.js';
-import { findComponentById } from '@/utils/vue-helpers.js';
+import { findComponentById } from '../../utils/vue-helpers.js';
 
 /**
  * Container for notifications (`f-message` components).
