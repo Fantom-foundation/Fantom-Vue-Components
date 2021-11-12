@@ -5,6 +5,7 @@
             :key="notification.id"
             v-bind="{ ...notification, text: undefined, html: undefined }"
             :type="notification.type"
+            :id="notification.id"
             animate
             @message-hidden="onMessageHidden"
             class="fnotifications_notification"
@@ -25,6 +26,7 @@
 import FMessage from '../FMessage/FMessage.vue';
 import { getUniqueId } from '../../utils/index.js';
 import { eventBusMixin } from '../../mixins/event-bus.js';
+import { findComponentById } from '@/utils/vue-helpers.js';
 
 /**
  * Container for notifications (`f-message` components).
@@ -140,14 +142,20 @@ export default {
 
     created() {
         this._eventBus.on('add-notification', this.addNotification);
+        this._eventBus.on('hide-notification', this.hideNotification);
     },
 
     methods: {
+        /**
+         * @param {Object} _notification
+         * @return {string} Notification id
+         */
         add(_notification) {
             const { notifications } = this;
             const { strategy } = this;
+            const id = getUniqueId();
             const notification = {
-                id: getUniqueId(),
+                id,
                 type: 'success',
                 animationIn: this.animationIn,
                 animationOut: this.animationOut,
@@ -169,11 +177,23 @@ export default {
             } else {
                 notifications.push(notification);
             }
+
+            return id;
         },
 
         addNotification(_data) {
             if (_data.group === this.group) {
-                this.add(_data.notification);
+                _data._msgId = this.add(_data.notification);
+            }
+        },
+
+        hideNotification(_data) {
+            if (_data.group === this.group && _data.msgId) {
+                const fMessage = findComponentById(this, _data.msgId);
+
+                if (fMessage) {
+                    fMessage.hide();
+                }
             }
         },
 

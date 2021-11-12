@@ -19,9 +19,27 @@ export class Notifications {
      * @param {string} [_group] Notification group
      */
     add(_notification, _group = '') {
-        this._eventBus.emit('add-notification', {
+        const data = {
             notification: _notification,
             group: _group,
-        });
+        };
+
+        this._eventBus.emit('add-notification', data);
+
+        return data._msgId || '';
+    }
+
+    /**
+     * @param {string} msgId Message id
+     * @param {string} [group] Notification group
+     */
+    hide(msgId = '', group = '') {
+        if (msgId) {
+            const data = { msgId, group };
+
+            console.log('hide', JSON.stringify(data));
+
+            this._eventBus.emit('hide-notification', data);
+        }
     }
 }

@@ -141,23 +141,41 @@ export const Hide = () => ({
                 <f-button secondary size="small" @click.native="onButtonClick('topleft')">show notification</f-button>
             </p>
 
+            <h3>manual hide</h3>
+            <p>
+                <f-button secondary size="small" @click.native="onButtonClick('topleft', 100000)">show notification</f-button>
+                <f-button secondary size="small" @click.native="onButtonHideClick('topleft')">hide notification</f-button>
+            </p>
+
             <f-notifications hide-on-click position="top-center" group="topcetner" />
             <f-notifications hide-on-close-button position="top-right" group="topright" />
             <f-notifications :hide-after="{success: 1000, error: 1000, warning: 1000, info: 1000}" position="top-left" group="topleft" />
         </div>
     `,
+    data() {
+        return {
+            msgId: '',
+        };
+    },
     methods: {
-        onButtonClick(_group) {
+        onButtonClick(_group, hideAfter) {
             let type = getRandomType();
 
-            this.$notifications.add(
+            this.msgId = this.$notifications.add(
                 {
                     type,
                     text: notificationText(type),
                     withIcon: type === 'error',
+                    hideAfter,
                 },
                 _group
             );
+        },
+
+        onButtonHideClick(_group) {
+            if (this.msgId) {
+                this.$notifications.hide(this.msgId, _group);
+            }
         },
     },
 });
