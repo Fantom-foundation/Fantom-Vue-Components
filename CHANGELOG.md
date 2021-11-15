@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.33.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.32.1...v0.33.0) (2021-11-15)
+
+
+### Features
+
+* **f-search-field:** add 'delete-text' event ([d0eccd7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d0eccd79917b030214a938b31e7c365442891e26))
+
 ### [0.32.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.32.0...v0.32.1) (2021-11-15)
 
 
