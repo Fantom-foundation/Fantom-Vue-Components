@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.32.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.32.0...v0.32.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **f-details:** fix initial value of `render` property ([eba2501](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/eba25017f6f3be1810ef6cf3228f54a4981cf3e1))
+
 ## [0.32.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.31.0...v0.32.0) (2021-11-12)
 
 
