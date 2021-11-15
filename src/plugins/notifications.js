@@ -35,11 +35,7 @@ export class Notifications {
      */
     hide(msgId = '', group = '') {
         if (msgId) {
-            const data = { msgId, group };
-
-            console.log('hide', JSON.stringify(data));
-
-            this._eventBus.emit('hide-notification', data);
+            this._eventBus.emit('hide-notification', { msgId, group });
         }
     }
 }

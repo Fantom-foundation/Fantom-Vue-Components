@@ -80,7 +80,7 @@ export default {
             opened: this.open,
             dOpened: this.open,
             create: this.open || this.strategy === 'render',
-            render: this.open,
+            render: this.open || this.strategy === 'render',
         };
     },
 
