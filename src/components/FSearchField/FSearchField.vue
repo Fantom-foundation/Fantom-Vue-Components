@@ -98,6 +98,7 @@ export default {
             if (this.dValue && !this.disabled) {
                 this.dValue = '';
                 this.$emit('input', this.dValue);
+                this.$emit('delete-text');
             }
         },
 
