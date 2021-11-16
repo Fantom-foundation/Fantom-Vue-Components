@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.34.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.33.0...v0.34.0) (2021-11-16)
+
+
+### Features
+
+* **f-search-field:** re-emit focus and blur events ([a9bb2d5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a9bb2d55017afb85554af5354d41387f0f42a3b4))
+
 ## [0.33.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.32.1...v0.33.0) (2021-11-15)
 
 
