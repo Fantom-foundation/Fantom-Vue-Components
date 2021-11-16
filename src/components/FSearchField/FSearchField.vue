@@ -7,6 +7,8 @@
             :field-size="fieldSize"
             :disabled="disabled"
             :value="dValue"
+            @focus="$emit('focus', $event)"
+            @blur="$emit('blur', $event)"
             @input="onInput"
             @validation-state="onValidationState"
             class="inp-withbutton"
