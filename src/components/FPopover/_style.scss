@@ -71,4 +71,12 @@
             }
         }*/
     }
+
+    &-fitheight {
+        .fwindow {
+            &_body {
+                max-height: calc(100vh - var(--fwindow-offset-top) - 16px);
+            }
+        }
+    }
 }

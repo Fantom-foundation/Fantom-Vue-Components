@@ -12,7 +12,7 @@
         animation-out="scale-center-leave-active"
         v-bind="{ ...$attrs, ...$props }"
         v-on="$listeners"
-        :class="cssClass"
+        :class="cssClasses"
     >
         <template #controls>
             <f-button
@@ -82,14 +82,19 @@ export default {
             type: Boolean,
             default: false,
         },
+        fitHeightToViewport: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     computed: {
-        cssClass() {
+        cssClasses() {
             return {
                 fpopover: true,
                 'fpopover-big': this.size === 'big',
                 'fpopover-small': this.size === 'small',
+                'fpopover-fitheight': this.fitHeightToViewport,
             };
         },
 

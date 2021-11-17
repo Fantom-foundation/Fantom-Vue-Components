@@ -370,3 +370,41 @@ export const Hide = () => ({
         </div>
     `,
 });
+
+export const StayInPlace = () => ({
+    components: { FPopover, FButton },
+    template: `
+        <div style="max-width: 400px; margin: 0 auto;">
+            <f-popover
+                stay-in-place
+                hide-on-document-mousedown
+                attach-to="#popover"
+                attach-position="bottom"
+                ref="popover"
+            >
+                Stay In Place
+            </f-popover>
+            <br><br>
+            <f-button id="popover" @click.native="$refs.popover.show()">Show</f-button>
+        </div>
+    `,
+});
+
+export const FitHeightToViewport = () => ({
+    components: { FPopover, FButton },
+    template: `
+        <div style="position: fixed; top: 10px; width: 320px;">
+            <f-button id="popover" @click.native="$refs.popover.show()">Show</f-button>
+            <f-popover
+                fit-height-to-viewport
+                stay-in-place
+                hide-on-document-mousedown
+                attach-to="#popover"
+                attach-position="bottom"
+                ref="popover"
+            >
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque deleniti dignissimos, dolorum esse inventore ipsum minus molestiae nesciunt nisi nobis quis, temporibus. A adipisci autem expedita natus officiis omnis perspiciatis!</div><div>Beatae illo officia provident. Accusantium architecto consequuntur dicta ex illum iure, nam nihil quas, quisquam reprehenderit repudiandae sed similique tempora? Alias amet atque debitis eum exercitationem in labore quibusdam quo.</div><div>A accusantium amet deserunt dolore ipsa itaque libero maiores nihil tempore unde! Atque distinctio dolore eos, eveniet facere inventore maiores officia officiis quae quidem quod ratione sed sequi sint tempora?</div><div>Alias aliquid aut blanditiis consectetur distinctio dolorum earum exercitationem facilis iste molestiae pariatur quam quas qui quod reprehenderit similique soluta tenetur, totam voluptate voluptatem! Cupiditate dolores dolorum iste nulla unde!</div><div>Aperiam eligendi fugiat inventore praesentium, quod reiciendis. Architecto assumenda autem cumque cupiditate distinctio eaque eligendi esse eum iure maiores, nam natus, odit optio perspiciatis quas, quibusdam repudiandae sapiente voluptate voluptatibus.</div>
+            </f-popover>
+        </div>
+    `,
+});
