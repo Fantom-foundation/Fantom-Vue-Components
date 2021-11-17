@@ -236,6 +236,10 @@ export default {
         },
     },
 
+    created() {
+        this._inputValue = '';
+    },
+
     mounted() {
         this.setGhostHtml(this.inputValue);
     },
@@ -298,26 +302,30 @@ export default {
          * @param {Event} _event
          */
         onInput(_event) {
+            this._inputValue = _event.target.value;
+
             if (this.throttleInputInterval > 0) {
                 this.throttledInput(_event);
             } else {
                 this._onInput(_event);
             }
 
-            this.setGhostHtml(_event.target.value);
+            this.setGhostHtml(this._inputValue);
         },
 
         /**
          * @param {Event} _event
          */
         _onInput(_event) {
-            this.inputValue = this.formatIn(_event.target.value);
+            const value = this.throttleInputInterval > 0 ? this._inputValue : _event.target.value;
+
+            this.inputValue = this.formatIn(value);
 
             /**
              * Passthrough input event
              * @type {Event}
              */
-            this.$emit('input', this.formatOut(_event.target.value));
+            this.$emit('input', this.formatOut(value));
 
             if (this.validateOnInput) {
                 this.validate();
