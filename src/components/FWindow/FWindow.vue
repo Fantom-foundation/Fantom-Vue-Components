@@ -238,6 +238,11 @@ export default {
             type: [Boolean, String],
             default: true,
         },
+        /** Don't append window element to 'body' element */
+        stayInPlace: {
+            type: [Boolean, String],
+            default: false,
+        },
         /** Hide window when browser window is resized. */
         hideOnDocumentResize: {
             type: Boolean,
@@ -383,7 +388,9 @@ export default {
             this._updateStyle({ zIndex: this.dZIndex });
         }
 
-        document.body.appendChild(this.$el);
+        if (!this.stayInPlace) {
+            document.body.appendChild(this.$el);
+        }
 
         if (this.hideOnDocumentResize) {
             window.addEventListener('resize', this._resizeCallback, false);
@@ -640,6 +647,8 @@ export default {
                             left: attachMargin[3],
                         }
                     );
+
+                    setCustomProperty('--fwindow-offset-top', `${rect.elem1Rect.top}px`, this.$el);
 
                     this.attachToPoint = null;
 

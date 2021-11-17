@@ -3,6 +3,9 @@
     --fwindow-background: #fff;
     --fwindow-padding: var(--f-spacer-5, 24px);
 
+    /* this property is set in FWindow */
+    --fwindow-offset-top: 0;
+
     /* popover */
     --fwindow-popover-font-size: var(--f-font-size-4, 14px);
     --fwindow-popover-line-height: var(--f-line-height-1, 1.3);
