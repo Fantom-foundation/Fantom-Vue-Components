@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.35.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.34.0...v0.35.0) (2021-11-17)
+
+
+### Features
+
+* **f-popover:** add fitHeightToViewport option ([3c01224](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3c01224f945e726ad0d7f056d65ab565d85be6f8))
+* **f-window:** add stayInPlace option ([e8a17b7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e8a17b705db8846c88000f049b052bc36a394108))
+
 ## [0.34.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.33.0...v0.34.0) (2021-11-16)
 
 
