@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.35.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.35.0...v0.35.1) (2021-11-17)
+
+
+### Bug Fixes
+
+* **f-input:** fix input value when throttle input interval exists ([f2e299b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f2e299b8cbf9d79644d6b1b02438a9a355726c31))
+
 ## [0.35.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.34.0...v0.35.0) (2021-11-17)
 
 
