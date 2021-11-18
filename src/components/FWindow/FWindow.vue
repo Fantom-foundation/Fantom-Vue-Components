@@ -253,6 +253,11 @@ export default {
             type: Boolean,
             default: false,
         },
+        /** Hide window on browser window is scrolled. */
+        hideOnDocumentScroll: {
+            type: Boolean,
+            default: false,
+        },
         /** Hide window when escape key is pressed. */
         hideOnEscapeKey: {
             type: Boolean,
@@ -400,7 +405,7 @@ export default {
             window.addEventListener('mousedown', this.onWindowMousedown, false);
         }
 
-        if (this.correctPosOnScroll) {
+        if (this.correctPosOnScroll || this.hideOnDocumentScroll) {
             document.addEventListener('scroll', this._scrollCallback, false);
         }
 
@@ -902,8 +907,12 @@ export default {
         },
 
         onDocumentScroll() {
-            if (this.isVisible) {
+            if (this.isVisible && this.correctPosOnScroll) {
                 this.correctPositionAndSize();
+            }
+
+            if (this.hideOnDocumentScroll) {
+                this.hide();
             }
         },
 

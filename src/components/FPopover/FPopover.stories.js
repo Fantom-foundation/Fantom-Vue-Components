@@ -361,12 +361,24 @@ export const Hide = () => ({
             >
                 Hide after 2s
             </f-popover>
+            <f-popover
+                hide-on-document-scroll
+                attach-to="#popover4"
+                attach-position="bottom"
+                ref="popover4"
+            >
+                Hide on document scroll
+            </f-popover>
             <br><br>
             <f-button id="popover" @click.native="$refs.popover.show()"><code>hide-on-document-mousedown</code></f-button>
             <br><br>
             <f-button id="popover2" @click.native="$refs.popover2.show()">hide-on-document-resize</f-button>
             <br><br>
             <f-button id="popover3" @click.native="$refs.popover3.show()">:hide-after="2000"</f-button>
+            <br><br>
+            <f-button id="popover4" @click.native="$refs.popover4.show()">hide-on-document-scroll</f-button>
+
+            <div style="padding-top: 1000px"></div>
         </div>
     `,
 });
