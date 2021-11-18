@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.37.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.36.0...v0.37.0) (2021-11-18)
+
+
+### Features
+
+* **f-combo-box:** add `attachPosition` option ([c4c0d03](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c4c0d03f788de7f99691e3b76e69137b5235edca))
+
 ## [0.36.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.35.1...v0.36.0) (2021-11-18)
 
 
