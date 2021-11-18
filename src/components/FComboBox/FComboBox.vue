@@ -60,7 +60,7 @@
             v-if="popoverVisible"
             ref="popover"
             :attach-to="`#${dInputContId}`"
-            attach-position="auto-vertical-exact"
+            :attach-position="attachPosition"
             :attach-margin="[0, 0, 0, 0]"
             :animation-in="animationIn"
             :animation-out="animationOut"
@@ -209,6 +209,10 @@ export default {
         inputComponent: {
             type: String,
             default: 'f-input',
+        },
+        attachPosition: {
+            type: String,
+            default: 'auto-vertical-exact',
         },
         readonly: {
             type: Boolean,
