@@ -64,6 +64,8 @@
             :attach-margin="[0, 0, 0, 0]"
             :animation-in="animationIn"
             :animation-out="animationOut"
+            :hide-on-document-scroll="hideOnDocumentScroll"
+            :fit-height-to-viewport="fitHeightToViewport"
             __hide-on-document-mousedown
             width-as-attach
             class="fcombobox_fwindow"
@@ -225,6 +227,15 @@ export default {
         inlineAutocomplete: {
             type: Boolean,
             default: true,
+        },
+        /** Hide popover on browser window is scrolled */
+        hideOnDocumentScroll: {
+            type: Boolean,
+            default: false,
+        },
+        fitHeightToViewport: {
+            type: Boolean,
+            default: false,
         },
     },
 
