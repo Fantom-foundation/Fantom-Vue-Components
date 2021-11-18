@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.36.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.35.1...v0.36.0) (2021-11-18)
+
+
+### Features
+
+* **f-combo-box:** add `--fcombobox-listbox-max-height` custom property ([b4f4a98](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b4f4a9871018ffb6e2da33327e7fa67692e1e76f))
+* **f-combo-box:** add `hideOnDocumentScroll` and `fitHeightToViewport` options ([54fe91b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/54fe91b5d3fbc826592323da83de5637eab5b2c2))
+* **f-window:** add `hideOnDocumentScroll` option ([7d3ed2a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7d3ed2a7e6c6fb09016301529bf2adfe9b369642))
+
 ### [0.35.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.35.0...v0.35.1) (2021-11-17)
 
 
