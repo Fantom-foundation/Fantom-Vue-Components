@@ -1,3 +1,5 @@
+@use "custom-properties";
+
 .fcombobox {
     display: inline-block;
     vertical-align: middle;
@@ -35,7 +37,7 @@
             --f-listbox-item-selected-color: #fff;
             --f-listbox-item-selected-background-color: var(--f-color-primary-5, #1a6aff);
 
-            max-height: 280px;
+            max-height: var(--fcombobox-listbox-max-height);
             overflow: auto;
         }
     }
