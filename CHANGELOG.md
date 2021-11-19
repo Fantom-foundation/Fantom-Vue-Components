@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.38.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.37.0...v0.38.0) (2021-11-19)
+
+
+### Features
+
+* **f-image:** add `fit` option ([b1b3419](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b1b341951a20dab0132b5bf02be06482eb20a20b))
+* **f-image:** add `noImgSrc` option ([32f51ac](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/32f51acb678298ff452c49d988eb91616efcf0bd))
+
 ## [0.37.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.36.0...v0.37.0) (2021-11-18)
 
 
