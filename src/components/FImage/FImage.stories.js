@@ -92,6 +92,23 @@ export const Fit = () => ({
     },
 });
 
+export const NoImgSrc = () => ({
+    components: { FImage },
+    //language=HTML
+    template: `
+        <div class="gridauto">
+            <f-image no-img-src="avatar.png" src="nonexistingimage" size="200px" alt="image" :style="style" /> <!-- default -->
+        </div>
+    `,
+    data() {
+        return {
+            style: {
+                border: '1px solid #ddd',
+            },
+        };
+    },
+});
+
 export const PlaceholderSlot = () => ({
     components: { FImage },
     //language=HTML

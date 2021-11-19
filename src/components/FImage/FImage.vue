@@ -1,11 +1,11 @@
 <template>
-    <div class="fimage" :class="{ 'fimage-loaded': loaded }" :style="styles">
+    <div class="fimage" :class="classes" :style="styles">
         <div v-if="!loaded" class="fimage_placeholder">
             <slot name="placeholder">
                 <f-placeholder block :animation="placeholderAnimation"></f-placeholder>
             </slot>
         </div>
-        <img :src="src" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" :style="{ objectFit: fit }" />
+        <img :src="cSrc" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" :style="{ objectFit: fit }" />
     </div>
 </template>
 
@@ -56,11 +56,20 @@ export default {
             type: String,
             default: 'contain',
         },
+        /** Src used when image src is not provided or correct */
+        noImgSrc: {
+            type: String,
+            default: '',
+        },
     },
 
     computed: {
         loaded() {
-            return !!this.src && !this.imgLoading;
+            return !!this.cSrc && !this.imgLoading;
+        },
+
+        cSrc() {
+            return this.error ? this.noImgSrc : this.src;
         },
 
         styles() {
@@ -71,11 +80,19 @@ export default {
                 height: size || this.height,
             };
         },
+
+        classes() {
+            return {
+                'fimage-loaded': this.loaded,
+                'fimage-noimage': this.error,
+            };
+        },
     },
 
     data() {
         return {
             imgLoading: false,
+            error: false,
         };
     },
 
@@ -96,7 +113,7 @@ export default {
         },
 
         onImgError() {
-            // this.imgLoading = false;
+            this.error = true;
         },
     },
 };

@@ -37,6 +37,27 @@ describe('FImage', () => {
         expect(wrapper.findComponent(FPlaceholder).exists()).toBeTruthy();
     });
 
+    it('should use `noImgSrc` as an image src if the `noImgSrc` prop is set and image is not loaded correctly', async () => {
+        const noImgSrc = 'no-img-src';
+
+        wrapper = createWrapper({ propsData: { noImgSrc } });
+
+        wrapper.vm.onImgError();
+        await wrapper.vm.$nextTick();
+
+        const eImg = wrapper.find('img');
+        expect(eImg.element.src).toBe(`http://localhost/${noImgSrc}`);
+    });
+
+    it('should add "fimage-noimage" css class to the container if image is not loaded correctly', async () => {
+        wrapper = createWrapper();
+
+        wrapper.vm.onImgError();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.classes()).toContain('fimage-noimage');
+    });
+
     it('should show placeholder if the `src` prop is set and image is not loaded yet', () => {
         wrapper = createWrapper({ propsData: { src: 'avatar.jpg' } });
 
