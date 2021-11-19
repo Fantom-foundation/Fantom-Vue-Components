@@ -1,5 +1,5 @@
 <template>
-    <details class="fdetails" :open="dOpened || undefined" :class="classes" @click="onClick">
+    <details class="fdetails" :open="dOpened || undefined" :class="classes">
         <summary @click.prevent="onSummaryClick">
             <span class="fdetails_label">
                 <!-- @slot Default to `label` prop -->
@@ -141,11 +141,6 @@ export default {
                  */
                 this.$emit('toggle', false);
             }
-        },
-
-        onClick(event) {
-            // prevent default <details> behavior
-            event.preventDefault();
         },
     },
 };
