@@ -73,6 +73,25 @@ export const Size = () => ({
     },
 });
 
+export const Fit = () => ({
+    components: { FImage },
+    //language=HTML
+    template: `
+        <div class="gridauto">
+            <f-image fit="contain" size="200px" src="avatar2.jpg" alt="image" :style="style" /> <!-- default -->
+            <f-image fit="cover" size="200px" src="avatar2.jpg" alt="image" :style="style" />
+            <f-image fit="fill" size="200px" src="avatar2.jpg" alt="image" :style="style" />
+        </div>
+    `,
+    data() {
+        return {
+            style: {
+                border: '1px solid #ddd',
+            },
+        };
+    },
+});
+
 export const PlaceholderSlot = () => ({
     components: { FImage },
     //language=HTML

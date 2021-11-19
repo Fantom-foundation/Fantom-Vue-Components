@@ -5,7 +5,7 @@
                 <f-placeholder block :animation="placeholderAnimation"></f-placeholder>
             </slot>
         </div>
-        <img :src="src" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" />
+        <img :src="src" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" :style="{ objectFit: fit }" />
     </div>
 </template>
 
@@ -50,6 +50,11 @@ export default {
         placeholderAnimation: {
             type: String,
             default: 'fplaceholder-pulsebganim',
+        },
+        /** Value of `object-fit` css property used on img elmement */
+        fit: {
+            type: String,
+            default: 'contain',
         },
     },
 

@@ -68,6 +68,14 @@ describe('FImage', () => {
         expect(wrapper.vm.$el.style.width).toBe('100px');
         expect(wrapper.vm.$el.style.height).toBe('100px');
     });
+
+    it('should set `object-fit` css property on `img` element when `fit` prop is set', async () => {
+        wrapper = createWrapper({ propsData: { fit: 'cover' } });
+
+        const eImg = wrapper.find('img');
+
+        expect(eImg.element.style.objectFit).toBe('cover');
+    });
 });
 
 /* eslint-enable no-undef */
