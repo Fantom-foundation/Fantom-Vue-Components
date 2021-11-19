@@ -103,6 +103,14 @@ export default {
         },
     },
 
+    mounted() {
+        this.$nextTick(() => {
+            if (!this.open && this.strategy === 'render' && this.animate) {
+                this.render = false;
+            }
+        });
+    },
+
     methods: {
         onSummaryClick() {
             if (this.disabled) {
