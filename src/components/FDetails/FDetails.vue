@@ -99,6 +99,10 @@ export default {
             if (!this.disabled) {
                 this.opened = value;
                 this.dOpened = value;
+
+                if (value) {
+                    this.render = true;
+                }
             }
         },
     },
