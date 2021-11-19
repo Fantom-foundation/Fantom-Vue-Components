@@ -653,11 +653,13 @@ export default {
                         }
                     );
 
-                    setCustomProperty('--fwindow-offset-top', `${rect.elem1Rect.top}px`, this.$el);
+                    if (rect) {
+                        setCustomProperty('--fwindow-offset-top', `${rect.elem1Rect.top}px`, this.$el);
+                    }
 
                     this.attachToPoint = null;
 
-                    if (this.withArrow) {
+                    if (this.withArrow && rect) {
                         this._correctArrowPosition(rect);
                     }
                 }
