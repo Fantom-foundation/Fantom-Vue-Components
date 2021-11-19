@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.38.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.38.0...v0.38.1) (2021-11-19)
+
+
+### Bug Fixes
+
+* **f-details:** don't block click event ([6cb1423](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6cb1423b47c28e7e7c35ca9bfa58758204809d60))
+* **f-details:** fix opening animation when strategy is 'render' ([5de6b2d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/5de6b2d2560a597de2f9199f0f2cdfbe839d2fc5))
+* **f-window:** check if `rect` exists ([fe50f31](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/fe50f31a08f448644094cc09b43f95fb2f72e537))
+
 ## [0.38.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.37.0...v0.38.0) (2021-11-19)
 
 
