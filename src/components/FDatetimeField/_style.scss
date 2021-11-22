@@ -13,10 +13,10 @@
 
     &_date {
         margin-right: var(--f-spacer-6) !important;
-    }
 
-    ::-webkit-calendar-picker-indicator {
-        margin: 0;
-        padding: 0;
+        &::-webkit-calendar-picker-indicator {
+            margin: 0;
+            padding: 0;
+        }
     }
 }
