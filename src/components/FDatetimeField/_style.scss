@@ -2,12 +2,21 @@
     display: inline-block;
     vertical-align: middle;
 
-    &_cont {
+    /*&_cont {
         display: inline-flex;
-        gap: var(--f-spacer-4);
+        gap: var(--f-spacer-6);
+    }*/
+
+    .inp-nostyle {
+        width: auto;
     }
 
-    input {
-        //width: auto;
+    &_date {
+        margin-right: var(--f-spacer-6) !important;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        margin: 0;
+        padding: 0;
     }
 }

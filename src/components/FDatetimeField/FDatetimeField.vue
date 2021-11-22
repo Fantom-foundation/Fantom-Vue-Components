@@ -10,7 +10,7 @@
                 v-bind="inputProps"
                 :value="dateInputValue"
                 @input="onDateInput"
-                class="inp-nostyle"
+                class="inp-nostyle fdatetimefield_date"
             />
             <input
                 ref="time"
@@ -18,7 +18,7 @@
                 v-bind="inputProps"
                 :value="timeInputValue"
                 @input="onTimeInput"
-                class="inp-nostyle"
+                class="inp-nostyle fdatetimefield_time"
             />
         </span>
         <slot name="bottom" v-bind="slotProps">
