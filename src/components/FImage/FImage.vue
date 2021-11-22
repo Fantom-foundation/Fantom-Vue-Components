@@ -69,7 +69,7 @@ export default {
         },
 
         cSrc() {
-            return this.error ? this.noImgSrc : this.src;
+            return this.error && this.noImgSrc ? this.noImgSrc : this.src;
         },
 
         styles() {
