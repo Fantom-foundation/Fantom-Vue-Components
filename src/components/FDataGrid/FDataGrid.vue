@@ -531,6 +531,7 @@ export default {
             setTabIndex: true,
         });
         this._RCIdxs = null;
+        this._reload = false;
 
         if (!this.tableId) {
             this.dTableId = getUniqueId();
@@ -660,7 +661,7 @@ export default {
             } else if (items) {
                 const pState = this.getPaginationState();
 
-                if (this.infiniteScroll && 'currPage' in pState) {
+                if (this.infiniteScroll && 'currPage' in pState && !this._reload) {
                     if (pState.currPage < pState.prevPage) {
                         this.dItems = items.concat(this.dItems);
                     } else {
@@ -669,6 +670,8 @@ export default {
                 } else {
                     this.dItems = items;
                 }
+
+                this._reload = false;
             }
 
             if (this.checkChange) {
@@ -1043,6 +1046,10 @@ export default {
         },
 
         emitChangeEvent(_type, _data = {}) {
+            if (_type === 'reload') {
+                this._reload = true;
+            }
+
             this.$emit('change', {
                 type: _type,
                 filters: this.getFilters(),
