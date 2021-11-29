@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.39.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.38.8...v0.39.0) (2021-11-29)
+
+
+### Features
+
+* **f-data-grid:** don't concat items when reload is called ([7ad48de](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7ad48dec9841a3cfce0157a7eb17b83a0a24c34b))
+* **polling:** call callback func only if page is visible ([f2e9ca8](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f2e9ca8048818a27e6a0859c45e41fe7b2f1c855))
+
 ### [0.38.8](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.38.7...v0.38.8) (2021-11-29)
 
 ### [0.38.7](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.38.6...v0.38.7) (2021-11-28)
