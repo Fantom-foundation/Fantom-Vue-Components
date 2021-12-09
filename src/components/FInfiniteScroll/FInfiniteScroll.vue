@@ -142,7 +142,7 @@ export default {
 
                 defer(() => {
                     defer(() => {
-                        if (this.bottomIntersection && this.showBottomLoader) {
+                        if (!this.loading && this.bottomIntersection && this.showBottomLoader) {
                             this.goToPage('next');
                         }
                     });
