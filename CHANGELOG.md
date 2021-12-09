@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.39.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.0...v0.39.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* **f-infinite-scroll:** fix bottom page  loading ([cefbf20](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/cefbf205a1fc52508df45aaba9f2d7023e42c72f))
+* **f-infinite-scroll:** update helpers when currPage changes ([8c31b84](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8c31b845ca879be682ea2fb92ce0bb73774ba4ce))
+
 ## [0.39.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.38.8...v0.39.0) (2021-11-29)
 
 
