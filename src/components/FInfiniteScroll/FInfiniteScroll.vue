@@ -161,6 +161,11 @@ export default {
                 this.init();
             }
         },
+
+        currPage(value) {
+            this.lastTopPage = value;
+            this.lastBottomPage = value;
+        },
     },
 
     mounted() {
