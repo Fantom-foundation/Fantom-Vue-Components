@@ -179,7 +179,10 @@ export default {
                 const { lastChangedElement } = this;
 
                 if (_value && name && name in _value) {
-                    if (JSON.stringify(_value[name]) !== JSON.stringify(this._oldInputValue)) {
+                    const valStr = JSON.stringify(_value[name]);
+
+                    if (valStr !== JSON.stringify(this._oldInputValue) || valStr !== JSON.stringify(this.inputValue)) {
+                        // if (JSON.stringify(_value[name]) !== JSON.stringify(this._oldInputValue)) {
                         if (!this._firstChange) {
                             lastChangedElement.name = name;
                             lastChangedElement.value = clone(_value[name]);
