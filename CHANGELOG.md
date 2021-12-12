@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.39.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.1...v0.39.2) (2021-12-12)
+
+
+### Bug Fixes
+
+* **f-form-input:** adjust inputValue update condition ([e9fce28](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e9fce287f526e614be762c2b5cff3bdf147277fc))
+
 ### [0.39.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.0...v0.39.1) (2021-12-09)
 
 
