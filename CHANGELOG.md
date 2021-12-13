@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.39.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.2...v0.39.3) (2021-12-13)
+
+
+### Bug Fixes
+
+* **f-listbox:** clear selected item if value is empty ([40c35e3](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/40c35e347760ce880eeae145a55e83b22257ede5))
+* **f-listbox:** set selected item(s) when data are changed ([b1724c0](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b1724c05a66c1c7c5c693a86ff97c37d61071554))
+
 ### [0.39.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.1...v0.39.2) (2021-12-12)
 
 
