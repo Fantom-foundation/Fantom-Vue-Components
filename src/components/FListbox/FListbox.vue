@@ -696,6 +696,10 @@ export default {
                 this.$nextTick(() => {
                     this._itemSelected = false;
                 });
+            } else if (!this.multiselect) {
+                this.selectedItem = {};
+            } else {
+                this.selectedItems = [];
             }
         },
 
