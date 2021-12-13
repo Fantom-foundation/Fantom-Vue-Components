@@ -368,33 +368,7 @@ export default {
 
     watch: {
         value(_val) {
-            if (this.nonSelectable) {
-                return;
-            }
-
-            this.inputValue = _val;
-
-            if (!this.multiselect) {
-                if (!this.valuesAreEqual(this.selectedItem.value, _val)) {
-                    this.selectItem({ value: _val, key: 'value', focusItem: true });
-                }
-            } else if (isArray(_val) && !this._itemSelected) {
-                const selectedItems = [];
-
-                _val.forEach(val => {
-                    const item = this.items.find(_item => this.valuesAreEqual(_item.value, val));
-
-                    if (item) {
-                        selectedItems.push(item);
-                    }
-                });
-
-                this.selectedItems = selectedItems;
-
-                if (this.prependSelectedItems) {
-                    this.setPrependedItems(selectedItems);
-                }
-            }
+            this.onValueChange(_val);
         },
 
         data: {
@@ -404,6 +378,10 @@ export default {
                 } else if (JSON.stringify(_value) !== JSON.stringify(_oldValue)) {
                     // this.items = this.getItems();
                     this.setItems(_value);
+                }
+
+                if (this.inputValue) {
+                    this.onValueChange(this.inputValue);
                 }
             },
             deep: true,
@@ -882,6 +860,36 @@ export default {
                 return objectEquals(val1, val2);
             } else {
                 return val1 === val2;
+            }
+        },
+
+        onValueChange(_val) {
+            if (this.nonSelectable) {
+                return;
+            }
+
+            this.inputValue = _val;
+
+            if (!this.multiselect) {
+                if (!this.valuesAreEqual(this.selectedItem.value, _val)) {
+                    this.selectItem({ value: _val, key: 'value', focusItem: true });
+                }
+            } else if (isArray(_val) && !this._itemSelected) {
+                const selectedItems = [];
+
+                _val.forEach(val => {
+                    const item = this.items.find(_item => this.valuesAreEqual(_item.value, val));
+
+                    if (item) {
+                        selectedItems.push(item);
+                    }
+                });
+
+                this.selectedItems = selectedItems;
+
+                if (this.prependSelectedItems) {
+                    this.setPrependedItems(selectedItems);
+                }
             }
         },
 
