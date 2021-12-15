@@ -365,6 +365,10 @@ export default {
         },
 
         filterData(_text) {
+            if (this.readonly) {
+                return;
+            }
+
             this.showPopover();
 
             this.listboxFilterText = _text;
