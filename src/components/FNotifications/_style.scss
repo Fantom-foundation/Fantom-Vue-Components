@@ -13,6 +13,7 @@
         box-shadow: var(--f-box-shadow-2);
         background: var(--f-color-grey-1, #fcfcfc);
         line-height: var(--f-line-height-2, 1.3);
+        word-break: break-word;
 
         &_closebtn {
             --f-btn-color: var(--f-doc-color, #333);
