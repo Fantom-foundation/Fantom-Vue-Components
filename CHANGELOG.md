@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.39.4](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.3...v0.39.4) (2021-12-15)
+
+
+### Bug Fixes
+
+* **f-combo-box:** don't filter data when `readonly` prop is `true` ([c9b45b1](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c9b45b1b38737a765eee61952390f08f719d39dc))
+
 ### [0.39.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.2...v0.39.3) (2021-12-13)
 
 
