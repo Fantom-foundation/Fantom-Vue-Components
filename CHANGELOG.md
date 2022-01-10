@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.40.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.4...v0.40.0) (2022-01-10)
+
+
+### Features
+
+* **f-hidden-nav-link:** create component ([93bac80](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/93bac8066ebe46dd9727a7beb146e2def956afa6))
+
 ### [0.39.4](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.3...v0.39.4) (2021-12-15)
 
 
