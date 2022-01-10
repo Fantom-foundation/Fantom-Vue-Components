@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.40.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.0...v0.40.1) (2022-01-10)
+
+
+### Features
+
+* **f-hidden-nav-link:** add z-index ([4d020fc](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/4d020fcbbdb3f49a7580f104907daa39c7d7c6e4))
+
 ## [0.40.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.39.4...v0.40.0) (2022-01-10)
 
 
