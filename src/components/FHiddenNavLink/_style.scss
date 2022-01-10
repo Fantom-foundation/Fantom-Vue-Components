@@ -5,6 +5,7 @@ a.fhiddennavlink:not(.btn) {
     top: 0;
     left: 0;
     display: block;
+    z-index: var(--fhiddennavlink-zindex);
     padding: var(--f-spacer-4);
     background: var(--fhiddennavlink-background);
     transform: translateY(-100%);

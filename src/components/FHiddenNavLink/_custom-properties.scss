@@ -1,6 +1,7 @@
 .fhiddennavlink {
     --fhiddennavlink-color: var(--f-color-grey-1, #fcfcfc);
     --fhiddennavlink-background: var(--f-color-primary-5, #1a6aff);
+    --fhiddennavlink-zindex: calc(var(--f-zindex-above, 2) + var(--f-zindex-fixed, 2));
     --fhiddennavlink-transition-length: 160ms;
     --fhiddennavlink-transition-func: var(--f-transition-func, ease);
 }

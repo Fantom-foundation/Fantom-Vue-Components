@@ -1,7 +1,7 @@
 import FHiddenNavLink from '@/components/FHiddenNavLink/FHiddenNavLink.vue';
 
 export default {
-    title: 'Components/FHiddenNavLink',
+    title: 'FHiddenNavLink',
     components: FHiddenNavLink,
 };
 
