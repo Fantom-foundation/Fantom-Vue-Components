@@ -1,0 +1,18 @@
+@use "custom-properties";
+
+a.fhiddennavlink:not(.btn) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: var(--f-spacer-4);
+    background: var(--fhiddennavlink-background);
+    transform: translateY(-100%);
+    text-decoration: none;
+    color: var(--fhiddennavlink-color);
+    transition: transform var(--fhiddennavlink-transition-length) var(--fhiddennavlink-transition-func);
+
+    &:focus {
+        transform: translateY(0);
+    }
+}
