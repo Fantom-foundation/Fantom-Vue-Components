@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.40.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.1...v0.40.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **f-combo-box:** prevent document scrolling on 'arrow down' key ([f1e6d93](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f1e6d93b39b32784757f7e80160ac01138b474df))
+
 ### [0.40.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.0...v0.40.1) (2022-01-10)
 
 
