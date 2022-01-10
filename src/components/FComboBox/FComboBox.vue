@@ -474,6 +474,8 @@ export default {
                     this.listboxData = clone(this.data);
                 }*/
 
+                _event.preventDefault();
+
                 this.showPopover();
             }
             if (isKey('Enter', _event)) {
