@@ -977,11 +977,15 @@ export default {
 
             this._firstKeyup = true;
 
-            if (this.focusItemOnFocus && !this.focusedItem.id) {
-                if (!this.value || (this.multiselect && this.value.length === 0)) {
-                    this.focusFirstItem();
+            if (this.focusItemOnFocus) {
+                if (!this.focusedItem.id) {
+                    if (!this.value || (this.multiselect && this.value.length === 0)) {
+                        this.focusFirstItem();
+                    } else {
+                        this.focusItem({ value: this.value, key: 'value' });
+                    }
                 } else {
-                    this.focusItem({ value: this.value, key: 'value' });
+                    this.focusItem({ value: this.focusedItem.value, key: 'value' });
                 }
             }
         },
