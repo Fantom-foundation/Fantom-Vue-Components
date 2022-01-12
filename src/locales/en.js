@@ -27,6 +27,7 @@ export const enTranslations = {
     },
     fdatagrid: {
         noItems: 'No Items',
+        removeRow: 'Remove row',
     },
     fnetworkstatus: {
         message: 'Network error, trying to reconnect',

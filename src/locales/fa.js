@@ -27,6 +27,7 @@ export const faTranslations = {
     },
     fdatagrid: {
         noItems: 'موردی وجود ندارد',
+        removeRow: 'حذف ردیف',
     },
     fnetworkstatus: {
         message: 'خطای شبکه ، تلاش برای اتصال مجدد',

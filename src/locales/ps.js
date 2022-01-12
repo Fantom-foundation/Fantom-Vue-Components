@@ -27,6 +27,7 @@ export const psTranslations = {
     },
     fdatagrid: {
         noItems: 'توکي نشته',
+        removeRow: 'قطار لرې کړئ',
     },
     fnetworkstatus: {
         message: 'د شبکې تېروتنه ، د بیا پیوستولو هڅه',

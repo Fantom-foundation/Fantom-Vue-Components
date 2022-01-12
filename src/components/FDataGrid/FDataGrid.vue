@@ -90,7 +90,12 @@
                             <div class="fdatagrid_cellin">
                                 <div v-if="edModeRowEdit && col.name === '__removerow__'" data-removerow>
                                     <slot name="remove-row">
-                                        <f-button tertiary same-size :tabindex="!editing ? '-1' : null">
+                                        <f-button
+                                            tertiary
+                                            same-size
+                                            :tabindex="!editing ? '-1' : null"
+                                            :aria-label="_('fdatagrid.removeRow')"
+                                        >
                                             <f-svg-icon size="16px"><icon-trash /></f-svg-icon>
                                         </f-button>
                                     </slot>
