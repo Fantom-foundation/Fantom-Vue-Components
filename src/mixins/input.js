@@ -55,6 +55,10 @@ export const inputMixin = {
             type: Boolean,
             default: false,
         },
+        dataFocus: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     computed: {
@@ -72,6 +76,7 @@ export const inputMixin = {
                 maxlength: this.maxlength,
                 rows: this.rows,
                 cols: this.cols,
+                'data-focus': this.dataFocus,
             };
         },
     },
