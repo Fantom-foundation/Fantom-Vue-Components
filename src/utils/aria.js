@@ -222,6 +222,25 @@ export function setReceiveFocusFromAttr(_id) {
 }
 
 /**
+ * Focus element by selector
+ *
+ * @param {HTMLElement} [wrapper]
+ * @param {string} [selector]
+ */
+export function focusElem(wrapper = null, selector = '[data-focus]') {
+    const eWrapper = wrapper || document.body;
+    const elem = eWrapper.querySelector(selector);
+
+    if (elem) {
+        if (!isFocusable(elem)) {
+            elem.setAttribute('tabindex', '-1');
+        }
+
+        elem.focus();
+    }
+}
+
+/**
  *
  * @param {MouseEvent|KeyboardEvent} _event
  * @return {boolean}
