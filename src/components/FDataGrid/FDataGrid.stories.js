@@ -1131,7 +1131,9 @@ export const DataFormattingWithColumnSlots = () => ({
                 </template>
 
                 <template #column-email="{ value }">
-                    <span class="flex gap-2 co-orange-7"><span class="fos-6">&#x2709;</span> {{ value }}</span>
+                    <a href="mailto:foo@email.com" style="text-decoration: none">
+                        <span class="flex gap-2 co-orange-7"><span class="fos-6">&#x2709;</span> {{ value }}</span>
+                    </a>
                 </template>
             </f-data-grid>
         </div>

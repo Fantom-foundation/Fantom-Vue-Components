@@ -525,9 +525,10 @@ export default {
         this._editedKey = '';
         this._keyboardNav = new GridKeyboardNavigation({
             rowSelector: 'tr',
-            cellSelector: '[tabindex]',
+            // cellSelector: '[tabindex]',
+            cellSelector: 'td',
             focusCell: true,
-            // focusElemInsideCell: true,
+            focusElemInsideCell: true,
             setTabIndex: true,
         });
         this._RCIdxs = null;
@@ -1521,7 +1522,7 @@ export default {
                     this.stopEditing(true);
                 }
             } else {
-                const info = this._keyboardNav.navigate(event);
+                const info = this._keyboardNav.navigate(event, true);
 
                 if (info.cell) {
                     if (info.isFirstRow || info.isFirstCell) {
