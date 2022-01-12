@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.42.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.41.0...v0.42.0) (2022-01-12)
+
+
+### Features
+
+* **f-window:** focus window not document ([9834a6c](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/9834a6c85f022d3ce243d83aae187f21246e2a7c))
+* **inputMixin:** add `dataFocus` prop ([81eecd9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/81eecd9fe5b5faa17ce65ae3f1a591d5fddda828))
+
 ## [0.41.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.3...v0.41.0) (2022-01-12)
 
 
