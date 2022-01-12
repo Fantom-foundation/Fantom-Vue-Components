@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.41.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.3...v0.41.0) (2022-01-12)
+
+
+### Features
+
+* **aria:** create `focusElem` function ([c71aded](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/c71adedca6374b8c224881cf7f586b813aef3ea2))
+* **f-data-grid:** add label to 'remove row' button ([6552ac8](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6552ac82dd1b3e6e7e3890828db5ac941c522c78))
+* **f-data-grid:** adjust keyboard navigation to focus element inside cell ([52b52d7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/52b52d7b14598f6e41361afd77b67ae290537bda))
+
 ### [0.40.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.40.2...v0.40.3) (2022-01-11)
 
 
