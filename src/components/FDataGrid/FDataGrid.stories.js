@@ -1705,25 +1705,26 @@ export const EditModeRow = () => ({
                     :use-pagination="false"
                     no-header
                 >
-                    <template #editor-textinput="{ item }">
-                        <f-input v-model="item.textinput" no-label />
+                    <template #editor-textinput="{ item, column }">
+                        <f-input v-model="item.textinput" no-label :aria-label="column.label" />
                     </template>
-                    <template #editor-numberinput="{ item }">
+                    <template #editor-numberinput="{ item, column }">
                         <f-input
                             v-model="item.numberinput"
                             type="number"
                             no-label
+                            :aria-label="column.label"
                             :validator="numberValidator"
                             :auto-correction="0"
                             error-messages-component="f-error-messages-popover"
                             validate-on-input
                         />
                     </template>
-                    <template #editor-textarea="{ item }">
-                        <f-input is-textarea auto-resizable-textarea v-model="item.textarea" no-label />
+                    <template #editor-textarea="{ item, column }">
+                        <f-input is-textarea auto-resizable-textarea v-model="item.textarea" no-label :aria-label="column.label" />
                     </template>
-                    <template #editor-combobox="{ item }">
-                        <f-combo-box select-mode :data="comboboxEditorData" v-model="item.combobox" no-label />
+                    <template #editor-combobox="{ item, column }">
+                        <f-combo-box select-mode :data="comboboxEditorData" v-model="item.combobox" no-label :aria-label="column.label" />
                     </template>
                     <template #editor-checkbox="{ item }">
                         <f-option type="checkbox" v-model="item.checkbox" />
@@ -1864,25 +1865,26 @@ export const EditModeRowEdit = () => ({
                     :use-pagination="false"
                     no-header
                 >
-                    <template #editor-textinput="{ item }">
-                        <f-input v-model="item.textinput" no-label />
+                    <template #editor-textinput="{ item, column }">
+                        <f-input v-model="item.textinput" no-label :aria-label="column.label" />
                     </template>
-                    <template #editor-numberinput="{ item }">
+                    <template #editor-numberinput="{ item, column }">
                         <f-input
                             v-model="item.numberinput"
                             type="number"
                             no-label
+                            :aria-label="column.label"
                             :validator="numberValidator"
                             :auto-correction="0"
                             error-messages-component="f-error-messages-popover"
                             validate-on-input
                         />
                     </template>
-                    <template #editor-textarea="{ item }">
-                        <f-input is-textarea auto-resizable-textarea v-model="item.textarea" no-label />
+                    <template #editor-textarea="{ item, column }">
+                        <f-input is-textarea auto-resizable-textarea v-model="item.textarea" no-label :aria-label="column.label" />
                     </template>
-                    <template #editor-combobox="{ item }">
-                        <f-combo-box select-mode :data="comboboxEditorData" v-model="item.combobox" no-label />
+                    <template #editor-combobox="{ item, column }">
+                        <f-combo-box select-mode :data="comboboxEditorData" v-model="item.combobox" no-label :aria-label="column.label" />
                     </template>
                     <template #editor-checkbox="{ item }">
                         <f-option type="checkbox" v-model="item.checkbox" />
