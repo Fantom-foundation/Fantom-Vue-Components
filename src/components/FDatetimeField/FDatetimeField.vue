@@ -6,6 +6,7 @@
         <span class="fdatetimefield_cont" :class="inpClasses">
             <input
                 ref="date"
+                :id="labeledById"
                 type="date"
                 v-bind="inputProps"
                 :value="dateInputValue"
@@ -19,6 +20,7 @@
                 :value="timeInputValue"
                 @input="onTimeInput"
                 class="inp-nostyle fdatetimefield_time"
+                :aria-label="label"
             />
         </span>
         <slot name="bottom" v-bind="slotProps">
