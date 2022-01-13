@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.43.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.42.0...v0.43.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* **f-datetime-field:** add labels ([d7d2c93](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d7d2c93b1e9d6fa7f4fe6377c311774214769ba1))
+* **f-dropdown-listbox:** return focus to button after closing the popover ([8279b7b](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8279b7b381a7882e1cc7266c280d28931c85dba5))
+
 ## [0.42.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.41.0...v0.42.0) (2022-01-12)
 
 
