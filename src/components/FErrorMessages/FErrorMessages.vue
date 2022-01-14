@@ -1,5 +1,5 @@
 <template>
-    <div class="ferrormessages" :id="errorsContId">
+    <div class="ferrormessages" :id="errorsContId" role="alert" aria-atomic="true">
         <div v-for="(msg, idx) in errors" :key="`${errorsContId}_${idx}_err`" class="ferrormessages_message">
             {{ msg }}
         </div>
