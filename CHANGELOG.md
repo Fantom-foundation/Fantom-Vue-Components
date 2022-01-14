@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.44.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.43.0...v0.44.0) (2022-01-14)
+
+
+### Bug Fixes
+
+* **f-error-messages:** add role 'alert' to the container ([45d9b32](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/45d9b32ea34cc4e63b8ae8f12311d353dfd35055))
+
 ## [0.43.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.42.0...v0.43.0) (2022-01-13)
 
 
