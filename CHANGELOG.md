@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.44.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.44.0...v0.44.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* **f-input:** correct input value update mismatch ([a854c94](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/a854c943fe6e04b1945189510f653b409974deae))
+
 ## [0.44.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.43.0...v0.44.0) (2022-01-14)
 
 
