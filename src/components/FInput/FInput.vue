@@ -303,6 +303,7 @@ export default {
          */
         onInput(_event) {
             this._inputValue = _event.target.value;
+            this.inputValue = this.formatIn(this._inputValue);
 
             if (this.throttleInputInterval > 0) {
                 this.throttledInput(_event);
@@ -318,8 +319,6 @@ export default {
          */
         _onInput(_event) {
             const value = this.throttleInputInterval > 0 ? this._inputValue : _event.target.value;
-
-            this.inputValue = this.formatIn(value);
 
             /**
              * Passthrough input event
