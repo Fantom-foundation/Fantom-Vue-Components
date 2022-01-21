@@ -229,6 +229,10 @@ export default {
          * @return {int}
          */
         numPages() {
+            if (isNaN(this.totalItems)) {
+                return Number.MAX_SAFE_INTEGER;
+            }
+
             return Math.max(Math.ceil(this.totalItems / this.perPage), 1);
         },
 

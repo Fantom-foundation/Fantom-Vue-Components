@@ -80,6 +80,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        hasNextPage: {
+            type: Boolean,
+            default: true,
+        },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
         /** Number of items per page (FPagination prop) */
@@ -118,6 +122,10 @@ export default {
             }
 
             // console.log(pagination.isLastPage, this.lastBottomPage, pagination.numPages, this.loading);
+
+            if (isNaN(this.totalItems)) {
+                return this.hasNextPage;
+            }
 
             return (
                 !isNaN(this.totalItems) &&
@@ -267,7 +275,7 @@ export default {
 
             const pagination = clone(state);
 
-            if (!this.dontCheckTotalItems && pagination.totalItems <= 0) {
+            if (!this.dontCheckTotalItems && !isNaN(this.totalItems) && pagination.totalItems <= 0) {
                 return;
             }
 
