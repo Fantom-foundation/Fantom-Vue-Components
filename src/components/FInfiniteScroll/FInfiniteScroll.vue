@@ -111,6 +111,10 @@ export default {
 
     computed: {
         showTopLoader() {
+            if (isNaN(this.totalItems) && !this.hasNextPage && this.currPage === 1) {
+                return false;
+            }
+
             return !this.firstChange && !(this.firstPage && !this.loading) && !this.bottomIntersection;
         },
 
