@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.45.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.44.1...v0.45.0) (2022-01-21)
+
+
+### Features
+
+* **f-infinite-scroll:** use `hasNextPage` prop if `totalItems` is not provided ([e821567](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e821567bad9470dd45edee50dad87365d0da58e7))
+
 ### [0.44.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.44.0...v0.44.1) (2022-01-18)
 
 
