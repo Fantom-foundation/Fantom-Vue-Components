@@ -381,7 +381,9 @@ export default {
                 }
 
                 if (this.inputValue) {
-                    this.onValueChange(this.inputValue);
+                    this.$nextTick(() => {
+                        this.onValueChange(this.inputValue);
+                    });
                 }
             },
             deep: true,
