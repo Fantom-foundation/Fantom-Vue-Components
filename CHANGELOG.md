@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.45.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.45.1...v0.45.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* **f-listbox:** fix value update when data changes ([50c6428](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/50c64280c6b6b5d0416d53cb6a523c0ea34f0757))
+
 ### [0.45.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.45.0...v0.45.1) (2022-01-21)
 
 
