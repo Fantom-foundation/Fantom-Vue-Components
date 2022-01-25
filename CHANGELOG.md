@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.46.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.45.2...v0.46.0) (2022-01-25)
+
+
+### Features
+
+* **f-tooltip:** add onlyIfNeeded option ([3a60788](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/3a60788714c9fab60330e49b4c7cf55a728c25be))
+* **mocks:** create spyElementGetter ([87ac8c7](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/87ac8c7d49174299033113287b12937090fc40f1))
+
 ### [0.45.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.45.1...v0.45.2) (2022-01-24)
 
 
