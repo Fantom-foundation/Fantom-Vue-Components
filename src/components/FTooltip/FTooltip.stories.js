@@ -66,6 +66,20 @@ export const ThrottleInterval = () => ({
     `,
 });
 
+export const OnlyIfNeeded = () => ({
+    components: { FTooltip, FButton },
+    template: `
+        <div class="pat-9">
+            <f-button data-tooltip="only-if-needed" label="only-if-needed" />
+            <f-button
+                data-tooltip="only-if-needed"
+                label="only-if-needed" style="width: 80px; white-space: nowrap; overflow: hidden; justify-content: start"
+            />
+            <f-tooltip only-if-needed />
+        </div>
+    `,
+});
+
 export const Options = () => ({
     components: { FTooltip, FButton },
     template: `
@@ -75,15 +89,24 @@ export const Options = () => ({
             <f-button
                 data-tooltip='{ "text": "Button tooltip text 1" }'
                 label='{ "text": "Button tooltip text 1" }'
-            /> <br>
+            /> <br><br>
             <f-button
                 data-tooltip='{ "text": "Button tooltip text 2", "preferredAttachPosition": "right" }'
                 label='{ "text": "Button tooltip text 2", "preferredAttachPosition": "right" }'
-            /> <br>
+            /> <br><br>
             <f-button
                 data-tooltip='{ "text": "Button tooltip text 3", "withArrow": true, "preferredAttachPosition": "right" }'
                 label='{ "text": "Button tooltip text 3", "withArrow": true, "preferredAttachPosition": "right" }'
-            />
+            /> <br><br>
+            <f-button
+                data-tooltip='{ "text": "Lorem ipsum", "onlyIfNeeded": true }'
+                label='{ "text": "Lorem ipsum", "onlyIfNeeded": true }'
+            /> <br><br>
+            <f-button
+                data-tooltip='{ "text": "Lorem ipsum", "onlyIfNeeded": true }'
+                label='{ "text": "Lorem ipsum", "onlyIfNeeded": true }'
+                style="width: 250px; white-space: nowrap; overflow: hidden; justify-content: start"
+            /> <br><br>
 
             <f-tooltip />
         </div>

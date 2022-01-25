@@ -30,12 +30,18 @@ export default {
             type: Number,
             default: 200,
         },
+        /** Mouseover event listener throttling. In milliseconds */
+        onlyIfNeeded: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
         return {
             text: '',
             attach: '',
+            dOnlyIfNeeded: this.onlyIfNeeded,
             dProps: {},
         };
     },
@@ -97,12 +103,17 @@ export default {
         onTargetEnter(elem) {
             this.dProps = {};
 
-            this.text = this._processTargetAttr(elem);
+            const options = this._processTargetAttr(elem);
+
+            this.text = options.text;
+            this.dOnlyIfNeeded = options.onlyIfNeeded;
 
             if (this.text) {
-                elem.setAttribute(fTooltipElemIdAttr, '');
-                this.attach = `[${fTooltipElemIdAttr}]`;
-                this.$refs.popover.show();
+                if (!this.dOnlyIfNeeded || elem.scrollWidth > elem.offsetWidth) {
+                    elem.setAttribute(fTooltipElemIdAttr, '');
+                    this.attach = `[${fTooltipElemIdAttr}]`;
+                    this.$refs.popover.show();
+                }
             }
         },
 
@@ -137,21 +148,25 @@ export default {
         _processTargetAttr(elem) {
             const attr = elem.getAttribute(this.targetAttr) || '';
             let text = '';
+            let onlyIfNeeded = this.onlyIfNeeded;
 
             if (attr) {
                 try {
                     const options = JSON.parse(attr);
 
                     text = options.text;
+                    onlyIfNeeded = options.onlyIfNeeded;
 
                     delete options.text;
+                    delete options.onlyIfNeeded;
+
                     this.dProps = options;
                 } catch (error) {
                     text = attr;
                 }
             }
 
-            return text;
+            return { text, onlyIfNeeded };
         },
     },
 };

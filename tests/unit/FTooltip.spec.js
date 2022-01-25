@@ -4,6 +4,7 @@ import FPopover from '@/components/FPopover/FPopover.vue';
 import FWindow from '@/components/FWindow/FWindow.vue';
 import FButton from '@/components/FButton/FButton.vue';
 import { dispatchMouseEvent } from '@/utils/dom-events.js';
+import { spyElementGetter } from '../mocks/element.js';
 // import { delay } from '@/utils/function.js';
 // import { fTooltipElemIdAttr } from '@/components/FTooltip/FTooltip.vue';
 
@@ -21,6 +22,8 @@ const Playground = {
             <button id="btn1" data-tooltip="Button tooltip text 1">Button 1</button>
             <f-button id="fbtn2" data-tooltip="Button tooltip text 2">Button 2</f-button>
             <f-button id="noTooltipDataBtn" data-tooltip="">Button 3</f-button>
+            <div id="oin" data-tooltip='{ "text": "Lorem ipsum", "onlyIfNeeded": true }'>Lorem ipsum dolor sit amet</div>
+            <div id="oin2" data-tooltip="Lorem ipsum">Lorem ipsum dolor sit amet</div>
         </div>
     `,
 };
@@ -143,6 +146,38 @@ describe('FTooltip', () => {
             await noTooltipData.trigger('mouseover');
 
             expect(fWindow.vm.isVisible).toBe(false);
+        });
+
+        it("should not show tooltip if target element has `onlyIfNeeded` option set to `true` and width of target element's content is less than element width", async () => {
+            const oin = wrapperP.find('#oin');
+            const fWindow = wrapper.findComponent(FWindow);
+
+            spyElementGetter(oin.element, 'offsetWidth', 200);
+            spyElementGetter(oin.element, 'scrollWidth', 100);
+
+            dispatchMouseEvent(document.body, 'mouseenter');
+            await oin.trigger('mouseover');
+
+            expect(fWindow.vm.isVisible).toBe(false);
+
+            jest.restoreAllMocks();
+        });
+
+        it("should not show tooltip if target element has `onlyIfNeeded` prop set to `true` and width of target element's content is less than element width", async () => {
+            createWrapper({ propsData: { onlyIfNeeded: true } });
+
+            const oin = wrapperP.find('#oin2');
+            const fWindow = wrapper.findComponent(FWindow);
+
+            spyElementGetter(oin.element, 'offsetWidth', 200);
+            spyElementGetter(oin.element, 'scrollWidth', 100);
+
+            dispatchMouseEvent(document.body, 'mouseenter');
+            await oin.trigger('mouseover');
+
+            expect(fWindow.vm.isVisible).toBe(false);
+
+            jest.restoreAllMocks();
         });
 
         /*it('should throttle mouseover event listener if `throttleInterval` is greater than `0`', async () => {
