@@ -96,13 +96,11 @@ export default {
 
     watch: {
         open(value) {
-            if (!this.disabled) {
-                this.opened = value;
-                this.dOpened = value;
+            this.opened = value;
+            this.dOpened = value;
 
-                if (value) {
-                    this.render = true;
-                }
+            if (value) {
+                this.render = true;
             }
         },
     },
