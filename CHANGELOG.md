@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.46.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.0...v0.46.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* **f-details:** fix condition when watching `open` prop ([1eb0a8e](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/1eb0a8ecfebe38d63fde535e6f46487e96094f33))
+
 ## [0.46.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.45.2...v0.46.0) (2022-01-25)
 
 
