@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.46.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.2...v0.46.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* **f-details:** fix summary style for Safari ([69ea14a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/69ea14a36975bd51fb2b9855185bb782cbd25295))
+
 ### [0.46.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.1...v0.46.2) (2022-01-31)
 
 
