@@ -5,12 +5,14 @@
     border-radius: var(--f-border-radius-3);
 
     summary {
+        display: -webkit-flex;
         display: flex;
+        -webkit-justify-content: space-between;
         justify-content: space-between;
         padding: var(--f-spacer-4) var(--f-spacer-5);
         cursor: pointer;
 
-        &::marker {
+        &::marker, &::-webkit-details-marker {
             display: none;
             content: '';
         }
