@@ -1,19 +1,21 @@
 <template>
     <details class="fdetails" :open="dOpened || undefined" :class="classes">
         <summary @click.prevent="onSummaryClick">
-            <span class="fdetails_label">
-                <!-- @slot Default to `label` prop -->
-                <slot name="label">
-                    {{ label }}
-                </slot>
-            </span>
-            <span class="fdetails_icon">
-                <!-- @slot Default to `icon-angle-left` icon -->
-                <slot name="icon">
-                    <f-svg-icon size="16px" rotate="180deg" class="fsvgicon-rtl-mirror">
-                        <icon-angle-left />
-                    </f-svg-icon>
-                </slot>
+            <span class="fdetails_summary">
+                <span class="fdetails_label">
+                    <!-- @slot Default to `label` prop -->
+                    <slot name="label">
+                        {{ label }}
+                    </slot>
+                </span>
+                <span class="fdetails_icon">
+                    <!-- @slot Default to `icon-angle-left` icon -->
+                    <slot name="icon">
+                        <f-svg-icon size="16px" rotate="180deg" class="fsvgicon-rtl-mirror">
+                            <icon-angle-left />
+                        </f-svg-icon>
+                    </slot>
+                </span>
             </span>
         </summary>
 
