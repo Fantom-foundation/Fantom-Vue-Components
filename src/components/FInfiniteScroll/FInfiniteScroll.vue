@@ -156,6 +156,8 @@ export default {
                     defer(() => {
                         if (!this.loading && this.bottomIntersection && this.showBottomLoader) {
                             this.goToPage('next');
+                        } else if (!this.loading && this.topIntersection && this.showTopLoader) {
+                            this.goToPage('prev');
                         }
                     });
                 });
