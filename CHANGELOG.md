@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.46.5](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.4...v0.46.5) (2022-02-01)
+
+
+### Bug Fixes
+
+* **f-listbox:** fix issue with double id ([f4d4669](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/f4d466924188f07879ab88d668871a9c0205646c))
+
 ### [0.46.4](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.3...v0.46.4) (2022-02-01)
 
 
