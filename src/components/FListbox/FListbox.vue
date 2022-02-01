@@ -1,5 +1,5 @@
 <template>
-    <div :id="id" class="flistbox" :class="classes">
+    <div :id="`${id}-cont`" class="flistbox" :class="classes">
         <slot name="top" v-bind="slotProps">
             <f-label v-if="label" :id="labeledById" :label="label" :required="required" />
         </slot>
@@ -11,7 +11,7 @@
             no-label
             :aria-label="searchFieldLabel"
             :aria-activedescendant="activeDescendant"
-            :controls-id="id"
+            :controls-id="listboxId || id"
             @input="onSearch"
             class="flistbox_searchfield"
         />
@@ -23,7 +23,7 @@
             :total-items="dTotalItems"
             :per-page="perPage"
             :curr-page="currPage"
-            :root="infiniteScrollRoot || `#${id}`"
+            :root="infiniteScrollRoot || `#${id}-cont`"
             :root-margin="infiniteScrollRootMargin"
             dont-check-total-items
             @page-change="onPageChange"
