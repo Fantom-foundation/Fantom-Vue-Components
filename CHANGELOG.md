@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.47.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.5...v0.47.0) (2022-02-02)
+
+
+### Features
+
+* **f-image:** add lazyLoading option ([e9c8b05](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/e9c8b050e36d58d78824a825f2e467d1c644c72c))
+
 ### [0.46.5](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.4...v0.46.5) (2022-02-01)
 
 
