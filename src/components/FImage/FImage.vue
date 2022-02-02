@@ -5,7 +5,14 @@
                 <f-placeholder block :animation="placeholderAnimation"></f-placeholder>
             </slot>
         </div>
-        <img :src="cSrc" :alt="alt" loading="lazy" @load="onImgLoad" @error="onImgError" :style="{ objectFit: fit }" />
+        <img
+            :src="cSrc"
+            :alt="alt"
+            :loading="lazyLoading ? 'lazy' : null"
+            @load="onImgLoad"
+            @error="onImgError"
+            :style="{ objectFit: fit }"
+        />
     </div>
 </template>
 
@@ -60,6 +67,11 @@ export default {
         noImgSrc: {
             type: String,
             default: '',
+        },
+        /***/
+        lazyLoading: {
+            type: Boolean,
+            default: true,
         },
     },
 
