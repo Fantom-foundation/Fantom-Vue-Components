@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.47.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.0...v0.47.1) (2022-02-02)
+
+
+### Bug Fixes
+
+* **f-form-input:** copy slots for FOption ([7ea3b24](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/7ea3b2400c8b5ae6e0de12709810d1f5847683ac))
+
 ## [0.47.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.46.5...v0.47.0) (2022-02-02)
 
 
