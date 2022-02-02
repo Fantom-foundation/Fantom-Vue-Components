@@ -16,13 +16,11 @@
             </template>
         </f-input>
         <template v-else-if="type === 'checkbox' || type === 'radio'">
-            <f-option
-                ref="input"
-                :type="type"
-                v-bind="{ ...$attrs, ...inputProps }"
-                :name="name"
-                v-model="inputValue"
-            />
+            <f-option ref="input" :type="type" v-bind="{ ...$attrs, ...inputProps }" :name="name" v-model="inputValue">
+                <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+                    <slot :name="name" v-bind="data"></slot>
+                </template>
+            </f-option>
         </template>
         <f-option-group
             v-else-if="type === 'checkboxgroup' || type === 'radiogroup'"
