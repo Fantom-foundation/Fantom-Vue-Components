@@ -1,5 +1,6 @@
 .fimage {
     //width: fit-content;
+    overflow: hidden;
 
     &_placeholder, .fplaceholder {
         width: 100%;
