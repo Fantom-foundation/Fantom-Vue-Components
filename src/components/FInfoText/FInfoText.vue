@@ -1,6 +1,6 @@
 <template>
     <div class="finfotext" :id="infoTextId">
-        {{ text }}
+        <slot>{{ text }}</slot>
     </div>
 </template>
 
