@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.47.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.1...v0.47.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* **f-data-grid:** fix sticky position if no grid header exists ([ac8a7a5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/ac8a7a5d1a5ebdbd19ee41840d3bd0ce4c578fb6))
+
 ### [0.47.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.0...v0.47.1) (2022-02-02)
 
 
