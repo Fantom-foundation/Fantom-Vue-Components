@@ -472,6 +472,7 @@ export default {
                 'fdatagrid-loading': this.dLoading,
                 'fdatagrid-infinitescrollon': this.infiniteScroll,
                 'fdatagrid-rowedit': this.editMode === 'row-edit',
+                'fdatagrid-noheader': this.noHeader,
             };
         },
 

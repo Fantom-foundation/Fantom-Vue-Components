@@ -4,7 +4,9 @@
     --fdatagrid-border-spacing: 0;
     --fdatagrid-cell-padding: var(--f-spacer-3) var(--f-spacer-3);
     /* header */
-    --fdatagrid-thead-sticky-top: 0;
+    --fdatagrid-header-height: 60px;
+    --fdatagrid-thead-sticky-top: calc(var(--curr-sticky-top, 0px) + var(--fdatagrid-header-height));
+
     --fdatagrid-sortcolumn-background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path style="fill: rgb(200,200,200);" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"/></svg>');
     --fdatagrid-header-cell-border: none;
     /* cell */

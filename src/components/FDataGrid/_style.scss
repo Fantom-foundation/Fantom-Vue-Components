@@ -243,8 +243,7 @@
             position: sticky;
             //top: $f-header-height;
             //top: 128px;
-            //top: var(--fdatagrid-thead-sticky-top);
-            top: calc(var(--curr-sticky-top, 0px) + 60px);
+            top: var(--fdatagrid-thead-sticky-top);
             //top: 60px;
             z-index: var(--f-zindex-sticky);
         }
@@ -263,6 +262,10 @@
             z-index: var(--f-zindex-sticky);
             background: var(--fdatagrid-cell-background-color);
         }
+    }
+
+    &-noheader {
+        --fdatagrid-header-height: 0;
     }
 
     &-heightset {
