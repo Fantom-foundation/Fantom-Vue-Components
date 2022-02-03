@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.47.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.2...v0.47.3) (2022-02-03)
+
+
+### Bug Fixes
+
+* **f-data-grid:** fix css unit ([6c2c3b5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6c2c3b5ea0dc80086d891d92685ce8d8979b0957))
+
 ### [0.47.2](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.1...v0.47.2) (2022-02-03)
 
 
