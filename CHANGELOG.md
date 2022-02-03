@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.48.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.3...v0.48.0) (2022-02-03)
+
+
+### Bug Fixes
+
+* **f-info-text:** add default slot ([50c06a0](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/50c06a03f262da5f9119fce5bb6ea8f70d6c9a72))
+
 ### [0.47.3](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.47.2...v0.47.3) (2022-02-03)
 
 
