@@ -1,4 +1,5 @@
 @use "custom-properties";
+@use "../../assets/scss/tools/visibility";
 
 .fdatagrid {
     position: relative;
@@ -44,6 +45,12 @@
         //height: 48px;
         &:hover td {
             background-color: var(--fdatagrid-cell-hover-background-color);
+        }
+    }
+
+    &_caption {
+        &-hidden {
+            @include visibility.not-visible;
         }
     }
 

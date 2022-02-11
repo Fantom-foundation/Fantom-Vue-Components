@@ -998,6 +998,49 @@ export const StickyHeadAndMoreGridsOnAPage = () => ({
     },
 });
 
+export const Caption = () => ({
+    components: { FDataGrid },
+    template: `
+        <div>
+            <f-data-grid
+                :columns="columns"
+                :items="items"
+                :total-items="items.length"
+                caption="Table caption"
+                :caption-hidden="false"
+                :per-page="40"
+            />
+        </div>
+    `,
+    data() {
+        return {
+            columns: clone(columns),
+            items: clone(rows),
+        };
+    },
+});
+
+export const HiddenCaption = () => ({
+    components: { FDataGrid },
+    template: `
+        <div>
+            <f-data-grid
+                :columns="columns"
+                :items="items"
+                :total-items="items.length"
+                caption="Table caption"
+                :per-page="40"
+            />
+        </div>
+    `,
+    data() {
+        return {
+            columns: clone(columns),
+            items: clone(rows),
+        };
+    },
+});
+
 export const LessRowsThanPerPage = () => ({
     components: { FDataGrid },
     template: `

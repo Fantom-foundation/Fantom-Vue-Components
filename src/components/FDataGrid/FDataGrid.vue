@@ -29,6 +29,11 @@
                 @focus="onTableFocus"
                 @focusout="onTableFocusout"
             >
+                <caption v-if="caption" :class="{ 'fdatagrid_caption-hidden': captionHidden }">
+                    {{
+                        caption
+                    }}
+                </caption>
                 <thead class="fdatagrid_thead">
                     <tr @click="onHeaderClick" @keyup="onHeaderKeyup">
                         <th
@@ -396,6 +401,16 @@ export default {
         labeledBy: {
             type: String,
             default: '',
+        },
+        /** Table's caption */
+        caption: {
+            type: String,
+            default: '',
+        },
+        /** Table's caption is hidden */
+        captionHidden: {
+            type: Boolean,
+            default: true,
         },
         /** Total amount of items (FPagination prop) */
         totalItems: { ...FPagination.props.totalItems },
