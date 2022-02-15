@@ -133,7 +133,12 @@ export class GridKeyboardNavigation {
                         isFirstRow = true;
                     }
                 } else {
-                    eCell = eRow.querySelector(`${cellSelector}:nth-child(${prevElemsCount(eCell, cellSelector) + 1})`);
+                    let prevElsCount = prevElemsCount(eCell, cellSelector);
+
+                    eCell = eRow.querySelector(`${cellSelector}:nth-child(${prevElsCount + 1})`);
+                    if (eCell === null) {
+                        eCell = eRow.querySelector(`${cellSelector}:first-child`);
+                    }
                 }
             }
 
@@ -218,7 +223,10 @@ export class GridKeyboardNavigation {
      * @return {{row, cell: Element|null}}
      */
     activateCellByIndices(rowIdx, cellIdx, eContainer) {
-        let eRow = eContainer.querySelector(`${this.rowSelector}${this._getNthChildSelector(rowIdx)}`);
+        let eRow =
+            eContainer && eContainer.querySelector
+                ? eContainer.querySelector(`${this.rowSelector}${this._getNthChildSelector(rowIdx)}`)
+                : null;
         let eCell = eRow ? eRow.querySelector(`${this.cellSelector}${this._getNthChildSelector(cellIdx)}`) : null;
 
         this._activateCellAndRow(eCell, eRow);

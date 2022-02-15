@@ -1083,6 +1083,35 @@ export const OneLineMode = () => ({
     },
 });
 
+export const SubRows = () => ({
+    components: { FDataGrid },
+    template: `
+        <div>
+            <f-data-grid
+                :columns="columns"
+                :items="items"
+                :total-items="items.length"
+                :per-page="40"
+            >
+                <template #subrow="{item, columns, visibleColumnsNum, ariaRowindex}">
+                    <tr :style="item.css" :class="item.cssClass">
+                        <td :colspan="visibleColumnsNum" style="text-align: center; font-weight: bold">
+                            Sub row {{ item.id }}
+                        </td>
+                    </tr>
+                </template>
+            </f-data-grid>
+            <hr />
+        </div>
+    `,
+    data() {
+        return {
+            columns: clone(columns),
+            items: clone(rows),
+        };
+    },
+});
+
 export const NoPagination = () => ({
     components: { FDataGrid },
     template: `

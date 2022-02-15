@@ -76,56 +76,64 @@
                         </td>
                     </template>
 
-                    <tr
-                        v-for="(item, index) in dItems"
-                        :key="item._id"
-                        :data-fdg-id="item._id"
-                        :style="item.css"
-                        :class="item.cssClass"
-                        :aria-rowindex="getAriaRowIndex(index)"
-                    >
-                        <td
-                            v-for="(col, index) in cColumns"
-                            :key="col.name"
-                            :hidden="!!col.hidden"
-                            :class="getColumnClass(index, col)"
-                            :data-label="col.label"
-                            tabindex="-1"
+                    <template v-for="(item, index) in dItems">
+                        <tr
+                            :key="item._id"
+                            :data-fdg-id="item._id"
+                            :style="item.css"
+                            :class="item.cssClass"
+                            :aria-rowindex="getAriaRowIndex(index)"
                         >
-                            <div class="fdatagrid_cellin">
-                                <div v-if="edModeRowEdit && col.name === '__removerow__'" data-removerow>
-                                    <slot name="remove-row">
-                                        <f-button
-                                            tertiary
-                                            same-size
-                                            :tabindex="!editing ? '-1' : null"
-                                            :aria-label="_('fdatagrid.removeRow')"
-                                        >
-                                            <f-svg-icon size="16px"><icon-trash /></f-svg-icon>
-                                        </f-button>
+                            <td
+                                v-for="(col, index) in cColumns"
+                                :key="col.name"
+                                :hidden="!!col.hidden"
+                                :class="getColumnClass(index, col)"
+                                :data-label="col.label"
+                                tabindex="-1"
+                            >
+                                <div class="fdatagrid_cellin">
+                                    <div v-if="edModeRowEdit && col.name === '__removerow__'" data-removerow>
+                                        <slot name="remove-row">
+                                            <f-button
+                                                tertiary
+                                                same-size
+                                                :tabindex="!editing ? '-1' : null"
+                                                :aria-label="_('fdatagrid.removeRow')"
+                                            >
+                                                <f-svg-icon size="16px"><icon-trash /></f-svg-icon>
+                                            </f-button>
+                                        </slot>
+                                    </div>
+                                    <!-- @slot Dynamic slot for cell editors -->
+                                    <slot
+                                        v-else-if="isCellEditorOn(item, col)"
+                                        :name="`editor-${col.name}`"
+                                        :value="getItemPropValue(item, col)"
+                                        :item="item"
+                                        :column="col"
+                                    />
+                                    <!-- @slot Dynamic slot for cells -->
+                                    <slot
+                                        v-else
+                                        :name="`column-${col.name}`"
+                                        :value="getItemPropValue(item, col)"
+                                        :item="item"
+                                        :column="col"
+                                    >
+                                        {{ getItemPropValue(item, col) }}
                                     </slot>
                                 </div>
-                                <!-- @slot Dynamic slot for cell editors -->
-                                <slot
-                                    v-else-if="isCellEditorOn(item, col)"
-                                    :name="`editor-${col.name}`"
-                                    :value="getItemPropValue(item, col)"
-                                    :item="item"
-                                    :column="col"
-                                />
-                                <!-- @slot Dynamic slot for cells -->
-                                <slot
-                                    v-else
-                                    :name="`column-${col.name}`"
-                                    :value="getItemPropValue(item, col)"
-                                    :item="item"
-                                    :column="col"
-                                >
-                                    {{ getItemPropValue(item, col) }}
-                                </slot>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <slot
+                            name="subrow"
+                            :item="item"
+                            :columns="columns"
+                            :visibleColumnsNum="visibleColumnsNum"
+                            :ariaRowindex="getAriaRowIndex(index)"
+                        ></slot>
+                    </template>
                 </f-infinite-scroll>
 
                 <tbody v-else-if="!cLoading">
