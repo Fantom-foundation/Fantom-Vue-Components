@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.50.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.49.0...v0.50.0) (2022-02-15)
+
+
+### Features
+
+* **f-data-grid:** add `subrow` slot ([51b151a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/51b151afcec6591ec8e11d8eef3be01cdff78add))
+
 ## [0.49.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.48.0...v0.49.0) (2022-02-11)
 
 
