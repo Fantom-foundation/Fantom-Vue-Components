@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.50.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.50.0...v0.50.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* **f-steps:** fix steps style ([830e563](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/830e563871eb9329deb7a14e0d67b2f5975d0a2d))
+* **f-steps:** make steps responsive and fix rtl mode issue ([102cb38](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/102cb38ead3f08f5836560c34bd37da648d4ccef))
+
 ## [0.50.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.49.0...v0.50.0) (2022-02-15)
 
 
