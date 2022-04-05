@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.51.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.50.1...v0.51.0) (2022-04-05)
+
+
+### Features
+
+* **f-network-status:** add wai-aria alerts ([9ab67b9](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/9ab67b9d0d44cbae145568c5b6f2e86cf3a948de))
+* **f-notifications:** add wai-aria alerts ([b19dae5](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b19dae54fdb87083b7c0ce50ce90d4b083998c22))
+* **f-notifications:** add wai-aria alerts ([d0df90d](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/d0df90d119f032a7892c8d3433b742c296627468))
+
+
+### Bug Fixes
+
+* **f-datetime-field:** fix updating of inputs ([6633d7a](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/6633d7adb395ede25eefda8052c4f64b6e03f40b))
+* **f-form:** fix form resetting ([0628dd1](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/0628dd17ca2f42358d11de2ebbeb6d106b1060a8))
+* **f-message:** add title to 'close' button ([8b5a14f](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/8b5a14fb33dce06216578456ed3a2451ba44daab))
+
 ### [0.50.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.50.0...v0.50.1) (2022-02-22)
 
 
