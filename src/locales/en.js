@@ -53,4 +53,7 @@ export const enTranslations = {
         minutes: 'Minutes',
         seconds: 'Seconds',
     },
+    fmessage: {
+        hideMessage: 'Hide message',
+    },
 };

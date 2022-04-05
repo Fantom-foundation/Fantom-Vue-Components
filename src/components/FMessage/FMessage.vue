@@ -25,7 +25,13 @@
             <slot name="suffix"></slot>
             <template v-if="hideOnCloseButton">
                 <slot name="close-button">
-                    <f-button @click.native="hide()" size="small" round class="fmessage_closebtn">
+                    <f-button
+                        @click.native="hide()"
+                        size="small"
+                        round
+                        class="fmessage_closebtn"
+                        :title="_('fmessage.hideMessage')"
+                    >
                         <f-svg-icon size="12px"><icon-times /></f-svg-icon>
                     </f-button>
                 </slot>
@@ -43,6 +49,7 @@ import IconInfoCircle from '../icons/IconInfoCircle.vue';
 import { getUniqueId } from '../../utils/index.js';
 import IconTimes from '../icons/IconTimes.vue';
 import FButton from '../FButton/FButton.vue';
+import { translationsMixin } from '@/mixins/translations.js';
 // import { returnFocus, setReceiveFocusFromAttr } from '../../utils/aria.js';
 // import { getComputedStyle } from '../../utils/css.js';
 
@@ -51,7 +58,8 @@ import FButton from '../FButton/FButton.vue';
  */
 export default {
     components: { FButton, IconTimes, IconExclamationCircle, IconCheckCircle, FSvgIcon, IconInfoCircle },
-    mixins: [helpersMixin],
+
+    mixins: [helpersMixin, translationsMixin],
 
     props: {
         id: {
