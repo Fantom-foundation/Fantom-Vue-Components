@@ -9,7 +9,6 @@
                 :id="labeledById"
                 type="date"
                 v-bind="inputProps"
-                :value="dateInputValue"
                 @input="onDateInput"
                 class="inp-nostyle fdatetimefield_date"
             />
@@ -17,7 +16,6 @@
                 ref="time"
                 type="time"
                 v-bind="inputProps"
-                :value="timeInputValue"
                 @input="onTimeInput"
                 class="inp-nostyle fdatetimefield_time"
                 :aria-label="label"
@@ -101,8 +99,6 @@ export default {
     data() {
         return {
             inputValue: '',
-            dateInputValue: '',
-            timeInputValue: '',
         };
     },
 
@@ -141,8 +137,10 @@ export default {
                     const spl = this.inputValue.trim().split('T');
 
                     if (spl.length === 2) {
-                        this.dateInputValue = spl[0];
-                        this.timeInputValue = spl[1];
+                        this.$nextTick(() => {
+                            this.$refs.date.value = spl[0];
+                            this.$refs.time.value = spl[1];
+                        });
                     }
                 }
 
