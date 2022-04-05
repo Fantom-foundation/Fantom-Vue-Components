@@ -178,6 +178,8 @@ export default {
                 notifications.push(notification);
             }
 
+            this._eventBus.emit('aria-alert-replace', notification.html || notification.text);
+
             return id;
         },
 
