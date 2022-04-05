@@ -10,7 +10,7 @@
 import { translationsMixin } from '../../mixins/translations.js';
 import FPopover from '../FPopover/FPopover.vue';
 import Vue from 'vue';
-import { eventBusMixin } from '@/mixins/event-bus.js';
+import { eventBusMixin } from '../../mixins/event-bus.js';
 
 /** Global state for FNetworkStatus */
 const networkStatusState = new Vue({

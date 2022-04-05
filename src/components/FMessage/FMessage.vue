@@ -49,7 +49,7 @@ import IconInfoCircle from '../icons/IconInfoCircle.vue';
 import { getUniqueId } from '../../utils/index.js';
 import IconTimes from '../icons/IconTimes.vue';
 import FButton from '../FButton/FButton.vue';
-import { translationsMixin } from '@/mixins/translations.js';
+import { translationsMixin } from '../../mixins/translations.js';
 // import { returnFocus, setReceiveFocusFromAttr } from '../../utils/aria.js';
 // import { getComputedStyle } from '../../utils/css.js';
 
