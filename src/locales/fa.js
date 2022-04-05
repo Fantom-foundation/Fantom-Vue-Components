@@ -31,6 +31,7 @@ export const faTranslations = {
     },
     fnetworkstatus: {
         message: 'خطای شبکه ، تلاش برای اتصال مجدد',
+        online: 'بازگشت آنلاین',
     },
     flistbox: {
         notFound: 'چیزی پیدا نشد',

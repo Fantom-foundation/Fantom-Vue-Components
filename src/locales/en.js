@@ -31,6 +31,7 @@ export const enTranslations = {
     },
     fnetworkstatus: {
         message: 'Network error, trying to reconnect',
+        online: 'Back online',
     },
     flistbox: {
         notFound: 'Nothing found',

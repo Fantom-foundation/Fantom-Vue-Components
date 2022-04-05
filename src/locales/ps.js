@@ -31,6 +31,7 @@ export const psTranslations = {
     },
     fnetworkstatus: {
         message: 'د شبکې تېروتنه ، د بیا پیوستولو هڅه',
+        online: 'بیرته آنلاین',
     },
     flistbox: {
         notFound: 'څه پیدا نه شول',

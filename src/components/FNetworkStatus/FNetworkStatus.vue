@@ -10,6 +10,7 @@
 import { translationsMixin } from '../../mixins/translations.js';
 import FPopover from '../FPopover/FPopover.vue';
 import Vue from 'vue';
+import { eventBusMixin } from '@/mixins/event-bus.js';
 
 /** Global state for FNetworkStatus */
 const networkStatusState = new Vue({
@@ -24,7 +25,7 @@ const networkStatusState = new Vue({
 export default {
     name: 'FNetworkStatus',
 
-    mixins: [translationsMixin],
+    mixins: [translationsMixin, eventBusMixin],
 
     components: { FPopover },
 
@@ -42,9 +43,11 @@ export default {
             if (value) {
                 popover.show();
                 eHtml.classList.add('offline');
+                this._eventBus.emit('aria-alert-replace', this._('fnetworkstatus.message'));
             } else {
                 popover.hide();
                 eHtml.classList.remove('offline');
+                this._eventBus.emit('aria-alert-replace', this._('fnetworkstatus.online'));
             }
         },
     },
