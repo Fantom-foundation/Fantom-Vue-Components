@@ -337,7 +337,7 @@ export default {
          */
         onReset(_event) {
             const initValues = cloneObject(this._initValues);
-            const { elements } = this;
+            const { elements } = this.elements;
 
             _event.preventDefault();
 
