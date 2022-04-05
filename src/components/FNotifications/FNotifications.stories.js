@@ -3,7 +3,6 @@
 
 import FNotifications from './FNotifications.vue';
 import FButton from '@/components/FButton/FButton.vue';
-import FAriaAlert from '@/components/FAriaAlert/FAriaAlert.vue';
 
 import Vue from 'vue';
 import { Notifications } from '@/plugins/notifications.js';
@@ -32,7 +31,7 @@ function getRandomType() {
 }
 
 export const Default = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <h3>In page</h3>
@@ -43,8 +42,6 @@ export const Default = () => ({
                 <f-button secondary size="small" @click.native="onButtonClick('info')">info</f-button>
             </p>
             <f-notifications ref="notifications" style="max-width: 400px; padding: 0;" />
-
-            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -59,7 +56,7 @@ export const Default = () => ({
 });
 
 export const PositionAndGroup = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <p>
@@ -77,8 +74,6 @@ export const PositionAndGroup = () => ({
             <f-notifications position="bottom-left" group="bottomleft" />
             <f-notifications position="bottom-center" group="bottomcenter" />
             <f-notifications position="bottom-right" group="bottomright" />
-
-            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -98,7 +93,7 @@ export const PositionAndGroup = () => ({
 });
 
 export const Strategy = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <p>
@@ -109,8 +104,6 @@ export const Strategy = () => ({
             <f-notifications position="bottom-left" group="bottomleft" />
             <f-notifications strategy="newest-first" position="bottom-center" group="bottomcenter" />
             <f-notifications strategy="single" position="top-right" group="topright" />
-
-            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -130,7 +123,7 @@ export const Strategy = () => ({
 });
 
 export const Hide = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <h3><code>hide-on-click</code></h3>
@@ -157,8 +150,6 @@ export const Hide = () => ({
             <f-notifications hide-on-click position="top-center" group="topcetner" />
             <f-notifications hide-on-close-button position="top-right" group="topright" />
             <f-notifications :hide-after="{success: 1000, error: 1000, warning: 1000, info: 1000}" position="top-left" group="topleft" />
-
-            <f-aria-alert />
         </div>
     `,
     data() {
@@ -190,7 +181,7 @@ export const Hide = () => ({
 });
 
 export const Slot = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <p>
@@ -212,8 +203,6 @@ export const Slot = () => ({
                     </template>
                 </template>
             </f-notifications>
-
-            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -233,7 +222,7 @@ export const Slot = () => ({
 });
 
 export const WithIcon = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <p>
@@ -241,8 +230,6 @@ export const WithIcon = () => ({
             </p>
 
             <f-notifications with-icon position="top-center" group="topcetner" />
-
-            <f-aria-alert />
         </div>
     `,
     methods: {
@@ -261,7 +248,7 @@ export const WithIcon = () => ({
 });
 
 export const Variations = () => ({
-    components: { FNotifications, FButton, FAriaAlert },
+    components: { FNotifications, FButton },
     template: `
         <div>
             <div class="grid">
@@ -368,8 +355,6 @@ export const Variations = () => ({
                 </template>
             </f-notifications>
             <f-notifications group="bottomright" position="bottom-right" />
-
-            <f-aria-alert />
         </div>
     `,
     methods: {

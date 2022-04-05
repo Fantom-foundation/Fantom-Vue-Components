@@ -6,6 +6,7 @@
             v-bind="{ ...notification, text: undefined, html: undefined }"
             :type="notification.type"
             :id="notification.id"
+            alert
             animate
             @message-hidden="onMessageHidden"
             class="fnotifications_notification"
@@ -177,8 +178,6 @@ export default {
             } else {
                 notifications.push(notification);
             }
-
-            this._eventBus.emit('aria-alert-replace', notification.html || notification.text);
 
             return id;
         },
