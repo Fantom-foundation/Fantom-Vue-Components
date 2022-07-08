@@ -8,9 +8,9 @@
     --fslider-thumb-height: 24px;
     --fslider-thumb-background-color: #fff;
     --fslider-thumb-border-radius: 50%;
-    --fslider-thumb-box-shadow: 0 4px 8px 0 hsla(0,0%,39.2%,.28);
+    --fslider-thumb-box-shadow: 0 4px 8px 0 hsla(0, 0%, 39.2%, 0.28);
     --fslider-thumb-hover-background-color: #fff;
-    --fslider-thumb-hover-box-shadow: 0 6px 12px 0 hsla(0,0%,39.2%,.32);
+    --fslider-thumb-hover-box-shadow: 0 6px 12px 0 hsla(0, 0%, 39.2%, 0.32);
 
     --fslider-track-color: #e6e6e6;
     --fslider-track-height: 8px;
@@ -23,4 +23,12 @@
 
     --fslider-disabled-opacity: 0.5;
     --fslider-invalid-color: var(--f-color-red-5, #ca1616);
+
+    --fslider-tooltip-width: 40px;
+    --fslider-tooltip-height: 24px;
+    --fslider-tooltip-position-top: var(--f-spacer-4);
+    --fslider-tooltip-border-radius: 3px;
+    --fslider-tooltip-arrow-size: 6px;
+    --fslider-tooltip-color: var(--fslider-track-color);
+    --fslider-tooltip-box-shadow: none;
 }

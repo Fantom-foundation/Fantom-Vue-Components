@@ -29,6 +29,7 @@
 }
 
 .fslider {
+    position: relative;
     width: 100%;
     display: inline-block;
     vertical-align: middle;
@@ -83,6 +84,10 @@
         }
     }
 
+    &.use-tooltip {
+        padding-bottom: var(--f-spacer-5);
+    }
+
     &:hover {
         .finput .finput_inputcont input[type='range']::-webkit-slider-thumb {
             @include fslider-thumb-hover;
@@ -114,7 +119,50 @@
         }
     }
 
+    &_tooltip {
+        position: absolute;
+        width: calc(100% - var(--fslider-thumb-width));
+        height: var(--fslider-tooltip-height);
+        bottom: 0;
+        left: calc(var(--fslider-thumb-width) * 0.5);
+        font-size: 0.85em;
+        pointer-events: none;
+
+        > div {
+            position: absolute;
+            width: var(--fslider-tooltip-width);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            top: 0;
+            left: calc(var(--fslider-value) * 1%);
+            transform: translateX(-50%) translateY(var(--fslider-tooltip-position-top));
+            background-color: var(--fslider-tooltip-color);
+            box-shadow: var(--fslider-tooltip-box-shadow);
+            border-radius: var(--fslider-tooltip-border-radius);
+            z-index: 3;
+
+            span {
+                overflow: hidden;
+            }
+
+            &::before {
+                position: absolute;
+                top: calc(-1 * var(--fslider-tooltip-arrow-size));
+                content: '';
+                border-style: solid;
+                border-width: 0 var(--fslider-tooltip-arrow-size) var(--fslider-tooltip-arrow-size)
+                    var(--fslider-tooltip-arrow-size);
+                border-color: transparent transparent var(--fslider-tooltip-color) transparent;
+            }
+        }
+    }
+
     .labels {
+        position: relative;
+        z-index: 2;
         width: 100%;
         margin-top: 16px;
         padding: 0 calc(var(--fslider-thumb-width) * 0.5);
@@ -152,6 +200,10 @@
     &-withlabels {
         .fslider_messages {
             margin-top: var(--f-spacer-5);
+        }
+
+        &.use-tooltip {
+            padding-bottom: var(--fslider-track-height);
         }
     }
 }

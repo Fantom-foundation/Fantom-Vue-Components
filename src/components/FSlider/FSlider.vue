@@ -54,6 +54,13 @@
                 </slot>
             </template>
         </f-input>
+        <div v-if="useTooltip" class="fslider_tooltip">
+            <div ref="tooltip">
+                <span>
+                    <slot name="tooltip-value" v-bind="{ value: val }">{{ val }}</slot>
+                </span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -113,6 +120,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        useTooltip: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -134,6 +145,7 @@ export default {
             return {
                 'use-lower-fill-bar': this.useLowerFillBar,
                 'use-upper-fill-bar': this.useUpperFillBar,
+                'use-tooltip': this.useTooltip,
                 'fslider-disabled': this.dDisabled,
                 'fslider-invalid': this.dInvalid,
                 'fslider-withlabels': !!this.labels.length,
@@ -185,13 +197,21 @@ export default {
         updateFills(_value) {
             const dValue = this.getDetailedValue(_value);
             const inputStyle = this.$refs.input.$el.style;
+            let sliderValue = 0;
 
             if (inputStyle.setProperty && (this.useLowerFillBar || this.useUpperFillBar)) {
+                sliderValue = ((dValue.value - dValue.min) / (dValue.max - dValue.min)) * 100;
+
+                if (isNaN(sliderValue)) {
+                    sliderValue = 0;
+                }
+
                 // Set slider value in percentage to css custom property
-                inputStyle.setProperty(
-                    '--fslider-value',
-                    ((dValue.value - dValue.min) / (dValue.max - dValue.min)) * 100
-                );
+                inputStyle.setProperty('--fslider-value', sliderValue);
+
+                if (this.$refs.tooltip) {
+                    this.$refs.tooltip.style.setProperty('--fslider-value', sliderValue);
+                }
             }
         },
 

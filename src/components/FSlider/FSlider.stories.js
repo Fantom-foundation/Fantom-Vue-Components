@@ -55,6 +55,24 @@ export const Labels = () => ({
     },
 });
 
+export const Tooltip = () => ({
+    components: { FSlider },
+    template: `
+        <div>
+            <p><f-slider use-tooltip label="Slider with tooltip"  min="0" max="100" use-lower-fill-bar v-model="val1" /></p>
+            <p><f-slider use-tooltip label="Slider with tooltip and labels" clickable-labels :labels="labels2" min="-50" max="50" use-lower-fill-bar v-model="val2" /></p>
+        </div>
+    `,
+    data() {
+        return {
+            labels: ['0%', '50%', '100%'],
+            labels2: ['0%', '25%', '50%', '75%', '100%'],
+            val1: '50',
+            val2: '0',
+        };
+    },
+});
+
 export const Validation = () => ({
     components: { FSlider, FButton },
     template: `
