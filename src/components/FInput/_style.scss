@@ -12,6 +12,7 @@
     }
 
     &_inputcont {
+        position: relative;
         display: flex;
         align-items: center;
         align-content: center;
@@ -58,6 +59,13 @@
         visibility: hidden;
         min-width: var(--finput-autoresizetextarea-min-width);
         min-height: var(--finput-autoresizetextarea-min-height);
+    }
+
+    &_charscounter {
+        position: absolute;
+        bottom: calc(var(--f-spacer-5) * -1);
+        right: 0;
+        color: var(--f-color-grey-6, #666);
     }
 
     &-noinputstyle {

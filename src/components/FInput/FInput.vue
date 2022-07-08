@@ -76,6 +76,7 @@
                 />
             </template>
             <slot name="suffix"></slot>
+            <span v-if="showCharsCounter" class="finput_charscounter">{{ numChars }}/{{ maxlength }}</span>
         </span>
         <slot name="bottom" v-bind="slotProps">
             <div v-if="validationState.errors.length > 0">
@@ -171,12 +172,17 @@ export default {
             type: Boolean,
             default: false,
         },
+        showCharsCounter: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
         return {
             errmsgslot: 'suffix',
             ariaDescribedBy: null,
+            numChars: 0,
         };
     },
 
@@ -238,6 +244,10 @@ export default {
 
     created() {
         this._inputValue = '';
+
+        if (this.showCharsCounter && !this.maxlength) {
+            throw new Error(`'maxlength' has to be set if 'showCharsCounter' is set`);
+        }
     },
 
     mounted() {
@@ -328,6 +338,10 @@ export default {
 
             if (this.validateOnInput) {
                 this.validate();
+            }
+
+            if (this.showCharsCounter) {
+                this.numChars = value.length;
             }
         },
 

@@ -341,3 +341,16 @@ export const InfoText = () => ({
         </div>
     `,
 });
+
+export const CharsCounter = () => ({
+    components: { FInput },
+    template: `
+        <div>
+            <h3>Input</h3>
+            <f-input show-chars-counter maxlength="10" label="Large" />
+
+            <h3>Textarea</h3>
+            <f-input show-chars-counter maxlength="20" is-textarea label="Large" />
+        </div>
+    `,
+});
