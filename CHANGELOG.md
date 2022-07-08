@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.52.0](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.51.1...v0.52.0) (2022-07-08)
+
+
+### Features
+
+* **f-input:** add chars counter ([50db136](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/50db1360ead0707722a617128585b63300ff2324))
+* **f-slider:** add tooltip ([b6967ac](https://github.com/Fantom-foundation/Fantom-Vue-Components/commit/b6967ac95edff379cade37f0455fb3b6dbf81734))
+
 ### [0.51.1](https://github.com/Fantom-foundation/Fantom-Vue-Components/compare/v0.51.0...v0.51.1) (2022-04-05)
 
 
